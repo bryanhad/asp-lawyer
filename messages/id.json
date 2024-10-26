@@ -1,0 +1,19 @@
+{
+    "Navbar": {
+        "home": "Beranda",
+        "about": "Tentang",
+        "contact": "Hubungi"
+    },
+    "HomePage": {
+        "title": "Halo Dunia!",
+        "desc": "Ini adalah halaman beranda!"
+    },
+    "AboutPage": {
+        "title": "HALAMAN TENTANG",
+        "desc": "oh yaak! halaman tentang ini sangat keren!"
+    },
+    "ContactPage": {
+        "title": "HALAMAN HUBUNGI",
+        "desc": "woaw! halaman hubungi ini bagus!"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "Navbar": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "HomePage": {
+        "title": "Hello world!",
+        "desc": "This is the landing page!"
+    },
+    "AboutPage": {
+        "title": "ABOUT PAGE",
+        "desc": "oh yeah! this about page is so cool!"
+    },
+    "ContactPage": {
+        "title": "CONTACT PAGE",
+        "desc": "woaw! this contact page is nice!"
+    }
+}
