@@ -5,7 +5,7 @@ export default async function Home() {
 
     return (
         <div className="p-7">
-            <h1 className="bold text-xl">{t('title')}</h1>
+            <h1 className="text-xl font-bold">{t('title')}</h1>
             <p>{t('desc')}</p>
         </div>
     )
