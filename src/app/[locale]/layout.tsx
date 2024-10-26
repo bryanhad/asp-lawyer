@@ -6,7 +6,6 @@ import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/request'
 import { notFound } from 'next/navigation'
 import { getMessages } from 'next-intl/server'
-import { Params } from 'next/dist/server/request/params'
 import { NextIntlClientProvider } from 'next-intl'
 
 const geistSans = localFont({
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
     children: React.ReactNode
-    params: Params
+    params: Promise<{ locale: Locale }>
 }
 
 export default async function RootLayout({
@@ -37,10 +36,9 @@ export default async function RootLayout({
     const { locale } = await params
 
     // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(locale as Locale)) {
+    if (!routing.locales.includes(locale)) {
         notFound()
     }
-    const validLocale = locale as Locale
 
     // Providing all messages to the client
     // side is the easiest way to get started
@@ -51,7 +49,7 @@ export default async function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <NextIntlClientProvider messages={messages}>
-                    <Navbar selectedLocale={validLocale} />
+                    <Navbar selectedLocale={locale} />
                     {children}
                 </NextIntlClientProvider>
             </body>
