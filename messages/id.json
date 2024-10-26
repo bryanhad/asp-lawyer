@@ -30,5 +30,24 @@
     "contactUsPage": {
         "title": "Hubungi Kami",
         "desc": "Hubungi kami untuk konsultasi dan pertanyaan. Kami siap membantu."
+    },
+    "carousels": {
+        "homePage": {
+            "first": {
+                "title": "Layanan Hukum Profesional",
+                "desc": "Dapatkan pendampingan hukum yang berdedikasi dengan fokus pada keberhasilan klien.",
+                "callToAction": "Pelajari Lebih Lanjut"
+            },
+            "second": {
+                "title": "Konsultan Terpercaya Anda",
+                "desc": "Tim ahli kami memberikan panduan untuk semua kebutuhan hukum Anda.",
+                "callToAction": "Temui Tim Kami"
+            },
+            "third": {
+                "title": "Bidang Praktik Komprehensif",
+                "desc": "Jelajahi keahlian kami yang disesuaikan dengan situasi unik Anda.",
+                "callToAction": "Jelajahi Bidang Praktik Kami"
+            }
+        }
     }
 }

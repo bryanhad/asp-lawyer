@@ -30,5 +30,24 @@
     "contactUsPage": {
         "title": "Get in Touch",
         "desc": "Contact us for consultations and inquiries. We're here to help."
+    },
+    "carousels": {
+        "homePage": {
+            "first": {
+                "title": "Professional Legal Services",
+                "desc": "Experience dedicated legal representation with a focus on client success.",
+                "callToAction": "Learn More"
+            },
+            "second": {
+                "title": "Your Trusted Advisors",
+                "desc": "Our expert team provides guidance for all your legal needs.",
+                "callToAction": "Meet Our Team"
+            },
+            "third": {
+                "title": "Comprehensive Practice Areas",
+                "desc": "Explore our areas of expertise tailored to your unique situation.",
+                "callToAction": "Explore Our Practice Areas"
+            }
+        }
     }
 }
