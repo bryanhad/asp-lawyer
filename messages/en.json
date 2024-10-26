@@ -1,19 +1,34 @@
 {
-    "Navbar": {
+    "navbar": {
         "home": "Home",
-        "about": "About",
-        "contact": "Contact"
+        "about": "About Us",
+        "practiceAreas": "Practice Areas",
+        "members": "Our Team",
+        "blogs": "Blogs",
+        "contactUs": "Contact Us"
     },
-    "HomePage": {
-        "title": "Hello world!",
-        "desc": "This is the landing page!"
+    "homePage": {
+        "title": "Welcome to Our Law Firm",
+        "desc": "Providing trusted legal solutions with professionalism and dedication."
     },
-    "AboutPage": {
-        "title": "ABOUT PAGE",
-        "desc": "oh yeah! this about page is so cool!"
+    "aboutPage": {
+        "title": "About Our Firm",
+        "desc": "Learn more about our mission, values, and dedication to our clients."
     },
-    "ContactPage": {
-        "title": "CONTACT PAGE",
-        "desc": "woaw! this contact page is nice!"
+    "practiceAreasPage": {
+        "title": "Our Practice Areas",
+        "desc": "Expertise in various legal fields to meet your unique needs."
+    },
+    "membersPage": {
+        "title": "Meet Our Team",
+        "desc": "Get to know our skilled lawyers and support staff dedicated to your success."
+    },
+    "blogsPage": {
+        "title": "Legal Insights",
+        "desc": "Stay informed with articles and updates on important legal topics."
+    },
+    "contactUsPage": {
+        "title": "Get in Touch",
+        "desc": "Contact us for consultations and inquiries. We're here to help."
     }
 }

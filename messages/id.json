@@ -1,19 +1,34 @@
 {
-    "Navbar": {
+    "navbar": {
         "home": "Beranda",
-        "about": "Tentang",
-        "contact": "Hubungi"
+        "about": "Tentang Kami",
+        "practiceAreas": "Bidang Praktik",
+        "members": "Tim Kami",
+        "blogs": "Blog",
+        "contactUs": "Hubungi Kami"
     },
-    "HomePage": {
-        "title": "Halo Dunia!",
-        "desc": "Ini adalah halaman beranda!"
+    "homePage": {
+        "title": "Selamat Datang di Firma Hukum Kami",
+        "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi."
     },
-    "AboutPage": {
-        "title": "HALAMAN TENTANG",
-        "desc": "oh yaak! halaman tentang ini sangat keren!"
+    "aboutPage": {
+        "title": "Tentang Firma Kami",
+        "desc": "Pelajari lebih lanjut tentang misi, nilai, dan dedikasi kami kepada klien."
     },
-    "ContactPage": {
-        "title": "HALAMAN HUBUNGI",
-        "desc": "woaw! halaman hubungi ini bagus!"
+    "practiceAreasPage": {
+        "title": "Bidang Praktik Kami",
+        "desc": "Keahlian di berbagai bidang hukum untuk memenuhi kebutuhan unik Anda."
+    },
+    "membersPage": {
+        "title": "Kenali Tim Kami",
+        "desc": "Kenali pengacara dan staf pendukung kami yang berdedikasi untuk kesuksesan Anda."
+    },
+    "blogsPage": {
+        "title": "Wawasan Hukum",
+        "desc": "Tetap terinformasi dengan artikel dan pembaruan tentang topik hukum penting."
+    },
+    "contactUsPage": {
+        "title": "Hubungi Kami",
+        "desc": "Hubungi kami untuk konsultasi dan pertanyaan. Kami siap membantu."
     }
 }

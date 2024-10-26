@@ -21,8 +21,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | ASP Lawyer',
-        default: 'ASP Lawyer'
+        template: '%s | ASP Law firm',
+        default: 'ASP Law firm'
     },
     description: 'Website ASP',
 }

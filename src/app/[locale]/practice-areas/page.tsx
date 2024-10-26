@@ -1,8 +1,8 @@
 import { MainContainer, SectionContainer } from '@/components/ui/containers'
 import { getTranslations } from 'next-intl/server'
 
-export default async function AboutPage() {
-    const t = await getTranslations('aboutPage')
+export default async function PracticeAreasPage() {
+    const t = await getTranslations('practiceAreasPage')
 
     return (
         <MainContainer>
