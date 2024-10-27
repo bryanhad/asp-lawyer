@@ -20,7 +20,7 @@ export default function LinkButton({
         <Button
             variant={variant}
             size={size}
-            className={cn('rounded-full', className)}
+            className={cn('rounded-full text-lg h-auto py-4', className)}
             asChild
         >
             <Link href={href} {...props}>

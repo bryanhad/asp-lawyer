@@ -10,35 +10,52 @@
     "homePage": {
         "title": "Welcome to Our Law Firm",
         "desc": "Providing trusted legal solutions with professionalism and dedication.",
-        "aboutUsPreview": {
+        "previewAboutUs": {
             "title": "About ASP Law Firm",
             "desc": "ASP Law Firm specializes in bankruptcy law, providing compassionate, effective guidance to individuals and businesses facing financial challenges. Our team is committed to helping clients navigate the complexities of bankruptcy with clarity and confidence.",
             "callToAction": "Learn More"
         },
-        "practiceAreasPreview": {
+        "previewPracticeAreas": {
             "title": "Our Practice Areas",
-            "desc": "Discover our expertise in bankruptcy law, including debt restructuring, asset protection, and more.",
-            "callToAction": "Explore Practice Areas"
-          },
-          "ourTeamPreview": {
+            "desc": "We offer a comprehensive range of practice areas, each expertly managed by our dedicated professionals. From bankruptcy law to debt restructuring and asset protection, our team applies their specialized knowledge to every case.",
+            "callToAction": "Explore All Practice Areas",
+            "topPracticeAreas": {
+                "bankruptcyLaw": {
+                    "title": "Bankruptcy Law",
+                    "shortDesc": "Guiding clients through financial distress with expertise.",
+                    "longDesc": "Specializing in bankruptcy cases, we offer guidance to individuals and businesses facing financial distress, helping them navigate complex legal processes with confidence."
+                },
+                "litigation": {
+                    "title": "Litigation",
+                    "shortDesc": "Defending client rights in court with precision.",
+                    "longDesc": "Our skilled litigators represent clients in court with dedication and precision, ensuring that their rights are protected in every legal proceeding."
+                },
+                "copyright": {
+                    "title": "Copyright Law",
+                    "shortDesc": "Safeguarding intellectual property with legal expertise.",
+                    "longDesc": "Protecting intellectual property rights, we assist clients in copyright law to safeguard their creative works and ensure legal protection."
+                }
+            }
+        },
+        "previewOurTeam": {
             "title": "Meet Our Team",
             "desc": "Our skilled attorneys are dedicated to providing personalized and reliable legal guidance.",
             "callToAction": "Meet the Team"
-          },
-          "testimonials": {
+        },
+        "testimonials": {
             "title": "What Our Clients Say",
             "desc": "Read testimonials from clients who have benefited from our legal services."
-          },
-          "latestBlogs": {
+        },
+        "latestBlogs": {
             "title": "Insights & Articles",
             "desc": "Stay informed with our latest blog posts on bankruptcy law.",
             "callToAction": "Read Our Blogs"
-          },
-          "contactUs": {
+        },
+        "contactUs": {
             "title": "Ready to Talk?",
             "desc": "Get in touch with us to discuss your case and see how we can help.",
             "callToAction": "Contact Us"
-          }
+        }
     },
     "aboutPage": {
         "title": "About Our Firm",

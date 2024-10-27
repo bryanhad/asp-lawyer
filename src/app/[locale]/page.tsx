@@ -1,7 +1,8 @@
-import AboutUsPreview from '@/components/home-components/about-us-preview'
+import PreviewAboutUs from '@/components/home-components/preview-about-us'
 import { MainContainer } from '@/components/ui/containers'
 import { getTranslations } from 'next-intl/server'
 import HeroCarousel from '../../components/home-components/hero-carousel'
+import PreviewPracticeAreas from '@/components/home-components/preview-practice-areas'
 
 export default async function Home() {
     const t = await getTranslations('homePage')
@@ -9,8 +10,8 @@ export default async function Home() {
     return (
         <MainContainer>
             <HeroCarousel />
-            <AboutUsPreview/>
-
+            <PreviewAboutUs />
+            <PreviewPracticeAreas />
         </MainContainer>
     )
 }

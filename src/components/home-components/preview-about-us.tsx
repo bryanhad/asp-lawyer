@@ -3,15 +3,15 @@ import { SectionContainer } from '../ui/containers'
 import LinkButton from '../ui/link-button'
 import Image from 'next/image'
 
-export default async function AboutUsPreview() {
-    const t = await getTranslations('homePage.aboutUsPreview')
+export default async function PreviewAboutUs() {
+    const t = await getTranslations('homePage.previewAboutUs')
 
     return (
         <SectionContainer
             side="left"
             secondaryContent={
                 <Image
-                    className='rounded-xl'
+                    className="rounded-xl"
                     src={'/home-page/squad.webp'}
                     alt="The SQUAD"
                     width={640}

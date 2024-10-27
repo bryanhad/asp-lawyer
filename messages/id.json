@@ -10,17 +10,34 @@
     "homePage": {
         "title": "Selamat Datang di Firma Hukum Kami",
         "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi.",
-        "aboutUsPreview": {
+        "previewAboutUs": {
             "title": "Tentang ASP Law Firm",
             "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
             "callToAction": "Pelajari Lebih Lanjut"
         },
-        "practiceAreasPreview": {
+        "previewPracticeAreas": {
             "title": "Bidang Praktik Kami",
-            "desc": "Temukan keahlian kami dalam hukum kepailitan, termasuk restrukturisasi utang, perlindungan aset, dan lainnya.",
-            "callToAction": "Jelajahi Bidang Praktik"
+            "desc": "Kami menawarkan berbagai layanan hukum yang komprehensif, masing-masing ditangani dengan keahlian profesional oleh anggota tim kami. Dari hukum kepailitan hingga restrukturisasi utang dan perlindungan aset, tim kami menerapkan pengetahuan khusus pada setiap kasus.",
+            "callToAction": "Jelajahi Semua Bidang Praktik",
+            "topPracticeAreas": {
+                "bankruptcyLaw": {
+                    "title": "Hukum Kepailitan",
+                    "shortDesc": "Membimbing klien melewati kesulitan keuangan dengan keahlian.",
+                    "longDesc": "Mengkhususkan diri dalam kasus kepailitan, kami memberikan panduan kepada individu dan bisnis yang menghadapi kesulitan keuangan, membantu mereka melalui proses hukum yang kompleks dengan percaya diri."
+                },
+                "litigation": {
+                    "title": "Litigasi",
+                    "shortDesc": "Melindungi hak klien di pengadilan dengan ketelitian.",
+                    "longDesc": "Pengacara litigasi kami yang terampil mewakili klien di pengadilan dengan dedikasi dan ketelitian, memastikan hak mereka terlindungi di setiap proses hukum."
+                },
+                "copyright": {
+                    "title": "Hukum Hak Cipta",
+                    "shortDesc": "Melindungi kekayaan intelektual dengan keahlian hukum.",
+                    "longDesc": "Melindungi hak kekayaan intelektual, kami membantu klien dalam hukum hak cipta untuk menjaga karya kreatif mereka dan memastikan perlindungan hukum."
+                }
+            }
         },
-        "ourTeamPreview": {
+        "previewOurTeam": {
             "title": "Temui Tim Kami",
             "desc": "Pengacara kami yang berpengalaman berdedikasi memberikan panduan hukum yang andal dan personal.",
             "callToAction": "Temui Tim"

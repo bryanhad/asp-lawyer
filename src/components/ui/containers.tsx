@@ -36,14 +36,14 @@ export function SectionContainer({
         return (
             <div
                 className={cn(
-                    'flex w-full max-w-[1720px] flex-col items-center px-4 py-12',
+                    'flex w-full max-w-[1720px] flex-col items-center px-4 py-12 md:py-20',
                     className,
                 )}
             >
                 <div className="mb-4 xl:max-w-[40%]">
                     <SectionHeading side={side}>{title}</SectionHeading>
                 </div>
-                <div className="mb-7 text-muted-foreground xl:max-w-[50%]">
+                <div className="mb-7 text-muted-foreground text-center xl:max-w-[50%]">
                     {desc}
                 </div>
                 {children}
@@ -77,8 +77,8 @@ export function SectionContainer({
                         className={cn(
                             'mb-7 text-center text-muted-foreground',
                             {
-                                'text-start md:max-w-[90%]': side === 'left',
-                                'text-end': side === 'right',
+                                'md:text-start md:max-w-[90%]': side === 'left',
+                                'md:text-end': side === 'right',
                             },
                         )}
                     >
