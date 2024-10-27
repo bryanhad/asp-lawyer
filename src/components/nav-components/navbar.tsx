@@ -15,16 +15,16 @@ async function Navbar({ selectedLocale }: Props) {
     const t = await getTranslations('navbar')
 
     return (
-        <header className="flex h-16 justify-center border-b bg-white lg:h-20">
-            <nav className="flex h-full w-full max-w-[1820px] justify-between px-4 sm:px-6 md:px-8">
+        <header className="fixed top-0 z-[90] flex h-16 w-full justify-center border-b bg-white lg:h-20">
+            <nav className="flex h-full w-full max-w-[1720px] justify-between px-4 sm:px-6 md:px-8">
                 <div className="flex items-end gap-14 self-center">
                     <Link href={'/'} className="flex items-center">
-                        <h1 className="relative text-xl font-bold text-amber-300 sm:text-2xl">
+                        <h1 className="relative text-xl font-bold text-primary sm:text-2xl">
                             ASP Law firm
                         </h1>
                     </Link>
                     <div className="hidden gap-10 lg:flex">
-                        <NavLink href={'/about'}>{t('about')}</NavLink>
+                        <NavLink href={'/about-us'}>{t('about')}</NavLink>
                         <NavLink href={'/practice-areas'}>
                             {t('practiceAreas')}
                         </NavLink>

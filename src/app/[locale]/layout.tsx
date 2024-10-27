@@ -53,7 +53,10 @@ export default async function RootLayout({
             >
                 <NextIntlClientProvider messages={messages}>
                     <Navbar selectedLocale={locale} />
+                    <main className='mt-16 lg:mt-20'>
                     {children}
+
+                    </main>
                 </NextIntlClientProvider>
             </body>
         </html>

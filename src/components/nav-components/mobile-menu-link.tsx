@@ -27,7 +27,7 @@ function MobileMenuLink({ children, icon, href }: MobileMenuLinkProps) {
                 <Link
                     href={href}
                     className={cn({
-                        'text-amber-400 hover:text-amber-400': isActive,
+                        'text-primary hover:text-primary': isActive,
                     })}
                 >
                     {icon}
@@ -35,7 +35,7 @@ function MobileMenuLink({ children, icon, href }: MobileMenuLinkProps) {
                 </Link>
             </Button>
             {isActive && (
-                <div className="absolute left-0 z-10 h-full w-2 translate-x-[-50%] rounded-full bg-amber-400" />
+                <div className="absolute left-0 z-10 h-full w-2 translate-x-[-50%] rounded-full bg-primary" />
             )}
         </div>
     )

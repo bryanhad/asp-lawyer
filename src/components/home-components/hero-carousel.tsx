@@ -88,7 +88,7 @@ function Title({ children }: PropsWithChildren) {
     return (
         <h2
             style={{
-                fontSize: 'clamp(2.5rem, 2vw + 1rem, 3.8rem)',
+                fontSize: 'clamp(2rem, 2vw + 1rem, 3.8rem)',
             }}
             className="font-bold leading-tight"
         >
@@ -99,7 +99,7 @@ function Title({ children }: PropsWithChildren) {
 
 function Description({ children }: PropsWithChildren) {
     return (
-        <p className="w-full max-w-[80%] leading-snug lg:text-lg xl:text-xl">
+        <p className="w-full max-w-[80%] text-sm leading-snug sm:text-base lg:text-lg xl:text-xl">
             {children}
         </p>
     )
@@ -107,11 +107,7 @@ function Description({ children }: PropsWithChildren) {
 
 function CTA({ href, text }: { href: string; text: string }) {
     return (
-        <Button
-            asChild
-            size="lg"
-            className="hover:text-yellow-90 bg-yellow-600 text-white hover:bg-amber-500 lg:text-lg"
-        >
+        <Button asChild size="lg" variant={'link'}>
             <Link href={href}>{text}</Link>
         </Button>
     )

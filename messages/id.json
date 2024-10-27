@@ -9,7 +9,12 @@
     },
     "homePage": {
         "title": "Selamat Datang di Firma Hukum Kami",
-        "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi."
+        "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi.",
+        "aboutUsPreview": {
+            "title": "Tentang ASP Law Firm",
+            "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
+            "callToAction": "Pelajari Lebih Lanjut"
+        }
     },
     "aboutPage": {
         "title": "Tentang Firma Kami",
@@ -34,19 +39,19 @@
     "carousels": {
         "homePage": {
             "first": {
-                "title": "Layanan Hukum Profesional",
-                "desc": "Dapatkan pendampingan hukum yang berdedikasi dengan fokus pada keberhasilan klien.",
-                "callToAction": "Pelajari Lebih Lanjut"
+                "title": "Solusi Hukum yang Disesuaikan untuk Anda",
+                "desc": "Firma kami menyediakan panduan hukum khusus untuk membantu Anda menghadapi dunia hukum dengan percaya diri.",
+                "callToAction": "Temukan Layanan Kami"
             },
             "second": {
-                "title": "Konsultan Terpercaya Anda",
-                "desc": "Tim ahli kami memberikan panduan untuk semua kebutuhan hukum Anda.",
-                "callToAction": "Temui Tim Kami"
+                "title": "Dukungan Klien yang Berdedikasi",
+                "desc": "Kami berkomitmen untuk memahami kebutuhan unik Anda dan memberikan dukungan pribadi di setiap langkah.",
+                "callToAction": "Temui Tim Berdedikasi Kami"
             },
             "third": {
-                "title": "Bidang Praktik Komprehensif",
-                "desc": "Jelajahi keahlian kami yang disesuaikan dengan situasi unik Anda.",
-                "callToAction": "Jelajahi Bidang Praktik Kami"
+                "title": "Keberhasilan Terbukti di Berbagai Bidang Hukum",
+                "desc": "Dengan pengalaman luas di berbagai bidang hukum, kami menawarkan perwakilan yang andal untuk mencapai tujuan Anda.",
+                "callToAction": "Jelajahi Keahlian Kami"
             }
         }
     }

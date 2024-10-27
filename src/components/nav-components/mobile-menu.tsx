@@ -37,7 +37,7 @@ function MobileMenu({ selectedLocale }: Props) {
                     <MobileMenuLink icon={<Home />} href={'/'}>
                         {t('home')}
                     </MobileMenuLink>
-                    <MobileMenuLink icon={<Info />} href={'/about'}>
+                    <MobileMenuLink icon={<Info />} href={'/about-us'}>
                         {t('about')}
                     </MobileMenuLink>
                     <MobileMenuLink

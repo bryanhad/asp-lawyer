@@ -22,12 +22,12 @@ type Props = {
 }
 /**
  * A Carousel component for background images with any content
- * 
+ *
  * Refer to shadcn carousel documentation:
  * https://ui.shadcn.com/docs/components/carousel
- * 
+ *
  * @param items An array of objects. { "backgroundImagePath": string; "content": ReactNode }[]
- * 
+ *
  * @returns A cool carousel
  */
 export default function BackgroundCarousel({ items }: Props) {
@@ -80,6 +80,7 @@ export default function BackgroundCarousel({ items }: Props) {
                             className="relative w-full pl-0"
                         >
                             <div className="relative aspect-square w-full sm:aspect-[5/4] md:aspect-[10/5] lg:aspect-[16/6]">
+                                {/* TODO: handle lower resolution background image for fallback */}
                                 <Image
                                     src={item.backgroundImagePath}
                                     alt={`Carousel image number ${index + 1}`}

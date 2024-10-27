@@ -1,4 +1,5 @@
-import { MainContainer, SectionContainer } from '@/components/ui/containers'
+import AboutUsPreview from '@/components/home-components/about-us-preview'
+import { MainContainer } from '@/components/ui/containers'
 import { getTranslations } from 'next-intl/server'
 import HeroCarousel from '../../components/home-components/hero-carousel'
 
@@ -8,12 +9,8 @@ export default async function Home() {
     return (
         <MainContainer>
             <HeroCarousel />
-            <SectionContainer>
-                <div className="p-7">
-                    <h1 className="text-xl font-bold">{t('title')}</h1>
-                    <p>{t('desc')}</p>
-                </div>
-            </SectionContainer>
+            <AboutUsPreview/>
+
         </MainContainer>
     )
 }

@@ -1,14 +1,16 @@
 'use client'
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-} from '@/components/ui/select'
 import { Locale } from '@/i18n/request'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
+import { Button } from '../ui/button'
+import { ChevronDown } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 type Props = {
     selectedLocale: Locale
@@ -19,15 +21,18 @@ export default function LanguageSelect({ selectedLocale }: Props) {
     const router = useRouter()
 
     function handleLanguageChange(value: string) {
+        if (value === selectedLocale) {
+            return
+        }
         const newLocale = value
         const path = pathname.split('/').slice(2).join('/')
         router.push(`/${newLocale}/${path}`)
     }
 
     return (
-        <Select onValueChange={handleLanguageChange}>
-            <SelectTrigger className="focus:ring-0 w-max">
-                <div className="pr-1">
+        <Popover>
+            <Button asChild variant="outline" className="px-2">
+                <PopoverTrigger>
                     {selectedLocale === 'id' ? (
                         <Image
                             src={'/flag-id.svg'}
@@ -43,32 +48,63 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                             height={18}
                         />
                     )}
-                </div>
-            </SelectTrigger>
-            <SelectContent>
-                <SelectItem value="en" noCheck>
-                    <div className="flex gap-2 items-center">
+                    <ChevronDown className="text-muted-foreground" />
+                </PopoverTrigger>
+            </Button>
+            <PopoverContent className="z-[91] w-auto p-2" align="start">
+                <div className="flex flex-col gap-2">
+                    <Button
+                        onClick={() => handleLanguageChange('en')}
+                        variant="naked"
+                        size="sm"
+                        className={cn('flex items-center justify-start gap-2', {
+                            'bg-muted': selectedLocale === 'en',
+                        })}
+                    >
                         <Image
                             src={'/flag-en.svg'}
                             alt="English flag"
                             width={24}
                             height={18}
                         />
-                        <p className="leading-none">English</p>
-                    </div>
-                </SelectItem>
-                <SelectItem value="id" noCheck>
-                    <div className="flex gap-2 items-center">
+                        <p className="leading-none text-muted-foreground">
+                            English
+                        </p>
+                    </Button>
+                    <Button
+                        onClick={() => handleLanguageChange('id')}
+                        variant="naked"
+                        size="sm"
+                        className={cn('flex items-center justify-start gap-2', {
+                            'bg-muted': selectedLocale === 'id',
+                        })}
+                    >
                         <Image
                             src={'/flag-id.svg'}
                             alt="Indonesian flag"
                             width={24}
                             height={18}
                         />
-                        <p className="leading-none">Indoneisa</p>
-                    </div>
-                </SelectItem>
-            </SelectContent>
-        </Select>
+                        <p className="leading-none text-muted-foreground">
+                            Indoneisa
+                        </p>
+                    </Button>
+                </div>
+            </PopoverContent>
+        </Popover>
+
+        // <Select onValueChange={handleLanguageChange}>
+        //     <SelectTrigger className="focus:ring-0 w-max">
+
+        //     </SelectTrigger>
+        //     <SelectContent>
+        //         <SelectItem value="en" noCheck>
+
+        //         </SelectItem>
+        //         <SelectItem value="id" noCheck>
+
+        //         </SelectItem>
+        //     </SelectContent>
+        // </Select>
     )
 }
