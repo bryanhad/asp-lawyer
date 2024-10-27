@@ -37,7 +37,7 @@
                 }
             }
         },
-        "previewOurTeam": {
+        "previewMembers": {
             "title": "Meet Our Team",
             "desc": "Our skilled attorneys are dedicated to providing personalized and reliable legal guidance.",
             "callToAction": "Meet the Team"
@@ -95,5 +95,8 @@
                 "callToAction": "Explore Our Expertise"
             }
         }
+    },
+    "commonWords": {
+        "learnMore": "Learn More"
     }
 }

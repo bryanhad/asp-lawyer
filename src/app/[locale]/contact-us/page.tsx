@@ -6,8 +6,7 @@ export default async function ContactUsPage() {
 
     return (
         <MainContainer>
-            <SectionContainer
-            >
+            <SectionContainer variant="naked">
                 <div className="p-7">
                     <h1 className="text-xl font-bold">{t('title')}</h1>
                     <p>{t('desc')}</p>

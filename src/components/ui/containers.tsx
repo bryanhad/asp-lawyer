@@ -16,13 +16,14 @@ export function MainContainer({ children, className }: Props) {
 
 type SectionProps = {
     className?: string
-    title: string
-    desc: ReactNode
-} & PropsWithChildren &
-    (
-        | { side?: 'right' | 'left'; secondaryContent: ReactNode }
-        | { side?: 'center'; secondaryContent?: never }
-    )
+    children?: ReactNode
+    variant?: 'title-and-desc' | 'naked'
+    title?: string
+    desc?: ReactNode
+} & (
+    | { side?: 'right' | 'left'; secondaryContent: ReactNode }
+    | { side?: 'center'; secondaryContent?: never }
+)
 
 export function SectionContainer({
     children,
@@ -31,7 +32,21 @@ export function SectionContainer({
     desc,
     side = 'center',
     secondaryContent,
+    variant = 'title-and-desc',
 }: SectionProps) {
+    if (variant === 'naked') {
+        return (
+            <div
+                className={cn(
+                    'flex w-full max-w-[1720px] flex-col  px-4 py-12',
+                    className,
+                )}
+            >
+                {children}
+            </div>
+        )
+    }
+
     if (side === 'center') {
         return (
             <div
@@ -43,7 +58,7 @@ export function SectionContainer({
                 <div className="mb-4 xl:max-w-[40%]">
                     <SectionHeading side={side}>{title}</SectionHeading>
                 </div>
-                <div className="mb-7 text-muted-foreground text-center xl:max-w-[50%]">
+                <div className="mb-7 text-center text-muted-foreground xl:max-w-[50%]">
                     {desc}
                 </div>
                 {children}
@@ -54,7 +69,7 @@ export function SectionContainer({
     return (
         <div
             className={cn(
-                'grid w-full max-w-[1420px] grid-cols-1 px-4 py-12 md:py-20 md:grid-cols-2',
+                'grid w-full max-w-[1420px] grid-cols-1 px-4 py-12 md:grid-cols-2 md:py-20',
                 className,
             )}
         >
@@ -77,7 +92,7 @@ export function SectionContainer({
                         className={cn(
                             'mb-7 text-center text-muted-foreground',
                             {
-                                'md:text-start md:max-w-[90%]': side === 'left',
+                                'md:max-w-[90%] md:text-start': side === 'left',
                                 'md:text-end': side === 'right',
                             },
                         )}

@@ -37,7 +37,7 @@
                 }
             }
         },
-        "previewOurTeam": {
+        "previewMembers": {
             "title": "Temui Tim Kami",
             "desc": "Pengacara kami yang berpengalaman berdedikasi memberikan panduan hukum yang andal dan personal.",
             "callToAction": "Temui Tim"
@@ -95,5 +95,8 @@
                 "callToAction": "Jelajahi Keahlian Kami"
             }
         }
+    },
+    "commonWords": {
+        "learnMore": "Pelajari Lebih Lanjut"
     }
 }

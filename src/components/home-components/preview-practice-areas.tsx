@@ -7,6 +7,7 @@ import { PiggyBank, Scale, FileText } from 'lucide-react'
 
 export default async function PreviewPracticeAreas() {
     const t = await getTranslations('homePage.previewPracticeAreas')
+    const tCommon = await getTranslations('commonWords')
 
     return (
         <div className="flex w-full flex-col items-center bg-gray-50">
@@ -18,6 +19,7 @@ export default async function PreviewPracticeAreas() {
                         desc={t('topPracticeAreas.litigation.shortDesc')}
                         imagePath="/home-page/practice-bankruptcy.jpg"
                         href="/practice-areas/litigation"
+                        linkText={tCommon('learnMore')}
                     />
                     <PracticeAreaCard
                         icon={<PiggyBank size={48} className="shrink-0" />}
@@ -25,6 +27,7 @@ export default async function PreviewPracticeAreas() {
                         desc={t('topPracticeAreas.bankruptcyLaw.shortDesc')}
                         imagePath="/home-page/practice-copyright.jpg"
                         href="/practice-areas/bankruptcy"
+                        linkText={tCommon('learnMore')}
                     />
                     <PracticeAreaCard
                         icon={<FileText size={48} />}
@@ -32,6 +35,7 @@ export default async function PreviewPracticeAreas() {
                         desc={t('topPracticeAreas.copyright.shortDesc')}
                         imagePath="/home-page/practice-litigation.jpg"
                         href="/practice-areas/copyright"
+                        linkText={tCommon('learnMore')}
                     />
                 </div>
 
@@ -49,6 +53,7 @@ type PracticeAreaCardProps = {
     imagePath: string
     desc: string
     href: string
+    linkText: string
 }
 
 function PracticeAreaCard({
@@ -57,6 +62,7 @@ function PracticeAreaCard({
     imagePath,
     desc,
     href,
+    linkText,
 }: PracticeAreaCardProps) {
     return (
         <div className="overflow-hidden rounded-lg bg-white shadow-md">
@@ -77,7 +83,7 @@ function PracticeAreaCard({
                     href={href}
                     className="text-primary-600 hover:text-primary-700 font-medium"
                 >
-                    Learn More &rarr;
+                    {linkText} &rarr;
                 </Link>
             </div>
         </div>
