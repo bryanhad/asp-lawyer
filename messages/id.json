@@ -14,6 +14,30 @@
             "title": "Tentang ASP Law Firm",
             "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
             "callToAction": "Pelajari Lebih Lanjut"
+        },
+        "practiceAreasPreview": {
+            "title": "Bidang Praktik Kami",
+            "desc": "Temukan keahlian kami dalam hukum kepailitan, termasuk restrukturisasi utang, perlindungan aset, dan lainnya.",
+            "callToAction": "Jelajahi Bidang Praktik"
+        },
+        "ourTeamPreview": {
+            "title": "Temui Tim Kami",
+            "desc": "Pengacara kami yang berpengalaman berdedikasi memberikan panduan hukum yang andal dan personal.",
+            "callToAction": "Temui Tim"
+        },
+        "testimonials": {
+            "title": "Apa Kata Klien Kami",
+            "desc": "Baca testimoni dari klien yang telah merasakan manfaat layanan hukum kami."
+        },
+        "latestBlogs": {
+            "title": "Wawasan & Artikel",
+            "desc": "Tetap terinformasi dengan artikel terbaru kami tentang hukum kepailitan.",
+            "callToAction": "Baca Blog Kami"
+        },
+        "contactUs": {
+            "title": "Siap untuk Berdiskusi?",
+            "desc": "Hubungi kami untuk membahas kasus Anda dan lihat bagaimana kami dapat membantu.",
+            "callToAction": "Hubungi Kami"
         }
     },
     "aboutPage": {

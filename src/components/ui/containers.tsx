@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { PropsWithChildren, ReactNode } from 'react'
+import SectionHeading from './section-heading'
 
 type Props = {
     className?: string
@@ -15,28 +16,85 @@ export function MainContainer({ children, className }: Props) {
 
 type SectionProps = {
     className?: string
-    title: ReactNode
+    title: string
     desc: ReactNode
-} & PropsWithChildren
+} & PropsWithChildren &
+    (
+        | { side?: 'right' | 'left'; secondaryContent: ReactNode }
+        | { side?: 'center'; secondaryContent?: never }
+    )
 
 export function SectionContainer({
     children,
     className,
     title,
     desc,
+    side = 'center',
+    secondaryContent,
 }: SectionProps) {
+    if (side === 'center') {
+        return (
+            <div
+                className={cn(
+                    'flex w-full max-w-[1720px] flex-col items-center px-4 py-12',
+                    className,
+                )}
+            >
+                <div className="mb-4 xl:max-w-[40%]">
+                    <SectionHeading side={side}>{title}</SectionHeading>
+                </div>
+                <div className="mb-7 text-muted-foreground xl:max-w-[50%]">
+                    {desc}
+                </div>
+                {children}
+            </div>
+        )
+    }
+
     return (
         <div
             className={cn(
-                'flex w-full max-w-[1720px] flex-col items-center px-4 py-12',
+                'grid w-full max-w-[1420px] grid-cols-1 px-4 py-12 md:py-20 md:grid-cols-2',
                 className,
             )}
         >
-            <div className="mb-3 xl:max-w-[40%]">{title}</div>
-            <div className="mb-7 text-muted-foreground xl:max-w-[50%]">
-                {desc}
-            </div>
-            {children}
+            <>
+                <span
+                    className={cn('flex flex-col items-center justify-center', {
+                        'order-1 md:items-start': side === 'left',
+                        'order-2 md:items-end': side === 'right',
+                    })}
+                >
+                    <div
+                        className={cn('mb-4 xl:mb-6', {
+                            'text-start': side === 'left',
+                            'text-end': side === 'right',
+                        })}
+                    >
+                        <SectionHeading side={side}>{title}</SectionHeading>
+                    </div>
+                    <div
+                        className={cn(
+                            'mb-7 text-center text-muted-foreground',
+                            {
+                                'text-start md:max-w-[90%]': side === 'left',
+                                'text-end': side === 'right',
+                            },
+                        )}
+                    >
+                        {desc}
+                    </div>
+                    {children}
+                </span>
+                <span
+                    className={cn('hidden md:block', {
+                        'order-2': side === 'left',
+                        'order-1': side === 'right',
+                    })}
+                >
+                    {secondaryContent}
+                </span>
+            </>
         </div>
     )
 }

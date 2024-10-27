@@ -26,7 +26,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
         }
         const newLocale = value
         const path = pathname.split('/').slice(2).join('/')
-        router.push(`/${newLocale}/${path}`)
+        router.push(`/${newLocale}/${path}`, { scroll: false })
     }
 
     return (
