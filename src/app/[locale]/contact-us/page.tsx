@@ -1,5 +1,14 @@
 import { MainContainer, SectionContainer } from '@/components/ui/containers'
+import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+
+export async function generateMetadata(): Promise<Metadata> {
+    const pageTitle = await getTranslations('contactUsPage')
+
+    return {
+        title: pageTitle('pageTitle'),
+    }
+}
 
 export default async function ContactUsPage() {
     const t = await getTranslations('contactUsPage')
