@@ -32,7 +32,7 @@ export default function SectionHeading({
                 <h2
                     id={href ?? undefined}
                     className={cn(
-                        'flex max-w-max scroll-m-28 flex-col gap-2 text-center font-semibold text-primary xl:font-bold',
+                        'flex max-w-max scroll-m-28 flex-col gap-1 sm:gap-2 text-center font-semibold text-primary xl:font-bold',
                         className,
                         {
                             'md:items-start': side === 'left',

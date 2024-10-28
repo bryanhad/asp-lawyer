@@ -28,13 +28,13 @@ export default function Tags({
 
     return (
         <>
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-3 xl:gap-8">
                 {tags.map((tag) => (
                     <Button
                         key={tag.title}
                         onClick={() => handleClick(tag.title)}
                         className={cn(
-                            'rounded-full bg-gray-200 text-gray-500 hover:bg-gray-300',
+                            'rounded-full bg-gray-200 text-gray-500 hover:bg-gray-300 text-sm',
                             {
                                 'bg-blue-500 text-white hover:bg-blue-600':
                                     activeTag === tag.title,
