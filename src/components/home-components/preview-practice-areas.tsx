@@ -4,6 +4,7 @@ import LinkButton from '../ui/link-button'
 import { ReactNode } from 'react'
 import { Link } from '@/i18n/routing'
 import { PiggyBank, Scale, FileText } from 'lucide-react'
+import ImageWithBlur from '../ui/image-with-blur'
 
 export default async function PreviewPracticeAreas() {
     const t = await getTranslations('homePage.previewPracticeAreas')
@@ -67,9 +68,11 @@ function PracticeAreaCard({
     return (
         <div className="overflow-hidden rounded-lg bg-white shadow-md">
             <div className="relative h-48">
-                <img
+                <ImageWithBlur
                     src={imagePath}
                     alt={title}
+                    width={400}
+                    height={200}
                     className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">

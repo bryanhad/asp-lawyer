@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { SectionContainer } from '../ui/containers'
 import LinkButton from '../ui/link-button'
-import Image from 'next/image'
+import ImageWithBlur from '../ui/image-with-blur'
 
 export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')
@@ -10,7 +10,7 @@ export default async function PreviewAboutUs() {
         <SectionContainer
             side="left"
             secondaryContent={
-                <Image
+                <ImageWithBlur
                     className="rounded-xl"
                     src={'/home-page/squad.webp'}
                     alt="The SQUAD"

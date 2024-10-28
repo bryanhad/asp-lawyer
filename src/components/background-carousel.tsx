@@ -11,14 +11,17 @@ import {
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { ReactNode, useEffect, useRef, useState } from 'react'
+import ImageWithBlur from './ui/image-with-blur'
 
-type CarouselItemData = {
+export type CarouselItemData = {
     backgroundImagePath: string
+    backgroundImageAlt: string
     content: ReactNode
 }
 
 type Props = {
-    items: CarouselItemData[]
+    itemCount: number
+    children: ReactNode
 }
 /**
  * A Carousel component for background images with any content
@@ -30,7 +33,7 @@ type Props = {
  *
  * @returns A cool carousel
  */
-export default function BackgroundCarousel({ items }: Props) {
+export default function BackgroundCarousel({ itemCount, children }: Props) {
     const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null)
     const [current, setCurrent] = useState(0)
     const plugin = useRef(
@@ -73,32 +76,10 @@ export default function BackgroundCarousel({ items }: Props) {
                     loop: true,
                 }}
             >
-                <CarouselContent className="ml-0">
-                    {items.map((item, index) => (
-                        <CarouselItem
-                            key={index}
-                            className="relative w-full pl-0"
-                        >
-                            <div className="relative aspect-square w-full sm:aspect-[5/4] md:aspect-[10/5] lg:aspect-[16/6]">
-                                {/* TODO: handle lower resolution background image for fallback */}
-                                <Image
-                                    src={item.backgroundImagePath}
-                                    alt={`Carousel image number ${index + 1}`}
-                                    fill
-                                    quality={100}
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-0 bg-black/50" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    {item.content}
-                                </div>
-                            </div>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
+                <CarouselContent className="ml-0">{children}</CarouselContent>
             </Carousel>
             <div className="absolute bottom-4 left-1/2 right-0 flex max-w-max -translate-x-1/2 justify-center space-x-3">
-                {items.map((_, index) => (
+                {Array.from({ length: itemCount }).map((_, index) => (
                     <button
                         key={index}
                         className={cn(

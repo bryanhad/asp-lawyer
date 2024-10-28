@@ -1,15 +1,20 @@
-import BackgroundCarousel from '@/components/background-carousel'
+import BackgroundCarousel, {
+    CarouselItemData,
+} from '@/components/background-carousel'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'
 import { Button } from '../ui/button'
+import ImageWithBlur from '../ui/image-with-blur'
+import { CarouselItem } from '../ui/carousel'
 
 export default async function HeroCarousel() {
     const t = await getTranslations('carousels.homePage')
 
-    const carouselItems = [
+    const carouselItems: CarouselItemData[] = [
         {
             backgroundImagePath: '/home-page/carousel-1.webp',
+            backgroundImageAlt: '1',
             content: (
                 <ContentContainer
                     title={<Title>{t('first.title')}</Title>}
@@ -25,6 +30,7 @@ export default async function HeroCarousel() {
         },
         {
             backgroundImagePath: '/home-page/carousel-2.webp',
+            backgroundImageAlt: '2',
             content: (
                 <ContentContainer
                     title={<Title>{t('second.title')}</Title>}
@@ -40,6 +46,7 @@ export default async function HeroCarousel() {
         },
         {
             backgroundImagePath: '/home-page/carousel-3.webp',
+            backgroundImageAlt: '3',
             content: (
                 <ContentContainer
                     title={<Title>{t('third.title')}</Title>}
@@ -55,7 +62,27 @@ export default async function HeroCarousel() {
         },
     ]
 
-    return <BackgroundCarousel items={carouselItems} />
+    return (
+        <BackgroundCarousel itemCount={carouselItems.length}>
+            {carouselItems.map((item, index) => (
+                <CarouselItem key={index} className="relative w-full pl-0">
+                    <div className="relative aspect-square w-full sm:aspect-[5/4] md:aspect-[10/5] lg:aspect-[16/6]">
+                        <ImageWithBlur
+                            src={item.backgroundImagePath}
+                            alt={`Carousel image of ${item.backgroundImageAlt}`}
+                            fill
+                            quality={100}
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            {item.content}
+                        </div>
+                    </div>
+                </CarouselItem>
+            ))}
+        </BackgroundCarousel>
+    )
 }
 
 function ContentContainer({
