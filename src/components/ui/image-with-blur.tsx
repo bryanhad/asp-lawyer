@@ -6,8 +6,8 @@ type Props = {} & ImageProps
 
 export default async function ImageWithBlur({
     src,
-    blurDataURL,
     placeholder = 'blur',
+    alt,
     ...props
 }: Props) {
     const imageBuffer = await fs.readFile(`./public${src}`)
@@ -15,6 +15,7 @@ export default async function ImageWithBlur({
 
     return (
         <Image
+            alt={alt}
             src={src}
             placeholder={placeholder}
             blurDataURL={base64}

@@ -1,8 +1,7 @@
-import { Mail } from 'lucide-react'
-import Image from 'next/image'
-import ImageWithBlur from '../ui/image-with-blur'
-import LinkedInIcon from '../icons/linked-in'
 import { Link } from '@/i18n/routing'
+import { Mail } from 'lucide-react'
+import LinkedInIcon from '../icons/linked-in'
+import ImageWithBlur from '../ui/image-with-blur'
 
 export type MemberCardProps = {
     name: string

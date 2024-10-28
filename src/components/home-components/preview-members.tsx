@@ -34,8 +34,6 @@ export default async function PreviewMembers() {
                             <MemberCard
                                 key={member.name}
                                 {...member}
-                                position={member.position}
-                                imageSrc={`/lawyers/${member.name}.png`}
                             />
                         </div>
                     </CarouselItem>
