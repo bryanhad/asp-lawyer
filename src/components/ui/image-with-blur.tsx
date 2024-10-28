@@ -9,6 +9,8 @@ export default async function ImageWithBlur({
     src,
     placeholder = 'blur',
     alt,
+    height, 
+    width,
     ...props
 }: Props) {
     // const imagePath = path.join(process.cwd(), 'public', 'lawyers', 'ratna.png');
@@ -23,6 +25,8 @@ export default async function ImageWithBlur({
         <Image
             alt={alt}
             src={src}
+            height={height} 
+            width={width}
             placeholder={placeholder}
             blurDataURL={base64}
             {...props}

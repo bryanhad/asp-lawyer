@@ -21,13 +21,13 @@ export function MemberCard({
     return (
         <div className="flex w-full flex-col items-center gap-2 p-4">
             <Link href={`/members/${name}`} className="group cursor-pointer">
-                <div className="mb-4 aspect-square overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50">
+                <div className="mb-4 aspect-square overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50 h-[220px] w-[220px]">
                     <ImageWithBlur
                         src={imageSrc}
                         alt={`Picture of ${name}`}
                         className="h-full w-full object-contain object-center duration-300 group-hover:scale-105"
-                        height={180}
-                        width={180}
+                        height={220}
+                        width={220}
                     />
                 </div>
                 <div className="flex flex-col items-center">
