@@ -9,16 +9,18 @@ export default async function PreviewAboutUs() {
     return (
         <SectionContainer
             side="left"
+            className='aspect-[16/5.3]'
             secondaryContent={
                 <ImageWithBlur
                     className="rounded-xl"
                     src={'/home-page/squad.webp'}
                     alt="The SQUAD"
-                    width={640}
-                    height={300}
+                    width={649}
+                    height={320}
                 />
             }
-            title={t('title')}
+            titleTop={t('titleTop')}
+            titleBottom={t('titleBottom')}
             desc={<p>{t('desc')}</p>}
         >
             <LinkButton variant={'outline-accent'} href={'/about-us'}>

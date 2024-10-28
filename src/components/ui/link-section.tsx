@@ -1,24 +1,42 @@
 'use client'
 
-import { PropsWithChildren, ReactNode } from 'react'
-import { Link as LickIcon } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { Link as LickIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { PropsWithChildren } from 'react'
 
-type Props = {
-    title: string | ReactNode
+type Props = PropsWithChildren<
+    | {
+          title: string
+          titleTop?: never
+          titleBottom?: never
+      }
+    | {
+          title?: never
+          titleTop: string
+          titleBottom: string
+      }
+> & {
     size?: number
     className?: string
-} & PropsWithChildren
+}
 
-function LinkSection({ title, children, size = 18, className }: Props) {
+function LinkSection({
+    title,
+    children,
+    size = 18,
+    className,
+    titleTop,
+    titleBottom,
+}: Props) {
     const router = useRouter()
     const pathname = usePathname()
-    const titleTag =
-        typeof title === 'string'
-            ? title.toLowerCase().split(' ').join('-')
-            : undefined
+
+    const titleTag = title
+        ? title.toLowerCase().split(' ').join('-')
+        : `${titleTop} ${titleBottom}`.toLowerCase().split(' ').join('-')
+
 
     const href = `${pathname}#${titleTag}`
 

@@ -22,7 +22,10 @@ export default async function PreviewMembers() {
         .sort((a, b) => a.order - b.order)
 
     return (
-        <SectionContainer title={t('title')} desc={<p>{t('desc')}</p>}>
+        <SectionContainer 
+            titleTop={t('titleTop')}
+            titleBottom={t('titleBottom')}
+        desc={<p>{t('desc')}</p>}>
             {/* <BioEditor /> */}
             <MemberCarousel>
                 {sortedMembers.map((member) => (

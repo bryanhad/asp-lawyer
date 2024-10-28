@@ -27,24 +27,28 @@ export default function Tags({
     }
 
     return (
-        <div className="flex flex-wrap justify-center gap-8">
-            <div>
-            {tags.map((tag) => (
-                <Button
-                    key={tag.title}
-                    onClick={() => handleClick(tag.title)}
-                    className={cn('rounded-full bg-gray-400 text-gray-600', {
-                        'bg-blue-500 text-white': activeTag === tag.title,
-                    })}
-                >
-                    {tag.title}
-                </Button>
-            ))}
+        <>
+            <div className="flex flex-wrap justify-center gap-8">
+                {tags.map((tag) => (
+                    <Button
+                        key={tag.title}
+                        onClick={() => handleClick(tag.title)}
+                        className={cn(
+                            'rounded-full bg-gray-200 text-gray-500 hover:bg-gray-300',
+                            {
+                                'bg-blue-500 text-white hover:bg-blue-600':
+                                    activeTag === tag.title,
+                            },
+                        )}
+                    >
+                        {tag.title}
+                    </Button>
+                ))}
             </div>
             <TagPreview
                 {...tags.filter((tag) => tag.title === activeTag)[0]}
                 learnMoreIntl={learnMoreIntl}
             />
-        </div>
+        </>
     )
 }

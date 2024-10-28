@@ -11,12 +11,15 @@
         "title": "Selamat Datang di Firma Hukum Kami",
         "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi.",
         "previewAboutUs": {
+            "titleTop": "Pengacara Handal",
+            "titleBottom": "Hasil Terpercaya",
             "title": "Tentang ASP Law Firm",
             "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
             "callToAction": "Pelajari Lebih Lanjut"
         },
         "previewPracticeAreas": {
-            "title": "Bidang Praktik Kami",
+            "titleTop": "Dukungan Penuh Melalui",
+            "titleBottom": "Keahlian Hukum",
             "desc": "Kami menawarkan berbagai layanan hukum yang komprehensif, masing-masing ditangani dengan keahlian profesional oleh anggota tim kami. Dari hukum kepailitan hingga restrukturisasi utang dan perlindungan aset, tim kami menerapkan pengetahuan khusus pada setiap kasus.",
             "callToAction": "Jelajahi Semua Bidang Praktik",
             "topPracticeAreas": {
@@ -38,9 +41,10 @@
             }
         },
         "previewMembers": {
-            "title": "Temui Tim Kami",
+            "titleTop": "Tim di Balik",
+            "titleBottom": "Kesuksesan Anda",
             "desc": "Pengacara kami yang berpengalaman berdedikasi memberikan panduan hukum yang andal dan personal.",
-            "callToAction": "Temui Tim"
+            "callToAction": "Temui Pengacara Kami"
         },
         "testimonials": {
             "title": "Apa Kata Klien Kami",

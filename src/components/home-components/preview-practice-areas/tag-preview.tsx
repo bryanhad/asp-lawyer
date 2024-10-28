@@ -13,13 +13,14 @@ export default function TagPreview({
     learnMoreIntl,
 }: Props) {
     return (
-        <div className="flex w-full flex-col gap-4 rounded-lg p-6 shadow-md">
+        <div className="flex w-full flex-col gap-4 rounded-lg p-6 shadow-md bg-white max-w-[1200px]">
             <div className="flex items-center gap-4">
-                <div className={cn('size-8 rounded-full', color)} />
+                <div className={cn('size-10 rounded-full grid place-items-center text-white', color)} >
                 {icon}
-                <h3 className="text-lg font-semibold">{title}</h3>
+                </div>
+                <h3 className="text-lg font-semibold text-muted-foreground">{title}</h3>
             </div>
-            <p className="text-muted">{desc}</p>
+            <p className="text-muted-foreground">{desc}</p>
             <Link href={href}>{learnMoreIntl}</Link>
         </div>
     )

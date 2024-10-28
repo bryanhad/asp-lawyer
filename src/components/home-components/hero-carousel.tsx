@@ -56,6 +56,7 @@ export default async function HeroCarousel() {
                 <CarouselItem key={index} className="relative w-full pl-0">
                     <div className="relative aspect-square w-full sm:aspect-[5/4] md:aspect-[10/5] lg:aspect-[16/6]">
                         <ImageWithBlur
+                            priority
                             src={item.backgroundImagePath}
                             alt={`Carousel image of ${item.backgroundImageAlt}`}
                             fill

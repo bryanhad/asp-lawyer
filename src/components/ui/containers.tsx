@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils'
+import { ImageProps } from 'next/image'
 import { PropsWithChildren, ReactNode } from 'react'
+import ImageWithBlur from './image-with-blur'
 import SectionHeading from './section-heading'
 
 type Props = {
@@ -18,7 +20,8 @@ type SectionProps = {
     className?: string
     children?: ReactNode
     variant?: 'title-and-desc' | 'naked'
-    title?: string
+    titleTop?: string
+    titleBottom?: string
     desc?: ReactNode
 } & (
     | { side?: 'right' | 'left'; secondaryContent: ReactNode }
@@ -28,7 +31,8 @@ type SectionProps = {
 export function SectionContainer({
     children,
     className,
-    title,
+    titleTop,
+    titleBottom,
     desc,
     side = 'center',
     secondaryContent,
@@ -38,13 +42,17 @@ export function SectionContainer({
         return (
             <div
                 className={cn(
-                    'flex w-full max-w-[1720px] flex-col  px-4 py-12',
+                    'flex w-full max-w-[1720px] flex-col px-4 py-12',
                     className,
                 )}
             >
                 {children}
             </div>
         )
+    }
+
+    if (!titleTop || !titleBottom) {
+        return null
     }
 
     if (side === 'center') {
@@ -55,8 +63,12 @@ export function SectionContainer({
                     className,
                 )}
             >
-                <div className="mb-4 xl:max-w-[40%]">
-                    <SectionHeading side={side}>{title}</SectionHeading>
+                <div className="my-4 xl:my-6 xl:max-w-[40%]">
+                    <SectionHeading
+                        titleTop={titleTop}
+                        titleBottom={titleBottom}
+                        side={side}
+                    />
                 </div>
                 <div className="mb-7 text-center text-muted-foreground xl:max-w-[50%]">
                     {desc}
@@ -81,16 +93,20 @@ export function SectionContainer({
                     })}
                 >
                     <div
-                        className={cn('mb-4 xl:mb-6', {
+                        className={cn( {
                             'text-start': side === 'left',
                             'text-end': side === 'right',
                         })}
                     >
-                        <SectionHeading side={side}>{title}</SectionHeading>
+                        <SectionHeading
+                            titleTop={titleTop}
+                            titleBottom={titleBottom}
+                            side={side}
+                        />
                     </div>
                     <div
                         className={cn(
-                            'mb-7 text-center text-muted-foreground',
+                            'my-4 xl:my-6 text-center text-muted-foreground',
                             {
                                 'md:max-w-[90%] md:text-start': side === 'left',
                                 'md:text-end': side === 'right',
@@ -110,6 +126,20 @@ export function SectionContainer({
                     {secondaryContent}
                 </span>
             </>
+        </div>
+    )
+}
+
+export function SectionBackground({ children, src, alt }: ImageProps) {
+    return (
+        <div className="relative grid w-full place-items-center">
+            <div className="relative z-[20]">{children}</div>
+            <ImageWithBlur
+                src={src}
+                alt={alt}
+                fill
+                className="absolute z-[10] object-cover"
+            />
         </div>
     )
 }
