@@ -1,19 +1,209 @@
 {
-    "Navbar": {
+    "navbar": {
         "home": "Home",
-        "about": "About",
-        "contact": "Contact"
+        "about": "About Us",
+        "practiceAreas": "Practice Areas",
+        "members": "Our Team",
+        "blogs": "Blogs",
+        "contactUs": "Contact Us"
     },
-    "HomePage": {
-        "title": "Hello world!",
-        "desc": "This is the landing page!"
+    "homePage": {
+        "title": "Welcome to Our Law Firm",
+        "desc": "Providing trusted legal solutions with professionalism and dedication.",
+        "previewAboutUs": {
+            "title": "About ASP Law Firm",
+            "desc": "ASP Law Firm specializes in bankruptcy law, providing compassionate, effective guidance to individuals and businesses facing financial challenges. Our team is committed to helping clients navigate the complexities of bankruptcy with clarity and confidence.",
+            "callToAction": "Learn More"
+        },
+        "previewPracticeAreas": {
+            "title": "Our Practice Areas",
+            "desc": "We offer a comprehensive range of practice areas, each expertly managed by our dedicated professionals. From bankruptcy law to debt restructuring and asset protection, our team applies their specialized knowledge to every case.",
+            "callToAction": "Explore All Practice Areas",
+            "topPracticeAreas": {
+                "bankruptcyLaw": {
+                    "title": "Bankruptcy Law",
+                    "shortDesc": "Guiding clients through financial distress with expertise.",
+                    "longDesc": "Specializing in bankruptcy cases, we offer guidance to individuals and businesses facing financial distress, helping them navigate complex legal processes with confidence."
+                },
+                "litigation": {
+                    "title": "Litigation",
+                    "shortDesc": "Defending client rights in court with precision.",
+                    "longDesc": "Our skilled litigators represent clients in court with dedication and precision, ensuring that their rights are protected in every legal proceeding."
+                },
+                "copyright": {
+                    "title": "Copyright Law",
+                    "shortDesc": "Safeguarding intellectual property with legal expertise.",
+                    "longDesc": "Protecting intellectual property rights, we assist clients in copyright law to safeguard their creative works and ensure legal protection."
+                }
+            }
+        },
+        "previewMembers": {
+            "title": "Meet Our Team",
+            "desc": "Our skilled attorneys are dedicated to providing personalized and reliable legal guidance.",
+            "callToAction": "Meet the Team"
+        },
+        "testimonials": {
+            "title": "What Our Clients Say",
+            "desc": "Read testimonials from clients who have benefited from our legal services."
+        },
+        "latestBlogs": {
+            "title": "Insights & Articles",
+            "desc": "Stay informed with our latest blog posts on bankruptcy law.",
+            "callToAction": "Read Our Blogs"
+        },
+        "contactUs": {
+            "title": "Ready to Talk?",
+            "desc": "Get in touch with us to discuss your case and see how we can help.",
+            "callToAction": "Contact Us"
+        }
     },
-    "AboutPage": {
-        "title": "ABOUT PAGE",
-        "desc": "oh yeah! this about page is so cool!"
+    "aboutPage": {
+        "pageTitle": "About Us",
+        "title": "About Our Firm",
+        "desc": "Learn more about our mission, values, and dedication to our clients."
     },
-    "ContactPage": {
-        "title": "CONTACT PAGE",
-        "desc": "woaw! this contact page is nice!"
+    "practiceAreasPage": {
+        "pageTitle": "Practice Areas",
+        "title": "Our Practice Areas",
+        "desc": "Expertise in various legal fields to meet your unique needs."
+    },
+    "membersPage": {
+        "pageTitle": "Members",
+        "title": "Meet Our Team",
+        "desc": "Get to know our skilled lawyers and support staff dedicated to your success."
+    },
+    "eachMemberPage": {
+        "pageTitle": "About {name}",
+        "wellcome": "Wellcome to {name}'s page!"
+    },
+    "blogsPage": {
+        "pageTitle": "Blogs",
+        "title": "Legal Insights",
+        "desc": "Stay informed with articles and updates on important legal topics."
+    },
+    "contactUsPage": {
+        "pageTitle": "Contact Us",
+        "title": "Get in Touch",
+        "desc": "Contact us for consultations and inquiries. We're here to help."
+    },
+    "carousels": {
+        "homePage": {
+            "first": {
+                "title": "Legal Solutions Tailored for You",
+                "desc": "Our firm provides specialized legal guidance to help you navigate complex legal landscapes with confidence.",
+                "callToAction": "Discover Our Services"
+            },
+            "second": {
+                "title": "Dedicated Client Support",
+                "desc": "We are committed to understanding your unique needs and delivering personalized support at every step.",
+                "callToAction": "Meet Our Dedicated Team"
+            },
+            "third": {
+                "title": "Proven Success Across Legal Fields",
+                "desc": "With extensive experience across multiple practice areas, we offer reliable representation to achieve your goals.",
+                "callToAction": "Explore Our Expertise"
+            }
+        }
+    },
+    "lawyers": {
+        "adnan": {
+            "name": "Adnan",
+            "position": "Senior Partner",
+            "bio": "Adnan is a seasoned lawyer with over 20 years of experience in corporate law.",
+            "description": "Specializes in corporate governance, mergers, and acquisitions."
+        },
+        "agung": {
+            "name": "Agung",
+            "position": "Junior Partner",
+            "bio": "Agung is known for his meticulous attention to detail and dedication to client success.",
+            "description": "Focuses on business law and contract negotiations."
+        },
+        "andy": {
+            "name": "Andy",
+            "position": "Associate",
+            "bio": "Andy is a dynamic young lawyer with a passion for advocacy.",
+            "description": "Handles cases related to civil and family law."
+        },
+        "arif": {
+            "name": "Arif",
+            "position": "Paralegal",
+            "bio": "Arif supports the team with research and case preparation.",
+            "description": "Assists in case management and document organization."
+        },
+        "betti": {
+            "name": "Betti",
+            "position": "Consultant",
+            "bio": "Betti brings a wealth of knowledge in intellectual property law.",
+            "description": "Advises on trademarks, patents, and copyright issues."
+        },
+        "dani": {
+            "name": "Dani",
+            "position": "Senior Associate",
+            "bio": "Dani is experienced in handling high-profile litigation cases.",
+            "description": "Specializes in litigation and dispute resolution."
+        },
+        "edward": {
+            "name": "Edward",
+            "position": "Senior Partner",
+            "bio": "Edward has extensive expertise in financial regulations.",
+            "description": "Focuses on regulatory compliance and risk management."
+        },
+        "erwin": {
+            "name": "Erwin",
+            "position": "Junior Partner",
+            "bio": "Erwin has a background in international law and cross-border cases.",
+            "description": "Advises on international trade and investment law."
+        },
+        "fahmi": {
+            "name": "Fahmi",
+            "position": "Associate",
+            "bio": "Fahmi is a skilled negotiator with a focus on real estate law.",
+            "description": "Handles property transactions and zoning issues."
+        },
+        "faras": {
+            "name": "Faras",
+            "position": "Consultant",
+            "bio": "Faras is an expert in environmental law and sustainability.",
+            "description": "Advises on environmental compliance and regulations."
+        },
+        "herlin": {
+            "name": "Herlin",
+            "position": "Paralegal",
+            "bio": "Herlin provides crucial support in document preparation and case tracking.",
+            "description": "Manages legal documentation and client communication."
+        },
+        "indah": {
+            "name": "Indah",
+            "position": "Senior Associate",
+            "bio": "Indah is recognized for her work in family law and mediation.",
+            "description": "Specializes in family disputes and child custody cases."
+        },
+        "indra": {
+            "name": "Indra",
+            "position": "Junior Partner",
+            "bio": "Indra has a robust background in employment law.",
+            "description": "Focuses on labor law and workplace compliance."
+        },
+        "kharis": {
+            "name": "Kharis",
+            "position": "Consultant",
+            "bio": "Kharis advises on technology law and data privacy.",
+            "description": "Handles data protection and cybersecurity issues."
+        },
+        "ratna": {
+            "name": "Ratna",
+            "position": "Senior Partner",
+            "bio": "Ratna is a highly respected lawyer in commercial litigation.",
+            "description": "Specializes in corporate disputes and arbitration."
+        },
+        "tracy": {
+            "name": "Tracy",
+            "position": "Associate",
+            "bio": "Tracy is a rising star with a passion for social justice.",
+            "description": "Works on human rights and pro bono cases."
+        }
+    },
+    "commonWords": {
+        "learnMore": "Learn More"
     }
 }

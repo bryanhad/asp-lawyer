@@ -1,19 +1,209 @@
 {
-    "Navbar": {
+    "navbar": {
         "home": "Beranda",
-        "about": "Tentang",
-        "contact": "Hubungi"
+        "about": "Tentang Kami",
+        "practiceAreas": "Bidang Praktik",
+        "members": "Tim Kami",
+        "blogs": "Blog",
+        "contactUs": "Hubungi Kami"
     },
-    "HomePage": {
-        "title": "Halo Dunia!",
-        "desc": "Ini adalah halaman beranda!"
+    "homePage": {
+        "title": "Selamat Datang di Firma Hukum Kami",
+        "desc": "Memberikan solusi hukum terpercaya dengan profesionalisme dan dedikasi.",
+        "previewAboutUs": {
+            "title": "Tentang ASP Law Firm",
+            "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
+            "callToAction": "Pelajari Lebih Lanjut"
+        },
+        "previewPracticeAreas": {
+            "title": "Bidang Praktik Kami",
+            "desc": "Kami menawarkan berbagai layanan hukum yang komprehensif, masing-masing ditangani dengan keahlian profesional oleh anggota tim kami. Dari hukum kepailitan hingga restrukturisasi utang dan perlindungan aset, tim kami menerapkan pengetahuan khusus pada setiap kasus.",
+            "callToAction": "Jelajahi Semua Bidang Praktik",
+            "topPracticeAreas": {
+                "bankruptcyLaw": {
+                    "title": "Hukum Kepailitan",
+                    "shortDesc": "Membimbing klien melewati kesulitan keuangan dengan keahlian.",
+                    "longDesc": "Mengkhususkan diri dalam kasus kepailitan, kami memberikan panduan kepada individu dan bisnis yang menghadapi kesulitan keuangan, membantu mereka melalui proses hukum yang kompleks dengan percaya diri."
+                },
+                "litigation": {
+                    "title": "Litigasi",
+                    "shortDesc": "Melindungi hak klien di pengadilan dengan ketelitian.",
+                    "longDesc": "Pengacara litigasi kami yang terampil mewakili klien di pengadilan dengan dedikasi dan ketelitian, memastikan hak mereka terlindungi di setiap proses hukum."
+                },
+                "copyright": {
+                    "title": "Hukum Hak Cipta",
+                    "shortDesc": "Melindungi kekayaan intelektual dengan keahlian hukum.",
+                    "longDesc": "Melindungi hak kekayaan intelektual, kami membantu klien dalam hukum hak cipta untuk menjaga karya kreatif mereka dan memastikan perlindungan hukum."
+                }
+            }
+        },
+        "previewMembers": {
+            "title": "Temui Tim Kami",
+            "desc": "Pengacara kami yang berpengalaman berdedikasi memberikan panduan hukum yang andal dan personal.",
+            "callToAction": "Temui Tim"
+        },
+        "testimonials": {
+            "title": "Apa Kata Klien Kami",
+            "desc": "Baca testimoni dari klien yang telah merasakan manfaat layanan hukum kami."
+        },
+        "latestBlogs": {
+            "title": "Wawasan & Artikel",
+            "desc": "Tetap terinformasi dengan artikel terbaru kami tentang hukum kepailitan.",
+            "callToAction": "Baca Blog Kami"
+        },
+        "contactUs": {
+            "title": "Siap untuk Berdiskusi?",
+            "desc": "Hubungi kami untuk membahas kasus Anda dan lihat bagaimana kami dapat membantu.",
+            "callToAction": "Hubungi Kami"
+        }
     },
-    "AboutPage": {
-        "title": "HALAMAN TENTANG",
-        "desc": "oh yaak! halaman tentang ini sangat keren!"
+    "aboutPage": {
+        "pageTitle": "Tentang Kami",
+        "title": "Tentang Firma Kami",
+        "desc": "Pelajari lebih lanjut tentang misi, nilai, dan dedikasi kami kepada klien."
     },
-    "ContactPage": {
-        "title": "HALAMAN HUBUNGI",
-        "desc": "woaw! halaman hubungi ini bagus!"
+    "practiceAreasPage": {
+        "pageTitle": "Bidang Praktik",
+        "title": "Bidang Praktik Kami",
+        "desc": "Keahlian di berbagai bidang hukum untuk memenuhi kebutuhan unik Anda."
+    },
+    "membersPage": {
+        "pageTitle": "Tim",
+        "title": "Kenali Tim Kami",
+        "desc": "Kenali pengacara dan staf pendukung kami yang berdedikasi untuk kesuksesan Anda."
+    },
+    "eachMemberPage": {
+        "pageTitle": "Tentang {name}",
+        "wellcome": "Selamat datang di halaman {name}!"
+    },
+    "blogsPage": {
+        "pageTitle": "Blog",
+        "title": "Wawasan Hukum",
+        "desc": "Tetap terinformasi dengan artikel dan pembaruan tentang topik hukum penting."
+    },
+    "contactUsPage": {
+        "pageTitle": "Hubungi Kami",
+        "title": "Hubungi Kami",
+        "desc": "Hubungi kami untuk konsultasi dan pertanyaan. Kami siap membantu."
+    },
+    "carousels": {
+        "homePage": {
+            "first": {
+                "title": "Solusi Hukum yang Disesuaikan untuk Anda",
+                "desc": "Firma kami menyediakan panduan hukum khusus untuk membantu Anda menghadapi dunia hukum dengan percaya diri.",
+                "callToAction": "Temukan Layanan Kami"
+            },
+            "second": {
+                "title": "Dukungan Klien yang Berdedikasi",
+                "desc": "Kami berkomitmen untuk memahami kebutuhan unik Anda dan memberikan dukungan pribadi di setiap langkah.",
+                "callToAction": "Temui Tim Berdedikasi Kami"
+            },
+            "third": {
+                "title": "Keberhasilan Terbukti di Berbagai Bidang Hukum",
+                "desc": "Dengan pengalaman luas di berbagai bidang hukum, kami menawarkan perwakilan yang andal untuk mencapai tujuan Anda.",
+                "callToAction": "Jelajahi Keahlian Kami"
+            }
+        }
+    },
+    "lawyers": {
+        "adnan": {
+            "name": "Adnan",
+            "position": "Mitra Senior",
+            "bio": "Adnan adalah pengacara berpengalaman dengan lebih dari 20 tahun di bidang hukum perusahaan.",
+            "description": "Berspesialisasi dalam tata kelola perusahaan, merger, dan akuisisi."
+        },
+        "agung": {
+            "name": "Agung",
+            "position": "Mitra Junior",
+            "bio": "Agung dikenal karena ketelitian dan dedikasinya untuk kesuksesan klien.",
+            "description": "Berfokus pada hukum bisnis dan negosiasi kontrak."
+        },
+        "andy": {
+            "name": "Andy",
+            "position": "Asisten",
+            "bio": "Andy adalah pengacara muda yang dinamis dengan semangat advokasi.",
+            "description": "Menangani kasus-kasus terkait hukum sipil dan keluarga."
+        },
+        "arif": {
+            "name": "Arif",
+            "position": "Paralegal",
+            "bio": "Arif mendukung tim dengan riset dan persiapan kasus.",
+            "description": "Membantu dalam manajemen kasus dan pengorganisasian dokumen."
+        },
+        "betti": {
+            "name": "Betti",
+            "position": "Konsultan",
+            "bio": "Betti membawa banyak pengetahuan dalam hukum kekayaan intelektual.",
+            "description": "Memberikan saran tentang merek dagang, paten, dan hak cipta."
+        },
+        "dani": {
+            "name": "Dani",
+            "position": "Asisten Senior",
+            "bio": "Dani berpengalaman dalam menangani kasus-kasus litigasi berprofil tinggi.",
+            "description": "Berspesialisasi dalam litigasi dan penyelesaian sengketa."
+        },
+        "edward": {
+            "name": "Edward",
+            "position": "Mitra Senior",
+            "bio": "Edward memiliki keahlian luas dalam regulasi keuangan.",
+            "description": "Berfokus pada kepatuhan regulasi dan manajemen risiko."
+        },
+        "erwin": {
+            "name": "Erwin",
+            "position": "Mitra Junior",
+            "bio": "Erwin memiliki latar belakang hukum internasional dan kasus lintas batas.",
+            "description": "Memberikan saran tentang hukum perdagangan internasional dan investasi."
+        },
+        "fahmi": {
+            "name": "Fahmi",
+            "position": "Asisten",
+            "bio": "Fahmi adalah negosiator yang ulung dengan fokus pada hukum properti.",
+            "description": "Menangani transaksi properti dan masalah zonasi."
+        },
+        "faras": {
+            "name": "Faras",
+            "position": "Konsultan",
+            "bio": "Faras adalah ahli dalam hukum lingkungan dan keberlanjutan.",
+            "description": "Memberikan saran tentang kepatuhan dan regulasi lingkungan."
+        },
+        "herlin": {
+            "name": "Herlin",
+            "position": "Paralegal",
+            "bio": "Herlin memberikan dukungan penting dalam persiapan dokumen dan pemantauan kasus.",
+            "description": "Mengelola dokumentasi hukum dan komunikasi dengan klien."
+        },
+        "indah": {
+            "name": "Indah",
+            "position": "Asisten Senior",
+            "bio": "Indah dikenal atas pekerjaannya dalam hukum keluarga dan mediasi.",
+            "description": "Berspesialisasi dalam sengketa keluarga dan kasus hak asuh anak."
+        },
+        "indra": {
+            "name": "Indra",
+            "position": "Mitra Junior",
+            "bio": "Indra memiliki latar belakang yang kuat dalam hukum ketenagakerjaan.",
+            "description": "Berfokus pada hukum tenaga kerja dan kepatuhan tempat kerja."
+        },
+        "kharis": {
+            "name": "Kharis",
+            "position": "Konsultan",
+            "bio": "Kharis memberikan saran tentang hukum teknologi dan privasi data.",
+            "description": "Menangani masalah perlindungan data dan keamanan siber."
+        },
+        "ratna": {
+            "name": "Ratna",
+            "position": "Mitra Senior",
+            "bio": "Ratna adalah pengacara yang dihormati dalam litigasi komersial.",
+            "description": "Berspesialisasi dalam sengketa perusahaan dan arbitrase."
+        },
+        "tracy": {
+            "name": "Tracy",
+            "position": "Asisten",
+            "bio": "Tracy adalah bintang yang sedang naik daun dengan semangat untuk keadilan sosial.",
+            "description": "Bekerja pada kasus hak asasi manusia dan pro bono."
+        }
+    },
+    "commonWords": {
+        "learnMore": "Pelajari Lebih Lanjut"
     }
 }

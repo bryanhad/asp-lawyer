@@ -1,10 +1,16 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+import withPlaiceholder from '@plaiceholder/next'
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+    /* config options here */
+    experimental: {
+        staleTimes: {
+            dynamic: 30,
+        },
+    },
+}
 
-export default withNextIntl(nextConfig);
+export default withPlaiceholder(withNextIntl(nextConfig))

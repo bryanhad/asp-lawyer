@@ -2,25 +2,48 @@ import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import LanguageSelect from './language-select'
 import { Locale } from '@/i18n/request'
+import MobileMenu from './mobile-menu'
+import { Separator } from '../ui/separator'
+import Search from './search'
+import NavLink from './nav-link'
 
 type Props = {
     selectedLocale: Locale
 }
 
 async function Navbar({ selectedLocale }: Props) {
-    const t = await getTranslations('Navbar')
+    const t = await getTranslations('navbar')
 
     return (
-        <nav className="flex justify-between items-center p-6">
-            <div>
-                <Link href={'/'}>{t('home')}</Link>
-                <Link href={'/about'}>{t('about')}</Link>
-                <Link href={'/contact'}>{t('contact')}</Link>
-            </div>
-            <div>
-                <LanguageSelect selectedLocale={selectedLocale} />
-            </div>
-        </nav>
+        <header className="fixed top-0 z-[90] flex h-16 w-full justify-center border-b bg-white lg:h-20">
+            <nav className="flex h-full w-full max-w-[1720px] justify-between px-4 sm:px-6 md:px-8">
+                <div className="flex items-end gap-14 self-center">
+                    <Link href={'/'} className="flex items-center">
+                        <h1 className="relative text-xl font-bold text-primary sm:text-2xl">
+                            ASP Law firm
+                        </h1>
+                    </Link>
+                    <div className="hidden gap-10 lg:flex">
+                        <NavLink href={'/about-us'}>{t('about')}</NavLink>
+                        <NavLink href={'/practice-areas'}>
+                            {t('practiceAreas')}
+                        </NavLink>
+                        <NavLink href={'/members'}>{t('members')}</NavLink>
+                        <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
+                        <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>
+                    </div>
+                </div>
+                <div className="hidden gap-5 lg:flex lg:items-center">
+                    <LanguageSelect selectedLocale={selectedLocale} />
+                    <Separator
+                        orientation="vertical"
+                        className="h-[70%] self-center"
+                    />
+                    <Search />
+                </div>
+                <MobileMenu selectedLocale={selectedLocale} />
+            </nav>
+        </header>
     )
 }
 

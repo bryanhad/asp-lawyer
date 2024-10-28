@@ -1,12 +1,19 @@
+import PreviewAboutUs from '@/components/home-components/preview-about-us'
+import { MainContainer } from '@/components/ui/containers'
 import { getTranslations } from 'next-intl/server'
+import HeroCarousel from '../../components/home-components/hero-carousel'
+import PreviewPracticeAreas from '@/components/home-components/preview-practice-areas'
+import PreviewMembers from '@/components/home-components/preview-members'
 
 export default async function Home() {
-    const t = await getTranslations('HomePage')
+    const t = await getTranslations('homePage')
 
     return (
-        <div className="p-7">
-            <h1 className="bold text-xl">{t('title')}</h1>
-            <p>{t('desc')}</p>
-        </div>
+        <MainContainer>
+            <HeroCarousel />
+            <PreviewAboutUs />
+            <PreviewPracticeAreas />
+            <PreviewMembers />
+        </MainContainer>
     )
 }
