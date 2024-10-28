@@ -1,23 +1,13 @@
 'use client'
 
 import Autoplay from 'embla-carousel-autoplay'
-
 import {
     Carousel,
     CarouselApi,
-    CarouselContent,
-    CarouselItem,
+    CarouselContent
 } from '@/components/ui/carousel'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { ReactNode, useEffect, useRef, useState } from 'react'
-import ImageWithBlur from './ui/image-with-blur'
-
-export type CarouselItemData = {
-    backgroundImagePath: string
-    backgroundImageAlt: string
-    content: ReactNode
-}
 
 type Props = {
     itemCount: number

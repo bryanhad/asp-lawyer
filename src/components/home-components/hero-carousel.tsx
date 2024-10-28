@@ -1,6 +1,4 @@
-import BackgroundCarousel, {
-    CarouselItemData,
-} from '@/components/background-carousel'
+import BackgroundCarousel from '@/components/background-carousel'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'
@@ -8,59 +6,49 @@ import { Button } from '../ui/button'
 import ImageWithBlur from '../ui/image-with-blur'
 import { CarouselItem } from '../ui/carousel'
 
+type CarouselItemData = {
+    backgroundImagePath: string
+    backgroundImageAlt: string
+    content: ReactNode
+}
+
+const carouselStructure = [
+    {
+        backgroundImagePath: '/home-page/carousel-1.webp',
+        backgroundImageAlt: '1',
+        titleKey: 'first.title' as const,
+        descKey: 'first.desc' as const,
+        ctaKey: 'first.callToAction' as const,
+    },
+    {
+        backgroundImagePath: '/home-page/carousel-2.webp',
+        backgroundImageAlt: '2',
+        titleKey: 'second.title' as const,
+        descKey: 'second.desc' as const,
+        ctaKey: 'second.callToAction' as const,
+    },
+    {
+        backgroundImagePath: '/home-page/carousel-3.webp',
+        backgroundImageAlt: '3',
+        titleKey: 'third.title' as const,
+        descKey: 'third.desc' as const,
+        ctaKey: 'third.callToAction' as const,
+    },
+]
+
 export default async function HeroCarousel() {
     const t = await getTranslations('carousels.homePage')
 
-    const carouselItems: CarouselItemData[] = [
-        {
-            backgroundImagePath: '/home-page/carousel-1.webp',
-            backgroundImageAlt: '1',
-            content: (
-                <ContentContainer
-                    title={<Title>{t('first.title')}</Title>}
-                    desc={<Description>{t('first.desc')}</Description>}
-                    cta={
-                        <CTA
-                            href="/contact-us"
-                            text={t('first.callToAction')}
-                        />
-                    }
-                />
-            ),
-        },
-        {
-            backgroundImagePath: '/home-page/carousel-2.webp',
-            backgroundImageAlt: '2',
-            content: (
-                <ContentContainer
-                    title={<Title>{t('second.title')}</Title>}
-                    desc={<Description>{t('second.desc')}</Description>}
-                    cta={
-                        <CTA
-                            href="/contact-us"
-                            text={t('second.callToAction')}
-                        />
-                    }
-                />
-            ),
-        },
-        {
-            backgroundImagePath: '/home-page/carousel-3.webp',
-            backgroundImageAlt: '3',
-            content: (
-                <ContentContainer
-                    title={<Title>{t('third.title')}</Title>}
-                    desc={<Description>{t('third.desc')}</Description>}
-                    cta={
-                        <CTA
-                            href="/contact-us"
-                            text={t('third.callToAction')}
-                        />
-                    }
-                />
-            ),
-        },
-    ]
+    const carouselItems: CarouselItemData[] = carouselStructure.map((item) => ({
+        ...item,
+        content: (
+            <ContentContainer
+                title={<Title>{t(item.titleKey)}</Title>}
+                desc={<Description>{t(item.descKey)}</Description>}
+                cta={<CTA href="/contact-us" text={t(item.ctaKey)} />}
+            />
+        ),
+    }))
 
     return (
         <BackgroundCarousel itemCount={carouselItems.length}>
