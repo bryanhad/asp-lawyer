@@ -1,6 +1,4 @@
-import {
-    CarouselItem
-} from '@/components/ui/carousel'
+import { CarouselItem } from '@/components/ui/carousel'
 import { getTranslations } from 'next-intl/server'
 import { MemberCard, MemberCardProps } from '../member-components/member-card'
 import { MemberCarousel } from '../member-components/member-carousel'
@@ -16,29 +14,27 @@ export default async function PreviewMembers() {
     const sortedMembers: CarouselMembersData = members
         .map((member) => ({
             ...member,
+            degree: tLawyers(`${member.name}.degree`),
+            fullName: tLawyers(`${member.name}.fullName`),
             position: tLawyers(`${member.name}.position`),
             imageSrc: `/lawyers/${member.name}.png`,
         }))
         .sort((a, b) => a.order - b.order)
 
     return (
-        <SectionContainer 
+        <SectionContainer
             titleTop={t('titleTop')}
             titleBottom={t('titleBottom')}
-        desc={<p>{t('desc')}</p>}>
+            desc={<p>{t('desc')}</p>}
+        >
             {/* <BioEditor /> */}
             <MemberCarousel>
                 {sortedMembers.map((member) => (
                     <CarouselItem
                         key={member.name}
-                        className="pl-0 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                        className="pl-0 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 flex"
                     >
-                        <div className="p-6">
-                            <MemberCard
-                                key={member.name}
-                                {...member}
-                            />
-                        </div>
+                        <MemberCard key={member.name} {...member} />
                     </CarouselItem>
                 ))}
             </MemberCarousel>

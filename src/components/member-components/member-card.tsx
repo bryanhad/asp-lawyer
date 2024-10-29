@@ -4,7 +4,9 @@ import LinkedInIcon from '../icons/linked-in'
 import ImageWithBlur from '../ui/image-with-blur'
 
 export type MemberCardProps = {
+    fullName: string
     name: string
+    degree: string
     position: string
     linkedInUrl?: string
     email?: string
@@ -12,16 +14,21 @@ export type MemberCardProps = {
 }
 
 export function MemberCard({
+    fullName,
     name,
+    degree,
     position,
     linkedInUrl,
     email,
     imageSrc,
 }: MemberCardProps) {
     return (
-        <div className="flex w-full flex-col items-center gap-2 p-4">
-            <Link href={`/members/${name}`} className="group cursor-pointer">
-                <div className="mb-4 aspect-square overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50 h-[220px] w-[220px]">
+        <div className="flex w-full flex-col items-center gap-2 p-8">
+            <Link
+                href={`/members/${name}`}
+                className="group flex flex-[1] cursor-pointer flex-col items-center"
+            >
+                <div className="mb-4 aspect-square h-[220px] w-[220px] overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50">
                     <ImageWithBlur
                         src={imageSrc}
                         alt={`Picture of ${name}`}
@@ -30,9 +37,18 @@ export function MemberCard({
                         width={220}
                     />
                 </div>
-                <div className="flex flex-col items-center">
-                    <h3 className="text-xl font-light capitalize">{name}</h3>
-                    <p className="text-sm text-muted-foreground">{position}</p>
+                <div className="flex max-w-[80%] flex-[1] flex-col">
+                    <div className="">
+                        <h3 className="text-center text-xl font-light capitalize">
+                            {fullName}
+                        </h3>
+                        <p className="text-center text-sm text-muted-foreground">
+                            {degree}
+                        </p>
+                    </div>
+                    <div className="flex flex-[1] items-center justify-center">
+                        <p className="border-b border-primary text-primary px-1 text-sm my-2">{position}</p>
+                    </div>
                 </div>
             </Link>
             <div className="flex items-center gap-2">
