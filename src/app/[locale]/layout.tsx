@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation'
 import { getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { Toaster } from '@/components/ui/toaster'
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = localFont({
     src: '../fonts/GeistVF.woff',
@@ -61,8 +60,6 @@ export default async function RootLayout({
                     </main>
                 </NextIntlClientProvider>
                 <Toaster/>        
-                <SpeedInsights />
-
             </body>
         </html>
     )
