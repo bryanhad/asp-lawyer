@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
             {
                 hostname: 'bryanhadinata.com',
             },
+            {
+                // Matches any domain that starts with "asp-lawyer-" and ends with ".vercel.app"
+                protocol: 'https',
+                hostname: 'asp-lawyer-*.*.vercel.app',
+            },
         ],
     },
 }
