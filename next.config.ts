@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
             dynamic: 30,
         },
     },
+    images: {
+        remotePatterns: [
+            {
+                hostname: 'localhost',
+            },
+            {
+                hostname: 'bryanhadinata.com',
+            },
+        ],
+    },
 }
 
 export default withPlaiceholder(withNextIntl(nextConfig))

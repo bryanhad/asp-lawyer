@@ -7,9 +7,9 @@ import {
     Users,
 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import { SectionContainer } from '../../ui/containers'
 import LinkButton from '../../ui/link-button'
 import Tags, { PracticeAreaTag } from './tags'
+import { SectionContainer } from '@/components/containers'
 
 const practiceAreas: PracticeAreaTag[] = [
     {

@@ -1,4 +1,4 @@
-import { MainContainer, SectionContainer } from '@/components/ui/containers'
+import { BaseContainer, SectionContainer } from '@/components/containers'
 import { capitalizeFirstLetter } from '@/lib/utils'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
@@ -30,7 +30,7 @@ export default async function MemberPage({ params }: Props) {
     const capitalizedSlug = capitalizeFirstLetter(slug)
 
     return (
-        <MainContainer>
+        <BaseContainer>
             <SectionContainer variant="naked">
                 <div className="p-7">
                     <h1 className="text-xl font-bold">
@@ -38,6 +38,6 @@ export default async function MemberPage({ params }: Props) {
                     </h1>
                 </div>
             </SectionContainer>
-        </MainContainer>
+        </BaseContainer>
     )
 }

@@ -1,16 +1,16 @@
 'use client'
 
-import { Locale } from '@/i18n/request'
-import { usePathname, useRouter } from 'next/navigation'
-import Image from 'next/image'
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-import { Button } from '../ui/button'
-import { ChevronDown } from 'lucide-react'
+import { Locale } from '@/i18n/request'
 import { cn } from '@/lib/utils'
+import { ChevronDown } from 'lucide-react'
+import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
+import { Button } from '../ui/button'
 
 type Props = {
     selectedLocale: Locale
@@ -92,19 +92,5 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                 </div>
             </PopoverContent>
         </Popover>
-
-        // <Select onValueChange={handleLanguageChange}>
-        //     <SelectTrigger className="focus:ring-0 w-max">
-
-        //     </SelectTrigger>
-        //     <SelectContent>
-        //         <SelectItem value="en" noCheck>
-
-        //         </SelectItem>
-        //         <SelectItem value="id" noCheck>
-
-        //         </SelectItem>
-        //     </SelectContent>
-        // </Select>
     )
 }

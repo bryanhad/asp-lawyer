@@ -1,17 +1,9 @@
+import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
+import { LawyerCarouselItemData } from '@/lib/types'
 import { Mail } from 'lucide-react'
+import Image from 'next/image'
 import LinkedInIcon from '../icons/linked-in'
-import ImageWithBlur from '../ui/image-with-blur'
-
-export type MemberCardProps = {
-    name: string
-    slug: string
-    degree: string
-    position: string
-    linkedInUrl?: string
-    email?: string
-    imageSrc: string
-}
 
 export function MemberCard({
     name,
@@ -21,7 +13,9 @@ export function MemberCard({
     linkedInUrl,
     email,
     imageSrc,
-}: MemberCardProps) {
+    currentLocale,
+    blurImageUrl,
+}: LawyerCarouselItemData & { currentLocale: Locale }) {
     return (
         <div className="flex w-full flex-col items-center gap-2 p-8">
             <Link
@@ -29,12 +23,14 @@ export function MemberCard({
                 className="group flex flex-[1] cursor-pointer flex-col items-center"
             >
                 <div className="mb-4 aspect-square h-[220px] w-[220px] overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50">
-                    <ImageWithBlur
-                        src={imageSrc}
+                    <Image
                         alt={`Picture of ${slug}`}
-                        className="h-full w-full object-contain object-center duration-300 group-hover:scale-105"
+                        src={imageSrc}
                         height={220}
                         width={220}
+                        placeholder={'blur'}
+                        className="h-full w-full object-contain object-center duration-300 group-hover:scale-105"
+                        blurDataURL={blurImageUrl}
                     />
                 </div>
                 <div className="flex max-w-[80%] flex-[1] flex-col">
@@ -43,11 +39,13 @@ export function MemberCard({
                             {name}
                         </h3>
                         <p className="text-center text-sm text-muted-foreground">
-                            {degree}
+                            {currentLocale === 'en' ? degree.EN : degree.ID}
                         </p>
                     </div>
                     <div className="flex flex-[1] items-center justify-center">
-                        <p className="border-b border-primary text-primary px-1 text-sm my-2">{position}</p>
+                        <p className="my-2 border-b border-primary px-1 text-sm text-primary">
+                            {currentLocale === 'en' ? position.EN : position.ID}
+                        </p>
                     </div>
                 </div>
             </Link>

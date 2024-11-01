@@ -1,20 +1,6 @@
 import { cn } from '@/lib/utils'
-import { ImageProps } from 'next/image'
-import { PropsWithChildren, ReactNode } from 'react'
-import ImageWithBlur from './image-with-blur'
-import SectionHeading from './section-heading'
-
-type Props = {
-    className?: string
-} & PropsWithChildren
-
-export function MainContainer({ children, className }: Props) {
-    return (
-        <div className={cn('flex flex-col items-center', className)}>
-            {children}
-        </div>
-    )
-}
+import { ReactNode } from 'react'
+import SectionHeading from '../ui/section-heading'
 
 type SectionProps = {
     className?: string
@@ -126,20 +112,6 @@ export function SectionContainer({
                     {secondaryContent}
                 </span>
             </>
-        </div>
-    )
-}
-
-export function SectionBackground({ children, src, alt }: ImageProps) {
-    return (
-        <div className="relative grid w-full place-items-center">
-            <div className="relative z-[20]">{children}</div>
-            <ImageWithBlur
-                src={src}
-                alt={alt}
-                fill
-                className="absolute z-[10] object-cover"
-            />
         </div>
     )
 }

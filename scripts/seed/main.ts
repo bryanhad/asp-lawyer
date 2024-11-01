@@ -44,7 +44,7 @@ async function main() {
                         },
                     },
                     update: {
-                        value: translationData.value,
+                        // value: translationData.value,
                     },
                     create: {
                         lawyerId,
