@@ -4,8 +4,8 @@ import LinkedInIcon from '../icons/linked-in'
 import ImageWithBlur from '../ui/image-with-blur'
 
 export type MemberCardProps = {
-    fullName: string
     name: string
+    slug: string
     degree: string
     position: string
     linkedInUrl?: string
@@ -14,8 +14,8 @@ export type MemberCardProps = {
 }
 
 export function MemberCard({
-    fullName,
     name,
+    slug,
     degree,
     position,
     linkedInUrl,
@@ -25,13 +25,13 @@ export function MemberCard({
     return (
         <div className="flex w-full flex-col items-center gap-2 p-8">
             <Link
-                href={`/members/${name}`}
+                href={`/members/${slug}`}
                 className="group flex flex-[1] cursor-pointer flex-col items-center"
             >
                 <div className="mb-4 aspect-square h-[220px] w-[220px] overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50">
                     <ImageWithBlur
                         src={imageSrc}
-                        alt={`Picture of ${name}`}
+                        alt={`Picture of ${slug}`}
                         className="h-full w-full object-contain object-center duration-300 group-hover:scale-105"
                         height={220}
                         width={220}
@@ -40,7 +40,7 @@ export function MemberCard({
                 <div className="flex max-w-[80%] flex-[1] flex-col">
                     <div className="">
                         <h3 className="text-center text-xl font-light capitalize">
-                            {fullName}
+                            {name}
                         </h3>
                         <p className="text-center text-sm text-muted-foreground">
                             {degree}

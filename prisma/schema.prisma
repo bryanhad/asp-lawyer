@@ -5,35 +5,59 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Lawyer {
+    id          String        @id @default(cuid())
+    slug        String        @unique
+    order       Int // order position in Lawyers page, caroucel, etc..
+    name        String
+    linkedInUrl String?
+    email       String?
+    Translation Translation[]
+
+    @@map("lawyers")
+}
+
+model Translation {
+    id       Int     @id @default(autoincrement())
+    language String // 'en' or 'id', etc.
+    key      String // 'position', 'degree', 'bio', 'description', etc.
+    value    String // The translated text
+    lawyerId String?
+    lawyer   Lawyer? @relation(fields: [lawyerId], references: [id])
+
+    @@unique([lawyerId, language, key]) // ensures each combination of lawyerId, language, and key in the Translation table is unique.
+    @@map("translations")
 }
 
 model Member {
-  id   String @id @default(cuid())
-  name String
-  // slug     String   @unique
-  // bio      String?
-  // position String
-  // joinedAt DateTime
+    id   String @id @default(cuid())
+    name String
+    // slug     String   @unique
+    // bio      String?
+    // position String
+    // joinedAt DateTime
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
 
-  @@map("members")
+    @@map("members")
 }
 
 model Blog {
-  id               String @id @default(cuid())
-  title            String
-  contentIndonesia String
-  contentEnglish   String
+    id               String @id @default(cuid())
+    title            String
+    contentIndonesia String
+    contentEnglish   String
 
-  createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
 
-  @@map("blogs")
+    @@map("blogs")
 }
