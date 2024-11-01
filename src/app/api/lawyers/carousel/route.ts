@@ -3,10 +3,8 @@ import prisma from '@/lib/prisma'
 import { getBlurredImageUrls } from '@/lib/server-utils'
 import {
     LawyerCarouselItemData,
-    lawyersDataSelect,
-    TranslationDataSelect,
+    lawyersDataSelect
 } from '@/lib/types'
-import { Prisma } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
