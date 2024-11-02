@@ -1,4 +1,5 @@
-import { BaseContainer, SectionContainer } from '@/components/containers'
+import { BaseContainer } from '@/components/containers/base-container'
+import { SectionContainer } from '@/components/containers/section-container'
 import { capitalizeFirstLetter } from '@/lib/utils'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'

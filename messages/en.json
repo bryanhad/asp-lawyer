@@ -39,10 +39,10 @@
                 }
             }
         },
-        "previewMembers": {
+        "previewLawyers": {
             "titleTop": "The Team Behind",
             "titleBottom": "Your Success",
-            "desc": "Our skilled attorneys are dedicated to providing personalized and reliable legal guidance.",
+            "desc": "Our skilled attorneys provide dedicated, personalized legal guidance, committed to achieving the best outcomes for our clients with professionalism and care.",
             "callToAction": "Meet Our Attorneys"
         },
         "testimonials": {

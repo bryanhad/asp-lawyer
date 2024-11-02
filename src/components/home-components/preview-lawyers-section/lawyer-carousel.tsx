@@ -4,7 +4,7 @@ import {
     Carousel,
     CarouselContent,
     CarouselNext,
-    CarouselPrevious
+    CarouselPrevious,
 } from '@/components/ui/carousel'
 import { debounce } from '@/lib/utils'
 import { ReactNode, useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ type Props = {
     children: ReactNode
 }
 
-export function MemberCarousel({ children }: Props) {
+export default function LawyerCarousel({ children }: Props) {
     const [slidesToScroll, setSlidesToScroll] = useState<number>(1)
 
     useEffect(() => {
@@ -24,15 +24,19 @@ export function MemberCarousel({ children }: Props) {
         const handleResize = () => {
             const width = window.innerWidth
 
-            if (width >= 1280) { // xl screens
+            if (width >= 1280) {
+                // xl screens
                 setSlidesToScroll(5)
-            } else if (width >= 1024) { // lg screens
+            } else if (width >= 1024) {
+                // lg screens
                 setSlidesToScroll(4)
-            } else if (width >= 768) { // md screens
+            } else if (width >= 768) {
+                // md screens
                 setSlidesToScroll(3)
-            } else if (width >= 640) { // sm screens
+            } else if (width >= 640) {
+                // sm screens
                 setSlidesToScroll(2)
-            } else { 
+            } else {
                 setSlidesToScroll(1) // xs screens
             }
         }
@@ -47,15 +51,13 @@ export function MemberCarousel({ children }: Props) {
 
     return (
         <Carousel
-            className="w-full px-5"
+            className="w-full lg:w-[95%] xl:w-[87%]"
             opts={{
                 align: 'start',
-                slidesToScroll
+                slidesToScroll,
             }}
         >
-            <CarouselContent className="-ml-1">
-                {children}
-            </CarouselContent>
+            <CarouselContent className="-ml-1">{children}</CarouselContent>
             <CarouselPrevious className="-left-3" />
             <CarouselNext className="-right-2" />
         </Carousel>

@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import LinkButton from '../ui/link-button'
 import ImageWithBlur from '../ui/image-with-blur'
-import { SectionContainer } from '../containers'
+import { SectionContainer } from '../containers/section-container'
 
 export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')

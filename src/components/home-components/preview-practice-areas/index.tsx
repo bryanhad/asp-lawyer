@@ -9,7 +9,7 @@ import {
 import { getTranslations } from 'next-intl/server'
 import LinkButton from '../../ui/link-button'
 import Tags, { PracticeAreaTag } from './tags'
-import { SectionContainer } from '@/components/containers'
+import { SectionContainer } from '@/components/containers/section-container'
 
 const practiceAreas: PracticeAreaTag[] = [
     {

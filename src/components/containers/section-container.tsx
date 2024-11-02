@@ -24,6 +24,7 @@ export function SectionContainer({
     secondaryContent,
     variant = 'title-and-desc',
 }: SectionProps) {
+    // NO SECTION HEADING, ONLY AS A CONTAINER
     if (variant === 'naked') {
         return (
             <div
@@ -56,7 +57,7 @@ export function SectionContainer({
                         side={side}
                     />
                 </div>
-                <div className="mb-7 text-center text-muted-foreground xl:max-w-[50%]">
+                <div className="mb-9 text-center text-muted-foreground xl:max-w-[50%]">
                     {desc}
                 </div>
                 {children}

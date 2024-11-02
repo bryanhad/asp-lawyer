@@ -10,13 +10,13 @@ generator client {
 
 datasource db {
     // FOR DEV MODE
-    // provider = "sqlite"
-    // url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 
     // FOR PROD MODE
-    provider  = "postgresql"
-    url       = env("DATABASE_URL")
-    directUrl = env("DIRECT_URL")
+    // provider  = "postgresql"
+    // url       = env("DATABASE_URL")
+    // directUrl = env("DIRECT_URL")
 }
 
 model Lawyer {
