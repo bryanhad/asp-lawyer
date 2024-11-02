@@ -21,7 +21,7 @@ export default function LinkButton({
         <Button
             variant={variant}
             size={size}
-            className={cn('rounded-full text-lg h-auto py-3', className)}
+            className={cn('xl:text-lg h-auto py-3 w-max', className)}
             asChild
         >
             <Link href={href} {...props}>

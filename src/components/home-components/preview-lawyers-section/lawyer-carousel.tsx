@@ -51,15 +51,17 @@ export default function LawyerCarousel({ children }: Props) {
 
     return (
         <Carousel
-            className="w-full lg:w-[95%] xl:w-[87%]"
+            className="relative w-full lg:w-[95%] xl:w-[87%]"
             opts={{
                 align: 'start',
                 slidesToScroll,
             }}
         >
             <CarouselContent className="-ml-1">{children}</CarouselContent>
-            <CarouselPrevious className="-left-3" />
-            <CarouselNext className="-right-2" />
+            <CarouselPrevious className="-left-3 z-20 lg:-left-6" />
+            <CarouselNext className="-right-2 z-20 lg:-right-5" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent"></div>
         </Carousel>
     )
 }

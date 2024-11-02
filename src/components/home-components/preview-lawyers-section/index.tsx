@@ -32,6 +32,7 @@ export default async function PreviewLawyersSection() {
             titleTop={t('titleTop')}
             titleBottom={t('titleBottom')}
             desc={t('desc')}
+            className="bg-white"
         >
             {/* 
                 // Neat! Serialization is now as easy as passing props.
@@ -40,7 +41,11 @@ export default async function PreviewLawyersSection() {
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <PreviewLawyers currentLocale={currentLocale} />
             </HydrationBoundary>
-            <LinkButton className='mt-5' variant={'outline-accent'} href={'/members'}>
+            <LinkButton
+                className="mx-auto lg:mt-4"
+                variant={'outline-accent'}
+                href={'/members'}
+            >
                 {t('callToAction')}
             </LinkButton>
         </SectionContainer>

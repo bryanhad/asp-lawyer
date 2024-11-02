@@ -45,7 +45,7 @@ function LinkSection({
     }
 
     return (
-        <span className="group relative cursor-pointer">
+        <span onClick={handleClick} className="group relative cursor-pointer">
             <Link
                 href={href}
                 className="absolute -left-1 top-1/2 grid size-8 -translate-x-full -translate-y-1/2 place-items-center"
@@ -58,7 +58,7 @@ function LinkSection({
                     size={size}
                 />
             </Link>
-            <span onClick={handleClick}>{children}</span>
+           {children}
         </span>
     )
 }

@@ -46,7 +46,7 @@ export function SectionContainer({
         return (
             <div
                 className={cn(
-                    'flex w-full max-w-[1720px] flex-col items-center px-4 py-12 md:py-20',
+                    'flex w-full max-w-[1720px] flex-col px-4 py-12 sm:items-center md:py-20',
                     className,
                 )}
             >
@@ -73,14 +73,17 @@ export function SectionContainer({
             )}
         >
             <>
-                <span
-                    className={cn('flex flex-col items-center justify-center', {
-                        'order-1 md:items-start': side === 'left',
-                        'order-2 md:items-end': side === 'right',
-                    })}
+                <div
+                    className={cn(
+                        'flex flex-col',
+                        {
+                            'order-1 md:items-start': side === 'left',
+                            'order-2 md:items-end': side === 'right',
+                        },
+                    )}
                 >
                     <div
-                        className={cn( {
+                        className={cn({
                             'text-start': side === 'left',
                             'text-end': side === 'right',
                         })}
@@ -91,9 +94,10 @@ export function SectionContainer({
                             side={side}
                         />
                     </div>
+                    <div className="mt-4 md:hidden">{secondaryContent}</div>
                     <div
                         className={cn(
-                            'my-4 xl:my-6 text-center text-muted-foreground',
+                            'my-4 text-center text-muted-foreground xl:my-6',
                             {
                                 'md:max-w-[90%] md:text-start': side === 'left',
                                 'md:text-end': side === 'right',
@@ -103,15 +107,15 @@ export function SectionContainer({
                         {desc}
                     </div>
                     {children}
-                </span>
-                <span
-                    className={cn('hidden md:block', {
+                </div>
+                <div
+                    className={cn('hidden md:block max-md:mt-6', {
                         'order-2': side === 'left',
                         'order-1': side === 'right',
                     })}
                 >
                     {secondaryContent}
-                </span>
+                </div>
             </>
         </div>
     )
