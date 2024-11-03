@@ -1,12 +1,11 @@
+import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import LanguageSelect from './language-select'
-import { Locale } from '@/i18n/request'
 import MobileMenu from './mobile-menu'
-import { Separator } from '../ui/separator'
-import Search from './search'
-import NavLink from './nav-link'
 import NavHeader from './nav-header'
+import NavLink from './nav-link'
+import Image from 'next/image'
 
 type Props = {
     selectedLocale: Locale
@@ -21,7 +20,13 @@ async function Navbar({ selectedLocale }: Props) {
                 <div className="flex items-end gap-14 self-center">
                     <Link href={'/'} className="flex items-center">
                         <h1 className="relative text-xl font-bold text-primary sm:text-2xl">
-                            ASP Law firm
+                            <Image
+                                src={'/asp-logo-modified.png'}
+                                alt='ASP Logo'
+                                width={50}
+                                height={20}
+                                priority
+                            />
                         </h1>
                     </Link>
                     <div className="hidden gap-10 lg:flex">
@@ -29,7 +34,7 @@ async function Navbar({ selectedLocale }: Props) {
                         <NavLink href={'/practice-areas'}>
                             {t('practiceAreas')}
                         </NavLink>
-                        <NavLink href={'/members'}>{t('members')}</NavLink>
+                        <NavLink href={'/lawyers'}>{t('lawyers')}</NavLink>
                         <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
                         <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>
                     </div>

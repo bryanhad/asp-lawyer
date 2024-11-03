@@ -2,7 +2,6 @@ import { SectionContainer } from '@/components/containers/section-container'
 import LinkButton from '@/components/ui/link-button'
 import { Locale } from '@/i18n/request'
 import kyInstance from '@/lib/ky'
-import { LawyerCarouselItemData } from '@/lib/types'
 import {
     dehydrate,
     HydrationBoundary,
@@ -10,11 +9,12 @@ import {
 } from '@tanstack/react-query'
 import { getLocale, getTranslations } from 'next-intl/server'
 import PreviewLawyers from './preview-lawyers'
+import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
 
 export async function getPreviewLawyersData() {
     return await kyInstance
-        .get('/api/lawyers/carousel')
-        .json<LawyerCarouselItemData[]>()
+        .get('api/lawyers/carousel')
+        .json<LawyerCardData[]>()
 }
 
 export default async function PreviewLawyersSection() {
@@ -23,7 +23,7 @@ export default async function PreviewLawyersSection() {
     const currentLocale = (await getLocale()) as Locale
 
     await queryClient.prefetchQuery({
-        queryKey: ['posts'],
+        queryKey: ['lawyers', 'preview'],
         queryFn: getPreviewLawyersData,
     })
 
@@ -43,7 +43,7 @@ export default async function PreviewLawyersSection() {
             <LinkButton
                 className="mx-auto lg:mt-4"
                 variant={'outline-accent'}
-                href={'/members'}
+                href={'/lawyers'}
             >
                 {t('callToAction')}
             </LinkButton>

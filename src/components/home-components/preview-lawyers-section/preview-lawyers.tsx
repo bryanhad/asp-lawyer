@@ -5,8 +5,8 @@ import LawyerCarousel from '@/components/home-components/preview-lawyers-section
 import { CarouselItem } from '@/components/ui/carousel'
 import { Locale } from '@/i18n/request'
 import { useQuery } from '@tanstack/react-query'
-import { getPreviewLawyersData } from '.'
 import PreviewLawyersSkeleton from './skeleton'
+import { getPreviewLawyersData } from '.'
 
 type Props = {
     currentLocale: Locale
@@ -14,9 +14,9 @@ type Props = {
 
 export default function PreviewLawyers({ currentLocale }: Props) {
     // This useQuery could just as well happen in some deeper
-    // child to <Posts>, data will be available immediately either way
+    // child, data will be available immediately either way
     const { data, isPending, isError } = useQuery({
-        queryKey: ['posts'],
+        queryKey: ['lawyers', 'preview'],
         queryFn: () => getPreviewLawyersData(),
     })
 

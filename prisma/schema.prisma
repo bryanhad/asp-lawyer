@@ -11,7 +11,7 @@ generator client {
 datasource db {
     // FOR DEV MODE
     // provider = "sqlite"
-    // url      = env("DATABASE_URL")
+    // url      = ""
 
     // FOR PROD MODE
     provider  = "postgresql"
@@ -20,27 +20,34 @@ datasource db {
 }
 
 model Lawyer {
-    id          String        @id @default(cuid())
-    slug        String        @unique
+    id          String  @id @default(cuid())
+    slug        String  @unique
     order       Int // order position in Lawyers page, caroucel, etc..
     name        String
     linkedInUrl String?
     email       String?
-    Translation Translation[]
 
     @@map("lawyers")
 }
 
 model Translation {
-    id       Int     @id @default(autoincrement())
-    language String // 'en' or 'id', etc.
-    key      String // 'position', 'degree', 'bio', 'description', etc.
-    value    String // The translated text
-    lawyerId String?
-    lawyer   Lawyer? @relation(fields: [lawyerId], references: [id])
+    id         Int    @id @default(autoincrement())
+    language   String // 'en' or 'id', etc.
+    key        String // 'position', 'degree', 'bio', 'description', etc.
+    value      String // The translated text
+    entityId   String // Could be the ID of any model needing translation
+    entityType String // Specifies the type, e.g., 'Lawyer' or 'Blog'
 
-    @@unique([lawyerId, language, key]) // ensures each combination of lawyerId, language, and key in the Translation table is unique.
+    @@unique([entityId, entityType, language, key]) // ensures each combination of entityId, entittyType, language, and key in the Translation model is unique.
     @@map("translations")
+}
+
+model PracticeArea {
+    id    String @id @default(cuid())
+    slug  String @unique
+    order Int // order position in practice-areas page, caroucel, etc..
+
+    @@map("practice_areas")
 }
 
 model Member {

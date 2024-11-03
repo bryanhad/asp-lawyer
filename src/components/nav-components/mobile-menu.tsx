@@ -3,20 +3,16 @@
 import {
     Sheet,
     SheetContent,
-    SheetTitle,
-    SheetTrigger,
+    SheetTitle
 } from '@/components/ui/sheet'
 import { Locale } from '@/i18n/request'
-import { cn } from '@/lib/utils'
 import {
     BriefcaseBusiness,
     Headset,
     Home,
     Info,
-    Menu,
     ScrollText,
-    Users,
-    X,
+    Users
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
@@ -29,7 +25,7 @@ type Props = {
 }
 
 function MobileMenu({ selectedLocale }: Props) {
-    const { isOpen, setIsOpen, isScrolled } = useNavContext()
+    const { isOpen, setIsOpen } = useNavContext()
     const router = useRouter()
 
     const [_, currentLocale, ...restOfPath] = usePathname().split('/')
@@ -76,9 +72,9 @@ function MobileMenu({ selectedLocale }: Props) {
                         currentPath={currentPath}
                         onClick={onLinkClicked}
                         icon={<Users />}
-                        href={'/members'}
+                        href={'/lawyers'}
                     >
-                        {t('members')}
+                        {t('lawyers')}
                     </MobileMenuLink>
                     <MobileMenuLink
                         currentPath={currentPath}

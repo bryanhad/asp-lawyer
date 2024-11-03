@@ -18,7 +18,7 @@ export default function SectionHeading({
 
     return (
         <div
-            className={cn('flex flex-col items-center xl:gap-4', {
+            className={cn('flex flex-col items-center gap-2 xl:gap-4', {
                 'md:items-start': side === 'left',
                 'md:items-end': side === 'right',
             })}
@@ -34,7 +34,7 @@ export default function SectionHeading({
                     },
                 )}
             >
-                <span className="text-3xl text-gray-500 lg:text-3xl xl:text-4xl">
+                <span className="text-3xl text-gray-600 lg:text-3xl xl:text-4xl">
                     {titleTop}
                 </span>
                 <LinkSection

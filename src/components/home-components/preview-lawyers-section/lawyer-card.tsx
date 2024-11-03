@@ -1,6 +1,5 @@
 import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
-import { LawyerCarouselItemData } from '@/lib/types'
 import { Mail, EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
 import LinkedInIcon from '../../icons/linked-in'
@@ -9,6 +8,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
+import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
 
 export default function LawyerCard({
     name,
@@ -20,12 +20,12 @@ export default function LawyerCard({
     imageSrc,
     currentLocale,
     blurImageUrl,
-}: LawyerCarouselItemData & { currentLocale: Locale }) {
+}: LawyerCardData & { currentLocale: Locale }) {
     return (
         <div className="flex w-full flex-col items-center gap-2">
             <div className="relative w-full max-w-[220px]">
                 <Link
-                    href={`/members/${slug}`}
+                    href={`/lawyers/${slug}`}
                     className="group relative z-10 flex flex-[1] cursor-pointer flex-col items-center"
                 >
                     <div className="mb-4 aspect-square h-[180px] w-[180px] overflow-hidden rounded-full bg-muted duration-300 group-hover:bg-primary/50">
@@ -41,13 +41,13 @@ export default function LawyerCard({
                     </div>
                     <div className="flex flex-[1] flex-col">
                         <p className="mx-auto rounded-full bg-yellow-400/40 px-3 text-sm text-yellow-700">
-                            {currentLocale === 'en' ? position.EN : position.ID}
+                            {currentLocale === 'en' ? position.en : position.id}
                         </p>
                         <h3 className="mt-2 line-clamp-2 text-center text-lg font-light capitalize leading-tight">
                             {name}
                         </h3>
                         <p className="text-center text-sm text-muted-foreground">
-                            {currentLocale === 'en' ? degree.EN : degree.ID}
+                            {currentLocale === 'en' ? degree.id : degree.id}
                         </p>
                     </div>
                 </Link>

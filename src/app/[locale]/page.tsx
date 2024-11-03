@@ -1,5 +1,5 @@
 import PreviewAboutUs from '@/components/home-components/preview-about-us'
-import PreviewPracticeAreas from '@/components/home-components/preview-practice-areas'
+import PreviewPracticeAreas from '@/components/home-components/preview-practice-areas-section'
 import Hero from '@/components/home-components/hero'
 import PreviewLawyersSection from '@/components/home-components/preview-lawyers-section'
 import { BaseContainer } from '@/components/containers/base-container'

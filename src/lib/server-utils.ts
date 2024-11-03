@@ -2,6 +2,7 @@ import { getPlaiceholder } from 'plaiceholder'
 import kyInstance from './ky'
 
 export async function getBlurredImageUrl(imageUrl: string) {
+    console.log(imageUrl)
     const res = await kyInstance.get(imageUrl)
     const imgBuffer = await res.arrayBuffer()
 
