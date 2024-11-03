@@ -8,8 +8,7 @@ export default async function PreviewAboutUs() {
 
     return (
         <SectionContainer
-            side="left"
-            className="aspect-[16/5.3]"
+            side="right"
             secondaryContent={
                 <ImageWithBlur
                     className="rounded-xl"

@@ -6,6 +6,7 @@ import MobileMenu from './mobile-menu'
 import { Separator } from '../ui/separator'
 import Search from './search'
 import NavLink from './nav-link'
+import NavHeader from './nav-header'
 
 type Props = {
     selectedLocale: Locale
@@ -15,7 +16,7 @@ async function Navbar({ selectedLocale }: Props) {
     const t = await getTranslations('navbar')
 
     return (
-        <header className="fixed top-0 z-[90] flex h-16 w-full justify-center border-b bg-white lg:h-20">
+        <NavHeader>
             <nav className="flex h-full w-full max-w-[1720px] justify-between px-4 sm:px-6 md:px-8">
                 <div className="flex items-end gap-14 self-center">
                     <Link href={'/'} className="flex items-center">
@@ -35,15 +36,16 @@ async function Navbar({ selectedLocale }: Props) {
                 </div>
                 <div className="hidden gap-5 lg:flex lg:items-center">
                     <LanguageSelect selectedLocale={selectedLocale} />
-                    <Separator
+                    {/* <Separator
                         orientation="vertical"
                         className="h-[70%] self-center"
-                    />
-                    <Search />
+                    /> */}
+                    {/* <Search /> */}
                 </div>
                 <MobileMenu selectedLocale={selectedLocale} />
             </nav>
-        </header>
+        </NavHeader>
+
     )
 }
 

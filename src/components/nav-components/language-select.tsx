@@ -31,7 +31,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
 
     return (
         <Popover>
-            <Button asChild variant="outline" className="px-2">
+            <Button asChild variant="ghost" className="px-2 bg-transparent ">
                 <PopoverTrigger>
                     {selectedLocale === 'id' ? (
                         <Image

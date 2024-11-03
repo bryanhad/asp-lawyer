@@ -9,6 +9,7 @@ type SectionProps = {
     titleTop?: string
     titleBottom?: string
     desc?: ReactNode
+    backgroundClassName?: string
 } & (
     | { side?: 'right' | 'left'; secondaryContent: ReactNode }
     | { side?: 'center'; secondaryContent?: never }
@@ -23,17 +24,20 @@ export function SectionContainer({
     side = 'center',
     secondaryContent,
     variant = 'title-and-desc',
+    backgroundClassName,
 }: SectionProps) {
     // NO SECTION HEADING, ONLY AS A CONTAINER
     if (variant === 'naked') {
         return (
-            <div
-                className={cn(
-                    'flex w-full max-w-[1720px] flex-col px-4 py-12',
-                    className,
-                )}
-            >
-                {children}
+            <div className={cn('w-full', backgroundClassName)}>
+                <section
+                    className={cn(
+                        'mx-auto flex w-full max-w-[1520px] flex-col px-4 py-12',
+                        className,
+                    )}
+                >
+                    {children}
+                </section>
             </div>
         )
     }
@@ -44,9 +48,9 @@ export function SectionContainer({
 
     if (side === 'center') {
         return (
-            <div
+            <section
                 className={cn(
-                    'flex w-full max-w-[1720px] flex-col px-4 py-12 sm:items-center md:py-20',
+                    'flex w-full max-w-[1520px] flex-col px-4 py-12 sm:items-center md:py-20',
                     className,
                 )}
             >
@@ -61,12 +65,12 @@ export function SectionContainer({
                     {desc}
                 </div>
                 {children}
-            </div>
+            </section>
         )
     }
 
     return (
-        <div
+        <section
             className={cn(
                 'grid w-full max-w-[1420px] grid-cols-1 px-4 py-12 md:grid-cols-2 md:py-20',
                 className,
@@ -74,13 +78,10 @@ export function SectionContainer({
         >
             <>
                 <div
-                    className={cn(
-                        'flex flex-col',
-                        {
-                            'order-1 md:items-start': side === 'left',
-                            'order-2 md:items-end': side === 'right',
-                        },
-                    )}
+                    className={cn('flex flex-col', {
+                        'order-1 md:items-start': side === 'left',
+                        'order-2 md:items-end': side === 'right',
+                    })}
                 >
                     <div
                         className={cn({
@@ -109,7 +110,7 @@ export function SectionContainer({
                     {children}
                 </div>
                 <div
-                    className={cn('hidden md:block max-md:mt-6', {
+                    className={cn('hidden max-md:mt-6 md:block', {
                         'order-2': side === 'left',
                         'order-1': side === 'right',
                     })}
@@ -117,6 +118,6 @@ export function SectionContainer({
                     {secondaryContent}
                 </div>
             </>
-        </div>
+        </section>
     )
 }

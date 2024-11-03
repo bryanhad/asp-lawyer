@@ -8,8 +8,12 @@
         "contactUs": "Contact Us"
     },
     "homePage": {
-        "title": "Welcome to Our Law Firm",
-        "desc": "Providing trusted legal solutions with professionalism and dedication.",
+        "titleWhite": "Providing",
+        "titlePrimary1": "Legal",
+        "titlePrimary2": "Solutions",
+        "titleExtra": "Tailored to Your Needs",
+        "desc": "Arifudin & Susanto Partnership (ASP) provides tailored legal solutions with a commitment to professionalism and client trust, serving your needs across Indonesia.",
+        "callToAction": "Contact Us",
         "previewAboutUs": {
             "titleTop": "Reliable Attorneys",
             "titleBottom": "Trusted Results",

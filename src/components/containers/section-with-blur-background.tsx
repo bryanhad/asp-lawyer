@@ -1,15 +1,16 @@
-import { ImageProps } from 'next/image'
-import ImageWithBlur from '../ui/image-with-blur'
+import Image, { ImageProps } from 'next/image'
 
 export function SectionWithBlurBackground({
     children,
     src,
     alt,
+    ...props
 }: ImageProps) {
     return (
         <div className="relative grid w-full place-items-center">
             <div className="relative z-[20]">{children}</div>
-            <ImageWithBlur
+            <Image
+                {...props}
                 src={src}
                 alt={alt}
                 fill

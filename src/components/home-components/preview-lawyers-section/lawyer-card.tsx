@@ -40,7 +40,7 @@ export default function LawyerCard({
                         />
                     </div>
                     <div className="flex flex-[1] flex-col">
-                        <p className="mx-auto rounded-full bg-yellow-600 px-3 text-sm text-white">
+                        <p className="mx-auto rounded-full bg-yellow-400/40 px-3 text-sm text-yellow-700">
                             {currentLocale === 'en' ? position.EN : position.ID}
                         </p>
                         <h3 className="mt-2 line-clamp-2 text-center text-lg font-light capitalize leading-tight">

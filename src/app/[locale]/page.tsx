@@ -12,6 +12,7 @@ export default async function Home() {
             <SectionWithBlurBackground
                 src="/low-poly-bg.svg"
                 alt="Low poly background"
+                priority
             >
                 <PreviewAboutUs />
             </SectionWithBlurBackground>

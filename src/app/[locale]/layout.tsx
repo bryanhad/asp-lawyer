@@ -58,7 +58,7 @@ export default async function RootLayout({
                     initialLocale={currentLocale}
                 >
                     <Navbar selectedLocale={currentLocale} />
-                    <main className="mt-16 lg:mt-20">{children}</main>
+                    <main >{children}</main>
                 </Providers>
                 <Toaster />
             </body>

@@ -32,7 +32,6 @@ export default async function PreviewLawyersSection() {
             titleTop={t('titleTop')}
             titleBottom={t('titleBottom')}
             desc={t('desc')}
-            className="bg-white"
         >
             {/* 
                 // Neat! Serialization is now as easy as passing props.

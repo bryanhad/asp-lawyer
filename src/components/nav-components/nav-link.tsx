@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import React from 'react'
 import { Button } from '../ui/button'
+import { useNavContext } from './nav-context'
 
 type NavLinkProps = {
     children: React.ReactNode
@@ -12,20 +13,18 @@ type NavLinkProps = {
 }
 
 function NavLink({ children, href }: NavLinkProps) {
+    const { isHomePage, isScrolled } = useNavContext()
     const selectedLayoutSegment = useSelectedLayoutSegment()
     const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/'
     const isActive = pathname === href
 
     return (
-        <Button
-            asChild
-            variant="ghost"
-            className="h-max p-0 hover:bg-transparent"
-        >
+        <Button asChild variant="naked" size="naked">
             <Link
                 href={href}
                 className={cn('text-base text-muted-foreground', {
                     'text-black': isActive,
+                    'text-slate-400': isHomePage && !isScrolled,
                 })}
             >
                 {children}
