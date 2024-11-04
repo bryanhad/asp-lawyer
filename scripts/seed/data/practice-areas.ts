@@ -18,6 +18,11 @@ export const practiceAreaSeed: PracticeArea[] = [
             },
             {
                 language: Language.EN,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'Corp & Banking',
+            },
+            {
+                language: Language.EN,
                 key: PracticeAreaTranslationKey.DESC,
                 value: 'Our team provides expert advice on corporate governance, mergers, acquisitions, banking regulations, and financing solutions for businesses of all sizes.',
             },
@@ -109,6 +114,16 @@ export const practiceAreaSeed: PracticeArea[] = [
                 language: Language.ID,
                 key: PracticeAreaTranslationKey.FULL_NAME,
                 value: 'Tindak Pidana Pencucian Uang dan Pidana Korupsi',
+            },
+            {
+                language: Language.EN,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'Anti-Corruption & Money Laundering',
+            },
+            {
+                language: Language.ID,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'Pencucian Uang & Korupsi',
             },
             {
                 language: Language.EN,
@@ -211,6 +226,16 @@ export const practiceAreaSeed: PracticeArea[] = [
                 language: Language.ID,
                 key: PracticeAreaTranslationKey.FULL_NAME,
                 value: 'Hak Kekayaan Intelektual',
+            },
+            {
+                language: Language.EN,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'IP Rights',
+            },
+            {
+                language: Language.ID,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'HKI',
             },
             {
                 language: Language.EN,
@@ -407,6 +432,16 @@ export const practiceAreaSeed: PracticeArea[] = [
                 language: Language.ID,
                 key: PracticeAreaTranslationKey.FULL_NAME,
                 value: 'Kepailitan dan Penundaan Kewajiban Pembayaran Utang',
+            },
+            {
+                language: Language.EN,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'Bankruptcy & Debt Suspension',
+            },
+            {
+                language: Language.ID,
+                key: PracticeAreaTranslationKey.SHORT_NAME,
+                value: 'Kepailitan & PKPU',
             },
             {
                 language: Language.EN,

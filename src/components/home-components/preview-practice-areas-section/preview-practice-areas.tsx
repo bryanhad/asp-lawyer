@@ -1,13 +1,21 @@
 'use client'
 
-import TagPreview from './tag-preview'
+import { PracticeAreaPreviewData } from '@/app/api/practice-areas/preview/route'
+import { Button } from '@/components/ui/button'
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from '@/components/ui/carousel'
+import { Locale } from '@/i18n/request'
+import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
 import { getPracticeAreaPreviewData } from '.'
 import PreviewPracticeAreasSkeleton from './skeleton'
-import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Locale } from '@/i18n/request'
+import TagPreview from './tag-preview'
 
 export default function PreviewPracticeAreas({
     currentLocale,
@@ -16,7 +24,7 @@ export default function PreviewPracticeAreas({
 }) {
     // This useQuery could just as well happen in some deeper
     // child, data will be available immediately either way
-    const { data, isPending, isError, isFetched } = useQuery({
+    const { data, isPending, isError } = useQuery({
         queryKey: ['practice-areas', 'preview'],
         queryFn: () => getPracticeAreaPreviewData(),
     })
@@ -27,7 +35,7 @@ export default function PreviewPracticeAreas({
         if (data && activeTag === null) {
             setActiveTag(data[0].slug)
         }
-    }, [data])
+    }, [data, activeTag])
 
     function handleClick(tagTitle: string) {
         setActiveTag(tagTitle)
@@ -53,29 +61,43 @@ export default function PreviewPracticeAreas({
     }
 
     return (
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex w-full flex-col items-center gap-6">
             <>
-                <div className="flex flex-wrap justify-center gap-3 xl:gap-8">
-                    {data.map((practiceArea) => (
-                        <Button
-                            key={practiceArea.slug}
-                            onClick={() => handleClick(practiceArea.slug)}
-                            className={cn(
-                                'max-w-[200px] rounded-full bg-gray-200 text-sm text-gray-500 hover:bg-gray-300',
-                                {
-                                    'bg-blue-500 text-white hover:bg-blue-600':
-                                        activeTag === practiceArea.slug,
-                                },
-                            )}
-                        >
-                            <p className="truncate">
-                                {currentLocale === 'en'
-                                    ? practiceArea.fullName.en
-                                    : practiceArea.fullName.id}
-                            </p>
-                        </Button>
+                <div className="hidden flex-wrap justify-center gap-3 md:flex xl:gap-4">
+                    {data.map((pa) => (
+                        <PracticeAreaTag
+                            {...pa}
+                            key={pa.slug}
+                            currentLocale={currentLocale}
+                            onClick={handleClick}
+                            activeTag={activeTag}
+                        />
                     ))}
                 </div>
+                <Carousel className="relative w-full max-w-[88%] md:hidden">
+                    <CarouselContent className="-ml-0">
+                        {data.map((pa, index) => (
+                            <CarouselItem
+                                key={pa.slug}
+                                className={cn('basis-auto pl-3', {
+                                    'mr-3': data.length - 1 === index,
+                                })}
+                            >
+                                <PracticeAreaTag
+                                    {...pa}
+                                    key={pa.slug}
+                                    currentLocale={currentLocale}
+                                    onClick={handleClick}
+                                    activeTag={activeTag}
+                                />
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="-left-8" />
+                    <CarouselNext className="-right-8" />
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 bg-gradient-to-r from-white to-transparent"></div>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-3 bg-gradient-to-l from-white to-transparent"></div>
+                </Carousel>
                 {activeTag && (
                     <TagPreview
                         {...data.filter((data) => data.slug === activeTag)[0]}
@@ -83,5 +105,53 @@ export default function PreviewPracticeAreas({
                 )}
             </>
         </div>
+    )
+}
+
+type PracticeAreaTagProps = {
+    currentLocale: Locale
+    onClick: (slug: string) => void
+    activeTag: string | null
+    key: string
+    className?: string
+} & PracticeAreaPreviewData
+
+function PracticeAreaTag({
+    currentLocale,
+    onClick,
+    activeTag,
+    className,
+    ...pa
+}: PracticeAreaTagProps) {
+    return (
+        <Button
+            key={pa.key}
+            onClick={() => onClick(pa.slug)}
+            className={cn(
+                'rounded-full bg-gray-200 text-sm text-gray-500 hover:bg-gray-300',
+                {
+                    'bg-blue-500 text-white hover:bg-blue-600':
+                        activeTag === pa.slug,
+                },
+                className,
+            )}
+        >
+            <div className="">
+                {/* smaller screen size */}
+                <p className="">
+                    {currentLocale === 'en'
+                        ? !!pa.shortName.en
+                            ? pa.shortName.en
+                            : pa.fullName.en
+                        : pa.shortName.id
+                          ? pa.shortName.id
+                          : pa.fullName.id}
+                </p>
+                {/* medium screen size */}
+                {/* <p className="hidden md:block">
+                    {currentLocale === 'en' ? pa.fullName.en : pa.fullName.id}
+                </p> */}
+            </div>
+        </Button>
     )
 }

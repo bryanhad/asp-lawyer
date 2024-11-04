@@ -5,13 +5,13 @@ import { NextResponse } from 'next/server'
 
 export type PracticeAreaPreviewData = Pick<PracticeArea, 'slug'> & {
     fullName: { id: string; en: string }
+    shortName: { id: string | null; en: string | null }
     // shortName: { id: string; en: string }
     desc: { id: string; en: string }
 }
 
 export async function GET(): Promise<
-    | NextResponse<PracticeAreaPreviewData[]>
-    | NextResponse<{ error: string }>
+    NextResponse<PracticeAreaPreviewData[]> | NextResponse<{ error: string }>
 > {
     try {
         const query: PracticeAreaPreviewData[] = await prisma.$queryRaw`
@@ -28,6 +28,17 @@ export async function GET(): Promise<
                         THEN t."value" 
                     END)
                 ) AS "fullName",
+                -- get shortName: { id: string; en: string }
+                jsonb_build_object(
+                    'id', MAX(CASE 
+                        WHEN t."key" = ${PracticeAreaTranslationKey.SHORT_NAME} AND t."language" = ${Language.ID}
+                        THEN t."value" 
+                    END),
+                    'en', MAX(CASE 
+                        WHEN t."key" = ${PracticeAreaTranslationKey.SHORT_NAME} AND t."language" = ${Language.EN}
+                        THEN t."value" 
+                    END)
+                ) AS "shortName",
                 -- get desc: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
@@ -39,22 +50,15 @@ export async function GET(): Promise<
                         THEN t."value" 
                     END)
                 ) AS "desc"
-                -- get shortName: { id: string; en: string }
-                -- jsonb_build_object(
-                --     'id', MAX(CASE 
-                --         WHEN t."key" = '' AND t."language" = ''
-                --         THEN t."value" 
-                --     END),
-                --     'en', MAX(CASE 
-                --         WHEN t."key" = '' AND t."language" = ''
-                --         THEN t."value" 
-                --     END)
-                -- ) AS "shortName"
             FROM practice_areas AS pa
             LEFT JOIN translations AS t 
                 ON pa."id" = t."entityId" 
                 AND t."entityType" = ${EntityType.PracticeArea}
-                AND t."key" IN (${PracticeAreaTranslationKey.FULL_NAME}, ${PracticeAreaTranslationKey.DESC})
+                AND t."key" IN (
+                    ${PracticeAreaTranslationKey.FULL_NAME}, 
+                    ${PracticeAreaTranslationKey.DESC}, 
+                    ${PracticeAreaTranslationKey.SHORT_NAME}
+                )
             GROUP BY pa."slug", pa."order"
             ORDER BY pa."order"
         `
