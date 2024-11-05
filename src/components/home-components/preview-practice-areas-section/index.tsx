@@ -9,16 +9,21 @@ export default async function PreviewLawyersSection() {
     const t = await getTranslations('homePage.previewPracticeAreas')
 
     return (
-        <div className="flex w-full flex-col items-center bg-white">
+        <div className="flex w-full flex-col items-center bg-neutral-50">
             <SectionContainer
+                side="left"
                 titleTop={t('titleTop')}
                 titleBottom={t('titleBottom')}
                 desc={<p>{t('desc')}</p>}
-                className="flex flex-col items-center"
+                descClassName='max-md:hidden'
+                secondaryContent={
+                    <div className='mt-2'>
+                        <Suspense fallback={<SkeletonFallback />}>
+                            <PracticeAreas />
+                        </Suspense>
+                    </div>
+                }
             >
-                <Suspense fallback={<SkeletonFallback />}>
-                    <PracticeAreas />
-                </Suspense>
                 <LinkButton
                     variant={'outline-accent'}
                     href={'/about-us'}

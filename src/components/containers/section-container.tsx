@@ -10,6 +10,7 @@ type SectionProps = {
     titleBottom?: string
     desc?: ReactNode
     backgroundClassName?: string
+    descClassName?:string
 } & (
     | { side?: 'right' | 'left'; secondaryContent: ReactNode }
     | { side?: 'center'; secondaryContent?: never }
@@ -25,6 +26,7 @@ export function SectionContainer({
     secondaryContent,
     variant = 'title-and-desc',
     backgroundClassName,
+    descClassName
 }: SectionProps) {
     // NO SECTION HEADING, ONLY AS A CONTAINER
     if (variant === 'naked') {
@@ -54,14 +56,14 @@ export function SectionContainer({
                     className,
                 )}
             >
-                <div className="my-4 xl:my-6 xl:max-w-[40%]">
+                <div className="my-4 xl:my-6 xl:max-w-[60%]">
                     <SectionHeading
                         titleTop={titleTop}
                         titleBottom={titleBottom}
                         side={side}
                     />
                 </div>
-                <div className="mb-9 text-center text-muted-foreground xl:max-w-[50%]">
+                <div className={cn("mb-9 text-center text-muted-foreground xl:max-w-[50%]", descClassName)}>
                     {desc}
                 </div>
                 {children}
@@ -72,52 +74,51 @@ export function SectionContainer({
     return (
         <section
             className={cn(
-                'grid w-full max-w-[1420px] grid-cols-1 px-4 py-12 md:grid-cols-2 md:py-20',
+                'grid w-full max-w-[1420px] gap-6 grid-cols-1 px-4 py-12 md:grid-cols-2 md:py-20 ',
                 className,
             )}
         >
-            <>
+            <div
+                className={cn('flex flex-col', {
+                    'order-1 md:items-start': side === 'left',
+                    'order-2 md:items-end': side === 'right',
+                })}
+            >
                 <div
-                    className={cn('flex flex-col', {
-                        'order-1 md:items-start': side === 'left',
-                        'order-2 md:items-end': side === 'right',
+                    className={cn({
+                        'text-start': side === 'left',
+                        'text-end': side === 'right',
                     })}
                 >
-                    <div
-                        className={cn({
-                            'text-start': side === 'left',
-                            'text-end': side === 'right',
-                        })}
-                    >
-                        <SectionHeading
-                            titleTop={titleTop}
-                            titleBottom={titleBottom}
-                            side={side}
-                        />
-                    </div>
-                    <div className="mt-4 md:hidden">{secondaryContent}</div>
-                    <div
-                        className={cn(
-                            'my-4 text-center text-muted-foreground xl:my-6',
-                            {
-                                'md:max-w-[90%] md:text-start': side === 'left',
-                                'md:text-end': side === 'right',
-                            },
-                        )}
-                    >
-                        {desc}
-                    </div>
-                    {children}
+                    <SectionHeading
+                        titleTop={titleTop}
+                        titleBottom={titleBottom}
+                        side={side}
+                    />
                 </div>
+                <div className="mt-4 md:hidden">{secondaryContent}</div>
                 <div
-                    className={cn('hidden max-md:mt-6 md:block', {
-                        'order-2': side === 'left',
-                        'order-1': side === 'right',
-                    })}
+                    className={cn(
+                        'my-4 text-center text-lg text-muted-foreground xl:my-6',
+                        {
+                            'md:max-w-[90%] md:text-start': side === 'left',
+                            'md:text-end': side === 'right',
+                        },
+                        descClassName
+                    )}
                 >
-                    {secondaryContent}
+                    {desc}
                 </div>
-            </>
+                {children}
+            </div>
+            <div
+                className={cn('max-md:hidden max-md:mt-6', {
+                    'order-2': side === 'left',
+                    'order-1': side === 'right',
+                })}
+            >
+                {secondaryContent}
+            </div>
         </section>
     )
 }

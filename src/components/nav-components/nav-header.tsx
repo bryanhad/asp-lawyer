@@ -23,7 +23,8 @@ export default function NavHeader({ children }: Props) {
                 setIsScrolled(false)
             }
         }
-
+        // Run once initially
+        handleScroll()
         window.addEventListener('scroll', handleScroll)
 
         // Clean up the event listener when the component unmounts

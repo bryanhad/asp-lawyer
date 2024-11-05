@@ -11,8 +11,16 @@ import {
 } from '@/components/ui/carousel'
 import { Locale } from '@/i18n/request'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import TagPreview from './client-tag-preview'
+import {
+    BadgeDollarSign,
+    Building2,
+    FileText,
+    Gavel,
+    Scale,
+    Shield,
+} from 'lucide-react'
 
 type Props = {
     data: PracticeAreaPreviewData[]
@@ -27,9 +35,9 @@ export default function ClientPracticeAreas({ data, currentLocale }: Props) {
     }
 
     return (
-        <div className="flex w-full flex-col items-center gap-6">
+        <div className="flex w-full flex-col gap-6 max-md:items-center">
             <>
-                <div className="hidden flex-wrap justify-center gap-3 md:flex xl:gap-4">
+                <div className="hidden grid-cols-2 justify-center gap-3 md:grid xl:gap-4">
                     {data.map((pa) => (
                         <PracticeAreaTag
                             {...pa}
@@ -89,22 +97,45 @@ function PracticeAreaTag({
     className,
     ...pa
 }: PracticeAreaTagProps) {
+    let icon: ReactNode
+    switch (pa.slug) {
+        case 'corporate-banking':
+            icon = <Building2 className="shrink-0" size={24} />
+            break
+        case 'money-laundering':
+            icon = <Shield className="shrink-0" size={24} />
+            break
+        case 'intellectual-property-rights':
+            icon = <FileText className="shrink-0" size={24} />
+            break
+        case 'arbitration':
+            icon = <Scale className="shrink-0" size={24} />
+            break
+        case 'bankruptcy-law':
+            icon = <BadgeDollarSign className="shrink-0" size={24} />
+            break
+        case 'litigation':
+            icon = <Gavel className="shrink-0" size={24} />
+            break
+    }
     return (
         <Button
+            variant={'outline'}
             key={pa.key}
             onClick={() => onClick(pa.slug)}
             className={cn(
-                'rounded-full bg-gray-200 text-sm text-gray-500 hover:bg-gray-300',
+                'rounded-md bg-white text-sm text-stone-500 border-stone-200 hover:bg-stone-100',
                 {
-                    'bg-blue-500 text-white hover:bg-blue-600':
+                    'border border-black text-black 0':
                         activeTag === pa.slug,
                 },
                 className,
             )}
         >
-            <div className="">
+            <div className="flex w-full items-center justify-start gap-2">
+                {icon}
                 {/* smaller screen size */}
-                <p className="">
+                <p className="truncate leading-none">
                     {currentLocale === 'en'
                         ? !!pa.shortName.en
                             ? pa.shortName.en

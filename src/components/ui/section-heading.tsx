@@ -26,7 +26,7 @@ export default function SectionHeading({
             <h2
                 id={href ?? undefined}
                 className={cn(
-                    'flex max-w-max scroll-m-28 flex-col text-center font-semibold text-primary sm:gap-2 xl:font-bold',
+                    'flex max-w-max scroll-m-28 flex-col text-center font-semibold text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
                         'md:items-start': side === 'left',
@@ -34,7 +34,7 @@ export default function SectionHeading({
                     },
                 )}
             >
-                <span className="text-3xl text-gray-600 lg:text-3xl xl:text-4xl">
+                <span className="text-3xl text-gray-700 lg:text-3xl xl:text-5xl">
                     {titleTop}
                 </span>
                 <LinkSection
