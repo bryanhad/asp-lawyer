@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import React from 'react'
 
-export default function PreviewLawyersSkeleton() {
+export default function SkeletonFallback() {
     return (
         <div className="flex w-full lg:w-[95%] xl:w-[87%] overflow-hidden">
             {Array.from({ length: 5 }).map((_, index) => (

@@ -1,43 +1,17 @@
-'use client'
-
+import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
 import LawyerCard from '@/components/home-components/preview-lawyers-section/lawyer-card'
-import LawyerCarousel from '@/components/home-components/preview-lawyers-section/lawyer-carousel'
+import LawyerCarousel from '@/components/home-components/preview-lawyers-section/client-lawyer-carousel'
 import { CarouselItem } from '@/components/ui/carousel'
 import { Locale } from '@/i18n/request'
-import { useQuery } from '@tanstack/react-query'
-import PreviewLawyersSkeleton from './skeleton'
-import { getPreviewLawyersData } from '.'
+import kyInstance from '@/lib/ky'
+import { getLocale } from 'next-intl/server'
 
-type Props = {
-    currentLocale: Locale
-}
+export default async function PracticeAreas() {
+    const currentLocale = (await getLocale()) as Locale
 
-export default function PreviewLawyers({ currentLocale }: Props) {
-    // This useQuery could just as well happen in some deeper
-    // child, data will be available immediately either way
-    const { data, isPending, isError } = useQuery({
-        queryKey: ['lawyers', 'preview'],
-        queryFn: () => getPreviewLawyersData(),
-    })
-
-    // This query was not prefetched on the server and will not start
-    // fetching until on the client, both patterns are fine to mix.
-    //   const { data: commentsData } = useQuery({
-    //     queryKey: ['posts-comments'],
-    //     queryFn: getComments,
-    //   })
-
-    if (isPending) {
-        return <PreviewLawyersSkeleton />
-    }
-
-    if (isError) {
-        return (
-            <p className="text-center text-destructive">
-                An error occured while loading lawyers data
-            </p>
-        )
-    }
+    const data = await kyInstance
+        .get('api/lawyers/carousel')
+        .json<LawyerCardData[]>()
 
     return (
         <>

@@ -39,6 +39,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                             alt="Indonesian flag"
                             width={24}
                             height={18}
+                            priority
                         />
                     ) : (
                         <Image
@@ -46,6 +47,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                             alt="English flag"
                             width={24}
                             height={18}
+                            priority
                         />
                     )}
                     <ChevronDown className="text-muted-foreground" />
@@ -66,6 +68,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                             alt="English flag"
                             width={24}
                             height={18}
+                            priority
                         />
                         <p className="leading-none text-muted-foreground">
                             English
@@ -84,6 +87,7 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                             alt="Indonesian flag"
                             width={24}
                             height={18}
+                            priority
                         />
                         <p className="leading-none text-muted-foreground">
                             Indoneisa

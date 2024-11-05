@@ -11,53 +11,19 @@ import {
 } from '@/components/ui/carousel'
 import { Locale } from '@/i18n/request'
 import { cn } from '@/lib/utils'
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { getPracticeAreaPreviewData } from '.'
-import PreviewPracticeAreasSkeleton from './skeleton'
-import TagPreview from './tag-preview'
+import { useState } from 'react'
+import TagPreview from './client-tag-preview'
 
-export default function PreviewPracticeAreas({
-    currentLocale,
-}: {
+type Props = {
+    data: PracticeAreaPreviewData[]
     currentLocale: Locale
-}) {
-    // This useQuery could just as well happen in some deeper
-    // child, data will be available immediately either way
-    const { data, isPending, isError } = useQuery({
-        queryKey: ['practice-areas', 'preview'],
-        queryFn: () => getPracticeAreaPreviewData(),
-    })
-    const [activeTag, setActiveTag] = useState<string | null>(null)
+}
 
-    useEffect(() => {
-        // Set the initial active tag only once when data is available
-        if (data && activeTag === null) {
-            setActiveTag(data[0].slug)
-        }
-    }, [data, activeTag])
+export default function ClientPracticeAreas({ data, currentLocale }: Props) {
+    const [activeTag, setActiveTag] = useState<string>(data[0].slug)
 
     function handleClick(tagTitle: string) {
         setActiveTag(tagTitle)
-    }
-
-    // This query was not prefetched on the server and will not start
-    // fetching until on the client, both patterns are fine to mix.
-    //   const { data: commentsData } = useQuery({
-    //     queryKey: ['posts-comments'],
-    //     queryFn: getComments,
-    //   })
-
-    if (isPending) {
-        return <PreviewPracticeAreasSkeleton />
-    }
-
-    if (isError) {
-        return (
-            <p className="text-center text-destructive">
-                An error occured while loading practice areas data
-            </p>
-        )
     }
 
     return (
