@@ -63,7 +63,7 @@ export function SectionContainer({
                         side={side}
                     />
                 </div>
-                <div className={cn("mb-9 text-center text-muted-foreground xl:max-w-[50%]", descClassName)}>
+                <div className={cn("mb-9 text-center text-muted-foreground w-full max-w-[800px] xl:max-w-[50%]", descClassName)}>
                     {desc}
                 </div>
                 {children}

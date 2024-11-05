@@ -18,7 +18,7 @@ export default async function PreviewLawyersSection() {
                 <PreviewLawyers />
             </Suspense>
             <LinkButton
-                className="mx-auto lg:mt-4"
+                className="mx-auto mt-6 lg:mt-8"
                 variant={'outline-accent'}
                 href={'/lawyers'}
             >

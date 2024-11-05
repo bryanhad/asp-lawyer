@@ -58,7 +58,7 @@ export default async function RootLayout({
                     initialLocale={currentLocale}
                 >
                     <Navbar selectedLocale={currentLocale} />
-                    <main >{children}</main>
+                    <main className='flex flex-col  min-h-screen'>{children}</main>
                 </Providers>
                 <Toaster />
             </body>

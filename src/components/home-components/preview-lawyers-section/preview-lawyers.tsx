@@ -19,7 +19,7 @@ export default async function PracticeAreas() {
                 {data.map((lawyer) => (
                     <CarouselItem
                         key={lawyer.slug}
-                        className="flex pl-0 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                        className="flex pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                     >
                         <LawyerCard
                             key={lawyer.slug}
