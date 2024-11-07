@@ -6,6 +6,7 @@ import MobileMenu from './mobile-menu'
 import NavHeader from './nav-header'
 import NavLink from './nav-link'
 import Image from 'next/image'
+import { DarkThemeToggle } from './dark-theme-toggle'
 
 type Props = {
     selectedLocale: Locale
@@ -22,7 +23,7 @@ async function Navbar({ selectedLocale }: Props) {
                         <h1 className="relative text-xl font-bold text-primary sm:text-2xl">
                             <Image
                                 src={'/asp-logo-modified.png'}
-                                alt='ASP Logo'
+                                alt="ASP Logo"
                                 width={50}
                                 height={20}
                                 priority
@@ -41,6 +42,7 @@ async function Navbar({ selectedLocale }: Props) {
                 </div>
                 <div className="hidden gap-5 lg:flex lg:items-center">
                     <LanguageSelect selectedLocale={selectedLocale} />
+                    <DarkThemeToggle />
                     {/* <Separator
                         orientation="vertical"
                         className="h-[70%] self-center"
@@ -50,7 +52,6 @@ async function Navbar({ selectedLocale }: Props) {
                 <MobileMenu selectedLocale={selectedLocale} />
             </nav>
         </NavHeader>
-
     )
 }
 

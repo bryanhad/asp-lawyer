@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query'
 import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
 import { PropsWithChildren } from 'react'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 function makeQueryClient() {
     return new QueryClient({
@@ -40,10 +41,10 @@ function getQueryClient() {
 
 /**
  * CONFUSED? NOT KNOWING WHAT THE FUCK IS GOING ON?
- * 
+ *
  * Refer to shadcn carousel documentation:
  * https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#initial-setup
- * 
+ *
  */
 
 export default function Providers({
@@ -62,12 +63,19 @@ export default function Providers({
 
     return (
         <QueryClientProvider client={queryClient}>
-            <NextIntlClientProvider
-                messages={intlMessages}
-                locale={initialLocale}
+            <NextThemesProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
             >
-                {children}
-            </NextIntlClientProvider>
+                <NextIntlClientProvider
+                    messages={intlMessages}
+                    locale={initialLocale}
+                >
+                    {children}
+                </NextIntlClientProvider>
+            </NextThemesProvider>
         </QueryClientProvider>
     )
 }

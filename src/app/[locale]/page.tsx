@@ -4,6 +4,7 @@ import { BaseContainer } from '@/components/containers/base-container'
 import { SectionWithBlurBackground } from '@/components/containers/section-with-blur-background'
 import PreviewLawyersSection from '@/components/home-components/preview-lawyers-section'
 import PreviewPracticeAreas from '@/components/home-components/preview-practice-areas-section'
+import PreviewContactUs from '@/components/home-components/contact-us-section'
 
 export default async function Home() {
     return (
@@ -18,6 +19,7 @@ export default async function Home() {
             </SectionWithBlurBackground>
             <PreviewLawyersSection />
             <PreviewPracticeAreas />
+            <PreviewContactUs />
         </BaseContainer>
     )
 }

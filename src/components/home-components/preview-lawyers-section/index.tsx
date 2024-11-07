@@ -13,6 +13,7 @@ export default async function PreviewLawyersSection() {
             titleTop={t('titleTop')}
             titleBottom={t('titleBottom')}
             desc={t('desc')}
+            className='bg-background'
         >
             <Suspense fallback={<SkeletonFallback />}>
                 <PreviewLawyers />

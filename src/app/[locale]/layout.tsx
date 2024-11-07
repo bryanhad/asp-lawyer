@@ -47,9 +47,9 @@ export default async function RootLayout({
     // Providing all messages to the client
     // side is the easiest way to get started
     const messages = await getMessages()
-    
+
     return (
-        <html lang="en">
+        <html lang={currentLocale} suppressHydrationWarning>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
@@ -58,7 +58,9 @@ export default async function RootLayout({
                     initialLocale={currentLocale}
                 >
                     <Navbar selectedLocale={currentLocale} />
-                    <main className='flex flex-col  min-h-screen'>{children}</main>
+                    <main className="flex min-h-screen flex-col">
+                        {children}
+                    </main>
                 </Providers>
                 <Toaster />
             </body>

@@ -34,10 +34,10 @@ export default function NavHeader({ children }: Props) {
     return (
         <header
             className={cn(
-                'fixed top-0 z-[90] flex h-16 w-full justify-center bg-white transition-colors duration-300 lg:h-20',
+                'fixed top-0 z-[90] flex h-16 w-full justify-center bg-background transition-colors duration-300 lg:h-20',
                 {
                     'bg-transparent': !isScrolled && !isOpen,
-                    'bg-white/90 backdrop-blur-md': isScrolled && !isOpen
+                    'bg-background/90 backdrop-blur-md': isScrolled && !isOpen
                 },
             )}
         >
