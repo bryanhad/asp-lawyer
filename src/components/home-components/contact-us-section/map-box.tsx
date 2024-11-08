@@ -63,6 +63,7 @@ export default function MapBox({ className }: Props) {
                         anchor="bottom"
                         offset={[0, -40]}
                         closeOnClick={false}
+                        focusAfterOpen={false}
                         closeButton={false}
                     >
                         <div className="grid grid-cols-2 gap-2">
@@ -84,6 +85,7 @@ export default function MapBox({ className }: Props) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="mt-auto text-sm text-blue-500"
+                                    tabIndex={-1} // Prevents autofocus on render
                                 >
                                     View On Google Maps
                                 </Link>
