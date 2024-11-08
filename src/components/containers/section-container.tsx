@@ -34,7 +34,7 @@ export function SectionContainer({
             <div className={cn('w-full', backgroundClassName)}>
                 <section
                     className={cn(
-                        'mx-auto flex w-full max-w-[1520px] flex-col px-4 py-12',
+                        'mx-auto flex w-full max-w-[1520px] flex-col px-4 py-20',
                         className,
                     )}
                 >
@@ -52,7 +52,7 @@ export function SectionContainer({
         return (
             <section
                 className={cn(
-                    'flex w-full max-w-[1520px] flex-col px-4 py-12 sm:items-center md:py-20',
+                    'flex w-full max-w-[1520px] flex-col px-4 py-20 sm:items-center md:py-20',
                     className,
                 )}
             >
@@ -74,7 +74,7 @@ export function SectionContainer({
     return (
         <section
             className={cn(
-                'grid w-full max-w-[1420px] gap-6 grid-cols-1 px-4 py-12 md:grid-cols-2 md:py-20 ',
+                'grid w-full max-w-[1420px] gap-6 grid-cols-1 px-4 py-20 md:grid-cols-2 md:py-20 ',
                 className,
             )}
         >
