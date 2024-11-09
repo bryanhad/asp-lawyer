@@ -6,8 +6,8 @@ import type { Metadata } from 'next'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import '../globals.css'
-import { geistSans } from './fonts'
 import Providers from './providers'
+import { poppins } from './fonts'
 
 export const metadata: Metadata = {
     title: {
@@ -40,7 +40,7 @@ export default async function RootLayout({
     return (
         <html lang={currentLocale} suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} antialiased`}
+                className={`${poppins.className} antialiased`}
             >
                 <Providers
                     intlMessages={messages}
