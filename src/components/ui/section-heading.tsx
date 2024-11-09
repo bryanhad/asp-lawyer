@@ -7,6 +7,7 @@ type Props = {
     titleBottom: string
     className?: string
     side?: 'left' | 'right' | 'center'
+    textAlign?: 'left' | 'right' | 'center'
 }
 
 export default function SectionHeading({
@@ -14,25 +15,38 @@ export default function SectionHeading({
     titleBottom,
     side = 'center',
     className,
+    textAlign,
 }: Props) {
     const href = `${titleTop?.toLowerCase().split(' ').join('-')}-${titleBottom?.toLowerCase().split(' ').join('-')}`
 
     return (
         <div
             className={cn('flex flex-col items-center gap-2 xl:gap-4', {
-                'md:items-start': side === 'left',
-                'md:items-end': side === 'right',
+                // prioritize textAlign value
+                'md:items-start':
+                    textAlign === 'left' || (!textAlign && side === 'left'),
+                // prioritize textAlign value
+                'md:items-end':
+                    textAlign === 'right' || (!textAlign && side === 'right'),
+                'md:items-center': textAlign === 'center',
             })}
         >
             <h2
                 id={href ?? undefined}
                 className={cn(
                     sourceSerif4.className,
-                    'flex max-w-max scroll-m-28 flex-col text-center font-[300  ] text-primary sm:gap-1 xl:font-bold',
+                    'font-[300 ] flex max-w-max scroll-m-28 flex-col text-center text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
-                        'md:items-start': side === 'left',
-                        'md:items-end': side === 'right',
+                        // prioritize textAlign value
+                        'md:items-start':
+                            textAlign === 'left' ||
+                            (!textAlign && side === 'left'),
+                        // prioritize textAlign value
+                        'md:items-end':
+                            textAlign === 'right' ||
+                            (!textAlign && side === 'right'),
+                        'md:items-center': textAlign === 'center',
                     },
                 )}
             >
@@ -54,9 +68,16 @@ export default function SectionHeading({
                 className={cn(
                     'h-1 w-12 bg-primary max-md:rounded-full xl:h-2 xl:w-20',
                     {
-                        'md:rounded-full': side === 'center',
-                        'md:rounded-r-full': side === 'left',
-                        'md:rounded-l-full': side === 'right',
+                        // prioritize textAlign value
+                        'md:rounded-r-full':
+                            textAlign === 'left' ||
+                            (!textAlign && side === 'left'),
+                        // prioritize textAlign value
+                        'md:rounded-l-full':
+                            textAlign === 'right' ||
+                            (!textAlign && side === 'right'),
+                        'md:rounded-full':
+                            textAlign === 'center' || side === 'center',
                     },
                 )}
             />

@@ -42,15 +42,17 @@ export default async function Hero() {
                     </h2>
                 </div>
 
-                <p className="max-w-xl text-base text-slate-300">{t('desc')}</p>
+                <p className="max-w-xl text-base text-slate-400">{t('desc')}</p>
 
                 <LinkButton href={'/contact-us'} variant={'primary'}>
                     {t('callToAction')}
                 </LinkButton>
             </div>
             <div className="absolute -right-10 top-0 h-full w-[80%] overflow-hidden md:w-2/3">
+                {/* image overlay */}
                 <div className="absolute inset-0 z-10 bg-background-suit opacity-50"></div>
 
+                {/* image left and right blur */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-44 bg-gradient-to-r from-background-suit to-transparent"></div>
                 <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-52 bg-gradient-to-l from-background-suit to-transparent"></div>
 

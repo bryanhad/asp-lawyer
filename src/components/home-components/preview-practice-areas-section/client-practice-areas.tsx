@@ -69,8 +69,8 @@ export default function ClientPracticeAreas({ data, currentLocale }: Props) {
                     </CarouselContent>
                     <CarouselPrevious className="-left-8" />
                     <CarouselNext className="-right-8" />
-                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 bg-gradient-to-r from-white to-transparent"></div>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-3 bg-gradient-to-l from-white to-transparent"></div>
+                    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 bg-gradient-to-r from-secondary to-transparent"></div>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-3 bg-gradient-to-l from-secondary to-transparent"></div>
                 </Carousel>
                 {activeTag && (
                     <TagPreview

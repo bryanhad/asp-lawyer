@@ -60,8 +60,8 @@ export default function LawyerCarousel({ children }: Props) {
             <CarouselContent className="ml-4 mr-6">{children}</CarouselContent>
             <CarouselPrevious className="-left-3 z-20 lg:-left-6" />
             <CarouselNext className="-right-2 z-20 lg:-right-5" />
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-secondary to-transparent"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-secondary to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-9 md:w-14 bg-gradient-to-r from-background to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-9 md:w-14 bg-gradient-to-l from-background to-transparent"></div>
         </Carousel>
     )
 }

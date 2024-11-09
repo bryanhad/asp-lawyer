@@ -57,7 +57,7 @@ export default function MapBox({ className }: Props) {
             >
                 {showPopup && (
                     <Popup
-                        maxWidth="260px"
+                        maxWidth="280px"
                         latitude={coordinate.ltd}
                         longitude={coordinate.lng}
                         anchor="bottom"
@@ -70,11 +70,11 @@ export default function MapBox({ className }: Props) {
                             <Image
                                 src={'/maps/the-h-tower.png'}
                                 alt="The H Tower"
-                                height={300}
-                                width={300}
+                                height={200}
+                                width={200}
                             />
-                            <div className="flex flex-col p-2 text-lg dark:text-black">
-                                <h2 className="text-xl font-bold">
+                            <div className="flex flex-col p-2 dark:text-black">
+                                <h2 className="text-lg font-bold">
                                     The H Tower
                                 </h2>
                                 <p className="leading-tight">
@@ -87,7 +87,7 @@ export default function MapBox({ className }: Props) {
                                     className="mt-auto text-sm text-blue-500"
                                     tabIndex={-1} // Prevents autofocus on render
                                 >
-                                    View On Google Maps
+                                    Google Maps
                                 </Link>
                             </div>
                         </div>

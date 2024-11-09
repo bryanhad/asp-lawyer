@@ -15,21 +15,20 @@ export default async function PreviewLawyersSection() {
                 titleTop={t('titleTop')}
                 titleBottom={t('titleBottom')}
                 desc={<p>{t('desc')}</p>}
-                descClassName='max-md:hidden'
+                descClassName="max-md:hidden"
                 secondaryContent={
-                    <div className='mt-2'>
+                    <div className="mt-2">
                         <Suspense fallback={<SkeletonFallback />}>
                             <PracticeAreas />
                         </Suspense>
                     </div>
                 }
             >
-                <LinkButton
-                    href={'/about-us'}
-                    className="mt-6"
-                >
-                    {t('callToAction')}
-                </LinkButton>
+                <div className="mt-6 flex">
+                    <LinkButton href={'/about-us'} className="max-md:mx-auto">
+                        {t('callToAction')}
+                    </LinkButton>
+                </div>
             </SectionContainer>
         </div>
     )
