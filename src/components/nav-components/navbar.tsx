@@ -43,11 +43,6 @@ async function Navbar({ selectedLocale }: Props) {
                 <div className="hidden gap-5 lg:flex lg:items-center">
                     <LanguageSelect selectedLocale={selectedLocale} />
                     <DarkThemeToggle />
-                    {/* <Separator
-                        orientation="vertical"
-                        className="h-[70%] self-center"
-                    /> */}
-                    {/* <Search /> */}
                 </div>
                 <MobileMenu selectedLocale={selectedLocale} />
             </nav>

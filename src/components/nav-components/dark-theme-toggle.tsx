@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useNavContext } from './nav-context'
 
-export function DarkThemeToggle() {
+export function DarkThemeToggle({ className }: { className?: string }) {
     const { setTheme, resolvedTheme } = useTheme()
     const { isScrolled } = useNavContext()
 
@@ -18,6 +18,7 @@ export function DarkThemeToggle() {
                 isScrolled
                     ? 'text-black dark:text-white'
                     : 'text-white hover:text-black dark:hover:text-white',
+                className,
             )}
             onClick={() => {
                 if (resolvedTheme === 'dark') {

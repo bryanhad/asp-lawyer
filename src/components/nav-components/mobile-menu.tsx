@@ -1,10 +1,6 @@
 'use client'
 
-import {
-    Sheet,
-    SheetContent,
-    SheetTitle
-} from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Locale } from '@/i18n/request'
 import {
     BriefcaseBusiness,
@@ -12,7 +8,7 @@ import {
     Home,
     Info,
     ScrollText,
-    Users
+    Users,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
@@ -20,6 +16,7 @@ import LanguageSelect from './language-select'
 import MobileMenuLink from './mobile-menu-link'
 import { useNavContext } from './nav-context'
 import { DarkThemeToggle } from './dark-theme-toggle'
+import { Separator } from '../ui/separator'
 
 type Props = {
     selectedLocale: Locale
@@ -43,7 +40,10 @@ function MobileMenu({ selectedLocale }: Props) {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             {/* required by radix */}
             <SheetTitle className="hidden">Mobile Navigation Links</SheetTitle>
-            <SheetContent autoFocus={false} className="flex flex-col gap-8 p-0 pt-20 bg-background">
+            <SheetContent
+                autoFocus={false}
+                className="flex flex-col gap-4 bg-background p-0 pt-20"
+            >
                 <div className={'flex w-full flex-col gap-2 overflow-hidden'}>
                     <MobileMenuLink
                         currentPath={currentPath}
@@ -94,9 +94,9 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('contactUs')}
                     </MobileMenuLink>
                 </div>
-                <div className="px-4">
+                <div className="flex gap-4 px-4">
+                    <DarkThemeToggle className='text-black dark:text-white' />
                     <LanguageSelect selectedLocale={selectedLocale} />
-                    <DarkThemeToggle/>
                 </div>
             </SheetContent>
         </Sheet>

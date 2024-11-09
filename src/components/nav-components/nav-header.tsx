@@ -5,12 +5,14 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 import { NavContext } from './nav-context'
 import { Menu, X } from 'lucide-react'
 import { usePathname } from '@/i18n/routing'
+import { useTheme } from 'next-themes'
 
 type Props = {} & PropsWithChildren
 
 export default function NavHeader({ children }: Props) {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
+    const { resolvedTheme } = useTheme()
 
     const isHomePage = usePathname() === '/'
 
@@ -37,7 +39,7 @@ export default function NavHeader({ children }: Props) {
                 'fixed top-0 z-[90] flex h-16 w-full justify-center bg-background transition-colors duration-300 lg:h-20',
                 {
                     'bg-transparent': !isScrolled && !isOpen,
-                    'bg-background/90 backdrop-blur-md': isScrolled && !isOpen
+                    'bg-background/90 backdrop-blur-md': isScrolled && !isOpen,
                 },
             )}
         >
@@ -57,14 +59,21 @@ export default function NavHeader({ children }: Props) {
                 >
                     {isOpen ? (
                         <X
-                            className={cn('shrink-0 text-black duration-300', {
-                                'text-white': !isScrolled && !isOpen,
-                            })}
+                            className={cn(
+                                'shrink-0 text-black transition-all duration-300',
+                                {
+                                    'text-white':
+                                        (!isScrolled && !isOpen) ||
+                                        resolvedTheme === 'dark',
+                                },
+                            )}
                         />
                     ) : (
                         <Menu
                             className={cn('shrink-0 text-black duration-300', {
-                                'text-white': !isScrolled && !isOpen,
+                                'text-white':
+                                    (!isScrolled && !isOpen) ||
+                                    resolvedTheme === 'dark',
                             })}
                         />
                     )}
