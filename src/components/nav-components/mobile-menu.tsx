@@ -19,6 +19,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import LanguageSelect from './language-select'
 import MobileMenuLink from './mobile-menu-link'
 import { useNavContext } from './nav-context'
+import { DarkThemeToggle } from './dark-theme-toggle'
 
 type Props = {
     selectedLocale: Locale
@@ -42,7 +43,7 @@ function MobileMenu({ selectedLocale }: Props) {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             {/* required by radix */}
             <SheetTitle className="hidden">Mobile Navigation Links</SheetTitle>
-            <SheetContent className="flex flex-col gap-8 p-0 pt-20 bg-white">
+            <SheetContent autoFocus={false} className="flex flex-col gap-8 p-0 pt-20 bg-background">
                 <div className={'flex w-full flex-col gap-2 overflow-hidden'}>
                     <MobileMenuLink
                         currentPath={currentPath}
@@ -95,6 +96,7 @@ function MobileMenu({ selectedLocale }: Props) {
                 </div>
                 <div className="px-4">
                     <LanguageSelect selectedLocale={selectedLocale} />
+                    <DarkThemeToggle/>
                 </div>
             </SheetContent>
         </Sheet>

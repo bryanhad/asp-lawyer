@@ -13,7 +13,7 @@ export default function TagPreview({
     const currentLocale = useLocale() as Locale
     const t = useTranslations('commonWords')
     return (
-        <div className="flex w-full flex-col gap-4 rounded-lg bg-white p-6 border">
+        <div className="flex w-full flex-col gap-4 rounded-lg bg-background p-6 border border-input">
             <div className="flex items-center gap-4">
                 {/* <div className={cn('size-10 rounded-full grid place-items-center text-white', color)} >
                 {icon}

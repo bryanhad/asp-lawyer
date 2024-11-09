@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import LinkButton from '../ui/link-button'
-import ImageWithBlur from '../ui/image-with-blur'
 import { SectionContainer } from '../containers/section-container'
+import ImageWithBlur from '../ui/image-with-blur'
+import LinkButton from '../ui/link-button'
 
 export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')
@@ -22,7 +22,7 @@ export default async function PreviewAboutUs() {
             titleBottom={t('titleBottom')}
             desc={<p>{t('desc')}</p>}
         >
-            <LinkButton className='max-md:mx-auto' variant={'outline-accent'} href={'/about-us'}>
+            <LinkButton className='max-md:mx-auto' href={'/about-us'}>
                 {t('callToAction')}
             </LinkButton>
         </SectionContainer>

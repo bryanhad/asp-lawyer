@@ -1,5 +1,6 @@
 import LinkSection from '@/components/ui/link-section'
 import { cn } from '@/lib/utils'
+import { sourceSerif4 } from '@/app/[locale]/fonts'
 
 type Props = {
     titleTop: string
@@ -26,7 +27,8 @@ export default function SectionHeading({
             <h2
                 id={href ?? undefined}
                 className={cn(
-                    'flex max-w-max scroll-m-28 flex-col text-center font-semibold text-primary sm:gap-1 xl:font-bold',
+                    sourceSerif4.className,
+                    'flex max-w-max scroll-m-28 flex-col text-center font-[300  ] text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
                         'md:items-start': side === 'left',
@@ -34,7 +36,7 @@ export default function SectionHeading({
                     },
                 )}
             >
-                <span className="text-3xl text-gray-700 lg:text-3xl xl:text-5xl">
+                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
                     {titleTop}
                 </span>
                 <LinkSection

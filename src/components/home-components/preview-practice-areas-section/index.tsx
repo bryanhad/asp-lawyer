@@ -9,7 +9,7 @@ export default async function PreviewLawyersSection() {
     const t = await getTranslations('homePage.previewPracticeAreas')
 
     return (
-        <div className="flex w-full flex-col items-center bg-neutral-50">
+        <div className="flex w-full flex-col items-center bg-secondary">
             <SectionContainer
                 side="left"
                 titleTop={t('titleTop')}
@@ -25,7 +25,6 @@ export default async function PreviewLawyersSection() {
                 }
             >
                 <LinkButton
-                    variant={'outline-accent'}
                     href={'/about-us'}
                     className="mt-6"
                 >

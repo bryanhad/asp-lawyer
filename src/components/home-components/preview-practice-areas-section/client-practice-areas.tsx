@@ -124,9 +124,9 @@ function PracticeAreaTag({
             key={pa.key}
             onClick={() => onClick(pa.slug)}
             className={cn(
-                'rounded-md bg-white text-sm text-stone-500 border-stone-200 hover:bg-stone-100',
+                'rounded-md border border-input bg-background',
                 {
-                    'border border-black text-black 0':
+                    'border border-stone-500':
                         activeTag === pa.slug,
                 },
                 className,

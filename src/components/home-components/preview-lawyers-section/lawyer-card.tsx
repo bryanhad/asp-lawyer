@@ -9,7 +9,6 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover'
 import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
-import { Card, CardContent } from '@/components/ui/card'
 
 export default function LawyerCard({
     name,
@@ -33,7 +32,7 @@ export default function LawyerCard({
                         key={slug}
                         className="group relative border-none shadow-none"
                     >
-                        <div className="relative flex items-end justify-center overflow-hidden rounded-lg bg-neutral-50 pt-2 duration-300 group-hover:bg-primary/30">
+                        <div className="relative flex items-end justify-center overflow-hidden rounded-lg bg-secondary pt-2 duration-300 group-hover:bg-primary/30">
                             <Image
                                 alt={`Picture of ${slug}`}
                                 src={imageSrc}
@@ -43,7 +42,7 @@ export default function LawyerCard({
                                 blurDataURL={blurImageUrl}
                                 className="object-cover transition-transform duration-300 group-hover:scale-105"
                             />
-                            <div className="absolute inset-x-0 bottom-0 top-10 bg-gradient-to-t from-slate-600/80 via-transparent to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 top-10 dark:top-[40%] bg-gradient-to-t from-slate-600/80 dark:from-primary/[15%] via-transparent to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 w-full p-4">
                                 <div className="w-full space-y-1 text-white">
                                     <h3 className="line-clamp-1 text-lg font-bold">
@@ -55,7 +54,7 @@ export default function LawyerCard({
                                                 ? degree.en
                                                 : degree.id}
                                         </p>
-                                        <div className="inline-flex max-w-[160px] items-center text-ellipsis rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm text-white backdrop-blur-sm">
+                                        <div className="inline-flex max-w-[160px] items-center text-ellipsis rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm text-white backdrop-blur-sm dark:backdrop-blur-md">
                                             <p className="truncate">
                                                 {currentLocale === 'en'
                                                     ? position.en

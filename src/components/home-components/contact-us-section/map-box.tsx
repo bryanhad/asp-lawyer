@@ -57,7 +57,7 @@ export default function MapBox({ className }: Props) {
             >
                 {showPopup && (
                     <Popup
-                        maxWidth="360px"
+                        maxWidth="260px"
                         latitude={coordinate.ltd}
                         longitude={coordinate.lng}
                         anchor="bottom"

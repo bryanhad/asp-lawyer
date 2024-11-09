@@ -4,21 +4,10 @@ import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import type { Metadata } from 'next'
 import { getMessages } from 'next-intl/server'
-import localFont from 'next/font/local'
 import { notFound } from 'next/navigation'
 import '../globals.css'
+import { geistSans } from './fonts'
 import Providers from './providers'
-
-const geistSans = localFont({
-    src: '../fonts/GeistVF.woff',
-    variable: '--font-geist-sans',
-    weight: '100 900',
-})
-const geistMono = localFont({
-    src: '../fonts/GeistMonoVF.woff',
-    variable: '--font-geist-mono',
-    weight: '100 900',
-})
 
 export const metadata: Metadata = {
     title: {
@@ -51,7 +40,7 @@ export default async function RootLayout({
     return (
         <html lang={currentLocale} suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} antialiased`}
             >
                 <Providers
                     intlMessages={messages}
