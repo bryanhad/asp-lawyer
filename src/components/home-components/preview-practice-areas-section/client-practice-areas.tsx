@@ -100,22 +100,22 @@ function PracticeAreaTag({
     let icon: ReactNode
     switch (pa.slug) {
         case 'corporate-banking':
-            icon = <Building2 className="shrink-0" size={24} />
+            icon = <Building2 className="shrink-0 text-primary" size={30} />
             break
         case 'money-laundering':
-            icon = <Shield className="shrink-0" size={24} />
+            icon = <Shield className="shrink-0 text-primary" size={30} />
             break
         case 'intellectual-property-rights':
-            icon = <FileText className="shrink-0" size={24} />
+            icon = <FileText className="shrink-0 text-primary" size={30} />
             break
         case 'arbitration':
-            icon = <Scale className="shrink-0" size={24} />
+            icon = <Scale className="shrink-0 text-primary" size={30} />
             break
         case 'bankruptcy-law':
-            icon = <BadgeDollarSign className="shrink-0" size={24} />
+            icon = <BadgeDollarSign className="shrink-0 text-primary" size={30} />
             break
         case 'litigation':
-            icon = <Gavel className="shrink-0" size={24} />
+            icon = <Gavel className="shrink-0 text-primary" size={30} />
             break
     }
     return (
@@ -124,7 +124,7 @@ function PracticeAreaTag({
             key={pa.key}
             onClick={() => onClick(pa.slug)}
             className={cn(
-                'rounded-md border border-input bg-background',
+                'rounded-md border border-input bg-background h-11',
                 {
                     'border border-stone-500':
                         activeTag === pa.slug,
@@ -135,7 +135,7 @@ function PracticeAreaTag({
             <div className="flex w-full items-center justify-start gap-2">
                 {icon}
                 {/* smaller screen size */}
-                <p className="truncate leading-none">
+                <p className="truncate leading-none pt-[1px]">
                     {currentLocale === 'en'
                         ? !!pa.shortName.en
                             ? pa.shortName.en
