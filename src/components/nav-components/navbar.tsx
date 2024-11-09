@@ -13,7 +13,7 @@ type Props = {
 }
 
 async function Navbar({ selectedLocale }: Props) {
-    const t = await getTranslations('navbar')
+    const t = await getTranslations('links')
 
     return (
         <NavHeader>
@@ -31,11 +31,11 @@ async function Navbar({ selectedLocale }: Props) {
                         </h1>
                     </Link>
                     <div className="hidden gap-10 lg:flex">
-                        <NavLink href={'/about-us'}>{t('about')}</NavLink>
+                        <NavLink href={'/about-us'}>{t('aboutUs')}</NavLink>
                         <NavLink href={'/practice-areas'}>
                             {t('practiceAreas')}
                         </NavLink>
-                        <NavLink href={'/lawyers'}>{t('lawyers')}</NavLink>
+                        <NavLink href={'/team'}>{t('ourTeam')}</NavLink>
                         <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
                         <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>
                     </div>

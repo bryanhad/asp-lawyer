@@ -13,15 +13,12 @@ export default async function PreviewLawyersSection() {
             titleTop={t('titleTop')}
             titleBottom={t('titleBottom')}
             desc={t('desc')}
-            className='bg-background'
+            className="bg-background"
         >
             <Suspense fallback={<SkeletonFallback />}>
                 <PreviewLawyers />
             </Suspense>
-            <LinkButton
-                className="mx-auto mt-6 lg:mt-8"
-                href={'/lawyers'}
-            >
+            <LinkButton className="mx-auto mt-6 lg:mt-8" href={'/team'}>
                 {t('callToAction')}
             </LinkButton>
         </SectionContainer>

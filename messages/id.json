@@ -1,11 +1,21 @@
 {
-    "navbar": {
+    "links": {
         "home": "Beranda",
-        "about": "Tentang Kami",
+        "aboutUs": "Tentang Kami",
         "practiceAreas": "Bidang Praktik",
-        "lawyers": "Tim Kami",
+        "ourTeam": "Tim Kami",
         "blogs": "Blog",
-        "contactUs": "Hubungi Kami"
+        "contactUs": "Hubungi Kami",
+        "careers": "Karier",
+        "privacyPolicy": "Kebijakan Privasi",
+        "termsOfService": "Syarat dan Ketentuan"
+    },
+    "footer": {
+        "desc": "Menyediakan layanan hukum profesional dengan integritas dan dedikasi sejak 2017.",
+        "practiceAreas": "Bidang Praktik",
+        "quickLinks": "Tautan Cepat",
+        "allRightsReserved": "Hak cipta dilindungi undang-undang.",
+        "designedBy": "Didesain & Dikembangkan oleh"
     },
     "homePage": {
         "titleWhite": "Menyediakan",
@@ -17,9 +27,13 @@
         "previewAboutUs": {
             "titleTop": "Pengacara Handal",
             "titleBottom": "Hasil Terpercaya",
-            "title": "Tentang ASP Law Firm",
             "desc": "ASP Law Firm mengkhususkan diri dalam hukum kepailitan, memberikan panduan yang penuh empati dan efektif kepada individu dan bisnis yang menghadapi tantangan keuangan. Tim kami berkomitmen untuk membantu klien memahami kompleksitas hukum kepailitan dengan jelas dan percaya diri.",
-            "callToAction": "Pelajari Lebih Lanjut"
+            "callToAction": "Pelajari Lebih Lanjut",
+            "glaze": {
+                "yearsOfExperience": "Tahun Praktik",
+                "casesWon": "Kasus dimenangkan",
+                "clientSatisfaction": "Klien Terpuaskan"
+            }
         },
         "previewPracticeAreas": {
             "titleTop": "Dukungan Penuh Melalui",
@@ -54,15 +68,27 @@
             "title": "Apa Kata Klien Kami",
             "desc": "Baca testimoni dari klien yang telah merasakan manfaat layanan hukum kami."
         },
-        "latestBlogs": {
-            "title": "Wawasan & Artikel",
-            "desc": "Tetap terinformasi dengan artikel terbaru kami tentang hukum kepailitan.",
-            "callToAction": "Baca Blog Kami"
-        },
-        "contactUs": {
-            "title": "Siap untuk Berdiskusi?",
-            "desc": "Hubungi kami untuk membahas kasus Anda dan lihat bagaimana kami dapat membantu.",
-            "callToAction": "Hubungi Kami"
+        "previewContactUs": {
+            "titleTop": "Get in Touch,",
+            "titleBottom": "We are Ready",
+            "info": {
+                "address": {
+                    "title": "Address"
+                },
+                "businessHours": {
+                    "title": "Business Hours",
+                    "moday-friday": "Monday - Friday: 9:00 AM - 6:00 PM",
+                    "saturday": "Saturday: 09:00 AM - 1:00 PM",
+                    "sunday": "Sunday: Closed"
+                },
+                "whatsApp": {
+                    "title": "WhatsApp",
+                    "desc": "+62 812 3456 7890"
+                },
+                "socialMedia": {
+                    "title": "Social Media"
+                }
+            }
         }
     },
     "aboutPage": {
@@ -115,5 +141,18 @@
     },
     "commonWords": {
         "learnMore": "Pelajari Lebih Lanjut"
+    },
+    "contactUs": {
+        "title": "Hubungi Kami",
+        "address": {
+            "building": "The H Tower, 15th Floor Unit 15 - F",
+            "street": "Jl. H. R. Rasuna Said, No.20, RT.1/RW.5",
+            "district": "Karet Kuningan, Kecamatan Setiabudi",
+            "city": "Jakarta Selatan, DKI Jakarta 12940"
+        },
+        "phone": {
+            "title": "Telepon",
+            "desc": "+62 21 1234 5678"
+        }
     }
 }

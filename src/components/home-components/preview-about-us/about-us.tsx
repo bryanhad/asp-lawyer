@@ -25,12 +25,16 @@ export default async function AboutUs() {
             titleBottom={t('titleBottom')}
             desc={<p>{t('desc')}</p>}
         >
-            <div className="w-full flex flex-col gap-6">
+            <div className="flex w-full flex-col gap-6">
                 <LinkButton className="max-md:mx-auto" href={'/about-us'}>
                     {t('callToAction')}
                 </LinkButton>
                 <Separator />
-                <SelfGlazingStats />
+                <SelfGlazingStats
+                    yearsOfExperienceIntl={t('glaze.yearsOfExperience')}
+                    casesWonIntl={t('glaze.casesWon')}
+                    clientSatisfactionIntl={t('glaze.clientSatisfaction')}
+                />
             </div>
         </SectionContainer>
     )

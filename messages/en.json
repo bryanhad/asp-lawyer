@@ -1,11 +1,21 @@
 {
-    "navbar": {
+    "links": {
         "home": "Home",
-        "about": "About Us",
+        "aboutUs": "About Us",
         "practiceAreas": "Practice Areas",
-        "lawyers": "Our Team",
+        "ourTeam": "Our Team",
         "blogs": "Blogs",
-        "contactUs": "Contact Us"
+        "contactUs": "Contact Us",
+        "careers": "Careers",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service"
+    },
+    "footer": {
+        "desc": "Providing expert legal services with integrity and dedication since 2017.",
+        "practiceAreas": "Practice Areas",
+        "quickLinks": "Quick Links",
+        "allRightsReserved": "All rights reserved.",
+        "designedBy": "Designed & Developed by"
     },
     "homePage": {
         "titleWhite": "Providing",
@@ -18,7 +28,12 @@
             "titleTop": "Reliable Attorneys",
             "titleBottom": "Trusted Results",
             "desc": "ASP Law Firm specializes in bankruptcy law, providing compassionate, effective guidance to individuals and businesses facing financial challenges. Our team is committed to helping clients navigate the complexities of bankruptcy with clarity and confidence.",
-            "callToAction": "Learn More"
+            "callToAction": "Learn More",
+            "glaze": {
+                "yearsOfExperience": "Years of Experience",
+                "casesWon": "Cases Won",
+                "clientSatisfaction": "Client Satisfied"
+            }
         },
         "previewPracticeAreas": {
             "titleTop": "Complete Support Through",
@@ -53,15 +68,27 @@
             "title": "What Our Clients Say",
             "desc": "Read testimonials from clients who have benefited from our legal services."
         },
-        "latestBlogs": {
-            "title": "Insights & Articles",
-            "desc": "Stay informed with our latest blog posts on bankruptcy law.",
-            "callToAction": "Read Our Blogs"
-        },
-        "contactUs": {
-            "title": "Ready to Talk?",
-            "desc": "Get in touch with us to discuss your case and see how we can help.",
-            "callToAction": "Contact Us"
+        "previewContactUs": {
+            "titleTop": "Get in Touch,",
+            "titleBottom": "We are Ready",
+            "info": {
+                "address": {
+                    "title": "Address"
+                },
+                "businessHours": {
+                    "title": "Business Hours",
+                    "moday-friday": "Monday - Friday: 9:00 AM - 6:00 PM",
+                    "saturday": "Saturday: 09:00 AM - 1:00 PM",
+                    "sunday": "Sunday: Closed"
+                },
+                "whatsApp": {
+                    "title": "WhatsApp",
+                    "desc": "+62 812 3456 7890"
+                },
+                "socialMedia": {
+                    "title": "Social Media"
+                }
+            }
         }
     },
     "aboutPage": {
@@ -114,5 +141,18 @@
     },
     "commonWords": {
         "learnMore": "Learn More"
+    },
+    "contactUs": {
+        "title": "Contact Us",
+        "address": {
+            "building": "The H Tower, 15th Floor Unit 15 - F",
+            "street": "H. R. Rasuna Said Street, No.20, RT.1/RW.5",
+            "district": "Karet Kuningan, Setiabudi District",
+            "city": "South Jakarta, DKI Jakarta 12940"
+        },
+        "phone": {
+            "title": "Phone",
+            "desc": "+62 21 1234 5678"
+        }
     }
 }

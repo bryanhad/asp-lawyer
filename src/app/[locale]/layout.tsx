@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation'
 import '../globals.css'
 import Providers from './providers'
 import { poppins } from './fonts'
+import Footer from '@/components/footer-components/footer'
 
 export const metadata: Metadata = {
     title: {
@@ -50,6 +51,7 @@ export default async function RootLayout({
                     <main className="flex min-h-screen flex-col">
                         {children}
                     </main>
+                    <Footer/>
                 </Providers>
                 <Toaster />
             </body>

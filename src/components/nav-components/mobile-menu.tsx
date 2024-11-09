@@ -29,7 +29,7 @@ function MobileMenu({ selectedLocale }: Props) {
     const [_, currentLocale, ...restOfPath] = usePathname().split('/')
     const currentPath = '/' + restOfPath.join('/')
 
-    const t = useTranslations('navbar')
+    const t = useTranslations('links')
 
     function onLinkClicked(href: string) {
         router.push(`/${currentLocale}${href}`)
@@ -59,7 +59,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         icon={<Info />}
                         href={'/about-us'}
                     >
-                        {t('about')}
+                        {t('aboutUs')}
                     </MobileMenuLink>
                     <MobileMenuLink
                         currentPath={currentPath}
@@ -73,9 +73,9 @@ function MobileMenu({ selectedLocale }: Props) {
                         currentPath={currentPath}
                         onClick={onLinkClicked}
                         icon={<Users />}
-                        href={'/lawyers'}
+                        href={'/team'}
                     >
-                        {t('lawyers')}
+                        {t('ourTeam')}
                     </MobileMenuLink>
                     <MobileMenuLink
                         currentPath={currentPath}
@@ -94,8 +94,8 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('contactUs')}
                     </MobileMenuLink>
                 </div>
-                <div className="flex gap-4 px-4">
-                    <DarkThemeToggle className='text-black dark:text-white' />
+                <div className="flex gap-4 px-4 mt-4">
+                    <DarkThemeToggle className="text-black dark:text-white" />
                     <LanguageSelect selectedLocale={selectedLocale} />
                 </div>
             </SheetContent>
