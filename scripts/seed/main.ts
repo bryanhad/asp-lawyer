@@ -1,8 +1,10 @@
-// scripts/seed/main.ts
 import { PrismaClient } from '@prisma/client'
-import { EntityType } from '../../src/lib/enum'
-import { lawyersSeed } from './data/lawyers'
-import { practiceAreaSeed } from './data/practice-areas'
+import { seedLawyers } from './util/lawyers'
+import { seedPracticeAreas } from './util/practice-areas'
+import {
+    seedLawyerTranslations,
+    seedPracticeAreaTranslations,
+} from './util/translations'
 
 const prisma = new PrismaClient()
 
@@ -11,102 +13,30 @@ async function main() {
 
     // Step 1: Upsert all lawyers concurrently
     console.log(`Seeding 'lawyers' table...`)
-    const upsertedLawyers = await Promise.all(
-        lawyersSeed.map((data) =>
-            prisma.lawyer.upsert({
-                where: { slug: data.slug },
-                update: {},
-                create: {
-                    slug: data.slug,
-                    order: data.order,
-                    name: data.name,
-                    linkedInUrl: data.linkedInUrl,
-                    email: data.email,
-                },
-            }),
-        ),
-    )
+    const upsertedLawyers = await seedLawyers(prisma)
     console.log(`Successfully seed 'lawyers' table!`)
 
     // Step 2: Upsert all practiceAreas concurrently
     console.log(`Seeding 'practice_areas' table...`)
-    const upsertedPracticeAreas = await Promise.all(
-        practiceAreaSeed.map((data) =>
-            prisma.practiceArea.upsert({
-                where: { slug: data.slug },
-                update: {},
-                create: {
-                    slug: data.slug,
-                    order: data.order,
-                },
-            }),
-        ),
-    )
+    const upsertedPracticeAreas = await seedPracticeAreas(prisma)
     console.log(`Successfully seed 'practice_areas' table!`)
 
-    // Step 3: Collect all translation upserts in a batch
-    const translationPromises = []
-
     // Lawyer Translation batch
-    for (const [index, lawyerData] of lawyersSeed.entries()) {
-        const lawyerId = upsertedLawyers[index].id
-
-        for (const translationData of lawyerData.translations) {
-            translationPromises.push(
-                prisma.translation.upsert({
-                    where: {
-                        entityId_entityType_language_key: {
-                            entityId: lawyerId,
-                            entityType: EntityType.Lawyer,
-                            language: translationData.language,
-                            key: translationData.key,
-                        },
-                    },
-                    update: {
-                    },
-                    create: {
-                        entityId: lawyerId,
-                        entityType: EntityType.Lawyer,
-                        language: translationData.language,
-                        key: translationData.key,
-                        value: translationData.value,
-                    },
-                }),
-            )
-        }
-    }
+    const lawyerTranslationPromises = await seedLawyerTranslations(
+        prisma,
+        upsertedLawyers,
+    )
     // PracticeAreas Translation batch
-    for (const [index, practiceAreasData] of practiceAreaSeed.entries()) {
-        const practiceAreasId = upsertedPracticeAreas[index].id
-
-        for (const translationData of practiceAreasData.translations) {
-            translationPromises.push(
-                prisma.translation.upsert({
-                    where: {
-                        entityId_entityType_language_key: {
-                            entityId: practiceAreasId,
-                            entityType: EntityType.PracticeArea,
-                            language: translationData.language,
-                            key: translationData.key,
-                        },
-                    },
-                    update: {
-                    },
-                    create: {
-                        entityId: practiceAreasId,
-                        entityType: EntityType.PracticeArea,
-                        language: translationData.language,
-                        key: translationData.key,
-                        value: translationData.value,
-                    },
-                }),
-            )
-        }
-    }
-
-    // Step 4: Execute all translation upserts concurrently
+    const practiceAreaTranslationPromises = await seedPracticeAreaTranslations(
+        prisma,
+        upsertedPracticeAreas,
+    )
+    // Step 3: Execute all translation upserts concurrently
     console.log(`Seeding 'translations' table...`)
-    await Promise.all(translationPromises)
+    await Promise.all([
+        ...lawyerTranslationPromises,
+        ...practiceAreaTranslationPromises,
+    ])
     console.log(`Successfully seed 'translations' table!`)
 }
 
