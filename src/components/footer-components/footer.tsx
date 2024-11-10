@@ -85,7 +85,6 @@ export default async function Footer() {
                         <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
                             {t('practiceAreas')}
                         </h3>
-                        {/* TODO: ADD PRACTICE AREA SLUG TO DB */}
                         <ul className="space-y-2">
                             {practiceAreasData.map((pa) => (
                                 <li key={pa.slug}>

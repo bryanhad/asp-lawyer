@@ -27,7 +27,7 @@
         "previewAboutUs": {
             "titleTop": "Reliable Attorneys",
             "titleBottom": "Trusted Results",
-            "desc": "ASP Law Firm specializes in bankruptcy law, providing compassionate, effective guidance to individuals and businesses facing financial challenges. Our team is committed to helping clients navigate the complexities of bankruptcy with clarity and confidence.",
+            "desc": "ASP Law Firm specializes in bankruptcy law, offering compassionate, effective support to individuals and businesses facing financial challenges.",
             "callToAction": "Learn More",
             "glaze": {
                 "yearsOfExperience": "Years of Experience",
@@ -38,7 +38,7 @@
         "previewPracticeAreas": {
             "titleTop": "Complete Support Through",
             "titleBottom": "Legal Expertise",
-            "desc": "We offer a comprehensive range of practice areas, each expertly managed by our dedicated professionals. From bankruptcy law to debt restructuring and asset protection, our team applies their specialized knowledge to every case.",
+            "desc": "Our team handles a range of practice areas, from bankruptcy law to debt restructuring and asset protection, applying specialized expertise to each case.",
             "callToAction": "Explore All Practice Areas",
             "topPracticeAreas": {
                 "bankruptcyLaw": {
@@ -61,7 +61,7 @@
         "previewLawyers": {
             "titleTop": "The Team Behind",
             "titleBottom": "Your Success",
-            "desc": "Our skilled attorneys provide dedicated, personalized legal guidance, committed to achieving the best outcomes for our clients with professionalism and care.",
+            "desc": "Our skilled attorneys offer dedicated, personalized guidance, committed to achieving the best results for our clients.",
             "callToAction": "Meet Our Attorneys"
         },
         "testimonials": {

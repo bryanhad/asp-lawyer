@@ -15,6 +15,7 @@ export default async function PreviewLawyersSection() {
             desc={t('desc')}
             className="bg-background"
         >
+            {/* TODO: FIX PREVIEW LAWYER SKELETONS */}
             <Suspense fallback={<SkeletonFallback />}>
                 <PreviewLawyers />
             </Suspense>
