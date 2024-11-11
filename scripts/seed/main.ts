@@ -1,10 +1,10 @@
 import { PrismaClient } from '@prisma/client'
-import { seedLawyers } from './util/lawyers'
-import { seedPracticeAreas } from './util/practice-areas'
+import { seedLawyers } from './functions/lawyers'
+import { seedPracticeAreas } from './functions/practice-areas'
 import {
     seedLawyerTranslations,
     seedPracticeAreaTranslations,
-} from './util/translations'
+} from './functions/translations'
 
 const prisma = new PrismaClient()
 

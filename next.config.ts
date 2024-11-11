@@ -25,6 +25,12 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'asp-lawyer-*.vercel.app',
             },
+            {
+                // uploadthing
+                protocol: 'https',
+                hostname: 'utfs.io',
+                pathname: `/a/${process.env.UPLOADTHING_APP_ID}/*`,
+            },
         ],
     },
 }

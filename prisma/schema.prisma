@@ -24,6 +24,7 @@ model Lawyer {
     slug        String  @unique
     order       Int // order position in Lawyers page, caroucel, etc..
     name        String
+    imageUrl    String?
     linkedInUrl String?
     email       String?
 
@@ -51,8 +52,9 @@ model PracticeArea {
 }
 
 model Member {
-    id   String @id @default(cuid())
-    name String
+    id       String  @id @default(cuid())
+    name     String
+    imageUrl String?
     // slug     String   @unique
     // bio      String?
     // position String

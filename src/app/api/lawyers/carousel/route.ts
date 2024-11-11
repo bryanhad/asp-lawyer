@@ -2,11 +2,11 @@ import { EntityType, Language, LawyerTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Lawyer } from '@prisma/client'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 type LawyerWithTranslations = Pick<
     Lawyer,
-    'slug' | 'email' | 'linkedInUrl' | 'name'
+    'slug' | 'email' | 'linkedInUrl' | 'name' | 'imageUrl'
 > & {
     position: { id: string; en: string }
     degree: { id: string; en: string }
@@ -17,15 +17,15 @@ export type LawyerCardData = LawyerWithTranslations & {
     blurImageUrl: string
 }
 
-export async function GET(
-    req: NextRequest,
-): Promise<NextResponse<LawyerCardData[]> | NextResponse<{ error: string }>> {
+export async function GET(): Promise<
+    NextResponse<LawyerCardData[]> | NextResponse<{ error: string }>
+> {
     // const urlOrigin = req.nextUrl.origin
 
     try {
         const query: LawyerWithTranslations[] = await prisma.$queryRaw`
             SELECT 
-                l."slug", l."email", l."linkedInUrl", l."name", 
+                l."slug", l."email", l."linkedInUrl", l."name", l."imageUrl"
                 -- get position: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
@@ -57,8 +57,9 @@ export async function GET(
             ORDER BY l."order"
         `
         // Step 1: Collect image URLs
-        const imageUrls = query.map((lawyer) => `lawyers/${lawyer.slug}.png`)
+        const imageUrls = query.map((lawyer) => lawyer.imageUrl)
 
+        // TODO FIX DIS SHIEEEET
         // Step 2: Get blurred images for all URLs concurrently
         const blurredImageUrls = await getBlurredImageUrls(imageUrls)
 

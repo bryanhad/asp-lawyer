@@ -8,6 +8,7 @@
         "start": "next start",
         "lint": "next lint",
         "seed": "ts-node scripts/seed/main.ts",
+        "seed-images-lawyer": "ts-node scripts/seed/lawyer-images.ts",
         "clear-tables-super-dangerous-act": "ts-node scripts/seed/clear-tables.ts"
     },
     "dependencies": {
