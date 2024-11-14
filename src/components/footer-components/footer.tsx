@@ -8,7 +8,9 @@ import { Locale } from '@/i18n/request'
 
 export default async function Footer() {
     const currentLocale = (await getLocale()) as Locale
-    const [t, tLinks, tContactUs, practiceAreasData] = await Promise.all([
+    const [t, tLinks, tContactUs,
+         practiceAreasData
+        ] = await Promise.all([
         getTranslations('footer'),
         getTranslations('links'),
         getTranslations('contactUs'),
@@ -22,7 +24,7 @@ export default async function Footer() {
         },
         {
             title: tLinks('ourTeam'),
-            href: '/team',
+            href: '/our-team',
         },
         {
             title: tLinks('contactUs'),

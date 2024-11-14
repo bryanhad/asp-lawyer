@@ -35,7 +35,7 @@ async function Navbar({ selectedLocale }: Props) {
                         <NavLink href={'/practice-areas'}>
                             {t('practiceAreas')}
                         </NavLink>
-                        <NavLink href={'/team'}>{t('ourTeam')}</NavLink>
+                        <NavLink href={'/our-team'}>{t('ourTeam')}</NavLink>
                         <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
                         <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>
                     </div>

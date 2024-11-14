@@ -24,7 +24,7 @@ model Lawyer {
     slug        String  @unique
     order       Int // order position in Lawyers page, caroucel, etc..
     name        String
-    imageUrl    String?
+    imageUrl    String
     linkedInUrl String?
     email       String?
 

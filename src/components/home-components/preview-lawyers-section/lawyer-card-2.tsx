@@ -1,5 +1,5 @@
 import { poppins } from '@/app/[locale]/fonts'
-import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
+import { LawyerCardData } from './action' 
 import {
     Popover,
     PopoverContent,
@@ -27,7 +27,7 @@ export default function LawyerCard({
         <div className="flex w-full flex-col items-center gap-2">
             <div className="relative w-full">
                 <Link
-                    href={`/lawyers/${slug}`}
+                    href={`/our-team/${slug}`}
                     className="group relative z-10 flex-[1] cursor-pointer"
                 >
                     <div className="relative flex flex-col overflow-hidden rounded-lg pt-2 duration-300">

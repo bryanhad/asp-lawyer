@@ -15,6 +15,7 @@ export type LawyerSeed = {
     slug: string
     order: number
     name: string
+    imageUrl: string
     linkedInUrl?: string
     email?: string
     translations: TranslationSeed<LawyerTranslationKey>[]

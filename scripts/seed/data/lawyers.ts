@@ -6,6 +6,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'arif',
         order: 1,
         name: 'Muhamad Arifudin',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY7zQU2j5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
         linkedInUrl: 'https://www.linkedin.com/in/arif',
         email: 'arif@lawfirm.com',
         translations: [
@@ -55,6 +57,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'herlin',
         order: 2,
         name: 'Herlin Susanto',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYfWZNn4lEKatOVHoSUhk9zbDc2s70CIGmEM1r',
         linkedInUrl: 'https://www.linkedin.com/in/herlin',
         email: 'herlin@lawfirm.com',
         translations: [
@@ -104,6 +108,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'dani',
         order: 3,
         name: 'Rakhmadani Hutama',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYd0IGuq2mcg8TAxuZ7joSfbs3Mv40w9YWdnkr',
         linkedInUrl: 'https://www.linkedin.com/in/dani',
         email: 'dani@lawfirm.com',
         translations: [
@@ -153,6 +159,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'agung',
         order: 4,
         name: 'Muhammad Agung Laksana',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYckefdl3P2y0Sdi6Jcb3wNU9O1MW8KLR54nHG',
         linkedInUrl: 'https://www.linkedin.com/in/agung',
         email: 'agung@lawfirm.com',
         translations: [
@@ -202,6 +210,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'andy',
         order: 5,
         name: 'Andy Arly Gustiawan',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYzd6Ck17aIrqWp4fKbB8vUlz7E16MPQAdkhx3',
         linkedInUrl: 'https://www.linkedin.com/in/andy',
         email: 'andy@lawfirm.com',
         translations: [
@@ -251,6 +261,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'kharis',
         order: 6,
         name: 'Christian Kharis Wicaksono',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYE4PciUwptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ',
         linkedInUrl: 'https://www.linkedin.com/in/kharis',
         email: 'kharis@lawfirm.com',
         translations: [
@@ -300,6 +312,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'fahmi',
         order: 7,
         name: 'Akhmad Fahmi Budiman',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYhDfsKltN8g1qOs04ZHVmLUQMjt9XCRG7wid5',
         linkedInUrl: 'https://www.linkedin.com/in/fahmi',
         email: 'fahmi@lawfirm.com',
         translations: [
@@ -349,6 +363,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'adnan',
         order: 8,
         name: 'Adnan Dika Prawira Wardhana',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYA2Ob6FhR2VPiZ7nNvJ5ClqKBfGWRgxX3AMht',
         linkedInUrl: 'https://www.linkedin.com/in/adnan',
         email: 'adnan@lawfirm.com',
         translations: [
@@ -399,6 +415,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'betti',
         order: 9,
         name: 'Betti',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYjAnobLBI49DHVPSikv0CFsfo7lbJacRYmK3x',
         linkedInUrl: 'https://www.linkedin.com/in/betti',
         email: 'betti@lawfirm.com',
         translations: [
@@ -448,6 +466,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'rizki',
         order: 10,
         name: 'Muhammad Rizki Aditya',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY7OAYqE5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
         linkedInUrl: 'https://www.linkedin.com/in/rizki',
         email: 'rizki@lawfirm.com',
         translations: [
@@ -497,6 +517,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'erwin',
         order: 11,
         name: 'Erwin Hardi Pramana',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYAPeZOjR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
         linkedInUrl: 'https://www.linkedin.com/in/erwin',
         email: 'erwin@lawfirm.com',
         translations: [
@@ -546,6 +568,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'faras',
         order: 12,
         name: 'Faras Salwaa Janvira',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYM9o0RpVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
         linkedInUrl: 'https://www.linkedin.com/in/faras',
         email: 'faras@lawfirm.com',
         translations: [
@@ -595,6 +619,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'indah',
         order: 13,
         name: 'Indah Try Harsanti',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYZS33EkGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
         linkedInUrl: 'https://www.linkedin.com/in/indah',
         email: 'indah@lawfirm.com',
         translations: [
@@ -644,6 +670,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'richard',
         order: 14,
         name: 'Richard Goenawan',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY5SJWuEjp8gy6AjzTCmMu1JFUwQqNSPVeXG9H',
         linkedInUrl: 'https://www.linkedin.com/in/richard',
         email: 'richard@lawfirm.com',
         translations: [
@@ -694,6 +722,8 @@ export const lawyersSeed: LawyerSeed[] = [
         order: 15,
         name: 'Ratna Sumirat',
         linkedInUrl: 'https://www.linkedin.com/in/ratna',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYB5vcL8hoqp60xSgMRAuJPfbCHtv9sT3hF4YD',
         email: 'ratna@lawfirm.com',
         translations: [
             {
@@ -742,6 +772,8 @@ export const lawyersSeed: LawyerSeed[] = [
         slug: 'reza',
         order: 16,
         name: 'Reza Rahmawati',
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYDlQxpEaGNSpAXJcwOzx8ZFt1vWi2sdkUKrae',
         linkedInUrl: 'https://www.linkedin.com/in/reza',
         email: 'reza@lawfirm.com',
         translations: [

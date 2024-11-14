@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/routing'
-import { PracticeAreaPreviewData } from '@/app/api/practice-areas/preview/route'
+import { PracticeAreaPreviewData } from './action'
 import { useLocale, useTranslations } from 'next-intl'
 import { Locale } from '@/i18n/request'
 

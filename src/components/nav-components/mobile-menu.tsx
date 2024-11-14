@@ -12,11 +12,10 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
+import { DarkThemeToggle } from './dark-theme-toggle'
 import LanguageSelect from './language-select'
 import MobileMenuLink from './mobile-menu-link'
 import { useNavContext } from './nav-context'
-import { DarkThemeToggle } from './dark-theme-toggle'
-import { Separator } from '../ui/separator'
 
 type Props = {
     selectedLocale: Locale
@@ -73,7 +72,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         currentPath={currentPath}
                         onClick={onLinkClicked}
                         icon={<Users />}
-                        href={'/team'}
+                        href={'/our-team'}
                     >
                         {t('ourTeam')}
                     </MobileMenuLink>

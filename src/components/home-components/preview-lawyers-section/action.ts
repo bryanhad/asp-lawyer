@@ -1,8 +1,9 @@
+'use server'
+
 import { EntityType, Language, LawyerTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Lawyer } from '@prisma/client'
-import { NextResponse } from 'next/server'
 
 type LawyerWithTranslations = Pick<
     Lawyer,
@@ -17,15 +18,11 @@ export type LawyerCardData = LawyerWithTranslations & {
     blurImageUrl: string
 }
 
-export async function GET(): Promise<
-    NextResponse<LawyerCardData[]> | NextResponse<{ error: string }>
-> {
-    // const urlOrigin = req.nextUrl.origin
-
+export async function getPreviewLawyersData() {
     try {
         const query: LawyerWithTranslations[] = await prisma.$queryRaw`
             SELECT 
-                l."slug", l."email", l."linkedInUrl", l."name", l."imageUrl"
+                l."slug", l."email", l."linkedInUrl", l."name", l."imageUrl",
                 -- get position: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
@@ -53,13 +50,12 @@ export async function GET(): Promise<
                 ON l."id" = t."entityId" 
                 AND t."entityType" = ${EntityType.Lawyer}
                 AND t."key" IN (${LawyerTranslationKey.DEGREE}, ${LawyerTranslationKey.POSITION})
-            GROUP BY l."slug", l."email", l."linkedInUrl", l."name", l."order"
+            GROUP BY l."slug", l."email", l."linkedInUrl", l."name", l."order", l."imageUrl"
             ORDER BY l."order"
         `
         // Step 1: Collect image URLs
         const imageUrls = query.map((lawyer) => lawyer.imageUrl)
-
-        // TODO FIX DIS SHIEEEET
+            
         // Step 2: Get blurred images for all URLs concurrently
         const blurredImageUrls = await getBlurredImageUrls(imageUrls)
 
@@ -67,21 +63,15 @@ export async function GET(): Promise<
         const transformedLawyers = query.map((lawyer, i) => {
             const result = {
                 ...lawyer,
-                imageSrc: '/' + imageUrls[i],
+                imageSrc: imageUrls[i],
                 blurImageUrl: blurredImageUrls[i],
             }
 
             return result
         })
-
-        return NextResponse.json(transformedLawyers)
+        return transformedLawyers
     } catch (err) {
         console.error(err)
-        return NextResponse.json(
-            {
-                error: 'Internal server error',
-            },
-            { status: 500 },
-        )
+        throw new Error('Internal Server Error')
     }
 }

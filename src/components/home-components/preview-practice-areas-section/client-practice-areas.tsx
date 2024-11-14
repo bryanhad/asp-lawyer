@@ -1,6 +1,6 @@
 'use client'
 
-import { PracticeAreaPreviewData } from '@/app/api/practice-areas/preview/route'
+import { PracticeAreaPreviewData } from './action'
 import { Button } from '@/components/ui/button'
 import {
     Carousel,

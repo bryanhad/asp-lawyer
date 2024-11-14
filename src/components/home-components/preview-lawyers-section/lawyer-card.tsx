@@ -8,7 +8,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-import { LawyerCardData } from '@/app/api/lawyers/carousel/route'
+import { LawyerCardData } from './action' 
 
 export default function LawyerCard({
     name,
@@ -25,7 +25,7 @@ export default function LawyerCard({
         <div className="flex w-full flex-col items-center gap-2">
             <div className="relative w-full">
                 <Link
-                    href={`/lawyers/${slug}`}
+                    href={`/our-team/${slug}`}
                     className="group relative z-10 flex-[1] cursor-pointer"
                 >
                     <div className="relative flex items-end justify-center overflow-hidden rounded-lg  pt-2 duration-300 group-hover:bg-background-suit/10 dark:group-hover:bg-background-suit">

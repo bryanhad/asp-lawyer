@@ -1,7 +1,8 @@
+'use server'
+
 import { EntityType, Language, PracticeAreaTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { PracticeArea } from '@prisma/client'
-import { NextResponse } from 'next/server'
 
 export type PracticeAreaPreviewData = Pick<PracticeArea, 'slug'> & {
     fullName: { id: string; en: string }
@@ -10,9 +11,7 @@ export type PracticeAreaPreviewData = Pick<PracticeArea, 'slug'> & {
     desc: { id: string; en: string }
 }
 
-export async function GET(): Promise<
-    NextResponse<PracticeAreaPreviewData[]> | NextResponse<{ error: string }>
-> {
+export async function getPracticeAreasData() {
     try {
         const query: PracticeAreaPreviewData[] = await prisma.$queryRaw`
             SELECT 
@@ -63,14 +62,9 @@ export async function GET(): Promise<
             ORDER BY pa."order"
         `
 
-        return NextResponse.json(query)
+        return query
     } catch (err) {
         console.error(err)
-        return NextResponse.json(
-            {
-                error: 'Internal server error',
-            },
-            { status: 500 },
-        )
+        throw new Error('Internal Server Error')
     }
 }
