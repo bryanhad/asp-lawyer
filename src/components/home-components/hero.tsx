@@ -19,7 +19,7 @@ export default async function Hero() {
                     <h1
                         className={cn(
                             sourceSerif4.className,
-                            'text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl',
+                            'select-none text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl',
                         )}
                     >
                         {t('titleWhite')}
@@ -35,7 +35,7 @@ export default async function Hero() {
                     <h2
                         className={cn(
                             sourceSerif4.className,
-                            'text-xl font-medium text-white sm:text-3xl lg:text-2xl',
+                            'select-none text-xl font-medium text-white sm:text-3xl lg:text-2xl',
                         )}
                     >
                         {t('titleExtra')}

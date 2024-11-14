@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cleanString, cn } from '@/lib/utils'
 import { Link as LickIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -35,7 +35,7 @@ function LinkSection({
 
     const titleTag = title
         ? title.toLowerCase().split(' ').join('-')
-        : `${titleTop} ${titleBottom}`.toLowerCase().split(' ').join('-')
+        : `${cleanString(titleTop!)} ${cleanString(titleBottom!)}`.toLowerCase().split(' ').join('-')
 
 
     const href = `${pathname}#${titleTag}`

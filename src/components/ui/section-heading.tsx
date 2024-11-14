@@ -1,5 +1,5 @@
 import LinkSection from '@/components/ui/link-section'
-import { cn } from '@/lib/utils'
+import { cleanString, cn } from '@/lib/utils'
 import { sourceSerif4 } from '@/app/[locale]/fonts'
 
 type Props = {
@@ -17,25 +17,30 @@ export default function SectionHeading({
     className,
     textAlign,
 }: Props) {
-    const href = `${titleTop?.toLowerCase().split(' ').join('-')}-${titleBottom?.toLowerCase().split(' ').join('-')}`
+    const href = `${cleanString(titleTop).toLowerCase().split(' ').join('-')}-${cleanString(titleBottom).toLowerCase().split(' ').join('-')}`
+    console.log({ href })
 
     return (
         <div
-            className={cn('flex flex-col items-center gap-2 xl:gap-4', {
-                // prioritize textAlign value
-                'md:items-start':
-                    textAlign === 'left' || (!textAlign && side === 'left'),
-                // prioritize textAlign value
-                'md:items-end':
-                    textAlign === 'right' || (!textAlign && side === 'right'),
-                'md:items-center': textAlign === 'center',
-            })}
+            className={cn(
+                'flex select-none flex-col items-center gap-2 xl:gap-4',
+                {
+                    // prioritize textAlign value
+                    'md:items-start':
+                        textAlign === 'left' || (!textAlign && side === 'left'),
+                    // prioritize textAlign value
+                    'md:items-end':
+                        textAlign === 'right' ||
+                        (!textAlign && side === 'right'),
+                    'md:items-center': textAlign === 'center',
+                },
+            )}
         >
             <h2
                 id={href ?? undefined}
                 className={cn(
                     sourceSerif4.className,
-                    'font-[300 ] flex max-w-max scroll-m-28 flex-col text-center text-primary sm:gap-1 xl:font-bold',
+                    'flex max-w-max scroll-m-28 flex-col text-center text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
                         // prioritize textAlign value

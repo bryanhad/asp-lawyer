@@ -2,22 +2,19 @@
 
 import { Moon, SunMedium } from 'lucide-react'
 import { useTheme } from 'next-themes'
-
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useNavContext } from './nav-context'
 
 export function DarkThemeToggle({ className }: { className?: string }) {
     const { setTheme, resolvedTheme } = useTheme()
-    const { isScrolled } = useNavContext()
+    const { isScrolled, isHomePage } = useNavContext()
 
     return (
         <Button
             variant={'ghost'}
             className={cn(
-                isScrolled
-                    ? 'text-black dark:text-white'
-                    : 'text-white hover:text-black dark:hover:text-white',
+                { 'text-white': isHomePage && !isScrolled },
                 className,
             )}
             onClick={() => {

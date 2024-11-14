@@ -20,9 +20,9 @@ type SectionProps = {
 export function SectionContainer({
     children,
     className,
-    titleTop,
-    titleBottom,
-    desc,
+    titleTop="insert 'titleTop' prop",
+    titleBottom="Insert 'titleBottom' prop",
+    desc="you can also pass desc prop 'tis a ReactNode!",
     side = 'center',
     secondaryContent,
     variant = 'title-and-desc',
@@ -54,7 +54,7 @@ export function SectionContainer({
         return (
             <section
                 className={cn(
-                    'flex w-full max-w-[1520px] flex-col px-4 py-20 sm:items-center md:py-20',
+                    'flex w-full max-w-[1420px] flex-col px-4 py-20 sm:items-center md:py-20',
                     className,
                 )}
             >

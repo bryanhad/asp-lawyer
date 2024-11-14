@@ -1,11 +1,9 @@
 import { PracticeAreaPageData } from '@/app/api/practice-areas/[slug]/route'
-import { BaseContainer } from '@/components/containers/base-container'
 import { SectionContainer } from '@/components/containers/section-container'
 import { Language } from '@/lib/enum'
 import kyInstance from '@/lib/ky'
-import { capitalizeFirstLetter } from '@/lib/utils'
 import { Metadata } from 'next'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getLocale } from 'next-intl/server'
 import { cache } from 'react'
 
 type Props = {

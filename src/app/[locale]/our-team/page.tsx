@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 export async function generateMetadata(): Promise<Metadata> {
-    const pageTitle = await getTranslations('membersPage')
+    const pageTitle = await getTranslations('ourTeamPage')
 
     return {
         title: pageTitle('pageTitle'),
@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MembersPage() {
-    const t = await getTranslations('membersPage')
+    const t = await getTranslations('ourTeamPage')
 
     return (
         <BaseContainer>

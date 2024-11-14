@@ -69,24 +69,24 @@
             "desc": "Baca testimoni dari klien yang telah merasakan manfaat layanan hukum kami."
         },
         "previewContactUs": {
-            "titleTop": "Get in Touch,",
-            "titleBottom": "We are Ready",
+            "titleTop": "Hubungi Kami,",
+            "titleBottom": "Kami Selalu Siap",
             "info": {
                 "address": {
-                    "title": "Address"
+                    "title": "Alamat"
                 },
                 "businessHours": {
-                    "title": "Business Hours",
-                    "moday-friday": "Monday - Friday: 9:00 AM - 6:00 PM",
-                    "saturday": "Saturday: 09:00 AM - 1:00 PM",
-                    "sunday": "Sunday: Closed"
+                    "title": "Jam Operasional",
+                    "moday-friday": "Senin - Jumat: 9:00 - 18:00",
+                    "saturday": "Sabtu: 09:00 - 13:00",
+                    "sunday": "Minggu: Tutup"
                 },
                 "whatsApp": {
                     "title": "WhatsApp",
                     "desc": "+62 812 3456 7890"
                 },
                 "socialMedia": {
-                    "title": "Social Media"
+                    "title": "Media Sosial"
                 }
             }
         }
@@ -101,8 +101,8 @@
         "title": "Bidang Praktik Kami",
         "desc": "Keahlian di berbagai bidang hukum untuk memenuhi kebutuhan unik Anda."
     },
-    "membersPage": {
-        "pageTitle": "Tim",
+    "ourTeamPage": {
+        "pageTitle": "Tim Kami",
         "title": "Kenali Tim Kami",
         "desc": "Kenali pengacara dan staf pendukung kami yang berdedikasi untuk kesuksesan Anda."
     },
