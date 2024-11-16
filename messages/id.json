@@ -21,6 +21,11 @@
         "titleWhite": "Menyediakan",
         "titlePrimary1": "Solusi",
         "titlePrimary2": "Hukum",
+        "titlePrimary": {
+            "1": "Solusi Hukum",
+            "2": "Panduan Tepat",
+            "3": "Kepastian Hukum"
+        },
         "titleExtra": "Sesuai dengan Kebutuhan Anda",
         "desc": "Arifudin & Susanto Partnership (ASP) menyediakan solusi hukum yang disesuaikan dengan komitmen terhadap profesionalisme dan kepercayaan klien, melayani kebutuhan Anda di seluruh Indonesia.",
         "callToAction": "Hubungi Kami",

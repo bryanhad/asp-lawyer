@@ -1,28 +1,23 @@
-import { PracticeAreaPageData } from '@/app/api/practice-areas/[slug]/route'
-import { SectionContainer } from '@/components/containers/section-container'
+import { BaseContainer } from '@/components/containers/base-container'
+import Section from '@/components/containers/section'
 import { Language } from '@/lib/enum'
-import kyInstance from '@/lib/ky'
 import { Metadata } from 'next'
 import { getLocale } from 'next-intl/server'
 import { cache } from 'react'
+import { getPracticeAreaPageContent } from '../action'
 
 type Props = {
     params: Promise<{ slug: string }>
 }
-
-const getPracticeAreaData = cache(async (slug: string) => {
-    return await Promise.all([
-        kyInstance
-            .get(`api/practice-areas/${slug}`)
-            .json<PracticeAreaPageData>(),
-        getLocale(),
-    ])
+const fetchPracticeAreaPageContent = cache(async (slug: string) => {
+    return await Promise.all([getPracticeAreaPageContent(slug), getLocale()])
 })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
 
-    const [{ fullName }, currentLocale] = await getPracticeAreaData(slug)
+    const [{ fullName }, currentLocale] =
+        await fetchPracticeAreaPageContent(slug)
 
     const pageTitle = currentLocale === Language.EN ? fullName.en : fullName.id
 
@@ -33,14 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MemberPage({ params }: Props) {
     const { slug } = await params
-    const [{ content, fullName }, currentLocale] =
-        await getPracticeAreaData(slug)
+    const [{ content, fullName: _ }, currentLocale] =
+        await fetchPracticeAreaPageContent(slug)
 
     const htmlContent = currentLocale === Language.EN ? content.en : content.id
 
     return (
-        <SectionContainer variant="naked" className="prose mt-12">
-            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        </SectionContainer>
+        <BaseContainer>
+            <Section className="prose max-w-custom-wide">
+                <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+            </Section>
+        </BaseContainer>
     )
 }

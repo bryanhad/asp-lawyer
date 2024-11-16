@@ -18,7 +18,6 @@ export default function SectionHeading({
     textAlign,
 }: Props) {
     const href = `${cleanString(titleTop).toLowerCase().split(' ').join('-')}-${cleanString(titleBottom).toLowerCase().split(' ').join('-')}`
-    console.log({ href })
 
     return (
         <div
@@ -40,7 +39,7 @@ export default function SectionHeading({
                 id={href ?? undefined}
                 className={cn(
                     sourceSerif4.className,
-                    'flex max-w-max scroll-m-28 flex-col text-center text-primary sm:gap-1 xl:font-bold',
+                    'flex max-w-max scroll-m-28 flex-col items-center text-center text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
                         // prioritize textAlign value

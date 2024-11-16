@@ -10,7 +10,6 @@ export const fetchPracticeAreasPreviewData = cache(async () => {
 
 export default async function ServerPracticeAreas() {
     const data = await getPracticeAreasData()
-    // const data = await fetchPracticeAreasPreviewData()
 
     const currentLocale = (await getLocale()) as Locale
 

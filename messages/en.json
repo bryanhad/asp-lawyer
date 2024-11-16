@@ -21,6 +21,11 @@
         "titleWhite": "Providing",
         "titlePrimary1": "Legal",
         "titlePrimary2": "Solutions",
+        "titlePrimary": {
+            "1": "Legal Solutions",
+            "2": "Precise Guidance",
+            "3": "Legal Assurance"
+        },
         "titleExtra": "Tailored to Your Needs",
         "desc": "Arifudin & Susanto Partnership (ASP) provides tailored legal solutions with a commitment to professionalism and client trust, serving your needs across Indonesia.",
         "callToAction": "Contact Us",

@@ -17,7 +17,7 @@ async function Navbar({ selectedLocale }: Props) {
 
     return (
         <NavHeader>
-            <nav className="flex h-full w-full max-w-[1720px] justify-between px-4 sm:px-6 md:px-8">
+            <nav className="flex h-full w-full max-w-custom-navbar justify-between px-4 sm:px-6 md:px-8">
                 <div className="flex items-end gap-14 self-center">
                     <Link href={'/'} className="flex items-center">
                         <h1 className="relative text-xl font-bold text-primary sm:text-2xl">

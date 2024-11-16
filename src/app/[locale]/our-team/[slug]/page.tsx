@@ -1,5 +1,5 @@
 import { BaseContainer } from '@/components/containers/base-container'
-import { SectionContainer } from '@/components/containers/section-container'
+import Section from '@/components/containers/section'
 import { capitalizeFirstLetter } from '@/lib/utils'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
@@ -32,13 +32,13 @@ export default async function MemberPage({ params }: Props) {
 
     return (
         <BaseContainer>
-            <SectionContainer variant="naked">
+            <Section className="max-w-custom-wide">
                 <div className="p-7">
                     <h1 className="text-xl font-bold">
                         {t('wellcome', { name: capitalizedSlug })}
                     </h1>
                 </div>
-            </SectionContainer>
+            </Section>
         </BaseContainer>
     )
 }

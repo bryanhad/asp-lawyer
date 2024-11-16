@@ -1,35 +1,48 @@
-import { SectionContainer } from '@/components/containers/section-container'
 import LinkButton from '@/components/ui/link-button'
 import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 import PracticeAreas from './practice-areas'
 import SkeletonFallback from './skeleton'
+import Section from '@/components/containers/section'
+import SectionHeading from '@/components/ui/section-heading'
 
-export default async function PreviewLawyersSection() {
+export default async function PreviewPracticeAreas2() {
     const t = await getTranslations('homePage.previewPracticeAreas')
 
     return (
-        <div className="flex w-full flex-col items-center bg-secondary">
-            <SectionContainer
-                side="left"
-                titleTop={t('titleTop')}
-                titleBottom={t('titleBottom')}
-                desc={<p>{t('desc')}</p>}
-                descClassName="max-md:hidden"
-                secondaryContent={
-                    <div className="mt-2">
-                        <Suspense fallback={<SkeletonFallback />}>
-                            <PracticeAreas />
-                        </Suspense>
-                    </div>
-                }
-            >
-                <div className="mt-6 flex">
-                    <LinkButton href={'/about-us'} className="max-md:mx-auto">
+        <div className="w-full bg-secondary">
+            <Section className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
+                {/* GRID 1 */}
+                <div className="flex flex-col gap-4">
+                    <SectionHeading
+                        titleTop={t('titleTop')}
+                        titleBottom={t('titleBottom')}
+                        side={'right'}
+                        textAlign={'left'}
+                    />
+                    <p className="text-center text-muted-foreground max-md:hidden md:text-start">
+                        {t('desc')}
+                    </p>
+                    <LinkButton
+                        className="mt-6 max-md:mx-auto max-md:hidden"
+                        href={'/about-us'}
+                    >
                         {t('callToAction')}
                     </LinkButton>
                 </div>
-            </SectionContainer>
+                {/* GRID 2 */}
+                <div className="flex flex-col">
+                    <Suspense fallback={<SkeletonFallback />}>
+                        <PracticeAreas />
+                    </Suspense>
+                    <LinkButton
+                        className="mx-auto mt-6 max-md:mx-auto md:hidden"
+                        href={'/about-us'}
+                    >
+                        {t('callToAction')}
+                    </LinkButton>
+                </div>
+            </Section>
         </div>
     )
 }

@@ -46,7 +46,7 @@ export default async function Footer() {
 
     return (
         <footer className="border-t border-border bg-background">
-            <div className="mx-auto max-w-[1720px] px-4 py-10 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-custom-navbar px-4 py-10 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                     <div className="flex flex-col gap-4 max-md:items-center max-md:text-center">
                         <Image

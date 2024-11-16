@@ -11,10 +11,15 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            maxWidth: {
+                'custom-navbar': '1720px',
+                'custom-wide': '1620px',
+                custom: '1420px',
+            },
             colors: {
                 background: {
                     DEFAULT: 'hsl(var(--background))',
-                    suit: 'hsl(var(--background-suit))'
+                    suit: 'hsl(var(--background-suit))',
                 },
                 foreground: 'hsl(var(--foreground))',
                 card: {

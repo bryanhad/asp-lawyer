@@ -1,4 +1,3 @@
-import { SectionContainer } from '@/components/containers/section-container'
 import SectionHeading from '@/components/ui/section-heading'
 import {
     Clock,
@@ -15,10 +14,7 @@ export default async function PreviewContactUs() {
     const t = await getTranslations('homePage.previewContactUs')
     const tContactUs = await getTranslations('contactUs')
     return (
-        <SectionContainer
-            variant="naked"
-            className="relative grid h-full max-w-[1620px] grid-cols-1 gap-6 px-4 md:py-24 lg:grid-cols-2"
-        >
+        <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 flex-col gap-6 px-4 py-20 md:py-24 lg:grid-cols-2">
             <div className="order-2 space-y-2 lg:order-1">
                 <MapBox className="h-[500px] overflow-hidden rounded-lg" />
                 <div className="flex items-start space-x-4 rounded-lg border px-4 py-2">
@@ -129,6 +125,6 @@ export default async function PreviewContactUs() {
                     </div>
                 </div>
             </div>
-        </SectionContainer>
+        </div>
     )
 }
