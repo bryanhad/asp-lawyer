@@ -1,13 +1,20 @@
 import Section from '@/components/containers/section'
-import { PinContainer } from './animated-pin'
 import Image from 'next/image'
 import SectionHeading from '@/components/ui/section-heading'
+import dynamic from 'next/dynamic'
+
+const PinContainer = dynamic(
+    () => import('./animated-pin'),
+    {
+        loading: () => <p>Loading..</p>,
+    },
+)
 
 export default function AchievementSection() {
     return (
         <Section>
             <SectionHeading oneLine titleTop="Our" titleBottom="Achievements" />
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
                 <PinContainer
                     title="Mr. Muhamad Arifudin, S.H., M.H., elected as the chairman of Ikatan Keluarga Alumni Fakultas Hukum Universitas Muhammadiyah Palembang 2023 - 2027."
                     containerClassName="relative z-10"

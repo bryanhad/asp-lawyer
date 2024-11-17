@@ -2,8 +2,15 @@ import { getLawyersWithQuote } from '@/app/[locale]/about-us/action'
 import { getCurrentLocale } from '@/app/[locale]/layout'
 import { Suspense } from 'react'
 import LawyerQuotesSkeleton from './skeleton'
-import LawyerQuotesComponent from './client-component'
 import Section from '@/components/containers/section'
+import dynamic from 'next/dynamic'
+
+const AnimatedTestimonials = dynamic(
+    () => import('@/components/ui/animated-cards'),
+    {
+        loading: () => <LawyerQuotesSkeleton />,
+    },
+)
 
 export default async function LawyerQuotes() {
     const currentLocale = await getCurrentLocale()
@@ -11,9 +18,9 @@ export default async function LawyerQuotes() {
 
     return (
         <div className="w-full bg-secondary">
-            <Section className='mx-auto'>
+            <Section className="mx-auto">
                 <Suspense fallback={<LawyerQuotesSkeleton />}>
-                    <LawyerQuotesComponent
+                    <AnimatedTestimonials
                         cardItems={lawyersWithQuote}
                         currentLocale={currentLocale}
                     />

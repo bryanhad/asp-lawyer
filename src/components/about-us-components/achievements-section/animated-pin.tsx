@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-export const PinContainer = ({
+const PinContainer = ({
     children,
     title,
     className,
@@ -155,3 +155,5 @@ export const PinPerspective = ({ title }: { title?: string }) => {
         </motion.div>
     )
 }
+
+export default PinContainer
