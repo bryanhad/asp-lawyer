@@ -3,19 +3,19 @@ import { PropsWithChildren } from 'react'
 
 type Props = {
     className?: string
-    lessTopSpacing?: boolean
+    lessYSpacing?: boolean
 } & PropsWithChildren
 
 export default function Section({
     children,
     className,
-    lessTopSpacing = false,
+    lessYSpacing = false,
 }: Props) {
     return (
         <section
             className={cn(
                 'w-full max-w-custom px-4 py-20',
-                lessTopSpacing && 'pt-10',
+                lessYSpacing && 'pb-14 pt-10',
                 className,
             )}
         >

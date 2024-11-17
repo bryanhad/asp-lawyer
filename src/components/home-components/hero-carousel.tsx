@@ -1,4 +1,4 @@
-import BackgroundCarousel from '@/components/background-carousel'
+import BackgroundCarousel from '@/components/any-page-components/background-carousel'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'

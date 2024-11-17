@@ -12,6 +12,6 @@ const AnimatedTestimonials = dynamic(
     },
 )
 
-export default function ClientComponent({ ...props }: AnimatedCardProps) {
+export default function LawyerQuotesComponent({ ...props }: AnimatedCardProps) {
     return <AnimatedTestimonials {...props} />
 }

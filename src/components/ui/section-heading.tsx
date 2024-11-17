@@ -8,6 +8,7 @@ type Props = {
     className?: string
     side?: 'left' | 'right' | 'center'
     textAlign?: 'left' | 'right' | 'center'
+    oneLine?: boolean
 }
 
 export default function SectionHeading({
@@ -16,6 +17,7 @@ export default function SectionHeading({
     side = 'center',
     className,
     textAlign,
+    oneLine = false,
 }: Props) {
     const href = `${cleanString(titleTop).toLowerCase().split(' ').join('-')}-${cleanString(titleBottom).toLowerCase().split(' ').join('-')}`
 
@@ -54,19 +56,35 @@ export default function SectionHeading({
                     },
                 )}
             >
-                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
-                    {titleTop}
-                </span>
-                <LinkSection
-                    titleTop={titleTop}
-                    titleBottom={titleBottom}
-                    className="text-primary"
-                    size={24}
-                >
-                    <span className="text-4xl text-primary lg:text-5xl xl:text-6xl">
-                        {titleBottom}
-                    </span>
-                </LinkSection>
+                {oneLine ? (
+                    <LinkSection
+                        titleTop={titleTop}
+                        titleBottom={titleBottom}
+                        size={24}
+                    >
+                        <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                            {titleTop}
+                        </span>
+                        <span className="text-4xl text-primary lg:text-5xl xl:text-6xl ml-4">
+                            {titleBottom}
+                        </span>
+                    </LinkSection>
+                ) : (
+                    <>
+                        <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                            {titleTop}
+                        </span>
+                        <LinkSection
+                            titleTop={titleTop}
+                            titleBottom={titleBottom}
+                            size={24}
+                        >
+                            <span className="text-4xl text-primary lg:text-5xl xl:text-6xl">
+                                {titleBottom}
+                            </span>
+                        </LinkSection>
+                    </>
+                )}
             </h2>
             <div
                 className={cn(

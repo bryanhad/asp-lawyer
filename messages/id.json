@@ -100,7 +100,17 @@
         "pageTitle": "Tentang Kami",
         "titleWhite": "Tentang",
         "titlePrimary": "ASP Law Firm",
-        "desc": "Pelajari lebih lanjut tentang misi, nilai, dan dedikasi kami kepada klien."
+        "desc": "berkomitmen untuk memberikan solusi hukum praktis yang sesuai dengan kebutuhan Klien. Dengan keahlian dan pemahaman mendalam terhadap perkembangan hukum di Indonesia, tim kami yang berpengalaman menjamin layanan yang dapat diandalkan dan berintegritas. Berpedoman pada etika profesi dan orientasi terhadap hasil, kami menghadirkan solusi hukum yang dipercaya oleh Klien.",
+        "vision": {
+            "title": "Visi",
+            "desc": "Menjadi firma hukum terpercaya dan terkemuka yang memberikan solusi hukum inovatif dengan integritas dan keunggulan."
+        },
+        "mission": {
+            "title": "Misi",
+            "1": "Memberikan layanan hukum berkualitas sesuai kebutuhan Klien.",
+            "2": "Menjunjung tinggi etika profesional dan kepercayaan Klien.",
+            "3": "Membangun budaya pembelajaran berkelanjutan dan pengembangan keahlian hukum."
+        }
     },
     "practiceAreasPage": {
         "pageTitle": "Bidang Praktik",

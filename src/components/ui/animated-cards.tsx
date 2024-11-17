@@ -134,14 +134,14 @@ const AnimatedCard = ({
                         }}
                     >
                         <h3 className="space-x-2 text-2xl font-light text-black dark:text-white">
-                            <span>{cardItems[active].name}</span>
+                            <span className='text-primary font-medium'>{cardItems[active].name}</span>
                             <span className="text-muted-foreground">
                                 {currentLocale === 'en'
                                     ? cardItems[active].degree.en
                                     : cardItems[active].degree.id}
                             </span>
                         </h3>
-                        <p className="text-gray-500 dark:text-neutral-500">
+                        <p className="text-gray-500 dark:text-neutral-500 px-2 py-1 rounded-full border max-w-max mt-1">
                             {currentLocale === 'en'
                                 ? cardItems[active].position.en
                                 : cardItems[active].position.id}

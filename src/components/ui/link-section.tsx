@@ -35,8 +35,10 @@ function LinkSection({
 
     const titleTag = title
         ? title.toLowerCase().split(' ').join('-')
-        : `${cleanString(titleTop!)} ${cleanString(titleBottom!)}`.toLowerCase().split(' ').join('-')
-
+        : `${cleanString(titleTop!)} ${cleanString(titleBottom!)}`
+              .toLowerCase()
+              .split(' ')
+              .join('-')
 
     const href = `${pathname}#${titleTag}`
 
@@ -45,20 +47,20 @@ function LinkSection({
     }
 
     return (
-        <span onClick={handleClick} className="group relative cursor-pointer">
+        <span
+            onClick={handleClick}
+            className={cn('group relative cursor-pointer', className)}
+        >
             <Link
                 href={href}
                 className="absolute -left-1 top-1/2 grid size-8 -translate-x-full -translate-y-1/2 place-items-center"
             >
                 <LickIcon
-                    className={cn(
-                        'hidden shrink-0 group-hover:block',
-                        className,
-                    )}
+                    className="hidden shrink-0 text-primary group-hover:block"
                     size={size}
                 />
             </Link>
-           {children}
+            {children}
         </span>
     )
 }
