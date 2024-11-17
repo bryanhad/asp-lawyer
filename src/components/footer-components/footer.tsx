@@ -1,13 +1,13 @@
+import { getCurrentLocale } from '@/app/[locale]/layout'
 import { Link } from '@/i18n/routing'
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { fetchPracticeAreasPreviewData } from '../home-components/preview-practice-areas-section/practice-areas'
-import { Locale } from '@/i18n/request'
 
 export default async function Footer() {
-    const currentLocale = (await getLocale()) as Locale
+    const currentLocale = await getCurrentLocale()
     const [t, tLinks, tContactUs,
          practiceAreasData
         ] = await Promise.all([

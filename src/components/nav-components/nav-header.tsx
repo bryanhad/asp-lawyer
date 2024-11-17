@@ -56,34 +56,15 @@ export default function NavHeader({ children }: Props) {
 
                 <div
                     onClick={() => setIsOpen(!isOpen)}
-                    className="my-auto mr-3 p-3 lg:hidden"
+                    className={cn('my-auto mr-3 p-3 lg:hidden')}
                 >
                     {isOpen ? (
-                        <X
-                            className={cn(
-                                'shrink-0 text-black transition-all duration-300',
-                                {
-                                    'text-white':
-                                        (!isScrolled && !isOpen) ||
-                                        resolvedTheme === 'dark',
-                                },
-                                {
-                                    'text-black': !isHomePage,
-                                },
-                            )}
-                        />
+                        <X className={cn('shrink-0')} />
                     ) : (
                         <Menu
                             className={cn(
-                                'shrink-0 text-black duration-300',
-                                {
-                                    'text-white':
-                                        (!isScrolled && !isOpen) ||
-                                        resolvedTheme === 'dark',
-                                },
-                                {
-                                    'text-black': !isHomePage,
-                                },
+                                'shrink-0 text-white',
+                                isScrolled && 'text-black dark:text-white',
                             )}
                         />
                     )}

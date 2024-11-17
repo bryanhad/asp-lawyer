@@ -6,7 +6,7 @@ export default function SkeletonFallback() {
             <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
                 <div className="relative h-80">
                     <Skeleton className="absolute h-80 w-full" />
-                    <Skeleton className="absolute h-80 w-full rotate-[10deg]" />
+                    <Skeleton className="absolute h-80 w-full -rotate-[10deg]" />
                 </div>
                 <div className="flex flex-col justify-between py-4">
                     <div>

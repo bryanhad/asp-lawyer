@@ -15,7 +15,7 @@ export default function PageTitleWithBackground({
     ...imageProps
 }: Props) {
     return (
-        <div className="relative flex min-h-[40vh] w-full">
+        <div className="relative flex min-h-[300px] w-full">
             <Image
                 src={src}
                 alt={alt}

@@ -98,7 +98,8 @@
     },
     "aboutPage": {
         "pageTitle": "Tentang Kami",
-        "title": "Tentang Firma Kami",
+        "titleWhite": "Tentang",
+        "titlePrimary": "ASP Law Firm",
         "desc": "Pelajari lebih lanjut tentang misi, nilai, dan dedikasi kami kepada klien."
     },
     "practiceAreasPage": {

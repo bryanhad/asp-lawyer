@@ -98,7 +98,8 @@
     },
     "aboutPage": {
         "pageTitle": "About Us",
-        "title": "About Our Firm",
+        "titleWhite": "About",
+        "titlePrimary": "ASP Law Firm",
         "desc": "Learn more about our mission, values, and dedication to our clients."
     },
     "practiceAreasPage": {

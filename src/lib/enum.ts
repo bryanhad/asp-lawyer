@@ -13,6 +13,7 @@ export enum LawyerTranslationKey {
     DEGREE = 'DEGREE',
     BIO = 'BIO',
     DESCRIPTION = 'DESCRIPTION',
+    QUOTE = 'QUOTE',
 }
 
 export enum PracticeAreaTranslationKey {

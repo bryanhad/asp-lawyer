@@ -1,8 +1,7 @@
-import { Locale } from '@/i18n/request'
-import { getLocale } from 'next-intl/server'
+import { getCurrentLocale } from '@/app/[locale]/layout'
+import { cache } from 'react'
 import { getPracticeAreasData } from './action'
 import ClientPracticeAreas from './client-practice-areas'
-import { cache } from 'react'
 
 export const fetchPracticeAreasPreviewData = cache(async () => {
     return await getPracticeAreasData()
@@ -10,8 +9,7 @@ export const fetchPracticeAreasPreviewData = cache(async () => {
 
 export default async function ServerPracticeAreas() {
     const data = await getPracticeAreasData()
-
-    const currentLocale = (await getLocale()) as Locale
+    const currentLocale = await getCurrentLocale()
 
     return <ClientPracticeAreas data={data} currentLocale={currentLocale} />
 }

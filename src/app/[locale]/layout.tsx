@@ -3,12 +3,13 @@ import { Toaster } from '@/components/ui/toaster'
 import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import type { Metadata } from 'next'
-import { getMessages } from 'next-intl/server'
+import { getLocale, getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import '../globals.css'
 import Providers from './providers'
 import { poppins } from './fonts'
 import Footer from '@/components/footer-components/footer'
+import { cache } from 'react'
 
 export const metadata: Metadata = {
     title: {
@@ -22,6 +23,10 @@ type RootLayoutProps = {
     children: React.ReactNode
     params: Promise<{ locale: Locale }>
 }
+
+export const getCurrentLocale = cache(async () => {
+    return await getLocale() as Locale
+})
 
 export default async function RootLayout({
     children,
@@ -40,9 +45,7 @@ export default async function RootLayout({
 
     return (
         <html lang={currentLocale} suppressHydrationWarning>
-            <body
-                className={`${poppins.className} antialiased`}
-            >
+            <body className={`${poppins.className} antialiased`}>
                 <Providers
                     intlMessages={messages}
                     initialLocale={currentLocale}
@@ -51,7 +54,7 @@ export default async function RootLayout({
                     <main className="flex min-h-screen flex-col">
                         {children}
                     </main>
-                    <Footer/>
+                    <Footer />
                 </Providers>
                 <Toaster />
             </body>

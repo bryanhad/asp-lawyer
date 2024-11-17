@@ -51,6 +51,16 @@ export const lawyersSeed: LawyerSeed[] = [
                 key: LawyerTranslationKey.DESCRIPTION,
                 value: 'Membantu dalam manajemen kasus dan pengorganisasian dokumen.',
             },
+            {
+                language: Language.EN,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'Our purpose is to deliver justice and provide our clients with innovative solutions to their most challenging legal matters.',
+            },
+            {
+                language: Language.ID,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'Tujuan kami adalah memberikan keadilan dan solusi inovatif untuk setiap tantangan hukum klien kami.',
+            },
         ],
     },
     {
@@ -102,6 +112,16 @@ export const lawyersSeed: LawyerSeed[] = [
                 key: LawyerTranslationKey.DESCRIPTION,
                 value: 'Mengelola dokumentasi hukum dan komunikasi dengan klien.',
             },
+            {
+                language: Language.EN,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'We believe in combining legal expertise with a client-first approach to build long-term trust and successful outcomes.',
+            },
+            {
+                language: Language.ID,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'Kami percaya pada kombinasi keahlian hukum dan pendekatan yang mengutamakan klien untuk membangun kepercayaan jangka panjang.',
+            },
         ],
     },
     {
@@ -152,6 +172,16 @@ export const lawyersSeed: LawyerSeed[] = [
                 language: Language.ID,
                 key: LawyerTranslationKey.DESCRIPTION,
                 value: 'Mengkhususkan diri dalam litigasi dan penyelesaian sengketa.',
+            },
+            {
+                language: Language.EN,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'Our mission is to advocate for fairness and integrity, ensuring every client feels empowered and represented with excellence.',
+            },
+            {
+                language: Language.ID,
+                key: LawyerTranslationKey.QUOTE,
+                value: 'Misi kami adalah memperjuangkan keadilan dan integritas, memastikan setiap klien merasa didukung dan direpresentasikan dengan keunggulan.',
             },
         ],
     },

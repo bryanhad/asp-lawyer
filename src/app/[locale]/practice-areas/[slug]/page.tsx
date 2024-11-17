@@ -2,15 +2,15 @@ import { BaseContainer } from '@/components/containers/base-container'
 import Section from '@/components/containers/section'
 import { Language } from '@/lib/enum'
 import { Metadata } from 'next'
-import { getLocale } from 'next-intl/server'
 import { cache } from 'react'
 import { getPracticeAreaPageContent } from '../action'
+import { getCurrentLocale } from '../../layout'
 
 type Props = {
     params: Promise<{ slug: string }>
 }
 const fetchPracticeAreaPageContent = cache(async (slug: string) => {
-    return await Promise.all([getPracticeAreaPageContent(slug), getLocale()])
+    return await Promise.all([getPracticeAreaPageContent(slug), getCurrentLocale()])
 })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
