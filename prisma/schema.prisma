@@ -52,6 +52,14 @@ model PracticeArea {
     @@map("practice_areas")
 }
 
+model Achievements {
+    id       String @id @default(cuid())
+    imageUrl String
+    order    Int @unique// order position in practice-areas page, caroucel, etc..
+
+    @@map("achievements")
+}
+
 model Member {
     id       String  @id @default(cuid())
     name     String

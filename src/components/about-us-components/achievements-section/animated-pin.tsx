@@ -3,17 +3,22 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import { achievementData } from './action'
+import { Locale } from '@/i18n/request'
 
 const PinContainer = ({
-    children,
+    desc,
     title,
     className,
+    src,
+    blurDataUrl,
     containerClassName,
-}: {
-    children: React.ReactNode
-    title?: string
+    currentLocale,
+}: achievementData & {
     className?: string
     containerClassName?: string
+    currentLocale: Locale
 }) => {
     const [transform, setTransform] = useState(
         'translate(-50%,-50%) rotateX(0deg)',
@@ -28,10 +33,7 @@ const PinContainer = ({
 
     return (
         <div
-            className={cn(
-                'group/pin relative z-50',
-                containerClassName,
-            )}
+            className={cn('group/pin relative z-50', containerClassName)}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >
@@ -49,24 +51,36 @@ const PinContainer = ({
                     className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-2xl bg-background shadow-[0_8px_16px_rgb(0_0_0/0.4)] transition duration-700 group-hover/pin:border-white/[0.2]"
                 >
                     <div className={cn('relative z-50', className)}>
-                        {children}
+                        <div className="mx-auto w-[300px]">
+                            <Image
+                                src={src}
+                                placeholder="blur"
+                                blurDataURL={blurDataUrl}
+                                alt=""
+                                width={300}
+                                height={300}
+                            />
+                            <div className="p-4">
+                                {currentLocale === 'en' ? title.en : title.id}
+                            </div>
+                        </div>{' '}
                     </div>
                     <div className="absolute inset-0 z-[60] bg-black bg-opacity-0 transition duration-500 group-hover/pin:bg-opacity-30 dark:bg-black dark:bg-opacity-0"></div>
                 </div>
             </div>
-            <PinPerspective title={title} />
+            <PinPerspective desc={currentLocale === 'en' ? desc.en : desc.id} />
         </div>
     )
 }
 
-export const PinPerspective = ({ title }: { title?: string }) => {
+export const PinPerspective = ({ desc }: { desc?: string }) => {
     return (
         <motion.div className="pointer-events-none z-[60] flex h-96 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100">
             <div className="inset-0 -mt-7 h-full w-full flex-none">
                 <div className="absolute inset-x-0 top-0 flex justify-center">
-                    <div className="relative z-10 max-w-[500px] flex items-center space-x-2 rounded-md bg-secondary/80 p-5 ring-1 ring-white/10 backdrop-blur-sm">
+                    <div className="relative z-10 flex max-w-[500px] items-center space-x-2 rounded-md bg-secondary/80 p-5 ring-1 ring-white/10 backdrop-blur-sm">
                         <span className="relative z-20 inline-block text-center text-sm text-foreground">
-                            {title}
+                            {desc}
                         </span>
 
                         {/* Cool Underlight Effect */}

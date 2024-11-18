@@ -3,7 +3,6 @@ import { BaseContainer } from '@/components/containers/base-container'
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import PageDescription from '@/components/any-page-components/page-description'
 import AchievementSection from '@/components/about-us-components/achievements-section'
 import LawyerQuotes from '@/components/about-us-components/lawyer-quotes'
 
@@ -37,7 +36,10 @@ export default async function AboutPage() {
                 }}
             />
             <LawyerQuotes />
-            <AchievementSection />
+            <AchievementSection
+                titleWhite={t('previewAchivements.titleWhite')}
+                titlePrimary={t('previewAchivements.titlePrimary')}
+            />
         </BaseContainer>
     )
 }

@@ -2,6 +2,7 @@ import {
     PracticeAreaTranslationKey,
     Language,
     LawyerTranslationKey,
+    AchievementsTranslationKey,
 } from '@/lib/enum'
 
 type TranslationSeed<TranslationKey> = {
@@ -21,9 +22,15 @@ export type LawyerSeed = {
     translations: TranslationSeed<LawyerTranslationKey>[]
 }
 
-export type PracticeArea = {
+export type PracticeAreaSeed = {
     slug: string
     order: number
     imageUrl: string
     translations: TranslationSeed<PracticeAreaTranslationKey>[]
+}
+
+export type AchievementsSeed = {
+    order: number
+    imageUrl: string
+    translations: TranslationSeed<AchievementsTranslationKey>[]
 }

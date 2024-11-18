@@ -1,10 +1,10 @@
 import { PracticeAreaTranslationKey, Language } from '../../../src/lib/enum'
-import { PracticeArea } from '../types'
+import { PracticeAreaSeed } from '../types'
 
-export const practiceAreaSeed: PracticeArea[] = [
+export const practiceAreaSeed: PracticeAreaSeed[] = [
     {
         slug: 'corporate-banking',
-        order: 1,
+        order: 5,
         imageUrl:
             'https://utfs.io/f/4YTZLQcHF0RYXKgIMBD0jgtPJHeMQbY2EOroZVI4BmaCLwD1',
         translations: [
@@ -429,7 +429,7 @@ export const practiceAreaSeed: PracticeArea[] = [
     },
     {
         slug: 'bankruptcy-law',
-        order: 5,
+        order: 1,
         imageUrl:
             'https://utfs.io/f/4YTZLQcHF0RYdc30iR2mcg8TAxuZ7joSfbs3Mv40w9YWdnkr',
         translations: [

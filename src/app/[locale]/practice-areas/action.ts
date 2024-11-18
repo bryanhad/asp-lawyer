@@ -40,7 +40,7 @@ export async function getPracticeAreaPageContent(slug: string) {
             FROM practice_areas AS pa
             LEFT JOIN translations AS t 
                 ON pa."id" = t."entityId" 
-                AND t."entityType" = ${EntityType.PracticeArea}
+                AND t."entityType" = ${EntityType.PRACTICE_AREA}
                 AND t."key" IN (${PracticeAreaTranslationKey.FULL_NAME}, ${PracticeAreaTranslationKey.CONTENT})
             WHERE 
                 pa."slug" = ${slug}

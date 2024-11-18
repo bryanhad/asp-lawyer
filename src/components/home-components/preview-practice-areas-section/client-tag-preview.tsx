@@ -18,38 +18,35 @@ export default function TagPreview({
     const t = useTranslations('commonWords')
     return (
         <div className="flex gap-2">
-            <div className="max-h-[500px] max-w-[200px] bg-red-400">
-                <Image
-                    src={imageUrl}
-                    alt={slug}
-                    width={400}
-                    height={200}
-                    placeholder="blur"
-                    blurDataURL={blurImageUrl}
-                    className="object-cover object-center"
-                    priority
-                />
-            </div>
-            <div className="flex w-full flex-col gap-4 rounded-lg border border-input bg-background p-6">
-                <div className="flex items-center gap-4">
-                    {/* <div className={cn('size-10 rounded-full grid place-items-center text-white', color)} >
-                {icon}
-                </div> */}
+            <div className="flex w-full gap-4 overflow-hidden rounded-lg border border-input bg-background">
+                <div className="relative min-w-[200px]">
+                    <Image
+                        src={imageUrl}
+                        alt={slug}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 700px"
+                        placeholder="blur"
+                        blurDataURL={blurImageUrl}
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+                <div className="flex flex-col gap-4 p-6">
                     <h3 className="text-xl font-bold">
                         {currentLocale === 'en'
                             ? shortName.en || fullName.en
                             : shortName.id || fullName.id}
                     </h3>
+                    <p className="line-clamp-2 text-muted-foreground">
+                        {currentLocale === 'en' ? desc.en : desc.id}
+                    </p>
+                    <Link
+                        className="mt-3 text-blue-600 hover:text-blue-500 dark:text-primary dark:hover:brightness-110 duration-200"
+                        href={`/practice-areas/${slug}`}
+                    >
+                        {t('learnMore')}
+                    </Link>
                 </div>
-                <p className="line-clamp-2 text-muted-foreground">
-                    {currentLocale === 'en' ? desc.en : desc.id}
-                </p>
-                <Link
-                    className="mt-3 text-blue-600"
-                    href={`/practice-areas/${slug}`}
-                >
-                    {t('learnMore')}
-                </Link>
             </div>
         </div>
     )

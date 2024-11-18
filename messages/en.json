@@ -115,6 +115,10 @@
             "1": "Provide high-quality legal services tailored to client needs.",
             "2": "Uphold professional ethics and prioritize client trust.",
             "3": "Foster a culture of continuous learning and legal expertise development."
+        },
+        "previewAchivements": {
+            "titleWhite": "Our",
+            "titlePrimary": "Achievements"
         }
     },
     "practiceAreasPage": {

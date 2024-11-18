@@ -62,7 +62,7 @@ export async function getLawyersWithQuote() {
             FROM lawyers AS l
             LEFT JOIN translations AS t 
                 ON l."id" = t."entityId" 
-                AND t."entityType" = ${EntityType.Lawyer}
+                AND t."entityType" = ${EntityType.LAWYER}
                 AND t."key" IN (
                     ${LawyerTranslationKey.DEGREE}, 
                     ${LawyerTranslationKey.POSITION}, 

@@ -2,9 +2,11 @@ import { PrismaClient } from '@prisma/client'
 import { seedLawyers } from './functions/lawyers'
 import { seedPracticeAreas } from './functions/practice-areas'
 import {
+    seedAchievementTranslations,
     seedLawyerTranslations,
     seedPracticeAreaTranslations,
 } from './functions/translations'
+import { seedAchievements } from './functions/achievements'
 
 const prisma = new PrismaClient()
 
@@ -21,6 +23,11 @@ async function main() {
     const upsertedPracticeAreas = await seedPracticeAreas(prisma)
     console.log(`Successfully seed 'practice_areas' table!`)
 
+    // Step 3: Upsert all practiceAreas concurrently
+    console.log(`Seeding 'achievements' table...`)
+    const upsertedAchievements = await seedAchievements(prisma)
+    console.log(`Successfully seed 'achievements' table!`)
+
     // Lawyer Translation batch
     const lawyerTranslationPromises = await seedLawyerTranslations(
         prisma,
@@ -31,11 +38,19 @@ async function main() {
         prisma,
         upsertedPracticeAreas,
     )
+
+    // Achievements Translation batch
+    const achievementTranslationPromises = await seedAchievementTranslations(
+        prisma,
+        upsertedAchievements,
+    )
+
     // Step 3: Execute all translation upserts concurrently
     console.log(`Seeding 'translations' table...`)
     await Promise.all([
         ...lawyerTranslationPromises,
         ...practiceAreaTranslationPromises,
+        ...achievementTranslationPromises,
     ])
     console.log(`Successfully seed 'translations' table!`)
 }

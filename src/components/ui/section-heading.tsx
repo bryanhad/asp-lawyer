@@ -9,6 +9,7 @@ type Props = {
     side?: 'left' | 'right' | 'center'
     textAlign?: 'left' | 'right' | 'center'
     oneLine?: boolean
+    flipText?: boolean
 }
 
 export default function SectionHeading({
@@ -18,8 +19,15 @@ export default function SectionHeading({
     className,
     textAlign,
     oneLine = false,
+    flipText = false,
 }: Props) {
-    const href = `${cleanString(titleTop).toLowerCase().split(' ').join('-')}-${cleanString(titleBottom).toLowerCase().split(' ').join('-')}`
+    const href = `${cleanString(!flipText ? titleTop : titleBottom)
+        .toLowerCase()
+        .split(' ')
+        .join('-')}-${cleanString(!flipText ? titleBottom : titleTop)
+        .toLowerCase()
+        .split(' ')
+        .join('-')}`
 
     return (
         <div
@@ -58,16 +66,29 @@ export default function SectionHeading({
             >
                 {oneLine ? (
                     <LinkSection
-                        titleTop={titleTop}
-                        titleBottom={titleBottom}
+                        titleTop={!flipText ? titleTop : titleBottom}
+                        titleBottom={!flipText ? titleBottom : titleTop}
                         size={24}
                     >
-                        <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
-                            {titleTop}
-                        </span>
-                        <span className="text-4xl text-primary lg:text-5xl xl:text-6xl ml-4">
-                            {titleBottom}
-                        </span>
+                        {!flipText ? (
+                            <>
+                                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                                    {titleTop}
+                                </span>
+                                <span className="ml-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
+                                    {titleBottom}
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                <span className="mr-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
+                                    {titleBottom}
+                                </span>
+                                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                                    {titleTop}
+                                </span>
+                            </>
+                        )}
                     </LinkSection>
                 ) : (
                     <>
@@ -75,8 +96,8 @@ export default function SectionHeading({
                             {titleTop}
                         </span>
                         <LinkSection
-                            titleTop={titleTop}
-                            titleBottom={titleBottom}
+                            titleTop={!flipText ? titleTop : titleBottom}
+                            titleBottom={!flipText ? titleBottom : titleTop}
                             size={24}
                         >
                             <span className="text-4xl text-primary lg:text-5xl xl:text-6xl">

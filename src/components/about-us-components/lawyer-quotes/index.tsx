@@ -18,7 +18,7 @@ export default async function LawyerQuotes() {
 
     return (
         <div className="w-full bg-secondary">
-            <Section className="mx-auto">
+            <Section className="mx-auto" lessYSpacing>
                 <Suspense fallback={<LawyerQuotesSkeleton />}>
                     <AnimatedTestimonials
                         cardItems={lawyersWithQuote}

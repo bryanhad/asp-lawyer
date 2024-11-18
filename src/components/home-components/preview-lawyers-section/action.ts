@@ -48,7 +48,7 @@ export async function getPreviewLawyersData() {
             FROM lawyers AS l
             LEFT JOIN translations AS t 
                 ON l."id" = t."entityId" 
-                AND t."entityType" = ${EntityType.Lawyer}
+                AND t."entityType" = ${EntityType.LAWYER}
                 AND t."key" IN (${LawyerTranslationKey.DEGREE}, ${LawyerTranslationKey.POSITION})
             GROUP BY l."slug", l."email", l."linkedInUrl", l."name", l."order", l."imageUrl"
             ORDER BY l."order"
