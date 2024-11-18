@@ -21,7 +21,12 @@
         "titleWhite": "Menyediakan",
         "titlePrimary1": "Solusi",
         "titlePrimary2": "Hukum",
-        "titlePrimary": {
+        "titlePrimaryMobile": {
+            "1": "Solusi",
+            "2": "Panduan",
+            "3": "Kepastian"
+        },
+        "titlePrimaryDesktop": {
             "1": "Solusi Hukum",
             "2": "Panduan Tepat",
             "3": "Kepastian Hukum"

@@ -3,20 +3,15 @@ import { cn } from '@/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import LinkButton from '../ui/link-button'
-import { FlipWords } from '../ui/flip-words'
+import TypeWriter from './typewriter'
 
 export default async function Hero() {
     const t = await getTranslations('homePage')
-    const words = [
-        t('titlePrimary.1'),
-        t('titlePrimary.2'),
-        t('titlePrimary.3'),
-    ]
 
     return (
         <div className="w-full overflow-hidden bg-background-suit">
-            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 py-20 md:grid-cols-2 md:py-24">
-                <div className="relative z-30 my-16 max-w-3xl space-y-6 lg:mt-24">
+            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 py-20 md:grid-cols-3 md:py-24">
+                <div className="relative z-30 my-16 max-w-3xl space-y-6 md:col-span-2 lg:mt-24">
                     <div className="space-y-4 lg:space-y-6">
                         <h1
                             className={cn(
@@ -26,9 +21,17 @@ export default async function Hero() {
                         >
                             {t('titleWhite')}
                             <br />
-                            <FlipWords
-                                words={words}
-                                className="text-primary dark:text-primary"
+                            <TypeWriter
+                                mobile={[
+                                    t('titlePrimaryMobile.1'),
+                                    t('titlePrimaryMobile.2'),
+                                    t('titlePrimaryMobile.3'),
+                                ]}
+                                desktop={[
+                                    t('titlePrimaryDesktop.1'),
+                                    t('titlePrimaryDesktop.2'),
+                                    t('titlePrimaryDesktop.3'),
+                                ]}
                             />
                         </h1>
                         <h2
@@ -41,7 +44,7 @@ export default async function Hero() {
                         </h2>
                     </div>
 
-                    <p className="max-w-xl text-base text-slate-400">
+                    <p className="max-w-xl text-sm md:text-base text-slate-400">
                         {t('desc')}
                     </p>
 

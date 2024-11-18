@@ -1,12 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { lawyersSeed } from '../data/lawyers'
+import { getPrivateUrl } from './util'
 
 export async function seedLawyers(prisma: PrismaClient) {
     const upsertedLawyers = await Promise.all(
         lawyersSeed.map((data) => {
-            const imageUrlSplit = data.imageUrl.split('/f/')
-            imageUrlSplit.splice(1, 0, `a/${process.env.UPLOADTHING_APP_ID}`)
-            const uploadThingImageUrl = imageUrlSplit.join('/')
+            const uploadThingImageUrl = getPrivateUrl(data.imageUrl)
 
             return prisma.lawyer.upsert({
                 where: { slug: data.slug },

@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import { getTranslations } from 'next-intl/server'
 import SelfGlazingStats from './self-glazing-stats'
 
-export default async function PreviewAboutUs2() {
+export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')
 
     return (

@@ -24,5 +24,6 @@ export type LawyerSeed = {
 export type PracticeArea = {
     slug: string
     order: number
+    imageUrl: string
     translations: TranslationSeed<PracticeAreaTranslationKey>[]
 }

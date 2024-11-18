@@ -2,20 +2,25 @@
 
 import { EntityType, Language, PracticeAreaTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
+import { getBlurredImageUrls } from '@/lib/server-utils'
 import { PracticeArea } from '@prisma/client'
 
-export type PracticeAreaPreviewData = Pick<PracticeArea, 'slug'> & {
+export type PracticeAreaPreviewData = Pick<
+    PracticeArea,
+    'slug' | 'imageUrl'
+> & {
     fullName: { id: string; en: string }
     shortName: { id: string | null; en: string | null }
     // shortName: { id: string; en: string }
     desc: { id: string; en: string }
+    blurImageUrl: string
 }
 
 export async function getPracticeAreasData() {
     try {
         const query: PracticeAreaPreviewData[] = await prisma.$queryRaw`
             SELECT 
-                pa."slug",
+                pa."slug", pa."imageUrl",
                 -- get fullName: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
@@ -58,11 +63,28 @@ export async function getPracticeAreasData() {
                     ${PracticeAreaTranslationKey.DESC}, 
                     ${PracticeAreaTranslationKey.SHORT_NAME}
                 )
-            GROUP BY pa."slug", pa."order"
+            GROUP BY pa."slug", pa."order", pa."imageUrl"
             ORDER BY pa."order"
         `
 
-        return query
+        // Step 1: Collect image URLs
+        const imageUrls = query.map((pa) => pa.imageUrl)
+
+        // Step 2: Get blurred images for all URLs concurrently
+        const blurredImageUrls = await getBlurredImageUrls(imageUrls)
+
+        // Step 3: add blurred images to final data
+        const data = query.map((pa, i) => {
+            const result = {
+                ...pa,
+                imageSrc: imageUrls[i],
+                blurImageUrl: blurredImageUrls[i],
+            }
+
+            return result
+        })
+
+        return data
     } catch (err) {
         console.error(err)
         throw new Error('Internal Server Error')

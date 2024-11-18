@@ -62,8 +62,8 @@ const AnimatedCard = ({
             : cardItems[active].quote.id
 
     return (
-        <div className="relative z-10 mx-auto max-w-sm px-4 py-10 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-            <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
+        <div className="relative z-10 mx-auto max-w-sm px-4 md:py-10 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+            <div className="relative grid grid-cols-1 gap-5 md:gap-20 md:grid-cols-2">
                 <div onClick={handleNext} className="cursor-pointer">
                     <div className="relative h-80 w-full">
                         <AnimatePresence>
@@ -133,7 +133,7 @@ const AnimatedCard = ({
                             ease: 'easeInOut',
                         }}
                     >
-                        <h3 className="space-x-2 text-2xl font-light text-black dark:text-white">
+                        <h3 className="space-x-2 text-xl md:text-2xl font-light text-black dark:text-white">
                             <span className='text-primary font-medium'>{cardItems[active].name}</span>
                             <span className="text-muted-foreground">
                                 {currentLocale === 'en'
@@ -141,7 +141,7 @@ const AnimatedCard = ({
                                     : cardItems[active].degree.id}
                             </span>
                         </h3>
-                        <p className="text-gray-500 dark:text-neutral-500 px-2 py-1 rounded-full border max-w-max mt-1">
+                        <p className="text-gray-500 dark:text-neutral-500 max-w-max mt-1">
                             {currentLocale === 'en'
                                 ? cardItems[active].position.en
                                 : cardItems[active].position.id}

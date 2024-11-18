@@ -5,6 +5,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'corporate-banking',
         order: 1,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYXKgIMBD0jgtPJHeMQbY2EOroZVI4BmaCLwD1',
         translations: [
             {
                 language: Language.EN,
@@ -104,6 +106,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'money-laundering',
         order: 2,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY7k6Xk75DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
         translations: [
             {
                 language: Language.EN,
@@ -118,7 +122,7 @@ export const practiceAreaSeed: PracticeArea[] = [
             {
                 language: Language.EN,
                 key: PracticeAreaTranslationKey.SHORT_NAME,
-                value: 'Anti-Corruption & Money Laundering',
+                value: 'Money Laundering & Corruption',
             },
             {
                 language: Language.ID,
@@ -216,6 +220,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'intellectual-property-rights',
         order: 3,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY3bvtfm8idCRQ3mgMFkBVD6XbeHvSy7Pj9o10',
         translations: [
             {
                 language: Language.EN,
@@ -314,6 +320,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'arbitration',
         order: 4,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RY9EkkeuxS3Zi2g7ELTK8jnM4ANh1apPwdDB0R',
         translations: [
             {
                 language: Language.EN,
@@ -422,6 +430,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'bankruptcy-law',
         order: 5,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYdc30iR2mcg8TAxuZ7joSfbs3Mv40w9YWdnkr',
         translations: [
             {
                 language: Language.EN,
@@ -540,6 +550,8 @@ export const practiceAreaSeed: PracticeArea[] = [
     {
         slug: 'litigation',
         order: 6,
+        imageUrl:
+            'https://utfs.io/f/4YTZLQcHF0RYKS5SHowsxBAKZnjMGWmJqyfbcgzHuR7r0CtN',
         translations: [
             {
                 language: Language.EN,

@@ -44,9 +44,10 @@ model Translation {
 }
 
 model PracticeArea {
-    id    String @id @default(cuid())
-    slug  String @unique
-    order Int // order position in practice-areas page, caroucel, etc..
+    id       String @id @default(cuid())
+    slug     String @unique
+    imageUrl String
+    order    Int // order position in practice-areas page, caroucel, etc..
 
     @@map("practice_areas")
 }
