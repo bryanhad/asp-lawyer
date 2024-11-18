@@ -1,6 +1,5 @@
 'use client'
 
-import { PracticeAreaPreviewData } from './action'
 import { Button } from '@/components/ui/button'
 import {
     Carousel,
@@ -11,8 +10,6 @@ import {
 } from '@/components/ui/carousel'
 import { Locale } from '@/i18n/request'
 import { cn } from '@/lib/utils'
-import { ReactNode, useState } from 'react'
-import TagPreview from './client-tag-preview'
 import {
     BadgeDollarSign,
     Building2,
@@ -21,14 +18,23 @@ import {
     Scale,
     Shield,
 } from 'lucide-react'
+import { ReactNode, useState } from 'react'
+import { PracticeAreaPreviewData } from './action'
+import TagPreview from './client-tag-preview'
 
 type Props = {
-    data: PracticeAreaPreviewData[]
+    practiceAreas: PracticeAreaPreviewData[]
     currentLocale: Locale
 }
 
-export default function ClientPracticeAreas({ data, currentLocale }: Props) {
-    const [activeTag, setActiveTag] = useState<string>(data[0].slug)
+export default function ClientPracticeAreas({
+    practiceAreas,
+    currentLocale,
+}: Props) {
+    const [activeTag, setActiveTag] = useState<string>(practiceAreas[0].slug)
+    const activeTagItem = practiceAreas.find(
+        (pa) => pa.slug === activeTag,
+    ) as PracticeAreaPreviewData
 
     function handleClick(tagTitle: string) {
         setActiveTag(tagTitle)
@@ -38,7 +44,7 @@ export default function ClientPracticeAreas({ data, currentLocale }: Props) {
         <div className="flex w-full flex-col gap-6 max-md:items-center">
             <>
                 <div className="hidden grid-cols-2 justify-center gap-3 md:grid xl:gap-4">
-                    {data.map((pa) => (
+                    {practiceAreas.map((pa) => (
                         <PracticeAreaTag
                             {...pa}
                             key={pa.slug}
@@ -50,11 +56,11 @@ export default function ClientPracticeAreas({ data, currentLocale }: Props) {
                 </div>
                 <Carousel className="relative w-full max-w-[88%] md:hidden">
                     <CarouselContent className="-ml-0">
-                        {data.map((pa, index) => (
+                        {practiceAreas.map((pa, index) => (
                             <CarouselItem
                                 key={pa.slug}
                                 className={cn('basis-auto pl-3', {
-                                    'mr-3': data.length - 1 === index,
+                                    'mr-3': practiceAreas.length - 1 === index,
                                 })}
                             >
                                 <PracticeAreaTag
@@ -72,11 +78,9 @@ export default function ClientPracticeAreas({ data, currentLocale }: Props) {
                     <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-3 bg-gradient-to-r from-secondary to-transparent"></div>
                     <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-3 bg-gradient-to-l from-secondary to-transparent"></div>
                 </Carousel>
-                {activeTag && (
-                    <TagPreview
-                        {...data.filter((data) => data.slug === activeTag)[0]}
-                    />
-                )}
+                {/* The Preview Component showing the Active Practice Areas Details (title, desc, image, etc..) */}
+                {/* Reset TagPreview component when activeTag changes */}
+                <TagPreview key={activeTagItem.slug} {...activeTagItem} />
             </>
         </div>
     )
@@ -112,7 +116,9 @@ function PracticeAreaTag({
             icon = <Scale className="shrink-0 text-primary" size={30} />
             break
         case 'bankruptcy-law':
-            icon = <BadgeDollarSign className="shrink-0 text-primary" size={30} />
+            icon = (
+                <BadgeDollarSign className="shrink-0 text-primary" size={30} />
+            )
             break
         case 'litigation':
             icon = <Gavel className="shrink-0 text-primary" size={30} />
@@ -124,9 +130,9 @@ function PracticeAreaTag({
             key={pa.key}
             onClick={() => onClick(pa.slug)}
             className={cn(
-                'rounded-md border border-input bg-background h-11',
+                'h-11 rounded-md border border-input bg-background',
                 {
-                    'border border-stone-500':
+                    'border border-primary dark:border-stone-500':
                         activeTag === pa.slug,
                 },
                 className,
@@ -134,8 +140,7 @@ function PracticeAreaTag({
         >
             <div className="flex w-full items-center justify-start gap-2">
                 {icon}
-                {/* smaller screen size */}
-                <p className="truncate leading-none pt-[1px]">
+                <p className="truncate pt-[1px] leading-none">
                     {currentLocale === 'en'
                         ? !!pa.shortName.en
                             ? pa.shortName.en
@@ -144,10 +149,6 @@ function PracticeAreaTag({
                           ? pa.shortName.id
                           : pa.fullName.id}
                 </p>
-                {/* medium screen size */}
-                {/* <p className="hidden md:block">
-                    {currentLocale === 'en' ? pa.fullName.en : pa.fullName.id}
-                </p> */}
             </div>
         </Button>
     )

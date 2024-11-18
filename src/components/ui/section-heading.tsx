@@ -72,7 +72,7 @@ export default function SectionHeading({
                     >
                         {!flipText ? (
                             <>
-                                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                                <span className="text-4xl text-secondary-foreground lg:text-4xl xl:text-5xl">
                                     {titleTop}
                                 </span>
                                 <span className="ml-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
@@ -84,7 +84,7 @@ export default function SectionHeading({
                                 <span className="mr-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
                                     {titleBottom}
                                 </span>
-                                <span className="text-3xl text-secondary-foreground lg:text-3xl xl:text-5xl">
+                                <span className="text-3xl text-secondary-foreground lg:text-4xl xl:text-5xl">
                                     {titleTop}
                                 </span>
                             </>

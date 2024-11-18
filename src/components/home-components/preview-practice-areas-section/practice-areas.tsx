@@ -8,8 +8,13 @@ export const fetchPracticeAreasPreviewData = cache(async () => {
 })
 
 export default async function ServerPracticeAreas() {
-    const data = await getPracticeAreasData()
+    const practiceAreasData = await getPracticeAreasData()
     const currentLocale = await getCurrentLocale()
 
-    return <ClientPracticeAreas data={data} currentLocale={currentLocale} />
+    return (
+        <ClientPracticeAreas
+            practiceAreas={practiceAreasData}
+            currentLocale={currentLocale}
+        />
+    )
 }

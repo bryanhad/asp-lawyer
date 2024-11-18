@@ -1,34 +1,26 @@
 import Image, { ImageProps } from 'next/image'
-import { getPlaiceholder } from 'plaiceholder'
-import fs from 'fs/promises'
-import path from 'path'
+import { getBlurredImageUrl } from '@/lib/server-utils'
 
-type Props = {} & ImageProps
+type Props = ImageProps & { src: string }
 
 export default async function ImageWithBlur({
     src,
     placeholder = 'blur',
     alt,
-    height, 
+    height,
     width,
     ...props
 }: Props) {
-    // const imagePath = path.join(process.cwd(), 'public', 'lawyers', 'ratna.png');
-    const imageSource = typeof src === 'string' ? src.split('/').splice(1) : ['']
-
-    const imagePath = path.join(process.cwd(), 'public', ...imageSource)
-
-    const imageBuffer = await fs.readFile(imagePath)
-    const { base64 } = await getPlaiceholder(imageBuffer)
+    const blurImage = await getBlurredImageUrl(src)
 
     return (
         <Image
             alt={alt}
             src={src}
-            height={height} 
+            height={height}
             width={width}
             placeholder={placeholder}
-            blurDataURL={base64}
+            blurDataURL={blurImage}
             {...props}
         />
     )

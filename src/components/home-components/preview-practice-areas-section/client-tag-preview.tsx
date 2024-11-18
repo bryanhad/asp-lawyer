@@ -5,6 +5,8 @@ import { PracticeAreaPreviewData } from './action'
 import { useLocale, useTranslations } from 'next-intl'
 import { Locale } from '@/i18n/request'
 import Image from 'next/image'
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export default function TagPreview({
     fullName,
@@ -14,34 +16,41 @@ export default function TagPreview({
     blurImageUrl,
     slug,
 }: PracticeAreaPreviewData) {
+    const [isLoading, setIsLoading] = useState(true)
     const currentLocale = useLocale() as Locale
     const t = useTranslations('commonWords')
+
     return (
         <div className="flex gap-2">
-            <div className="flex w-full gap-4 overflow-hidden rounded-lg border border-input bg-background">
-                <div className="relative min-w-[200px]">
+            <div className="relative flex w-full gap-4 overflow-hidden rounded-lg border border-input bg-background">
+                <div className="absolute inset-0 h-full w-full max-lg:brightness-[25%] lg:relative lg:max-w-[200px] lg:min-w-[200px] dark:lg:dark:brightness-75">
+                    {/* Main Image */}
                     <Image
                         src={imageUrl}
                         alt={slug}
                         fill
-                        sizes="(max-width: 768px) 100vw, 700px"
+                        sizes="(max-width: 768px) 100vw, 200px"
                         placeholder="blur"
                         blurDataURL={blurImageUrl}
-                        className="object-cover"
+                        className={cn(
+                            'object-cover transition-all duration-300',
+                            isLoading ? 'blur-sm' : 'blur-0',
+                        )}
+                        onLoadingComplete={() => setIsLoading(false)}
                         priority
                     />
                 </div>
-                <div className="flex flex-col gap-4 p-6">
-                    <h3 className="text-xl font-bold">
+                <div className="relative z-10 flex flex-col gap-4 p-6">
+                    <h3 className="text-xl font-bold max-lg:text-white">
                         {currentLocale === 'en'
                             ? shortName.en || fullName.en
                             : shortName.id || fullName.id}
                     </h3>
-                    <p className="line-clamp-2 text-muted-foreground">
+                    <p className="line-clamp-2 max-lg:text-white/80">
                         {currentLocale === 'en' ? desc.en : desc.id}
                     </p>
                     <Link
-                        className="mt-3 text-blue-600 hover:text-blue-500 dark:text-primary dark:hover:brightness-110 duration-200"
+                        className="mt-3 text-primary underline underline-offset-4 duration-200 hover:brightness-110"
                         href={`/practice-areas/${slug}`}
                     >
                         {t('learnMore')}

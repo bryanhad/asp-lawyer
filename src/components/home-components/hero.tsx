@@ -21,18 +21,20 @@ export default async function Hero() {
                         >
                             {t('titleWhite')}
                             <br />
-                            <TypeWriter
-                                mobile={[
-                                    t('titlePrimaryMobile.1'),
-                                    t('titlePrimaryMobile.2'),
-                                    t('titlePrimaryMobile.3'),
-                                ]}
-                                desktop={[
-                                    t('titlePrimaryDesktop.1'),
-                                    t('titlePrimaryDesktop.2'),
-                                    t('titlePrimaryDesktop.3'),
-                                ]}
-                            />
+                            <div className='h-20 min-h-20'>
+                                <TypeWriter
+                                    mobile={[
+                                        t('titlePrimaryMobile.1'),
+                                        t('titlePrimaryMobile.2'),
+                                        t('titlePrimaryMobile.3'),
+                                    ]}
+                                    desktop={[
+                                        t('titlePrimaryDesktop.1'),
+                                        t('titlePrimaryDesktop.2'),
+                                        t('titlePrimaryDesktop.3'),
+                                    ]}
+                                />
+                            </div>
                         </h1>
                         <h2
                             className={cn(
@@ -44,7 +46,7 @@ export default async function Hero() {
                         </h2>
                     </div>
 
-                    <p className="max-w-xl text-sm md:text-base text-slate-400">
+                    <p className="max-w-xl text-sm text-slate-400 md:text-base">
                         {t('desc')}
                     </p>
 

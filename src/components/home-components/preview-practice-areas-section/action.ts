@@ -11,7 +11,6 @@ export type PracticeAreaPreviewData = Pick<
 > & {
     fullName: { id: string; en: string }
     shortName: { id: string | null; en: string | null }
-    // shortName: { id: string; en: string }
     desc: { id: string; en: string }
     blurImageUrl: string
 }

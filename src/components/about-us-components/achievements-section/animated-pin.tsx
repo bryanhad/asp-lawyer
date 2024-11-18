@@ -56,9 +56,10 @@ const PinContainer = ({
                                 src={src}
                                 placeholder="blur"
                                 blurDataURL={blurDataUrl}
-                                alt=""
+                                alt={`Picture of "${title}"`}
                                 width={300}
                                 height={300}
+                                className='dark:brightness-95'
                             />
                             <div className="p-4">
                                 {currentLocale === 'en' ? title.en : title.id}

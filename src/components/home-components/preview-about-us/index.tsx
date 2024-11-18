@@ -15,7 +15,7 @@ export default async function PreviewAboutUs() {
                 {/* GRID 1 */}
                 <ImageWithBlur
                     className="rounded-xl"
-                    src={'/home-page/squad.webp'}
+                    src={`https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`}
                     alt="The SQUAD"
                     width={649}
                     height={320}

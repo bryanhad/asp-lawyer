@@ -1,10 +1,10 @@
-import VisionAndMissonSection from '@/components/about-us-components/vision-and-mission-section'
 import { BaseContainer } from '@/components/containers/base-container'
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import AchievementSection from '@/components/about-us-components/achievements-section'
 import LawyerQuotes from '@/components/about-us-components/lawyer-quotes'
+import VisionAndMissonSection from '@/components/about-us-components/vision-and-mission-section'
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('aboutPage')
@@ -26,13 +26,19 @@ export default async function AboutPage() {
                 titlePrimary={t('titlePrimary')}
             />
             <VisionAndMissonSection
+                titleWhite={t('previewVisionAndMission.titleWhite')}
+                titlePrimary={t('previewVisionAndMission.titlePrimary')}
                 vision={{
-                    title: t('vision.title'),
-                    desc: t('vision.desc'),
+                    title: t('previewVisionAndMission.vision.title'),
+                    desc: t('previewVisionAndMission.vision.desc'),
                 }}
                 mission={{
-                    title: t('mission.title'),
-                    desc: [t('mission.1'), t('mission.2'), t('mission.3')],
+                    title: t('previewVisionAndMission.mission.title'),
+                    desc: [
+                        t('previewVisionAndMission.mission.1'),
+                        t('previewVisionAndMission.mission.2'),
+                        t('previewVisionAndMission.mission.3'),
+                    ],
                 }}
             />
             <LawyerQuotes />

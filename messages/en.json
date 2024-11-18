@@ -106,15 +106,19 @@
         "titleWhite": "About",
         "titlePrimary": "ASP Law Firm",
         "desc": "is committed to providing practical legal solutions tailored to our clients' needs. Backed by expertise and a deep understanding of Indonesia's evolving legal landscape, our experienced team ensures reliable and ethical service. Guided by professional integrity and a results-driven approach, we deliver the legal solutions our clients trust.",
-        "vision": {
-            "title": "Vision",
-            "desc": "To be a trusted and leading law firm, delivering innovative legal solutions with integrity and excellence."
-        },
-        "mission": {
-            "title": "Mission",
-            "1": "Provide high-quality legal services tailored to client needs.",
-            "2": "Uphold professional ethics and prioritize client trust.",
-            "3": "Foster a culture of continuous learning and legal expertise development."
+        "previewVisionAndMission": {
+            "titleWhite": "Our Vision",
+            "titlePrimary": "& Mission",
+            "vision": {
+                "title": "Vision",
+                "desc": "To be a trusted and leading law firm, delivering innovative legal solutions with integrity and excellence."
+            },
+            "mission": {
+                "title": "Mission",
+                "1": "Provide high-quality legal services tailored to client needs.",
+                "2": "Uphold professional ethics and prioritize client trust.",
+                "3": "Foster a culture of continuous learning and legal expertise development."
+            }
         },
         "previewAchivements": {
             "titleWhite": "Our",
