@@ -14,7 +14,7 @@ async function main() {
     // Update each lawyer's imageUrl in the database
     await Promise.all(
         imgUploadResponses.map((img) =>
-            prisma.lawyer.update({
+            prisma.member.update({
                 where: { slug: img.slug },
                 data: { imageUrl: img.url },
             }),
