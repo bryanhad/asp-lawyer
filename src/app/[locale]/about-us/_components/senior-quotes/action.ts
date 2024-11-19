@@ -2,14 +2,14 @@
 
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
-import { Lawyer } from '@prisma/client'
+import { Member } from '@prisma/client'
 
-export type PracticeAreaPageData = Pick<Lawyer, 'name' | 'imageUrl'> & {
+export type PracticeAreaPageData = Pick<Member, 'name' | 'imageUrl'> & {
     fullName: { id: string; en: string }
     content: { id: string; en: string }
 }
 
-type QueryResult = Pick<Lawyer, 'slug' | 'name'> & {
+type QueryResult = Pick<Member, 'slug' | 'name'> & {
     position: { id: string; en: string }
     degree: { id: string; en: string }
     quote: { id?: string; en?: string }

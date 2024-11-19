@@ -3,10 +3,10 @@
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { getBlurredImageUrls } from '@/lib/server-utils'
-import { Lawyer } from '@prisma/client'
+import { Member } from '@prisma/client'
 
 type LawyerWithTranslations = Pick<
-    Lawyer,
+Member,
     'slug' | 'email' | 'linkedInUrl' | 'name' | 'imageUrl'
 > & {
     position: { id: string; en: string }
