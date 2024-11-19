@@ -1,9 +1,9 @@
 import Section from '@/components/containers/section'
 import SectionHeading from '@/components/ui/section-heading'
-import { getPageTranslations } from '../../page'
+import { getTranslations } from 'next-intl/server'
 
 export default async function VisionAndMissonSection() {
-    const t = await getPageTranslations()
+    const t = await getTranslations('aboutPage')
     
     return (
         <Section className="grid grid-cols-1 gap-6 lg:grid-cols-2" lessYSpacing>

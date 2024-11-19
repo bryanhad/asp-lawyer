@@ -4,9 +4,10 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import VisionAndMissonSection from './_components/vision-and-mission'
 import SeniorQuotesSection from './_components/senior-quotes'
-import { cache } from 'react'
 import AchievementSection from './_components/achievements'
 
+
+// fix this multiple getTranslations, it is inside the childrens too.. look it up
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('aboutPage')
 
@@ -15,12 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export const getPageTranslations = cache(async () => {
-    return await getTranslations('aboutPage')
-})
 
 export default async function AboutPage() {
-    const t = await getPageTranslations()
+    const t = await getTranslations('aboutPage')
 
     return (
         <BaseContainer>

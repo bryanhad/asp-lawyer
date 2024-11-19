@@ -4,11 +4,11 @@ import SectionHeading from '@/components/ui/section-heading'
 import FetchComponent from './fetch-component'
 import { Suspense } from 'react'
 import SkeletonFallback from './skeleton'
-import { getPageTranslations } from '../../page'
+import { getTranslations } from 'next-intl/server'
 
 export default async function AchievementSection() {
     const currentLocale = await getCurrentLocale()
-    const t = await getPageTranslations()
+    const t = await getTranslations('aboutPage')
 
     return (
         <Section className="space-y-6" lessYSpacing>
