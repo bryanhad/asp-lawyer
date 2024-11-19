@@ -1,6 +1,6 @@
 'use server'
 
-import { EntityType, Language, LawyerTranslationKey } from '@/lib/enum'
+import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { Lawyer } from '@prisma/client'
 
@@ -27,44 +27,44 @@ export async function getData() {
                 -- get position: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.POSITION} AND t."language" = ${Language.ID} 
+                        WHEN t."key" = ${MemberTranslationKey.POSITION} AND t."language" = ${Language.ID} 
                         THEN t."value" 
                     END),
                     'en', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.POSITION} AND t."language" = ${Language.EN} 
+                        WHEN t."key" = ${MemberTranslationKey.POSITION} AND t."language" = ${Language.EN} 
                         THEN t."value" 
                     END)
                 ) AS position,
                 -- get degree: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.DEGREE} AND t."language" = ${Language.ID} 
+                        WHEN t."key" = ${MemberTranslationKey.DEGREE} AND t."language" = ${Language.ID} 
                         THEN t."value" 
                     END),
                     'en', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.DEGREE} AND t."language" = ${Language.EN} 
+                        WHEN t."key" = ${MemberTranslationKey.DEGREE} AND t."language" = ${Language.EN} 
                         THEN t."value" 
                     END)
                 ) AS degree,
                 -- get quote: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.QUOTE} AND t."language" = ${Language.ID} 
+                        WHEN t."key" = ${MemberTranslationKey.QUOTE} AND t."language" = ${Language.ID} 
                         THEN t."value" 
                     END),
                     'en', MAX(CASE 
-                        WHEN t."key" = ${LawyerTranslationKey.QUOTE} AND t."language" = ${Language.EN} 
+                        WHEN t."key" = ${MemberTranslationKey.QUOTE} AND t."language" = ${Language.EN} 
                         THEN t."value" 
                     END)
                 ) AS quote
-            FROM lawyers AS l
+            FROM members AS l
             LEFT JOIN translations AS t 
                 ON l."id" = t."entityId" 
-                AND t."entityType" = ${EntityType.LAWYER}
+                AND t."entityType" = ${EntityType.MEMBER}
                 AND t."key" IN (
-                    ${LawyerTranslationKey.DEGREE}, 
-                    ${LawyerTranslationKey.POSITION}, 
-                    ${LawyerTranslationKey.QUOTE}
+                    ${MemberTranslationKey.DEGREE}, 
+                    ${MemberTranslationKey.POSITION}, 
+                    ${MemberTranslationKey.QUOTE}
                 )
             WHERE l."slug" IN ('arif', 'herlin')
             GROUP BY l."slug", l."name", l."order"

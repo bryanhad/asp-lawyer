@@ -4,17 +4,27 @@ export enum Language {
 }
 
 export enum EntityType {
-    LAWYER = 'LAWYER',
+    MEMBER = 'MEMBER',
     PRACTICE_AREA = 'PRACTICE_AREA',
     ACHIEVEMENT = 'ACHIEVEMENT',
 }
 
-export enum LawyerTranslationKey {
+export enum MemberTranslationKey {
     POSITION = 'POSITION',
     DEGREE = 'DEGREE',
-    BIO = 'BIO',
-    DESCRIPTION = 'DESCRIPTION',
     QUOTE = 'QUOTE',
+    BIO = 'BIO',
+    EXPERIENCE = 'EXPERIENCE',
+    CERTIFICATION = 'CERTIFICATION',
+    EDUCATION = 'EDUCATION',
+    ACHIEVEMENT = 'ACHIEVEMENT',
+    ORGANIZATION = 'ORGANIZATION' ,
+}
+
+export enum MemberRoles {
+    PARTNER = 'PARTNER',
+    ASSOCIATE = 'ASSOCIATE',
+    SUPPORT = 'SUPPORT',
 }
 
 export enum PracticeAreaTranslationKey {

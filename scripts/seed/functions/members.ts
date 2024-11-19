@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client'
-import { lawyersSeed } from '../data/lawyers'
+import { membersSeed } from '../data/members'
 import { getPrivateUrl } from './util'
 
-export async function seedLawyers(prisma: PrismaClient) {
+export async function seedMembers(prisma: PrismaClient) {
     const upsertedLawyers = await Promise.all(
-        lawyersSeed.map((data) => {
+        membersSeed.map((data) => {
             const uploadThingImageUrl = getPrivateUrl(data.imageUrl)
 
-            return prisma.lawyer.upsert({
+            return prisma.member.upsert({
                 where: { slug: data.slug },
                 update: {},
                 create: {
@@ -17,6 +17,7 @@ export async function seedLawyers(prisma: PrismaClient) {
                     imageUrl: uploadThingImageUrl,
                     linkedInUrl: data.linkedInUrl,
                     email: data.email,
+                    role: data.role,
                 },
             })
         }),

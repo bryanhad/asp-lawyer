@@ -61,7 +61,6 @@ export async function getData(slug: string): Promise<PracticeAreaPageSlugData> {
     // Step 1: Get blurred image for the practice area
     const blurredImageUrl = await getBlurredImageUrl(query[0].imageUrl)
 
-    console.log(query)
     return {
         ...query[0],
         blurImageUrl: blurredImageUrl,

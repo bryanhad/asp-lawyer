@@ -1,12 +1,12 @@
 import { PrismaClient, Translation } from '@prisma/client'
-import { lawyersSeed } from '../data/lawyers'
-import { seedLawyers } from './lawyers'
+import { membersSeed } from '../data/members'
+import { seedMembers } from './members'
 import { EntityType } from '../../../src/lib/enum'
 import { practiceAreaSeed } from '../data/practice-areas'
 import { seedPracticeAreas } from './practice-areas'
 import { seedAchievements } from './achievements'
 import { achievementsSeed } from '../data/achievements'
-type UpsertedLawyers = Awaited<ReturnType<typeof seedLawyers>>
+type UpsertedLawyers = Awaited<ReturnType<typeof seedMembers>>
 type UspertedPracticeAreas = Awaited<ReturnType<typeof seedPracticeAreas>>
 type UspertedAchievements = Awaited<ReturnType<typeof seedAchievements>>
 
@@ -16,7 +16,7 @@ export async function seedLawyerTranslations(
 ): Promise<Promise<Translation>[]> {
     const translationPromises: Promise<Translation>[] = []
 
-    for (const [index, lawyerData] of lawyersSeed.entries()) {
+    for (const [index, lawyerData] of membersSeed.entries()) {
         const lawyerId = upsertedLawyers[index].id
 
         for (const translationData of lawyerData.translations) {
@@ -25,7 +25,7 @@ export async function seedLawyerTranslations(
                     where: {
                         entityId_entityType_language_key: {
                             entityId: lawyerId,
-                            entityType: EntityType.LAWYER,
+                            entityType: EntityType.MEMBER,
                             language: translationData.language,
                             key: translationData.key,
                         },
@@ -33,7 +33,7 @@ export async function seedLawyerTranslations(
                     update: {},
                     create: {
                         entityId: lawyerId,
-                        entityType: EntityType.LAWYER,
+                        entityType: EntityType.MEMBER,
                         language: translationData.language,
                         key: translationData.key,
                         value: translationData.value,

@@ -9,26 +9,22 @@ generator client {
 }
 
 datasource db {
-    // FOR DEV MODE
-    // provider = "sqlite"
-    // url      = ""
-
-    // FOR PROD MODE
     provider  = "postgresql"
     url       = env("DATABASE_URL")
     directUrl = env("DIRECT_URL")
 }
 
-model Lawyer {
+model Member {
     id          String  @id @default(cuid())
     slug        String  @unique
-    order       Int // order position in Lawyers page, caroucel, etc..
+    order       Int // order position in Members page, carousel, etc..
     name        String
     imageUrl    String
     linkedInUrl String?
     email       String?
+    role        String
 
-    @@map("lawyers")
+    @@map("members")
 }
 
 model Translation {
@@ -37,7 +33,7 @@ model Translation {
     key        String // 'position', 'degree', 'bio', 'description', etc.
     value      String // The translated text
     entityId   String // Could be the ID of any model needing translation
-    entityType String // Specifies the type, e.g., 'Lawyer' or 'Blog'
+    entityType String // Specifies the type, e.g., 'Member' or 'Blog'
 
     @@unique([entityId, entityType, language, key]) // ensures each combination of entityId, entittyType, language, and key in the Translation model is unique.
     @@map("translations")
@@ -47,7 +43,7 @@ model PracticeArea {
     id       String @id @default(cuid())
     slug     String @unique
     imageUrl String
-    order    Int // order position in practice-areas page, caroucel, etc..
+    order    Int // order position in practice-areas page, carousel, etc..
 
     @@map("practice_areas")
 }
@@ -55,24 +51,9 @@ model PracticeArea {
 model Achievements {
     id       String @id @default(cuid())
     imageUrl String
-    order    Int @unique// order position in practice-areas page, caroucel, etc..
+    order    Int    @unique // order position in practice-areas page, carousel, etc..
 
     @@map("achievements")
-}
-
-model Member {
-    id       String  @id @default(cuid())
-    name     String
-    imageUrl String?
-    // slug     String   @unique
-    // bio      String?
-    // position String
-    // joinedAt DateTime
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
-
-    @@map("members")
 }
 
 model Blog {

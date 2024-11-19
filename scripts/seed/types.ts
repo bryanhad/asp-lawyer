@@ -1,8 +1,9 @@
 import {
     PracticeAreaTranslationKey,
     Language,
-    LawyerTranslationKey,
+    MemberTranslationKey,
     AchievementsTranslationKey,
+    MemberRoles,
 } from '@/lib/enum'
 
 type TranslationSeed<TranslationKey> = {
@@ -12,14 +13,15 @@ type TranslationSeed<TranslationKey> = {
 }
 
 // Define a type for the lawyer data with translations
-export type LawyerSeed = {
+export type MemberSeed = {
     slug: string
     order: number
     name: string
     imageUrl: string
     linkedInUrl?: string
     email?: string
-    translations: TranslationSeed<LawyerTranslationKey>[]
+    translations: TranslationSeed<MemberTranslationKey>[]
+    role: MemberRoles
 }
 
 export type PracticeAreaSeed = {

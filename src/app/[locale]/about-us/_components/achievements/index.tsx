@@ -11,7 +11,7 @@ export default async function AchievementSection() {
     const t = await getPageTranslations()
 
     return (
-        <Section className='space-y-6'>
+        <Section className="space-y-6" lessYSpacing>
             <SectionHeading
                 oneLine
                 titleTop={t('previewAchivements.titleWhite')}

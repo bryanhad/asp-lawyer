@@ -1,11 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { seedLawyerImages } from './functions/images'
-import { lawyersSeed } from './data/lawyers'
+import { membersSeed } from './data/members'
 
 const prisma = new PrismaClient()
 
 async function main() {
-    const lawyerSlugs = lawyersSeed.map((l) => l.slug)
+    const lawyerSlugs = membersSeed.map((l) => l.slug)
     console.log('Seeding lawyer images...')
 
     const imgUploadResponses = await seedLawyerImages(lawyerSlugs)

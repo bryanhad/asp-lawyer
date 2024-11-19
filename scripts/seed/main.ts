@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { seedLawyers } from './functions/lawyers'
+import { seedMembers } from './functions/members'
 import { seedPracticeAreas } from './functions/practice-areas'
 import {
     seedAchievementTranslations,
@@ -15,7 +15,7 @@ async function main() {
 
     // Step 1: Upsert all lawyers concurrently
     console.log(`Seeding 'lawyers' table...`)
-    const upsertedLawyers = await seedLawyers(prisma)
+    const upsertedLawyers = await seedMembers(prisma)
     console.log(`Successfully seed 'lawyers' table!`)
 
     // Step 2: Upsert all practiceAreas concurrently

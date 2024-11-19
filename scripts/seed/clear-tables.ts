@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 async function main() {
     await prisma.$transaction(async (tx) => {
-        await tx.lawyer.deleteMany()
+        await tx.member.deleteMany()
         await tx.practiceArea.deleteMany()
         await tx.translation.deleteMany()
     })

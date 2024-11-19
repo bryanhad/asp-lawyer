@@ -6,7 +6,7 @@ export default async function VisionAndMissonSection() {
     const t = await getPageTranslations()
     
     return (
-        <Section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <Section className="grid grid-cols-1 gap-6 lg:grid-cols-2" lessYSpacing>
             {/* GRID 1 */}
             <div className="flex flex-col gap-4">
                 <SectionHeading
