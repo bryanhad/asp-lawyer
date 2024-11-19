@@ -14,8 +14,11 @@ type Props = {
     blurDataUrl: string
     className?: string
     containerClassName?: string
+    pinContainerClassName?: string
+    pinHeightClassName?: string
     currentLocale: Locale
     href?: string
+    hrefText?: string
 }
 
 const PinContainer = ({
@@ -26,7 +29,10 @@ const PinContainer = ({
     blurDataUrl,
     containerClassName,
     currentLocale,
+    pinHeightClassName,
+    pinContainerClassName,
     href,
+    hrefText,
 }: Props) => {
     const [transform, setTransform] = useState(
         'translate(-50%,-50%) rotateX(0deg)',
@@ -56,7 +62,7 @@ const PinContainer = ({
                     style={{
                         transform: transform,
                     }}
-                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-2xl bg-background shadow-[0_8px_16px_rgb(0_0_0/0.4)] transition duration-700 group-hover/pin:border-white/[0.2]"
+                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-md bg-background shadow-[0_8px_16px_rgb(0_0_0/0.4)] transition duration-700 group-hover/pin:border-white/[0.2]"
                 >
                     <div className={cn('relative z-50', className)}>
                         <div className="mx-auto w-[300px]">
@@ -69,7 +75,7 @@ const PinContainer = ({
                                 height={300}
                                 className="dark:brightness-95"
                             />
-                            <div className="p-4">
+                            <div className="p-4 text-center">
                                 {currentLocale === 'en' ? title.en : title.id}
                             </div>
                         </div>{' '}
@@ -80,6 +86,9 @@ const PinContainer = ({
             <PinPerspective
                 desc={desc && (currentLocale === 'en' ? desc.en : desc.id)}
                 href={href}
+                className={pinContainerClassName}
+                pinHeightClassName={pinHeightClassName}
+                hrefText={hrefText}
             />
         </div>
     )
@@ -88,19 +97,40 @@ const PinContainer = ({
 export const PinPerspective = ({
     desc,
     href,
+    className,
+    pinHeightClassName,
+    hrefText,
 }: {
     desc?: string
     href?: string
+    className?: string
+    pinHeightClassName?: string
+    hrefText?: string
 }) => {
     return (
-        <motion.div className="pointer-events-none z-[60] flex h-96 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100">
+        <motion.div
+            className={cn(
+                'z-[60] flex h-96 w-full items-center justify-center opacity-0 transition duration-500 group-hover/pin:opacity-100',
+                pinHeightClassName,
+            )}
+        >
             <div className="inset-0 -mt-7 h-full w-full flex-none">
                 <div className="absolute inset-x-0 top-0 flex justify-center">
-                    <div className="relative z-10 flex max-w-[500px] items-center space-x-2 rounded-md bg-secondary/80 p-5 ring-1 ring-white/10 backdrop-blur-sm">
-                        <span className="relative z-20 inline-block text-center text-sm text-foreground">
-                            {desc}
-                            {href && <Link href={href}>Learn More</Link>}
-                        </span>
+                    <div
+                        className={cn(
+                            'relative z-10 flex max-w-[500px] items-center space-x-2 rounded-md bg-secondary/80 p-5 ring-1 ring-white/10 backdrop-blur-sm',
+                            className,
+                        )}
+                    >
+                        {href && hrefText ? (
+                            <Link className="relative z-20" href={href}>
+                                {hrefText}
+                            </Link>
+                        ) : (
+                            <span className="relative z-20 inline-block text-center text-sm text-foreground">
+                                {desc}
+                            </span>
+                        )}
 
                         {/* Cool Underlight Effect */}
                         <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-primary/0 via-primary/90 to-primary/0 transition-opacity duration-500 group-hover/btn:opacity-40"></span>

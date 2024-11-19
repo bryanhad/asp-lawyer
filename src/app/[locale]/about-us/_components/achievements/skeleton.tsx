@@ -1,7 +1,16 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function SkeletonFallback() {
-  return (
-    <Skeleton className="size-10"/>
-  )
+    return (
+        <div className="flex w-full overflow-hidden">
+            {Array.from({ length: 4 }).map((_, index) => (
+                <div
+                    key={index}
+                    className="grid shrink-0 grow-0 basis-full place-items-center md:basis-1/2 lg:basis-1/3"
+                >
+                    <Skeleton className="h-[325px] w-[300px]" />
+                </div>
+            ))}
+        </div>
+    )
 }

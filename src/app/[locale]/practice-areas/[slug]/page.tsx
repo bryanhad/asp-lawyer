@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const [{ fullName }, currentLocale] =
         await fetchPracticeAreaPageContent(slug)
 
-    const pageTitle = currentLocale === Language.EN ? fullName.en : fullName.id
+    const pageTitle = currentLocale === Language.EN ? fullName.en : fullName.id``
 
     return {
         title: pageTitle,

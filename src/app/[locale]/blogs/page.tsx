@@ -1,7 +1,8 @@
 import { BaseContainer } from '@/components/containers/base-container'
-import Section from '@/components/containers/section'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { BlogForm } from './_components/form'
+import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('blogsPage')
@@ -16,12 +17,16 @@ export default async function BlogsPage() {
 
     return (
         <BaseContainer>
-            <Section className="max-w-custom-wide">
-                <div className="p-7">
-                    <h1 className="text-xl font-bold">{t('title')}</h1>
-                    <p>{t('desc')}</p>
-                </div>
-            </Section>
+            <PageTitleWithBackground
+                src={'/home-page/about-us.webp'}
+                alt="Background image of about us page"
+                titleWhite={t('titleWhite')}
+                titlePrimary={t('titlePrimary')}
+            />
+            <BlogForm
+                titlePlaceholder={t('titleInputPlaceholder')}
+                contentPlaceholder={t('contentInputPlaceholder')}
+            />
         </BaseContainer>
     )
 }

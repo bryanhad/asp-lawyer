@@ -3,7 +3,6 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
-import { submitBlog } from './actions'
 import { Button } from '@/components/ui/button'
 import './styles.css'
 
@@ -26,7 +25,8 @@ export default function BlogEditor() {
         }) || ''
 
     async function onSubmit() {
-        await submitBlog(input)
+        console.log(input)
+        // await submitBlog(input)
         editor?.commands.clearContent()
     }
 

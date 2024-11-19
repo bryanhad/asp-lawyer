@@ -143,7 +143,10 @@
     },
     "blogsPage": {
         "pageTitle": "Blog",
-        "title": "Wawasan Hukum",
+        "titleWhite": "Wawasan",
+        "titlePrimary": "Hukum",
+        "titleInputPlaceholder": "Masukkan judul blog (contoh: '5 Elemen Penting dalam Hukum Kontrak')",
+        "contentInputPlaceholder": "Bagikan wawasan Anda tentang topik ini secara rinci",
         "desc": "Tetap terinformasi dengan artikel dan pembaruan tentang topik hukum penting."
     },
     "contactUsPage": {

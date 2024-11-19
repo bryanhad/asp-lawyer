@@ -144,7 +144,10 @@
     },
     "blogsPage": {
         "pageTitle": "Blogs",
-        "title": "Legal Insights",
+        "titleWhite": "Legal",
+        "titlePrimary": "Insights",
+        "titleInputPlaceholder": "Enter the blog title (e.g., '5 Key Elements of Contract Law')",
+        "contentInputPlaceholder": "Share your insights on the topic in detail",
         "desc": "Stay informed with articles and updates on important legal topics."
     },
     "contactUsPage": {
