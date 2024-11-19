@@ -33,11 +33,18 @@ const formSchema = z.object({
 })
 
 type Props = {
+    titleWhite: string
+    titlePrimary: string
     titlePlaceholder: string
     contentPlaceholder: string
 }
 
-export function BlogForm({ titlePlaceholder, contentPlaceholder }: Props) {
+export function BlogForm({
+    titleWhite,
+    titlePrimary,
+    titlePlaceholder,
+    contentPlaceholder,
+}: Props) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -52,7 +59,11 @@ export function BlogForm({ titlePlaceholder, contentPlaceholder }: Props) {
 
     return (
         <Section lessYSpacing>
-            <SectionHeading titleTop="Add a new" titleBottom="blog" oneLine />
+            <SectionHeading
+                titleTop={titleWhite}
+                titleBottom={titlePrimary}
+                oneLine
+            />
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

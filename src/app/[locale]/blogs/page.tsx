@@ -24,8 +24,10 @@ export default async function BlogsPage() {
                 titlePrimary={t('titlePrimary')}
             />
             <BlogForm
-                titlePlaceholder={t('titleInputPlaceholder')}
-                contentPlaceholder={t('contentInputPlaceholder')}
+                titleWhite={t('form.addBlog.titleWhite')}
+                titlePrimary={t('form.addBlog.titlePrimary')}
+                titlePlaceholder={t('form.titlePlaceholder')}
+                contentPlaceholder={t('form.contentPlaceholder')}
             />
         </BaseContainer>
     )
