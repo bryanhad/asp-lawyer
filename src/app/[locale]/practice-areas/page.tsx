@@ -1,7 +1,9 @@
+import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/components/containers/base-container'
 import Section from '@/components/containers/section'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import PracticeAreaCards from './_components/practice-area-cards'
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('practiceAreasPage')
@@ -16,11 +18,14 @@ export default async function PracticeAreasPage() {
 
     return (
         <BaseContainer>
-            <Section className="max-w-custom-wide">
-                <div className="p-7">
-                    <h1 className="text-xl font-bold">{t('title')}</h1>
-                    <p>{t('desc')}</p>
-                </div>
+            <PageTitleWithBackground
+                src={'/home-page/practice-areas.jpg'}
+                alt="Background image of about us page"
+                titleWhite={t('titleWhite')}
+                titlePrimary={t('titlePrimary')}
+            />
+            <Section lessYSpacing>
+                <PracticeAreaCards/>
             </Section>
         </BaseContainer>
     )

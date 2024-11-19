@@ -5,15 +5,19 @@ import prisma from '@/lib/prisma'
 import { getBlurredImageUrls } from '@/lib/server-utils'
 import { PracticeArea } from '@prisma/client'
 
-export type QueryResult = Pick<PracticeArea, 'slug' | 'imageUrl'> & {
+export type PracticeAreaPreviewData = Pick<
+    PracticeArea,
+    'slug' | 'imageUrl'
+> & {
     fullName: { id: string; en: string }
+    shortName: { id: string | null; en: string | null }
     desc: { id: string; en: string }
     blurImageUrl: string
 }
 
 export async function getData() {
     try {
-        const query: QueryResult[] = await prisma.$queryRaw`
+        const query: PracticeAreaPreviewData[] = await prisma.$queryRaw`
             SELECT 
                 pa."slug", pa."imageUrl",
                 -- get fullName: { id: string; en: string }
@@ -27,6 +31,17 @@ export async function getData() {
                         THEN t."value" 
                     END)
                 ) AS "fullName",
+                -- get shortName: { id: string; en: string }
+                jsonb_build_object(
+                    'id', MAX(CASE 
+                        WHEN t."key" = ${PracticeAreaTranslationKey.SHORT_NAME} AND t."language" = ${Language.ID}
+                        THEN t."value" 
+                    END),
+                    'en', MAX(CASE 
+                        WHEN t."key" = ${PracticeAreaTranslationKey.SHORT_NAME} AND t."language" = ${Language.EN}
+                        THEN t."value" 
+                    END)
+                ) AS "shortName",
                 -- get desc: { id: string; en: string }
                 jsonb_build_object(
                     'id', MAX(CASE 
@@ -61,6 +76,7 @@ export async function getData() {
         const data = query.map((pa, i) => {
             const result = {
                 ...pa,
+                imageSrc: imageUrls[i],
                 blurImageUrl: blurredImageUrls[i],
             }
 

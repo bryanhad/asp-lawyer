@@ -1,17 +1,17 @@
-import Hero from '@/components/home-components/hero'
 import { BaseContainer } from '@/components/containers/base-container'
-import PreviewContactUs from '@/components/home-components/contact-us-section'
-import PreviewAboutUs2 from '@/components/home-components/preview-about-us'
-import PreviewLawyersSection2 from '@/components/home-components/preview-lawyers-section'
-import PreviewPracticeAreas2 from '@/components/home-components/preview-practice-areas-section'
+import Hero from './_components/hero'
+import PreviewAboutUs from './_components/preview-about-us'
+import PreviewLawyersSection from './_components/preview-team'
+import PreviewPracticeAreas from './_components/practice-areas'
+import PreviewContactUs from './_components/preview-contact-us'
 
 export default async function Home() {
     return (
         <BaseContainer>
             <Hero />
-            <PreviewAboutUs2/>
-            <PreviewLawyersSection2/>
-            <PreviewPracticeAreas2 />
+            <PreviewAboutUs />
+            <PreviewLawyersSection />
+            <PreviewPracticeAreas />
             <PreviewContactUs />
         </BaseContainer>
     )

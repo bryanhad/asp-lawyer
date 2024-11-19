@@ -18,22 +18,24 @@
         "designedBy": "Designed & Developed by"
     },
     "homePage": {
-        "titleWhite": "Providing",
-        "titlePrimary1": "Legal",
-        "titlePrimary2": "Solutions",
-        "titlePrimaryMobile": {
-            "1": "Solutions",
-            "2": "Guidance",
-            "3": "Assurance"
+        "heroSection": {
+            "titleWhite": "Providing",
+            "titlePrimary1": "Legal",
+            "titlePrimary2": "Solutions",
+            "titlePrimaryMobile": {
+                "1": "Solutions",
+                "2": "Guidance",
+                "3": "Assurance"
+            },
+            "titlePrimaryDesktop": {
+                "1": "Legal Solutions",
+                "2": "Precise Guidance",
+                "3": "Legal Assurance"
+            },
+            "titleExtra": "Tailored to Your Needs",
+            "desc": "Arifudin & Susanto Partnership (ASP) provides tailored legal solutions with a commitment to professionalism and client trust, serving your needs across Indonesia.",
+            "callToAction": "Contact Us"
         },
-        "titlePrimaryDesktop": {
-            "1": "Legal Solutions",
-            "2": "Precise Guidance",
-            "3": "Legal Assurance"
-        },
-        "titleExtra": "Tailored to Your Needs",
-        "desc": "Arifudin & Susanto Partnership (ASP) provides tailored legal solutions with a commitment to professionalism and client trust, serving your needs across Indonesia.",
-        "callToAction": "Contact Us",
         "previewAboutUs": {
             "titleTop": "Reliable Attorneys",
             "titleBottom": "Trusted Results",
@@ -105,7 +107,6 @@
         "pageTitle": "About Us",
         "titleWhite": "About",
         "titlePrimary": "ASP Law Firm",
-        "desc": "is committed to providing practical legal solutions tailored to our clients' needs. Backed by expertise and a deep understanding of Indonesia's evolving legal landscape, our experienced team ensures reliable and ethical service. Guided by professional integrity and a results-driven approach, we deliver the legal solutions our clients trust.",
         "previewVisionAndMission": {
             "titleWhite": "Our Vision",
             "titlePrimary": "& Mission",
@@ -127,6 +128,8 @@
     },
     "practiceAreasPage": {
         "pageTitle": "Practice Areas",
+        "titleWhite": "Our",
+        "titlePrimary": "Practice Areas",
         "title": "Our Practice Areas",
         "desc": "Expertise in various legal fields to meet your unique needs."
     },

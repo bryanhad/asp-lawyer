@@ -18,22 +18,24 @@
         "designedBy": "Didesain & Dikembangkan oleh"
     },
     "homePage": {
-        "titleWhite": "Menyediakan",
-        "titlePrimary1": "Solusi",
-        "titlePrimary2": "Hukum",
-        "titlePrimaryMobile": {
-            "1": "Solusi",
-            "2": "Panduan",
-            "3": "Kepastian"
+        "heroSection": {
+            "titleWhite": "Menyediakan",
+            "titlePrimary1": "Solusi",
+            "titlePrimary2": "Hukum",
+            "titlePrimaryMobile": {
+                "1": "Solusi",
+                "2": "Panduan",
+                "3": "Kepastian"
+            },
+            "titlePrimaryDesktop": {
+                "1": "Solusi Hukum",
+                "2": "Panduan Tepat",
+                "3": "Kepastian Hukum"
+            },
+            "titleExtra": "Sesuai dengan Kebutuhan Anda",
+            "desc": "Arifudin & Susanto Partnership (ASP) menyediakan solusi hukum yang disesuaikan dengan komitmen terhadap profesionalisme dan kepercayaan klien, melayani kebutuhan Anda di seluruh Indonesia.",
+            "callToAction": "Hubungi Kami"
         },
-        "titlePrimaryDesktop": {
-            "1": "Solusi Hukum",
-            "2": "Panduan Tepat",
-            "3": "Kepastian Hukum"
-        },
-        "titleExtra": "Sesuai dengan Kebutuhan Anda",
-        "desc": "Arifudin & Susanto Partnership (ASP) menyediakan solusi hukum yang disesuaikan dengan komitmen terhadap profesionalisme dan kepercayaan klien, melayani kebutuhan Anda di seluruh Indonesia.",
-        "callToAction": "Hubungi Kami",
         "previewAboutUs": {
             "titleTop": "Pengacara Handal",
             "titleBottom": "Hasil Terpercaya",
@@ -105,7 +107,6 @@
         "pageTitle": "Tentang Kami",
         "titleWhite": "Tentang",
         "titlePrimary": "ASP Law Firm",
-        "desc": "berkomitmen untuk memberikan solusi hukum praktis yang sesuai dengan kebutuhan Klien. Dengan keahlian dan pemahaman mendalam terhadap perkembangan hukum di Indonesia, tim kami yang berpengalaman menjamin layanan yang dapat diandalkan dan berintegritas. Berpedoman pada etika profesi dan orientasi terhadap hasil, kami menghadirkan solusi hukum yang dipercaya oleh Klien.",
         "previewVisionAndMission": {
             "titleWhite": "Visi &",
             "titlePrimary": "Misi Kami",
@@ -127,7 +128,8 @@
     },
     "practiceAreasPage": {
         "pageTitle": "Bidang Praktik",
-        "title": "Bidang Praktik Kami",
+        "titleWhite": "Bidang",
+        "titlePrimary": "Praktik Kami",
         "desc": "Keahlian di berbagai bidang hukum untuk memenuhi kebutuhan unik Anda."
     },
     "ourTeamPage": {
