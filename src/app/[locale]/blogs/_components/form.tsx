@@ -20,7 +20,6 @@ import SkeletonFallback from '@/components/ui/tiptap/skeleton'
 
 const Tiptap = dynamic(() => import('@/components/ui/tiptap'), {
     loading: () => <SkeletonFallback />,
-    ssr: false,
 })
 
 const formSchema = z.object({

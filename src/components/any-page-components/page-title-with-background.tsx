@@ -37,7 +37,7 @@ export default function PageTitleWithBackground({
                     )}
                 >
                     <span className="text-white">{titleWhite}</span>
-                    <span className="text-white">{titlePrimary}</span>
+                    <span className="text-primary">{titlePrimary}</span>
                 </h1>
                 <div className="mt-2 flex items-center justify-center gap-4">
                     <Separator className="w-full max-w-[50%] bg-white/50" />

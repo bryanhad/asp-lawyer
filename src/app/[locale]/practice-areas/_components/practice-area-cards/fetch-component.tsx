@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 import { getCurrentLocale } from '@/app/[locale]/layout'
-import { getData } from '../../action'
 import SkeletonFallback from './skeleton'
 import { getTranslations } from 'next-intl/server'
+import { getData } from './action'
 
 const PinContainer = dynamic(() => import('@/components/ui/animated-pin'), {
     loading: () => <SkeletonFallback />,

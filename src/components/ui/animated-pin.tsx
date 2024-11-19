@@ -62,7 +62,7 @@ const PinContainer = ({
                     style={{
                         transform: transform,
                     }}
-                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-md bg-background shadow-[0_8px_16px_rgb(0_0_0/0.4)] transition duration-700 group-hover/pin:border-white/[0.2]"
+                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-md bg-background dark:bg-secondary shadow-lg transition duration-700 group-hover/pin:border-white/[0.2]"
                 >
                     <div className={cn('relative z-50', className)}>
                         <div className="mx-auto w-[300px]">

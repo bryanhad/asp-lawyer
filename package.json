@@ -45,6 +45,7 @@
         "embla-carousel-autoplay": "^8.3.0",
         "embla-carousel-react": "^8.3.0",
         "framer-motion": "^11.11.15",
+        "jsdom": "^25.0.1",
         "ky": "^1.7.2",
         "lucia": "^3.2.2",
         "lucide-react": "^0.453.0",
@@ -66,6 +67,7 @@
         "zod": "^3.23.8"
     },
     "devDependencies": {
+        "@types/jsdom": "^21.1.7",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

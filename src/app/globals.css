@@ -111,4 +111,11 @@ body {
     .tiptap ol {
         @apply ml-4 list-decimal;
     }
+
+    .tiptap.view h1,h2,h3 {
+        @apply mt-4 mb-1
+    }
+    .tiptap.view ul,ol {
+        @apply flex flex-col gap-1
+    }
 }

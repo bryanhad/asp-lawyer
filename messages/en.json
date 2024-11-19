@@ -135,7 +135,8 @@
     },
     "ourTeamPage": {
         "pageTitle": "Our Team",
-        "title": "Meet Our Team",
+        "titleWhite": "The Team Behind",
+        "titlePrimary": "Your Success",
         "desc": "Get to know our skilled lawyers and support staff dedicated to your success."
     },
     "eachMemberPage": {
