@@ -10,15 +10,13 @@ export enum EntityType {
 }
 
 export enum MemberTranslationKey {
-    POSITION = 'POSITION',
     DEGREE = 'DEGREE',
+    POSITION = 'POSITION',
     QUOTE = 'QUOTE',
     BIO = 'BIO',
     EXPERIENCE = 'EXPERIENCE',
-    CERTIFICATION = 'CERTIFICATION',
     EDUCATION = 'EDUCATION',
     ACHIEVEMENT = 'ACHIEVEMENT',
-    ORGANIZATION = 'ORGANIZATION' ,
 }
 
 export enum MemberRoles {

@@ -6,10 +6,10 @@ import {
     MemberRoles,
 } from '@/lib/enum'
 
-type TranslationSeed<TranslationKey> = {
+export type TranslationSeed<TranslationKey, ValueType = string> = {
     language: Language
     key: TranslationKey
-    value: string // Translated text
+    value: ValueType // Translated text
 }
 
 // Define a type for the lawyer data with translations
@@ -20,7 +20,7 @@ export type MemberSeed = {
     imageUrl: string
     linkedInUrl?: string
     email?: string
-    translations: TranslationSeed<MemberTranslationKey>[]
+    translations: TranslationSeed<MemberTranslationKey, string[] | string>[]
     role: MemberRoles
 }
 

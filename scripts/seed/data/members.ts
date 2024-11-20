@@ -39,12 +39,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Arif supports the team with research and case preparation.',
+                value: `Arif began his legal career as a junior associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts. Currently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.`,
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Arif mendukung tim dengan riset dan persiapan kasus.',
+                value: 'Arif memulai karir hukumnya sebagai junior associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak. Saat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
             },
             {
                 language: Language.EN,
@@ -59,32 +59,32 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.EXPERIENCE,
-                value: "Arif began his legal career as a junior associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts. Currently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.",
+                value: [],
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.EXPERIENCE,
-                value: 'Arif memulai karir hukumnya sebagai junior associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak. Saat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
+                value: [],
             },
             {
                 language: Language.EN,
                 key: MemberTranslationKey.EDUCATION,
-                value: 'Arif supports the team with research and case preparation.',
+                value: [],
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.EDUCATION,
-                value: 'Arif mendukung tim dengan riset dan persiapan kasus.',
+                value: [],
             },
             {
                 language: Language.EN,
-                key: MemberTranslationKey.ORGANIZATION,
-                value: 'Arif supports the team with research and case preparation.',
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
             {
                 language: Language.ID,
-                key: MemberTranslationKey.ORGANIZATION,
-                value: 'Arif mendukung tim dengan riset dan persiapan kasus.',
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -138,6 +138,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.QUOTE,
                 value: 'Kami percaya pada kombinasi keahlian hukum dan pendekatan yang mengutamakan klien untuk membangun kepercayaan jangka panjang.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -190,6 +220,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.QUOTE,
                 value: 'Misi kami adalah memperjuangkan keadilan dan integritas, memastikan setiap klien merasa didukung dan direpresentasikan dengan keunggulan.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -231,6 +291,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Agung dikenal karena perhatiannya yang cermat terhadap detail dan dedikasinya terhadap kesuksesan klien.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -274,6 +364,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Andy adalah pengacara muda yang dinamis dengan semangat advokasi.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -315,6 +435,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Kharis memberikan nasihat tentang hukum teknologi dan privasi data.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -358,6 +508,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Fahmi adalah negosiator ulung dengan fokus pada hukum real estat.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -399,6 +579,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Adnan adalah pengacara berpengalaman dengan lebih dari 20 tahun di bidang hukum perusahaan.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -443,6 +653,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Betti memiliki banyak pengetahuan dalam hukum kekayaan intelektual.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -484,6 +724,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Rizki memiliki keahlian yang luas dalam regulasi keuangan.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -527,6 +797,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Erwin memiliki latar belakang dalam hukum internasional dan kasus lintas batas.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -568,6 +868,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Faras ahli dalam hukum lingkungan dan keberlanjutan.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -611,6 +941,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Indah diakui atas karyanya dalam hukum keluarga dan mediasi.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -652,6 +1012,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Richard memiliki latar belakang kuat dalam hukum ketenagakerjaan.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
@@ -695,6 +1085,36 @@ export const membersSeed: MemberSeed[] = [
                 key: MemberTranslationKey.BIO,
                 value: 'Ratna adalah pengacara yang sangat dihormati dalam litigasi komersial.',
             },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
         ],
     },
     {
@@ -736,6 +1156,36 @@ export const membersSeed: MemberSeed[] = [
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
                 value: 'Reza adalah bintang yang sedang naik dengan semangat untuk keadilan sosial.',
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EXPERIENCE,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.EDUCATION,
+                value: [],
+            },
+            {
+                language: Language.EN,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
+            },
+            {
+                language: Language.ID,
+                key: MemberTranslationKey.ACHIEVEMENT,
+                value: [],
             },
         ],
     },
