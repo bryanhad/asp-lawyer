@@ -1,18 +1,18 @@
-import { PrismaClient, Translation } from '@prisma/client'
-import { membersSeed } from '../data/members'
-import { seedMembers } from './members'
+import { Prisma, Translation } from '@prisma/client'
 import { EntityType, MemberTranslationKey } from '../../../src/lib/enum'
-import { practiceAreaSeed } from '../data/practice-areas'
-import { seedPracticeAreas } from './practice-areas'
-import { seedAchievements } from './achievements'
 import { achievementsSeed } from '../data/achievements'
-import { getRandomSubsetFromArray, separateLanguages } from './util'
 import {
     dummyMemberAchievements,
     dummyMemberEducations,
     dummyMemberExperiences,
 } from '../data/dummy'
+import { membersSeed } from '../data/members'
+import { practiceAreaSeed } from '../data/practice-areas'
 import { TranslationSeed } from '../types'
+import { seedAchievements } from './achievements'
+import { seedMembers } from './members'
+import { seedPracticeAreas } from './practice-areas'
+import { getRandomSubsetFromArray, separateLanguages } from './util'
 
 type UpsertedMembers = Awaited<ReturnType<typeof seedMembers>>
 type UspertedPracticeAreas = Awaited<ReturnType<typeof seedPracticeAreas>>
@@ -25,7 +25,7 @@ function createTranslationPromise({
     entityType,
     translationData,
 }: {
-    prisma: PrismaClient
+    prisma: Prisma.TransactionClient
     entityId: string
     entityType: string
     translationData: TranslationSeed<string>
@@ -67,7 +67,7 @@ function getDummyDataForKey(
 }
 
 export async function seedMemberTranslations(
-    prisma: PrismaClient,
+    prisma: Prisma.TransactionClient,
     upsertedMembers: UpsertedMembers,
 ): Promise<Promise<Translation>[]> {
     const translationPromises: Promise<Translation>[] = []
@@ -136,7 +136,7 @@ export async function seedMemberTranslations(
 }
 
 export async function seedPracticeAreaTranslations(
-    prisma: PrismaClient,
+    prisma: Prisma.TransactionClient,
     upsertedPracticeAreas: UspertedPracticeAreas,
 ): Promise<Promise<Translation>[]> {
     const translationPromises: Promise<Translation>[] = []
@@ -171,7 +171,7 @@ export async function seedPracticeAreaTranslations(
 }
 
 export async function seedAchievementTranslations(
-    prisma: PrismaClient,
+    prisma: Prisma.TransactionClient,
     upsertedAchievements: UspertedAchievements,
 ): Promise<Promise<Translation>[]> {
     const translationPromises: Promise<Translation>[] = []

@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { membersSeed } from '../data/members'
 import { getPrivateUrl } from './util'
 
-export async function seedMembers(prisma: PrismaClient) {
+export async function seedMembers(prisma: Prisma.TransactionClient) {
     const upsertedLawyers = await Promise.all(
         membersSeed.map((data) => {
             const uploadThingImageUrl = getPrivateUrl(data.imageUrl)

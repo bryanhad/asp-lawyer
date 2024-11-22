@@ -18,7 +18,7 @@ model Member {
     id          String  @id @default(cuid())
     slug        String  @unique
     order       Int // order position in Members page, carousel, etc..
-    name        String
+        name        String
     imageUrl    String
     linkedInUrl String?
     email       String?

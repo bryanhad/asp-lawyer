@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { practiceAreaSeed } from '../data/practice-areas'
 import { getPrivateUrl } from './util'
 
-export async function seedPracticeAreas(prisma: PrismaClient) {
+export async function seedPracticeAreas(prisma: Prisma.TransactionClient) {
     const upsertedPracticeAreas = await Promise.all(
         practiceAreaSeed.map((data) => {
             const uploadThingImageUrl = getPrivateUrl(data.imageUrl)

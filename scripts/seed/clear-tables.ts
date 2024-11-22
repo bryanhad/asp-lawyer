@@ -7,7 +7,12 @@ async function main() {
         await tx.member.deleteMany()
         await tx.practiceArea.deleteMany()
         await tx.translation.deleteMany()
+        await tx.achievements.deleteMany()
+        await tx.blog.deleteMany()
     })
+
+    // reset the user_id sequence back to 1.
+    await prisma.$executeRaw`ALTER SEQUENCE translations_id_seq RESTART WITH 1;`
 }
 
 main()
