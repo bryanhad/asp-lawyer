@@ -69,10 +69,12 @@ function getDummyDataForKey(
 export async function seedMemberTranslations(
     prisma: Prisma.TransactionClient,
     upsertedMembers: UpsertedMembers,
-): Promise<Promise<Translation>[]> {
-    const translationPromises: Promise<Translation>[] = []
-
+) {
     for (const [index, memberData] of membersSeed.entries()) {
+        const translationPromises: Promise<Translation>[] = []
+
+        console.log(`\t ⚙️  Seeding translation for member "${memberData.slug}"...`)
+
         // get each member id
         const memberId = upsertedMembers[index].id
 
@@ -131,17 +133,22 @@ export async function seedMemberTranslations(
                 }
             }
         }
+        await Promise.all(translationPromises)
+        console.log(
+            `\t ✅ Successfully seeded translations for member "${memberData.slug}"!`,
+        )
     }
-    return translationPromises
 }
 
 export async function seedPracticeAreaTranslations(
     prisma: Prisma.TransactionClient,
     upsertedPracticeAreas: UspertedPracticeAreas,
-): Promise<Promise<Translation>[]> {
-    const translationPromises: Promise<Translation>[] = []
-
+) {
     for (const [index, practiceAreasData] of practiceAreaSeed.entries()) {
+        const translationPromises: Promise<Translation>[] = []
+
+        console.log(`\t ⚙️  Seeding translation for practice_area "${practiceAreasData.slug}"...`)
+
         const practiceAreasId = upsertedPracticeAreas[index].id
 
         for (const translationData of practiceAreasData.translations) {
@@ -166,17 +173,21 @@ export async function seedPracticeAreaTranslations(
                 }),
             )
         }
+        await Promise.all(translationPromises)
+        console.log(
+            `\t ✅ Successfully seeded translations for practice area "${practiceAreasData.slug}"!`,
+        )
     }
-    return translationPromises
 }
 
 export async function seedAchievementTranslations(
     prisma: Prisma.TransactionClient,
     upsertedAchievements: UspertedAchievements,
-): Promise<Promise<Translation>[]> {
+) {
     const translationPromises: Promise<Translation>[] = []
-
+    
     for (const [index, achievementsData] of achievementsSeed.entries()) {
+
         const achievementsId = upsertedAchievements[index].id
 
         for (const translationData of achievementsData.translations) {
@@ -202,5 +213,5 @@ export async function seedAchievementTranslations(
             )
         }
     }
-    return translationPromises
+    await Promise.all(translationPromises)
 }
