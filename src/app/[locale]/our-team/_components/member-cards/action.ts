@@ -2,9 +2,7 @@
 
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
-import { getBlurredImageUrl } from '@/lib/server-utils'
 import { Member } from '@prisma/client'
-import { notFound } from 'next/navigation'
 
 type QueryResult = Pick<
     Member,
@@ -14,14 +12,15 @@ type QueryResult = Pick<
     degree: { id: string; en: string }
 }
 
-export type PracticeAreaPageSlugData = QueryResult & {
-    blurImageUrl: string
-}
+export type PracticeAreaPageSlugData = QueryResult
+//  & {
+//     blurImageUrl: string
+// }
 
-export async function getData(slug: string): Promise<PracticeAreaPageSlugData> {
+export async function getData(): Promise<PracticeAreaPageSlugData[]> {
     const query: QueryResult[] = await prisma.$queryRaw`
         SELECT 
-            m."slug", m."name",
+            m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl",
             -- get degree: { id: string; en: string }
             jsonb_build_object(
                 'id', MAX(CASE 
@@ -64,20 +63,25 @@ export async function getData(slug: string): Promise<PracticeAreaPageSlugData> {
                 ${MemberTranslationKey.POSITION},
                 ${MemberTranslationKey.BIO}
             )
-        WHERE m."slug" = ${slug}
-        GROUP BY m."slug", m."order", m."imageUrl"
+        GROUP BY m."order", m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl"
         ORDER BY m."order"
     `
 
-    if (query.length < 1) {
-        notFound()
-    }
+    // // Step 1: Collect image URLs
+    // const imageUrls = query.map((pa) => pa.imageUrl)
 
-    // Step 1: Get blurred image for the practice area
-    const blurredImageUrl = await getBlurredImageUrl(query[0].imageUrl)
+    // // Step 2: Get blurred images for all URLs concurrently
+    // const blurredImageUrls = await getBlurredImageUrls(imageUrls)
 
-    return {
-        ...query[0],
-        blurImageUrl: blurredImageUrl,
-    }
+    // // Step 3: add blurred images to final data
+    // const data = query.map((pa, i) => {
+    //     const result = {
+    //         ...pa,
+    //         blurImageUrl: blurredImageUrls[i],
+    //     }
+
+    //     return result
+    // })
+
+    return query
 }

@@ -2,7 +2,6 @@
 
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
-import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Member } from '@prisma/client'
 
 type LawyerWithTranslations = Pick<
@@ -13,10 +12,10 @@ Member,
     degree: { id: string; en: string }
 }
 
-export type TeamCardData = LawyerWithTranslations & {
-    imageSrc: string
-    blurImageUrl: string
-}
+export type MemberCardData = LawyerWithTranslations 
+// & {
+//     blurImageUrl: string
+// }
 
 export async function getData() {
     try {
@@ -53,23 +52,24 @@ export async function getData() {
             GROUP BY l."slug", l."email", l."linkedInUrl", l."name", l."order", l."imageUrl"
             ORDER BY l."order"
         `
-        // Step 1: Collect image URLs
-        const imageUrls = query.map((lawyer) => lawyer.imageUrl)
+        // // Step 1: Collect image URLs
+        // const imageUrls = query.map((lawyer) => lawyer.imageUrl)
 
-        // Step 2: Get blurred images for all URLs concurrently
-        const blurredImageUrls = await getBlurredImageUrls(imageUrls)
+        // // Step 2: Get blurred images for all URLs concurrently
+        // const blurredImageUrls = await getBlurredImageUrls(imageUrls)
 
-        // Step 3: Transform lawyers data, including blurred images
-        const transformedLawyers = query.map((lawyer, i) => {
-            const result = {
-                ...lawyer,
-                imageSrc: imageUrls[i],
-                blurImageUrl: blurredImageUrls[i],
-            }
+        // // Step 3: Transform lawyers data, including blurred images
+        // const transformedLawyers = query.map((lawyer, i) => {
+        //     const result = {
+        //         ...lawyer,
+        //         imageUrl: imageUrls[i],
+        //         blurImageUrl: blurredImageUrls[i],
+        //     }
 
-            return result
-        })
-        return transformedLawyers
+        //     return result
+        // })
+
+        return query
     } catch (err) {
         console.error(err)
         throw new Error('Internal Server Error')

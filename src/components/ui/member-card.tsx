@@ -1,5 +1,4 @@
 import { poppins } from '@/app/[locale]/fonts'
-import { TeamCardData } from './action' 
 import {
     Popover,
     PopoverContent,
@@ -11,18 +10,18 @@ import { cn } from '@/lib/utils'
 import { EllipsisVertical, Mail } from 'lucide-react'
 import Image from 'next/image'
 import LinkedInIcon from '@/components/icons/linked-in'
+import { MemberCardData } from '@/app/[locale]/_components/preview-members/action'
 
-export default function TeamCard({
+export default function MemberCard({
     name,
     slug,
     degree,
     position,
     linkedInUrl,
     email,
-    imageSrc,
+    imageUrl,
     currentLocale,
-    blurImageUrl,
-}: TeamCardData & { currentLocale: Locale }) {
+}: MemberCardData & { currentLocale: Locale }) {
     return (
         <div className="flex w-full flex-col items-center gap-2">
             <div className="relative w-full">
@@ -33,11 +32,12 @@ export default function TeamCard({
                     <div className="relative flex flex-col overflow-hidden rounded-lg pt-2 duration-300">
                         <Image
                             alt={`Picture of ${slug}`}
-                            src={imageSrc}
+                            src={imageUrl}
                             height={300}
                             width={250}
-                            placeholder={'blur'}
-                            blurDataURL={blurImageUrl}
+                            // removed blur cuz it always gittering up on rerender (on filter)
+                            // placeholder={'blur'}
+                            // blurDataURL={blurImageUrl}
                             className="z-20 object-cover contrast-[90%] duration-300 group-hover:scale-105 group-hover:contrast-100"
                         />
                         <div className="absolute z-30 inset-x-0 bottom-0 top-[40%] bg-gradient-to-t from-slate-600/20 via-transparent to-transparent dark:top-[40%] dark:from-zinc-600/[15%]" />

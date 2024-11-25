@@ -2,7 +2,7 @@ import { getCurrentLocale } from '@/app/[locale]/layout'
 import TeamCarousel from './carousel'
 import { CarouselItem } from '@/components/ui/carousel'
 import { getData } from './action'
-import TeamCard from './team-card'
+import MemberCard from '@/components/ui/member-card'
 
 export default async function FetchComponent() {
     const currentLocale = await getCurrentLocale()
@@ -16,7 +16,7 @@ export default async function FetchComponent() {
                         key={lawyer.slug}
                         className="flex pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                     >
-                        <TeamCard
+                        <MemberCard
                             key={lawyer.slug}
                             {...lawyer}
                             currentLocale={currentLocale}
