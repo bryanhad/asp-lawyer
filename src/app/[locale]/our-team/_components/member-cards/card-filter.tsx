@@ -27,6 +27,17 @@ export default function CardFilter({ searchParams: { currentRole } }: Props) {
 
     return (
         <div className="flex select-none items-center justify-center gap-2">
+            <Button
+                type="button"
+                variant={'outline'}
+                className={cn({
+                    'bg-foreground text-background hover:bg-foreground hover:text-background':
+                        currentRole === 'ALL',
+                })}
+                onClick={() => handleClick('ALL')}
+            >
+                ALL
+            </Button>
             {Object.values(MemberRoles).map((role) => (
                 <Button
                     key={role}
@@ -41,17 +52,6 @@ export default function CardFilter({ searchParams: { currentRole } }: Props) {
                     {role}
                 </Button>
             ))}
-            <Button
-                type="button"
-                variant={'outline'}
-                className={cn({
-                    'bg-foreground text-background hover:bg-foreground hover:text-background':
-                        currentRole === 'ALL',
-                })}
-                onClick={() => handleClick('ALL')}
-            >
-                ALL
-            </Button>
         </div>
     )
 }

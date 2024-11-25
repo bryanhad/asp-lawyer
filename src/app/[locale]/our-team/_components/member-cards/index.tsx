@@ -3,9 +3,9 @@
 import MemberCard from '@/components/ui/member-card'
 import { Locale } from '@/i18n/request'
 import { useQuery } from '@tanstack/react-query'
-import { Loader2 } from 'lucide-react'
 import { getData } from './action'
 import { Props as CardFilterProps } from './card-filter'
+import SkeletonFallback from './skeleton'
 
 type Props = {
     currentLocale: Locale
@@ -21,7 +21,7 @@ export default function MemberCards({
     })
 
     if (isLoading) {
-        return <Loader2 className="shrink-0 animate-spin" />
+        return <SkeletonFallback />
     }
 
     if (isError) {
@@ -42,14 +42,16 @@ export default function MemberCards({
         : data
 
     return (
-        <div className="grid w-full grid-cols-4 gap-5">
-            {filteredMembers.map((member) => (
-                <MemberCard
-                    key={member.slug}
-                    {...member}
-                    currentLocale={currentLocale}
-                />
-            ))}
-        </div>
+        <>
+            <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {filteredMembers.map((member) => (
+                    <MemberCard
+                        key={member.slug}
+                        {...member}
+                        currentLocale={currentLocale}
+                    />
+                ))}
+            </div>
+        </>
     )
 }
