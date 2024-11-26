@@ -18,7 +18,7 @@ type QueryResult = Pick<
     bio: { id: string; en: string }
     experience: { id: string; en: string }
     education: { id: string; en: string }
-    achievement: { id: string; en: string }
+    // achievement: { id: string; en: string }
 }
 
 export type MemberPageSlugData = Omit<
@@ -27,7 +27,7 @@ export type MemberPageSlugData = Omit<
 > & {
     experience: { id: string[]; en: string[] }
     education: { id: string[]; en: string[] }
-    achievement: { id: string[]; en: string[] }
+    // achievement: { id: string[]; en: string[] }
     blurImageUrl: string
 }
 
@@ -89,18 +89,7 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
                     WHEN t."key" = ${MemberTranslationKey.EDUCATION} AND t."language" = ${Language.EN} 
                     THEN t."value" 
                 END)
-            ) AS "education",
-            -- get achievement: { id: string; en: string }
-            jsonb_build_object(
-                'id', MAX(CASE 
-                    WHEN t."key" = ${MemberTranslationKey.ACHIEVEMENT} AND t."language" = ${Language.ID} 
-                    THEN t."value" 
-                END),
-                'en', MAX(CASE 
-                    WHEN t."key" = ${MemberTranslationKey.ACHIEVEMENT} AND t."language" = ${Language.EN} 
-                    THEN t."value" 
-                END)
-            ) AS "achievement"
+            ) AS "education"
         FROM members AS m
         LEFT JOIN translations AS t 
             ON m."id" = t."entityId" 
@@ -110,8 +99,7 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
                 ${MemberTranslationKey.DEGREE},
                 ${MemberTranslationKey.BIO}, 
                 ${MemberTranslationKey.EXPERIENCE},
-                ${MemberTranslationKey.EDUCATION},
-                ${MemberTranslationKey.ACHIEVEMENT}
+                ${MemberTranslationKey.EDUCATION}
             )
         WHERE m."slug" = ${slug}
         GROUP BY m."slug", m."imageUrl", m."email", m."linkedInUrl", m."name", m."role"
@@ -127,9 +115,6 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
     return {
         ...query[0],
         education: parse_StringifiedArray_TranslationQuery(query[0].education),
-        achievement: parse_StringifiedArray_TranslationQuery(
-            query[0].achievement,
-        ),
         experience: parse_StringifiedArray_TranslationQuery(
             query[0].experience,
         ),

@@ -148,7 +148,7 @@
             "fallback": "'About me' details are currently unavailable."
         },
         "myExperiences": {
-            "titlWhite": "My",
+            "titlWhite": "Experiences",
             "titlePrimary": "Experiences",
             "fallback": "Professional experience details are currently unavailable."
         },

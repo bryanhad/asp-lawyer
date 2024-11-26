@@ -5,8 +5,6 @@ import { Metadata } from 'next'
 import { cache } from 'react'
 import { getCurrentLocale } from '../../layout'
 import { getData } from './action'
-import DOMPurify from 'dompurify'
-import { JSDOM } from 'jsdom'
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -36,9 +34,10 @@ export default async function MemberPage({ params }: Props) {
 
     const htmlContent = currentLocale === Language.EN ? content.en : content.id
 
-    const window = new JSDOM('').window
-    const purify = DOMPurify(window)
-    const cleanHtmlContent = purify.sanitize(htmlContent)
+    // heavy as shiet.. commented for now..
+    // const window = new JSDOM('').window
+    // const purify = DOMPurify(window)
+    // const cleanHtmlContent = purify.sanitize(htmlContent)
 
     return (
         <BaseContainer>
@@ -46,7 +45,7 @@ export default async function MemberPage({ params }: Props) {
                 <div
                     className="tiptap view"
                     dangerouslySetInnerHTML={{
-                        __html: cleanHtmlContent,
+                        __html: htmlContent,
                     }}
                 />
             </Section>

@@ -10,8 +10,8 @@ export default async function Hero() {
 
     return (
         <div className="w-full overflow-hidden bg-background-suit">
-            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 py-20 md:grid-cols-3 md:py-24">
-                <div className="relative z-30 my-16 max-w-3xl space-y-6 md:col-span-2 lg:mt-24">
+            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 sm:px-6 md:px-8 py-20 md:grid-cols-3 md:py-24">
+                <div className="relative z-30 my-16 max-w-3xl space-y-6 md:col-span-3 lg:mt-24">
                     <div className="space-y-4 lg:space-y-6">
                         <h1
                             className={cn(
@@ -46,7 +46,7 @@ export default async function Hero() {
                         </h2>
                     </div>
 
-                    <p className="max-w-xl text-sm text-slate-400 md:text-base">
+                    <p className="max-w-md lg:max-w-xl text-sm text-slate-400 md:text-base">
                         {t('desc')}
                     </p>
 

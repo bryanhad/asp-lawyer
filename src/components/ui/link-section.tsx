@@ -49,7 +49,7 @@ function LinkSection({
     return (
         <span
             onClick={handleClick}
-            className={cn('group relative cursor-pointer', className)}
+            className={cn('group relative cursor-pointer flex items-center gap-3', className)}
         >
             <Link
                 href={href}

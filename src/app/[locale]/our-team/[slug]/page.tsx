@@ -10,6 +10,7 @@ import { getCurrentLocale } from '../../layout'
 import { getData } from './action'
 
 import { poppins } from '@/app/[locale]/fonts'
+import { Briefcase, NotebookPen } from 'lucide-react'
 import MemberInfo from './_components/member_info'
 
 type Props = {
@@ -41,8 +42,8 @@ export default async function MemberPage({ params }: Props) {
 
     const memberExperiences =
         currentLocale === 'en' ? member.experience.en : member.experience.id
-    const memberAchievements =
-        currentLocale === 'en' ? member.achievement.en : member.achievement.id
+    // const memberAchievements =
+    //     currentLocale === 'en' ? member.achievement.en : member.achievement.id
 
     return (
         <BaseContainer>
@@ -92,8 +93,9 @@ export default async function MemberPage({ params }: Props) {
                     {/* CONTENT */}
                     <div className="flex flex-col gap-2 px-6 lg:px-0">
                         <MemberInfo
+                            icon={<NotebookPen className='shrink-0' size={30}/>}
                             titleTop={t('aboutMe.titlWhite')}
-                            titleBottom={t('aboutMe.titlePrimary')}
+                            titleBottom={''}
                         >
                             <p className="whitespace-pre-line text-muted-foreground">
                                 {currentLocale === 'en'
@@ -102,8 +104,9 @@ export default async function MemberPage({ params }: Props) {
                             </p>
                         </MemberInfo>
                         <MemberInfo
+                            icon={<Briefcase className='shrink-0' size={30}/>}
                             titleTop={t('myExperiences.titlWhite')}
-                            titleBottom={t('myExperiences.titlePrimary')}
+                            titleBottom=''
                         >
                             <ul className="list-disc space-y-1 text-muted-foreground">
                                 {memberExperiences.length > 0 ? (
@@ -122,7 +125,7 @@ export default async function MemberPage({ params }: Props) {
                     </div>
                 </div>
                 {/* BOTTOM DESKTOP SECTION */}
-                <div className="grid grid-cols-1 mt-5 md:mt-12 md:grid-cols-2 px-6 lg:px-0">
+                {/* <div className="grid grid-cols-1 mt-5 md:mt-12 md:grid-cols-2 px-6 lg:px-0">
                     <MemberInfo
                         titleTop={t('myAchievement.titlWhite')}
                         titleBottom={t('myAchievement.titlePrimary')}
@@ -141,7 +144,7 @@ export default async function MemberPage({ params }: Props) {
                             )}
                         </ul>
                     </MemberInfo>
-                </div>
+                </div> */}
             </Section>
         </BaseContainer>
     )

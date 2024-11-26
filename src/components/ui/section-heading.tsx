@@ -1,6 +1,7 @@
 import LinkSection from '@/components/ui/link-section'
 import { cleanString, cn } from '@/lib/utils'
 import { sourceSerif4 } from '@/app/[locale]/fonts'
+import { ReactNode } from 'react'
 
 export type Props = {
     titleTop: string
@@ -10,8 +11,9 @@ export type Props = {
     textAlign?: 'left' | 'right' | 'center'
     oneLine?: boolean
     flipText?: boolean
-    lessAccentLineYSpacing?:boolean
-    lessImportant?:boolean
+    lessAccentLineYSpacing?: boolean
+    lessImportant?: boolean
+    icon?: ReactNode
 }
 
 export default function SectionHeading({
@@ -23,7 +25,8 @@ export default function SectionHeading({
     oneLine = false,
     flipText = false,
     lessAccentLineYSpacing = false,
-    lessImportant = false
+    lessImportant = false,
+    icon,
 }: Props) {
     const href = `${cleanString(!flipText ? titleTop : titleBottom)
         .toLowerCase()
@@ -46,7 +49,7 @@ export default function SectionHeading({
                         textAlign === 'right' ||
                         (!textAlign && side === 'right'),
                     'md:items-center': textAlign === 'center',
-                    'xl:gap-2': lessAccentLineYSpacing === true
+                    'xl:gap-2': lessAccentLineYSpacing === true,
                 },
             )}
         >
@@ -54,7 +57,7 @@ export default function SectionHeading({
                 id={href ?? undefined}
                 className={cn(
                     sourceSerif4.className,
-                    'flex max-w-max scroll-m-28 flex-col items-center text-center text-primary sm:gap-1 xl:font-bold ',
+                    'flex max-w-max scroll-m-28 flex-col items-center text-center text-primary sm:gap-1 xl:font-bold',
                     className,
                     {
                         // prioritize textAlign value
@@ -75,24 +78,25 @@ export default function SectionHeading({
                         titleBottom={!flipText ? titleBottom : titleTop}
                         size={24}
                     >
+                        {icon && <span>{icon}</span>}
                         {!flipText ? (
-                            <>
+                            <span>
                                 <span className="text-4xl text-secondary-foreground lg:text-4xl xl:text-5xl">
                                     {titleTop}
                                 </span>
                                 <span className="ml-4 text-4xl text-primary lg:text-4xl xl:text-5xl">
                                     {titleBottom}
                                 </span>
-                            </>
+                            </span>
                         ) : (
-                            <>
+                            <span>
                                 <span className="mr-4 text-4xl text-primary lg:text-4xl xl:text-5xl">
                                     {titleBottom}
                                 </span>
                                 <span className="text-3xl text-secondary-foreground lg:text-4xl xl:text-5xl">
                                     {titleTop}
                                 </span>
-                            </>
+                            </span>
                         )}
                     </LinkSection>
                 ) : (
@@ -112,7 +116,6 @@ export default function SectionHeading({
                     </>
                 )}
             </h2>
-            {!lessImportant && 
             <div
                 className={cn(
                     'h-1 w-12 bg-primary max-md:rounded-full xl:h-2 xl:w-20',
@@ -127,10 +130,10 @@ export default function SectionHeading({
                             (!textAlign && side === 'right'),
                         'md:rounded-full':
                             textAlign === 'center' || side === 'center',
+                        'xl:h-1': lessImportant,
                     },
                 )}
             />
-            }
         </div>
     )
 }

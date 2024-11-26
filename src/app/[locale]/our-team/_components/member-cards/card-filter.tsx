@@ -26,7 +26,7 @@ export default function CardFilter({ searchParams: { currentRole } }: Props) {
     }
 
     return (
-        <div className="flex select-none items-center justify-center gap-2">
+        <div className="flex flex-wrap select-none items-center justify-center gap-2">
             <Button
                 type="button"
                 variant={'outline'}
