@@ -141,7 +141,7 @@
     },
     "eachMemberPage": {
         "pageTitle": "Tentang {name}",
-        "wellcome": "Selamat datang di halaman {name}!"
+        "titleWhite": "Tentang"
     },
     "blogsPage": {
         "pageTitle": "Blog",

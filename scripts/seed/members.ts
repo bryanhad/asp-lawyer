@@ -21,7 +21,7 @@ async function main() {
         },
         {
             maxWait: 5000, // 5 seconds max wait to connect to prisma
-            timeout: 120000, // 2 minutes
+            timeout: 150000, // 2.5 minutes
         },
     )
 }

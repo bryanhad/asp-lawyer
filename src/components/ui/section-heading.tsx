@@ -2,7 +2,7 @@ import LinkSection from '@/components/ui/link-section'
 import { cleanString, cn } from '@/lib/utils'
 import { sourceSerif4 } from '@/app/[locale]/fonts'
 
-type Props = {
+export type Props = {
     titleTop: string
     titleBottom: string
     className?: string
@@ -10,6 +10,7 @@ type Props = {
     textAlign?: 'left' | 'right' | 'center'
     oneLine?: boolean
     flipText?: boolean
+    lessAccentLineYSpacing?:boolean
 }
 
 export default function SectionHeading({
@@ -20,6 +21,7 @@ export default function SectionHeading({
     textAlign,
     oneLine = false,
     flipText = false,
+    lessAccentLineYSpacing = false
 }: Props) {
     const href = `${cleanString(!flipText ? titleTop : titleBottom)
         .toLowerCase()
@@ -42,6 +44,7 @@ export default function SectionHeading({
                         textAlign === 'right' ||
                         (!textAlign && side === 'right'),
                     'md:items-center': textAlign === 'center',
+                    'xl:gap-2': lessAccentLineYSpacing === true
                 },
             )}
         >
@@ -75,13 +78,13 @@ export default function SectionHeading({
                                 <span className="text-4xl text-secondary-foreground lg:text-4xl xl:text-5xl">
                                     {titleTop}
                                 </span>
-                                <span className="ml-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
+                                <span className="ml-4 text-4xl text-primary lg:text-4xl xl:text-5xl">
                                     {titleBottom}
                                 </span>
                             </>
                         ) : (
                             <>
-                                <span className="mr-4 text-4xl text-primary lg:text-5xl xl:text-6xl">
+                                <span className="mr-4 text-4xl text-primary lg:text-4xl xl:text-5xl">
                                     {titleBottom}
                                 </span>
                                 <span className="text-3xl text-secondary-foreground lg:text-4xl xl:text-5xl">

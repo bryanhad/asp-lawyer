@@ -1,8 +1,14 @@
+import { TranslationQuery } from '../../../src/lib/types'
 import { Prisma, Translation } from '@prisma/client'
-import { EntityType, MemberTranslationKey } from '../../../src/lib/enum'
+import {
+    EntityType,
+    Language,
+    MemberTranslationKey,
+} from '../../../src/lib/enum'
 import { achievementsSeed } from '../data/achievements'
 import {
     dummyMemberAchievements,
+    dummyMemberBios,
     dummyMemberEducations,
     dummyMemberExperiences,
 } from '../data/dummy'
@@ -12,7 +18,11 @@ import { TranslationSeed } from '../types'
 import { seedAchievements } from './achievements'
 import { seedMembers } from './members'
 import { seedPracticeAreas } from './practice-areas'
-import { getRandomSubsetFromArray, separateLanguages } from './util'
+import {
+    getRandomElement,
+    getRandomSubsetFromArray,
+    separateLanguages,
+} from './util'
 
 type UpsertedMembers = Awaited<ReturnType<typeof seedMembers>>
 type UspertedPracticeAreas = Awaited<ReturnType<typeof seedPracticeAreas>>
@@ -51,9 +61,9 @@ function createTranslationPromise({
 }
 
 // Helper function to get dummy data based on the key
-function getDummyDataForKey(
+function getDummyData_By_TranslationKey(
     key: MemberTranslationKey,
-): { en: string; id: string }[] | null {
+): TranslationQuery[] | null {
     switch (key) {
         case MemberTranslationKey.EXPERIENCE:
             return dummyMemberExperiences
@@ -61,6 +71,8 @@ function getDummyDataForKey(
             return dummyMemberEducations
         case MemberTranslationKey.ACHIEVEMENT:
             return dummyMemberAchievements
+        case MemberTranslationKey.BIO:
+            return dummyMemberBios
         default:
             return null
     }
@@ -72,31 +84,97 @@ export async function seedMemberTranslations(
 ) {
     for (const [index, memberData] of membersSeed.entries()) {
         const translationPromises: Promise<Translation>[] = []
+        // const processedKeys = new Set<string>() // Flag variable to track processed keys
 
-        console.log(`\t ⚙️  Seeding translation for member "${memberData.slug}"...`)
+        console.log(
+            `  ⚙️  Seeding translation for member "${memberData.slug}"...`,
+        )
 
         // get each member id
         const memberId = upsertedMembers[index].id
 
         // iterate through each member's translations
         for (const translationData of memberData.translations) {
+            // idk man this is hard..
+            /**
+             *  if the seed data actually contians the value, I want this to run both for the id and en,
+             * but for if it is empty I want it to run once.. but I think it is okay to not care about this..
+             * since the this currently works haha..
+             * 
+             * So I commented the flagging for now.. hopefully this works fine..
+             * 
+             */
+
+            /**
+             * Since in each member's translation has 2 element of which the key is the same..
+             * e.g.:
+             * [
+             *      {language: Language.EN, key: MemberTranslationKey.BIO, value: ''},
+             *      {language: Language.ID, key: MemberTranslationKey.BIO, value: ''},
+             *      ...
+             * ]
+             *
+             * We must prevent for this seeding to only run ONCE for every key.
+             * I make sure of that by using a flag which is stored in processedKeys Set.
+             */
+
+            // const uniqueKey = `${translationData.key}`
+
+            // if (processedKeys.has(uniqueKey)) {
+            //     continue // Skip if this key-language combination is already processed
+            // }
+            // console.log(
+            //     `   - Processing "${memberData.slug}"'s "${translationData.key}" translation...`,
+            // )
+            // Mark the key as processed
+            // processedKeys.add(uniqueKey)
+
             if (typeof translationData.value === 'string') {
-                // Add string value directly
-                translationPromises.push(
-                    createTranslationPromise({
-                        prisma,
-                        entityId: memberId,
-                        entityType: EntityType.MEMBER,
-                        translationData: {
-                            ...translationData,
-                            value: translationData.value,
-                        },
-                    }),
-                )
+                if (translationData.value.trim().length > 0) {
+                    // Add string value directly if it has length
+                    translationPromises.push(
+                        createTranslationPromise({
+                            prisma,
+                            entityId: memberId,
+                            entityType: EntityType.MEMBER,
+                            translationData: {
+                                ...translationData,
+                                value: translationData.value,
+                            },
+                        }),
+                    )
+                } else {
+                    // Handle empty string case based on the key
+                    const dummyData = getDummyData_By_TranslationKey(
+                        translationData.key,
+                    )
+                    if (dummyData) {
+                        // Pick a random TranslationQuery object
+                        const randomDummy =
+                            getRandomElement<TranslationQuery>(dummyData)
+
+                        for (const [language, value] of Object.entries(
+                            randomDummy,
+                        )) {
+                            translationPromises.push(
+                                createTranslationPromise({
+                                    prisma,
+                                    entityId: memberId,
+                                    entityType: EntityType.MEMBER,
+                                    translationData: {
+                                        key: translationData.key,
+                                        language: language as Language,
+                                        value: value,
+                                    },
+                                }),
+                            )
+                        }
+                    }
+                }
             }
 
             if (Array.isArray(translationData.value)) {
-                if (translationData.value.length > 1) {
+                if (translationData.value.length > 0) {
                     // Add array value directly if it has items
                     translationPromises.push(
                         createTranslationPromise({
@@ -111,20 +189,45 @@ export async function seedMemberTranslations(
                     )
                 } else {
                     // Handle empty array case based on the translation key
-                    const dummyData = getDummyDataForKey(translationData.key)
+                    const dummyData = getDummyData_By_TranslationKey(
+                        translationData.key,
+                    )
                     if (dummyData) {
+                        // Pick a random subset from dummy data
+                        /**
+                         * example:
+                         * When translationData.key === EXPERIENCE:
+                         * randomSubset = [
+                         *      {en: en_dummy_experience_1, id: id_dummy_experience_1},
+                         *      {en: en_dummy_experience_2, id: id_dummy_experience_2},
+                         *      ...
+                         * ]
+                         */
                         const randomSubset = getRandomSubsetFromArray(dummyData)
-                        const ID_AND_EN_Values = separateLanguages(randomSubset)
+                        // Separate randomSubset languages:
+                        /**
+                         * example:
+                         * When translationData.key === EXPERIENCE:
+                         * ID_AND_EN_TRANSLATION = {
+                         *      en: [en_dummy_experience_1, en_dummy_experience_2, ...],
+                         *      id: [id_dummy_experience_1, id_dummy_experience_2, ...],
+                         * }
+                         */
+                        const ID_AND_EN_TRANSLATION =
+                            separateLanguages(randomSubset)
 
-                        for (const ID_OR_EN_value of ID_AND_EN_Values) {
+                        for (const [language, value] of Object.entries(
+                            ID_AND_EN_TRANSLATION,
+                        )) {
                             translationPromises.push(
                                 createTranslationPromise({
                                     prisma,
                                     entityId: memberId,
                                     entityType: EntityType.MEMBER,
                                     translationData: {
-                                        ...translationData,
-                                        value: JSON.stringify(ID_OR_EN_value),
+                                        key: translationData.key,
+                                        language: language as Language,
+                                        value: JSON.stringify(value),
                                     },
                                 }),
                             )
@@ -135,7 +238,7 @@ export async function seedMemberTranslations(
         }
         await Promise.all(translationPromises)
         console.log(
-            `\t ✅ Successfully seeded translations for member "${memberData.slug}"!`,
+            `  ✅ Successfully seeded translations for member "${memberData.slug}"!`,
         )
     }
 }
@@ -147,7 +250,9 @@ export async function seedPracticeAreaTranslations(
     for (const [index, practiceAreasData] of practiceAreaSeed.entries()) {
         const translationPromises: Promise<Translation>[] = []
 
-        console.log(`\t ⚙️  Seeding translation for practice_area "${practiceAreasData.slug}"...`)
+        console.log(
+            `  ⚙️  Seeding translation for practice_area "${practiceAreasData.slug}"...`,
+        )
 
         const practiceAreasId = upsertedPracticeAreas[index].id
 
@@ -175,7 +280,7 @@ export async function seedPracticeAreaTranslations(
         }
         await Promise.all(translationPromises)
         console.log(
-            `\t ✅ Successfully seeded translations for practice area "${practiceAreasData.slug}"!`,
+            `  ✅ Successfully seeded translations for practice area "${practiceAreasData.slug}"!`,
         )
     }
 }
@@ -185,9 +290,8 @@ export async function seedAchievementTranslations(
     upsertedAchievements: UspertedAchievements,
 ) {
     const translationPromises: Promise<Translation>[] = []
-    
-    for (const [index, achievementsData] of achievementsSeed.entries()) {
 
+    for (const [index, achievementsData] of achievementsSeed.entries()) {
         const achievementsId = upsertedAchievements[index].id
 
         for (const translationData of achievementsData.translations) {

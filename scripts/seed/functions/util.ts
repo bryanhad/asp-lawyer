@@ -1,3 +1,6 @@
+import { Language } from '../../../src/lib/enum'
+import { TranslationQuery } from '../../../src/lib/types'
+
 export function getPrivateUrl(publicUploadthingUrl: string) {
     const imageUrlSplit = publicUploadthingUrl.split('/f/')
     imageUrlSplit.splice(1, 0, `a/${process.env.UPLOADTHING_APP_ID}`)
@@ -24,10 +27,18 @@ export function getRandomSubsetFromArray<T>(arr: T[]): T[] {
     return shuffled.slice(0, randomCount)
 }
 
+export function getRandomElement<T>(array: T[]): T {
+    const randomIndex = Math.floor(Math.random() * array.length)
+    return array[randomIndex]
+}
+
 export function separateLanguages(
-    data: { en: string; id: string }[],
-): [string[], string[]] {
+    data: TranslationQuery[],
+): Record<Language, string[]> {
     const enArray = data.map((item) => item.en)
     const idArray = data.map((item) => item.id)
-    return [enArray, idArray]
+    return {
+        [Language.EN]: enArray,
+        [Language.ID]: idArray,
+    }
 }

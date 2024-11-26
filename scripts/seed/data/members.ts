@@ -39,12 +39,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: `Arif began his legal career as a junior associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts. Currently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.`,
+                value: `Arif began his legal career as a junior associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts.\n\nCurrently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.`,
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Arif memulai karir hukumnya sebagai junior associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak. Saat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
+                value: 'Arif memulai karir hukumnya sebagai junior associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak.\n\nSaat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
             },
             {
                 language: Language.EN,
@@ -121,12 +121,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Herlin provides crucial support in document preparation and case tracking.',
+                value: 'Herlin started his legal career at an international law firm, where she worked on cross-border transactions and developed a strong foundation in international trade law. His expertise spans multiple jurisdictions, enabling his to assist clients in navigating complex global regulatory frameworks.\n\nOver the years, Herlin has expanded his practice to include intellectual property rights, helping businesses safeguard their innovations and trademarks. As a dedicated team member, Herlin plays a crucial role in providing strategic advice on global compliance and intellectual property matters. His client-centric approach and exceptional negotiation skills have made his a trusted advisor in high-stakes legal situations.',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Herlin memberikan dukungan penting dalam persiapan dokumen dan pelacakan kasus.',
+                value: 'Herlin memulai karir hukumnya di sebuah firma hukum internasional, di mana ia menangani transaksi lintas negara dan membangun dasar yang kuat dalam hukum perdagangan internasional. Keahliannya mencakup berbagai yurisdiksi, memungkinkan Herlin membantu klien menavigasi kerangka peraturan global yang kompleks.\n\nSelama bertahun-tahun, Herlin memperluas praktiknya ke hak kekayaan intelektual, membantu bisnis melindungi inovasi dan merek dagang mereka. Sebagai anggota tim yang berdedikasi, Herlin memainkan peran penting dalam memberikan saran strategis tentang kepatuhan global dan masalah kekayaan intelektual. Pendekatan yang berpusat pada klien dan keterampilan negosiasinya yang luar biasa telah menjadikannya penasihat tepercaya dalam situasi hukum berisiko tinggi.',
             },
             {
                 language: Language.EN,
@@ -203,12 +203,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Dani is experienced in handling high-profile litigation cases.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Dani berpengalaman dalam menangani kasus litigasi profil tinggi.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -285,12 +285,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Agung is known for his meticulous attention to detail and dedication to client success.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Agung dikenal karena perhatiannya yang cermat terhadap detail dan dedikasinya terhadap kesuksesan klien.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -357,12 +357,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Andy is a dynamic young lawyer with a passion for advocacy.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Andy adalah pengacara muda yang dinamis dengan semangat advokasi.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -429,12 +429,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Kharis advises on technology law and data privacy.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Kharis memberikan nasihat tentang hukum teknologi dan privasi data.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -501,12 +501,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Fahmi is a skilled negotiator with a focus on real estate law.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Fahmi adalah negosiator ulung dengan fokus pada hukum real estat.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -573,12 +573,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Adnan is a seasoned lawyer with over 20 years of experience in corporate law.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Adnan adalah pengacara berpengalaman dengan lebih dari 20 tahun di bidang hukum perusahaan.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -646,12 +646,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Betti brings a wealth of knowledge in intellectual property law.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Betti memiliki banyak pengetahuan dalam hukum kekayaan intelektual.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -718,12 +718,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Rizki has extensive expertise in financial regulations.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Rizki memiliki keahlian yang luas dalam regulasi keuangan.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -790,12 +790,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Erwin has a background in international law and cross-border cases.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Erwin memiliki latar belakang dalam hukum internasional dan kasus lintas batas.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -862,12 +862,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Faras is an expert in environmental law and sustainability.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Faras ahli dalam hukum lingkungan dan keberlanjutan.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -934,12 +934,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Indah is recognized for her work in family law and mediation.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Indah diakui atas karyanya dalam hukum keluarga dan mediasi.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -1006,12 +1006,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Richard has a robust background in employment law.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Richard memiliki latar belakang kuat dalam hukum ketenagakerjaan.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -1078,12 +1078,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Ratna is a highly respected lawyer in commercial litigation.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Ratna adalah pengacara yang sangat dihormati dalam litigasi komersial.',
+                value: '',
             },
             {
                 language: Language.EN,
@@ -1150,12 +1150,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: 'Reza is a rising star with a passion for social justice.',
+                value: '',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Reza adalah bintang yang sedang naik dengan semangat untuk keadilan sosial.',
+                value: '',
             },
             {
                 language: Language.EN,

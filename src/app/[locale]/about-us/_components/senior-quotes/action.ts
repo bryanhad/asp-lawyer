@@ -2,6 +2,7 @@
 
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
+import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Member } from '@prisma/client'
 
 export type PracticeAreaPageData = Pick<Member, 'name' | 'imageUrl'> & {
@@ -16,7 +17,8 @@ type QueryResult = Pick<Member, 'slug' | 'name'> & {
 }
 
 export type LawyerQuotesData = QueryResult & {
-    src: string
+    imageUrl: string
+    blurImageUrl: string
 }
 
 export async function getData() {
@@ -71,13 +73,21 @@ export async function getData() {
             ORDER BY l."order"
         `
 
-        const lawyersWithImage = query.map((lawyer) => {
+        const images = query.map((el) => {
+            if (el.slug === 'arif') {
+                return `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUYpKpGObXmFsjS39BxoYHaeJ0yCUQhf1gO5d` // arif-quote
+            } else {
+                return `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RY2cSmiGCKp8XLOYARutgPevhjcNx356ZdQUw9` // herlin-quote
+            }
+        })
+
+        const blurImages = await getBlurredImageUrls(images)
+
+        const lawyersWithImage = query.map((lawyer, i) => {
             const result = {
                 ...lawyer,
-                src:
-                    lawyer.slug === 'arif'
-                        ? `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUYpKpGObXmFsjS39BxoYHaeJ0yCUQhf1gO5d` // arif-quote
-                        : `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RY2cSmiGCKp8XLOYARutgPevhjcNx356ZdQUw9`, // herlin-quote
+                imageUrl: images[i],
+                blurImageUrl: blurImages[i],
             }
 
             return result

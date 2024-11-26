@@ -1,21 +1,14 @@
 'use client'
 
+import { LawyerQuotesData } from '@/app/[locale]/about-us/_components/senior-quotes/action'
 import { Locale } from '@/i18n/request'
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-type CardItems = {
-    name: string
-    degree: { id: string; en: string }
-    position: { id: string; en: string }
-    quote: { id?: string; en?: string }
-    src: string
-}
-
 export type AnimatedCardProps = {
-    cardItems: CardItems[]
+    cardItems: LawyerQuotesData[]
     autoplay?: boolean
     currentLocale: Locale
 }
@@ -62,14 +55,14 @@ const AnimatedCard = ({
             : cardItems[active].quote.id
 
     return (
-        <div className="relative z-10 mx-auto max-w-sm px-4 md:py-10 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-            <div className="relative grid grid-cols-1 gap-5 md:gap-20 md:grid-cols-2">
+        <div className="relative z-10 mx-auto max-w-sm px-4 font-sans antialiased md:max-w-4xl md:px-8 md:py-10 lg:px-12">
+            <div className="relative grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-20">
                 <div onClick={handleNext} className="cursor-pointer">
                     <div className="relative h-80 w-full">
                         <AnimatePresence>
                             {cardItems.map((item, index) => (
                                 <motion.div
-                                    key={item.src}
+                                    key={item.slug}
                                     initial={{
                                         opacity: 0,
                                         scale: 0.9,
@@ -101,8 +94,10 @@ const AnimatedCard = ({
                                     className="absolute inset-0 origin-bottom"
                                 >
                                     <Image
-                                        src={item.src}
+                                        src={item.imageUrl}
                                         alt={item.name}
+                                        placeholder="blur"
+                                        blurDataURL={item.blurImageUrl}
                                         width={500}
                                         height={500}
                                         draggable={false}
@@ -133,15 +128,17 @@ const AnimatedCard = ({
                             ease: 'easeInOut',
                         }}
                     >
-                        <h3 className="space-x-2 text-xl md:text-2xl font-light text-black dark:text-white">
-                            <span className='text-primary font-medium'>{cardItems[active].name}</span>
+                        <h3 className="space-x-2 text-xl font-light text-black dark:text-white md:text-2xl">
+                            <span className="font-medium text-primary">
+                                {cardItems[active].name}
+                            </span>
                             <span className="text-muted-foreground">
                                 {currentLocale === 'en'
                                     ? cardItems[active].degree.en
                                     : cardItems[active].degree.id}
                             </span>
                         </h3>
-                        <p className="text-gray-500 dark:text-neutral-500 max-w-max mt-1">
+                        <p className="mt-1 max-w-max text-gray-500 dark:text-neutral-500">
                             {currentLocale === 'en'
                                 ? cardItems[active].position.en
                                 : cardItems[active].position.id}
@@ -152,7 +149,7 @@ const AnimatedCard = ({
                                 alt="quote icon"
                                 width={200}
                                 height={200}
-                                className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 opacity-5 dark:invert filter"
+                                className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 opacity-5 filter dark:invert"
                             />
                             <motion.p className="relative z-20 text-lg text-gray-500 dark:text-neutral-300">
                                 {quote

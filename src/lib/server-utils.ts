@@ -1,5 +1,6 @@
 import { getPlaiceholder } from 'plaiceholder'
 import kyInstance from './ky'
+import { TranslationQuery } from './types'
 
 export async function getBlurredImageUrl(imageUrl: string) {
     const res = await kyInstance.get(imageUrl)
@@ -17,4 +18,23 @@ export async function getBlurredImageUrls(imageUrls: string[]) {
     const base64Results = await Promise.all(base64Promises)
 
     return base64Results
+}
+
+export function parseStringifiedArray<T = string>(stringifiedArr: string): T[] {
+    try {
+        return JSON.parse(stringifiedArr) as T[]
+    } catch (error) {
+        console.error('Failed to parse stringified array:', error)
+        return []
+    }
+}
+
+export function parse_StringifiedArray_TranslationQuery({
+    en: stringifiedArrOfEnglishTranslations,
+    id: stringifiedArrOfIndonesianTranslations,
+}: TranslationQuery): { id: string[]; en: string[] } {
+    return {
+        en: parseStringifiedArray(stringifiedArrOfEnglishTranslations),
+        id: parseStringifiedArray(stringifiedArrOfIndonesianTranslations),
+    }
 }

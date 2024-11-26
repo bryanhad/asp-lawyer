@@ -7,7 +7,7 @@ import {
 import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { EllipsisVertical, Mail } from 'lucide-react'
+import { EllipsisVertical, Mail, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import LinkedInIcon from '@/components/icons/linked-in'
 import { MemberCardData } from '@/app/[locale]/_components/preview-members/action'
@@ -47,11 +47,29 @@ export default function MemberCard({
                     </p>
                 </div>
                 {/* lawyer info */}
-                <div className={cn(poppins.className, 'w-full space-y-1 px-3 mt-2')}>
+                <div
+                    className={cn(
+                        poppins.className,
+                        'mt-2 w-full space-y-1 px-3',
+                    )}
+                >
                     <h3 className="m-0 line-clamp-1 md:text-lg">{name}</h3>
-                    <p className="text-nowrap text-sm">
-                        {currentLocale === 'en' ? degree.en : degree.id}
-                    </p>
+                    <div className="flex items-center justify-between">
+                        <p className="text-nowrap text-sm">
+                            {currentLocale === 'en' ? degree.en : degree.id}
+                        </p>
+                        <div className="flex items-center">
+                            <p className="text-sm text-primary">
+                                {currentLocale === 'en'
+                                    ? 'View Profile'
+                                    : 'Kunjungi Profil'}
+                            </p>
+                            <ChevronRight
+                                className="shrink-0 text-primary"
+                                size={20}
+                            />
+                        </div>
+                    </div>
                 </div>
             </Link>
             <div className="absolute right-0 top-0 z-20 flex translate-x-1/3 flex-col items-center gap-2 p-2">

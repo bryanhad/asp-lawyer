@@ -141,7 +141,7 @@
     },
     "eachMemberPage": {
         "pageTitle": "About {name}",
-        "wellcome": "Wellcome to {name}'s page!"
+        "titleWhite": "About"
     },
     "blogsPage": {
         "pageTitle": "Blogs",
