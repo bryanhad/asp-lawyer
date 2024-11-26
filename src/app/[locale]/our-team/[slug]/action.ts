@@ -4,7 +4,7 @@ import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import {
     getBlurredImageUrl,
-    parse_StringifiedArray_TranslationQuery
+    parse_StringifiedArray_TranslationQuery,
 } from '@/lib/server-utils'
 import { Member } from '@prisma/client'
 import { notFound } from 'next/navigation'
@@ -18,14 +18,16 @@ type QueryResult = Pick<
     bio: { id: string; en: string }
     experience: { id: string; en: string }
     education: { id: string; en: string }
+    achievement: { id: string; en: string }
 }
 
 export type MemberPageSlugData = Omit<
     QueryResult,
-    'experience' | 'education'
+    'experience' | 'education' | 'achievement'
 > & {
     experience: { id: string[]; en: string[] }
     education: { id: string[]; en: string[] }
+    achievement: { id: string[]; en: string[] }
     blurImageUrl: string
 }
 
@@ -87,7 +89,18 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
                     WHEN t."key" = ${MemberTranslationKey.EDUCATION} AND t."language" = ${Language.EN} 
                     THEN t."value" 
                 END)
-            ) AS "education"
+            ) AS "education",
+            -- get achievement: { id: string; en: string }
+            jsonb_build_object(
+                'id', MAX(CASE 
+                    WHEN t."key" = ${MemberTranslationKey.ACHIEVEMENT} AND t."language" = ${Language.ID} 
+                    THEN t."value" 
+                END),
+                'en', MAX(CASE 
+                    WHEN t."key" = ${MemberTranslationKey.ACHIEVEMENT} AND t."language" = ${Language.EN} 
+                    THEN t."value" 
+                END)
+            ) AS "achievement"
         FROM members AS m
         LEFT JOIN translations AS t 
             ON m."id" = t."entityId" 
@@ -97,7 +110,8 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
                 ${MemberTranslationKey.DEGREE},
                 ${MemberTranslationKey.BIO}, 
                 ${MemberTranslationKey.EXPERIENCE},
-                ${MemberTranslationKey.EDUCATION}
+                ${MemberTranslationKey.EDUCATION},
+                ${MemberTranslationKey.ACHIEVEMENT}
             )
         WHERE m."slug" = ${slug}
         GROUP BY m."slug", m."imageUrl", m."email", m."linkedInUrl", m."name", m."role"
@@ -113,6 +127,9 @@ export async function getData(slug: string): Promise<MemberPageSlugData> {
     return {
         ...query[0],
         education: parse_StringifiedArray_TranslationQuery(query[0].education),
+        achievement: parse_StringifiedArray_TranslationQuery(
+            query[0].achievement,
+        ),
         experience: parse_StringifiedArray_TranslationQuery(
             query[0].experience,
         ),

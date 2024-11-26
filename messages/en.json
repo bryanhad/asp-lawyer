@@ -141,7 +141,22 @@
     },
     "eachMemberPage": {
         "pageTitle": "About {name}",
-        "titleWhite": "About"
+        "titleWhite": "About",
+        "aboutMe": {
+            "titlWhite": "About",
+            "titlePrimary": "Me",
+            "fallback": "'About me' details are currently unavailable."
+        },
+        "myExperiences": {
+            "titlWhite": "My",
+            "titlePrimary": "Experiences",
+            "fallback": "Professional experience details are currently unavailable."
+        },
+        "myAchievement": {
+            "titlWhite": "My",
+            "titlePrimary": "Achievements",
+            "fallback": "Professional achievement details are currently unavailable."
+        }
     },
     "blogsPage": {
         "pageTitle": "Blogs",

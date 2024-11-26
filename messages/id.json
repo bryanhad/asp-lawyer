@@ -141,7 +141,22 @@
     },
     "eachMemberPage": {
         "pageTitle": "Tentang {name}",
-        "titleWhite": "Tentang"
+        "titleWhite": "Tentang",
+        "aboutMe": {
+            "titlWhite": "Tentang",
+            "titlePrimary": "Saya",
+            "fallback": "Detail 'tentang saya' saat ini tidak tersedia."
+        },
+        "myExperiences": {
+            "titlWhite": "Pengalaman",
+            "titlePrimary": "Saya",
+            "fallback": "Detail pengalaman profesional saat ini tidak tersedia."
+        },
+        "myAchievement": {
+            "titlWhite": "Pencapaian",
+            "titlePrimary": "Saya",
+            "fallback": "Detail pencapaian profesional saat ini tidak tersedia."
+        }
     },
     "blogsPage": {
         "pageTitle": "Blog",

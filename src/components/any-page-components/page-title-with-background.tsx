@@ -40,9 +40,9 @@ export default function PageTitleWithBackground({
                     <span className="text-primary">{titlePrimary}</span>
                 </h1>
                 <div className="mt-2 flex items-center justify-center gap-4">
-                    <Separator className="w-full max-w-[50%] bg-white/50" />
+                    <Separator className="w-full max-w-[40%] bg-white/50" />
                     <Scale className="shrink-0 text-white/50" size={20} />
-                    <Separator className="w-full max-w-[50%] bg-white/50" />
+                    <Separator className="w-full max-w-[40%] bg-white/50" />
                 </div>
             </div>
         </div>

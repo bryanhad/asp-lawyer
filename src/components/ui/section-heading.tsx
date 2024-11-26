@@ -11,6 +11,7 @@ export type Props = {
     oneLine?: boolean
     flipText?: boolean
     lessAccentLineYSpacing?:boolean
+    lessImportant?:boolean
 }
 
 export default function SectionHeading({
@@ -21,7 +22,8 @@ export default function SectionHeading({
     textAlign,
     oneLine = false,
     flipText = false,
-    lessAccentLineYSpacing = false
+    lessAccentLineYSpacing = false,
+    lessImportant = false
 }: Props) {
     const href = `${cleanString(!flipText ? titleTop : titleBottom)
         .toLowerCase()
@@ -52,7 +54,7 @@ export default function SectionHeading({
                 id={href ?? undefined}
                 className={cn(
                     sourceSerif4.className,
-                    'flex max-w-max scroll-m-28 flex-col items-center text-center text-primary sm:gap-1 xl:font-bold',
+                    'flex max-w-max scroll-m-28 flex-col items-center text-center text-primary sm:gap-1 xl:font-bold ',
                     className,
                     {
                         // prioritize textAlign value
@@ -110,6 +112,7 @@ export default function SectionHeading({
                     </>
                 )}
             </h2>
+            {!lessImportant && 
             <div
                 className={cn(
                     'h-1 w-12 bg-primary max-md:rounded-full xl:h-2 xl:w-20',
@@ -127,6 +130,7 @@ export default function SectionHeading({
                     },
                 )}
             />
+            }
         </div>
     )
 }
