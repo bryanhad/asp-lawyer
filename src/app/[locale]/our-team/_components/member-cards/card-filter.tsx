@@ -4,36 +4,40 @@ import { Button } from '@/components/ui/button'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { MemberRoles } from '@/lib/enum'
 import { cn } from '@/lib/utils'
+import { FilterOptions } from './member-cards'
 
 export type Props = {
-    searchParams: { currentRole?: string }
+    currentSelectedRole: FilterOptions
+    onClick: (clickedFilter: FilterOptions) => void
 }
 
-type FilterValues = MemberRoles | 'ALL'
-
-export default function CardFilter({ searchParams: { currentRole } }: Props) {
+export default function CardFilter({
+    currentSelectedRole,
+    onClick,
+}: Props) {
     const pathname = usePathname()
     const router = useRouter()
 
-    function handleClick(roleFilterValue: FilterValues) {
+    function handleClick(value: FilterOptions) {
         const queryParams = new URLSearchParams(window.location.search)
-        if (roleFilterValue === 'ALL') {
+        if (value === 'ALL') {
             queryParams.delete('role')
         } else {
-            queryParams.set('role', roleFilterValue)
+            queryParams.set('role', value)
         }
 
         router.push(`${pathname}?${queryParams.toString()}`)
+        onClick(value)
     }
 
     return (
-        <div className="flex flex-wrap select-none items-center justify-center gap-2">
+        <div className="flex select-none flex-wrap items-center justify-center gap-2">
             <Button
                 type="button"
                 variant={'outline'}
                 className={cn({
                     'bg-foreground text-background hover:bg-foreground hover:text-background':
-                        currentRole === 'ALL',
+                        currentSelectedRole === 'ALL',
                 })}
                 onClick={() => handleClick('ALL')}
             >
@@ -46,7 +50,7 @@ export default function CardFilter({ searchParams: { currentRole } }: Props) {
                     variant={'outline'}
                     className={cn({
                         'bg-foreground text-background hover:bg-foreground hover:text-background':
-                            role === currentRole,
+                            role === currentSelectedRole,
                     })}
                     onClick={() => handleClick(role)}
                 >

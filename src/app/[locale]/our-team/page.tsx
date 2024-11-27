@@ -1,11 +1,13 @@
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/components/containers/base-container'
-import { Metadata } from 'next'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import MemberCards from './_components/member-cards'
-import CardFilter from './_components/member-cards/card-filter'
 import Section from '@/components/containers/section'
 import { Locale } from '@/i18n/request'
+import { MemberRoles } from '@/lib/enum'
+import { Metadata } from 'next'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { Suspense } from 'react'
+import FetchComponent from './_components/member-cards/fetch-component'
+import SkeletonFallback from './_components/member-cards/skeleton'
 
 type Props = {
     params: Promise<{ currentLocale: Locale }>
@@ -24,14 +26,19 @@ export default async function MembersPage({ searchParams, params }: Props) {
     const { currentLocale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
-    *
-    * Refer to next-intl's documentation:
-    * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
-    */
-   setRequestLocale(currentLocale)
-   
-   
-   const { role } = await searchParams
+     *
+     * Refer to next-intl's documentation:
+     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     */
+    setRequestLocale(currentLocale)
+
+    const { role } = await searchParams
+
+    const roleSearchParam =
+        role && Object.values(MemberRoles).includes(role as MemberRoles)
+            ? (role as MemberRoles)
+            : undefined
+
     const t = await getTranslations('ourTeamPage')
 
     return (
@@ -43,11 +50,9 @@ export default async function MembersPage({ searchParams, params }: Props) {
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing className="space-y-6">
-                <CardFilter searchParams={{ currentRole: role }} />
-                <MemberCards
-                    currentLocale={currentLocale}
-                    searchParams={{ currentRole: role }}
-                />
+                <Suspense fallback={<SkeletonFallback />}>
+                    <FetchComponent currentRole={roleSearchParam} />
+                </Suspense>
             </Section>
         </BaseContainer>
     )

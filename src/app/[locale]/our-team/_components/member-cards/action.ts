@@ -12,12 +12,12 @@ type QueryResult = Pick<
     degree: { id: string; en: string }
 }
 
-export type PracticeAreaPageSlugData = QueryResult
+export type MembersData = QueryResult[]
 //  & {
 //     blurImageUrl: string
 // }
 
-export async function getData(): Promise<PracticeAreaPageSlugData[]> {
+export async function getData(): Promise<MembersData> {
     const query: QueryResult[] = await prisma.$queryRaw`
         SELECT 
             m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl",

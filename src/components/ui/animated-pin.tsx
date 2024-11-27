@@ -19,6 +19,8 @@ type Props = {
     currentLocale: Locale
     href?: string
     hrefText?: string
+    imageWidth?: number
+    imageHeight?:number
 }
 
 const PinContainer = ({
@@ -33,6 +35,8 @@ const PinContainer = ({
     pinContainerClassName,
     href,
     hrefText,
+    imageHeight=200,
+    imageWidth=300
 }: Props) => {
     const [transform, setTransform] = useState(
         'translate(-50%,-50%) rotateX(0deg)',
@@ -71,8 +75,8 @@ const PinContainer = ({
                                 placeholder="blur"
                                 blurDataURL={blurDataUrl}
                                 alt={`Picture of "${title}"`}
-                                width={300}
-                                height={300}
+                                width={imageWidth}
+                                height={imageHeight}
                                 className="dark:brightness-[80%]"
                             />
                             <div className="p-4 text-center">
