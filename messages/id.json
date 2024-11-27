@@ -178,7 +178,8 @@
     },
     "contactUsPage": {
         "pageTitle": "Hubungi Kami",
-        "title": "Hubungi Kami",
+        "titleWhite": "Hubungi",
+        "titlePrimary": "Kami",
         "desc": "Hubungi kami untuk konsultasi dan pertanyaan. Kami siap membantu."
     },
     "carousels": {

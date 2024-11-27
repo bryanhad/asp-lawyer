@@ -5,10 +5,11 @@ import { Scale } from 'lucide-react'
 import { Separator } from '../ui/separator'
 import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
 
-type Props = { titleWhite: string; titlePrimary: string; publicUrlFromUploadThing: string } & Omit<
-    ImageProps,
-    'src'
->
+type Props = {
+    titleWhite?: string
+    titlePrimary?: string
+    publicUrlFromUploadThing: string
+} & Omit<ImageProps, 'src'>
 
 export default async function PageTitleWithBackground({
     titleWhite,
@@ -45,8 +46,12 @@ export default async function PageTitleWithBackground({
                         'flex text-center text-3xl max-lg:flex-col lg:gap-4 lg:text-4xl',
                     )}
                 >
-                    <span className="text-white">{titleWhite}</span>
-                    <span className="text-primary">{titlePrimary}</span>
+                    {titleWhite && (
+                        <span className="text-white">{titleWhite}</span>
+                    )}
+                    {titlePrimary && (
+                        <span className="text-primary">{titlePrimary}</span>
+                    )}
                 </h1>
                 <div className="mt-2 flex items-center justify-center gap-4">
                     <Separator className="w-full max-w-[40%] bg-white/50" />

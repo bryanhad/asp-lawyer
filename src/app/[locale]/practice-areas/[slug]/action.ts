@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 type QueryResult = Pick<PracticeArea, 'slug' | 'imageUrl'> & {
     fullName: { id: string; en: string }
     content: { id: string; en: string }
+    desc: { id: string; en: string }
 }
 
 export type PracticeAreaPageSlugData = QueryResult & {
@@ -40,14 +41,26 @@ export async function getData(slug: string): Promise<PracticeAreaPageSlugData> {
                     WHEN t."key" = ${PracticeAreaTranslationKey.CONTENT} AND t."language" = ${Language.EN} 
                     THEN t."value" 
                 END)
-            ) AS "content"
+            ) AS "content",
+            -- get desc: { id: string; en: string }
+            jsonb_build_object(
+                'id', MAX(CASE 
+                    WHEN t."key" = ${PracticeAreaTranslationKey.DESC} AND t."language" = ${Language.ID} 
+                    THEN t."value" 
+                END),
+                'en', MAX(CASE 
+                    WHEN t."key" = ${PracticeAreaTranslationKey.DESC} AND t."language" = ${Language.EN} 
+                    THEN t."value" 
+                END)
+            ) AS "desc"
         FROM practice_areas AS pa
         LEFT JOIN translations AS t 
             ON pa."id" = t."entityId" 
             AND t."entityType" = ${EntityType.PRACTICE_AREA}
             AND t."key" IN (
                 ${PracticeAreaTranslationKey.FULL_NAME}, 
-                ${PracticeAreaTranslationKey.CONTENT}
+                ${PracticeAreaTranslationKey.CONTENT},
+                ${PracticeAreaTranslationKey.DESC}
             )
         WHERE pa."slug" = ${slug}
         GROUP BY pa."slug", pa."order", pa."imageUrl"

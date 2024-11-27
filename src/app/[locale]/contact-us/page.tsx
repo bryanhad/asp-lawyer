@@ -1,3 +1,4 @@
+import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/components/containers/base-container'
 import Section from '@/components/containers/section'
 import { Metadata } from 'next'
@@ -16,11 +17,14 @@ export default async function ContactUsPage() {
 
     return (
         <BaseContainer>
-            <Section className="max-w-custom-wide">
-                <div className="p-7">
-                    <h1 className="text-xl font-bold">{t('title')}</h1>
-                    <p>{t('desc')}</p>
-                </div>
+            <PageTitleWithBackground
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RYEQLudoptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ0"
+                alt="Background image of about us page"
+                titleWhite={t('titleWhite')}
+                titlePrimary={t('titlePrimary')}
+            />
+            <Section lessYSpacing>
+             
             </Section>
         </BaseContainer>
     )

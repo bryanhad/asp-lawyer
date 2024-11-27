@@ -14,9 +14,9 @@ export default async function PreviewAboutUs() {
             <Section className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
                 {/* GRID 1 */}
                 <ImageWithBlur
-                    className="rounded-xl"
+                    className="rounded-md shadow-md dark:brightness-[90%]"
                     src={`https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`}
-                    alt="The SQUAD"
+                    alt="Picture of ASP lawyers"
                     width={649}
                     height={320}
                 />

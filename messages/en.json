@@ -178,7 +178,8 @@
     },
     "contactUsPage": {
         "pageTitle": "Contact Us",
-        "title": "Get in Touch",
+        "titleWhite": "Get in",
+        "titlePrimary": "Touch",
         "desc": "Contact us for consultations and inquiries. We're here to help."
     },
     "carousels": {

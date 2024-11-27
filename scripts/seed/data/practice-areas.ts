@@ -174,7 +174,7 @@ export const practiceAreaSeed: PracticeAreaSeed[] = [
             {
                 language: Language.ID,
                 key: PracticeAreaTranslationKey.CONTENT,
-                value: `<p>Pencucian uang dan korupsi adalah kejahatan keuangan serius yang dapat berdampak buruk bagi bisnis dan individu. Kejahatan ini melibatkan penyembunyian asal-usul uang yang diperoleh secara ilegal dan praktik tidak etis untuk keuntungan finansial. Penanganan masalah ini membutuhkan keahlian dalam menavigasi kerangka hukum dan peraturan yang kompleks./p>
+                value: `<p>Pencucian uang dan korupsi adalah kejahatan keuangan serius yang dapat berdampak buruk bagi bisnis dan individu. Kejahatan ini melibatkan penyembunyian asal-usul uang yang diperoleh secara ilegal dan praktik tidak etis untuk keuntungan finansial. Penanganan masalah ini membutuhkan keahlian dalam menavigasi kerangka hukum dan peraturan yang kompleks.</p>
 
                 <h2>Apa yang Kami Tawarkan</h2>
                 
