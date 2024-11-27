@@ -3,27 +3,46 @@ import { BaseContainer } from '@/components/containers/base-container'
 import Section from '@/components/containers/section'
 import { capitalizeFirstLetter, cn } from '@/lib/utils'
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import { cache } from 'react'
-import { getCurrentLocale } from '../../layout'
 import { getData } from './action'
 
 import { poppins } from '@/app/[locale]/fonts'
 import { Briefcase, NotebookPen } from 'lucide-react'
 import MemberInfo from './_components/member-info'
+import { Locale } from '@/i18n/request'
+import prisma from '@/lib/prisma'
+import { routing } from '@/i18n/routing'
 
 type Props = {
-    params: Promise<{ slug: string }>
+    params: Promise<{ slug: string; currentLocale: Locale }>
 }
 
 const fetchMemberPageContent = cache(async (slug: string) => {
-    return await Promise.all([
-        getTranslations('eachMemberPage'),
-        getData(slug),
-        getCurrentLocale(),
-    ])
+    return await Promise.all([getTranslations('eachMemberPage'), getData(slug)])
 })
+
+/**
+ * We must Nextjs the possible slugs for this dynamic page, this is this dynamic page's structure:
+ * /[locale]/our-team/[slug]  
+ * So that Nextjs can prebuilt all the possible pages statically!
+ */
+export async function generateStaticParams() {
+    const locales = routing.locales.map((locale) => locale)
+    const memberSlugs = (
+        await prisma.member.findMany({ select: { slug: true } })
+    ).map((member) => member.slug)
+
+    const params = []
+    for (const locale of locales) {
+        for (const slug of memberSlugs) {
+            params.push({ locale, slug })
+        }
+    }
+
+    return params
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params
@@ -37,8 +56,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function MemberPage({ params }: Props) {
-    const { slug } = await params
-    const [t, member, currentLocale] = await fetchMemberPageContent(slug)
+    const { currentLocale, slug } = await params
+    /**
+     * Enable static rendering (just following next-intl's docs)
+     *
+     * Refer to next-intl's documentation:
+     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     */
+    setRequestLocale(currentLocale)
+
+    const [t, member] = await fetchMemberPageContent(slug)
 
     const memberExperiences =
         currentLocale === 'en' ? member.experience.en : member.experience.id

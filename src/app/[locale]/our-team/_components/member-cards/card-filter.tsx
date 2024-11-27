@@ -1,9 +1,9 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { usePathname, useRouter } from '@/i18n/routing'
 import { MemberRoles } from '@/lib/enum'
 import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
 
 export type Props = {
     searchParams: { currentRole?: string }
@@ -12,6 +12,7 @@ export type Props = {
 type FilterValues = MemberRoles | 'ALL'
 
 export default function CardFilter({ searchParams: { currentRole } }: Props) {
+    const pathname = usePathname()
     const router = useRouter()
 
     function handleClick(roleFilterValue: FilterValues) {
@@ -22,7 +23,7 @@ export default function CardFilter({ searchParams: { currentRole } }: Props) {
             queryParams.set('role', roleFilterValue)
         }
 
-        router.push(`${window.location.pathname}?${queryParams.toString()}`)
+        router.push(`${pathname}?${queryParams.toString()}`)
     }
 
     return (

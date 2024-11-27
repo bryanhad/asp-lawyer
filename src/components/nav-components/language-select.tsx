@@ -6,50 +6,43 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover'
 import { Locale } from '@/i18n/request'
+import { usePathname, useRouter } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { memo } from 'react'
 import { Button } from '../ui/button'
+import flagEN from '/public/flag-en.svg'
+import flagID from '/public/flag-id.svg'
+import { useLocale } from 'next-intl'
 
-type Props = {
-    selectedLocale: Locale
-}
-
-export default function LanguageSelect({ selectedLocale }: Props) {
-    const pathname = usePathname()
+export default function LanguageSelect() {
     const router = useRouter()
+    const pathname = usePathname()
+    const currentLocale = useLocale() as Locale
 
     function handleLanguageChange(value: string) {
-        if (value === selectedLocale) {
+        if (value === currentLocale) {
             return
         }
-        const newLocale = value
-        const path = pathname.split('/').slice(2).join('/')
-        router.push(`/${newLocale}/${path}`, { scroll: false })
+        router.replace(pathname, { locale: value })
     }
 
     return (
         <Popover>
-            <Button asChild variant="ghost" className="px-2 bg-transparent ">
+            <Button asChild variant="ghost" className="bg-transparent px-2">
                 <PopoverTrigger>
-                    {selectedLocale === 'id' ? (
-                        <Image
-                            src={'/flag-id.svg'}
-                            alt="Indonesian flag"
-                            width={24}
-                            height={18}
-                            priority
-                        />
-                    ) : (
-                        <Image
-                            src={'/flag-en.svg'}
-                            alt="English flag"
-                            width={24}
-                            height={18}
-                            priority
-                        />
-                    )}
+                    <Image
+                        src={currentLocale === 'en' ? flagEN : flagID}
+                        alt={
+                            currentLocale === 'en'
+                                ? 'English Flag'
+                                : 'Indonesian Flag'
+                        }
+                        width={24}
+                        height={18}
+                        priority
+                    />
                     <ChevronDown className="text-muted-foreground" />
                 </PopoverTrigger>
             </Button>
@@ -60,16 +53,10 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                         variant="naked"
                         size="sm"
                         className={cn('flex items-center justify-start gap-2', {
-                            'bg-muted': selectedLocale === 'en',
+                            'bg-muted': currentLocale === 'en',
                         })}
                     >
-                        <Image
-                            src={'/flag-en.svg'}
-                            alt="English flag"
-                            width={24}
-                            height={18}
-                            priority
-                        />
+                        <FlagImage src={flagEN} alt="English flag" />
                         <p className="leading-none text-muted-foreground">
                             English
                         </p>
@@ -79,18 +66,12 @@ export default function LanguageSelect({ selectedLocale }: Props) {
                         variant="naked"
                         size="sm"
                         className={cn('flex items-center justify-start gap-2', {
-                            'bg-muted': selectedLocale === 'id',
+                            'bg-muted': currentLocale === 'id',
                         })}
                     >
-                        <Image
-                            src={'/flag-id.svg'}
-                            alt="Indonesian flag"
-                            width={24}
-                            height={18}
-                            priority
-                        />
+                        <FlagImage src={flagID} alt="Indonesian flag" />
                         <p className="leading-none text-muted-foreground">
-                            Indoneisa
+                            Indonesia
                         </p>
                     </Button>
                 </div>
@@ -98,3 +79,13 @@ export default function LanguageSelect({ selectedLocale }: Props) {
         </Popover>
     )
 }
+
+const FlagImage = memo(function FlagImage({
+    src,
+    alt,
+}: {
+    src: string
+    alt: string
+}) {
+    return <Image src={src} alt={alt} width={24} height={18} priority />
+})

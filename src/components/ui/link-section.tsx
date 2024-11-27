@@ -1,9 +1,8 @@
 'use client'
 
+import { Link, usePathname, useRouter } from '@/i18n/routing'
 import { cleanString, cn } from '@/lib/utils'
 import { Link as LickIcon } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<
@@ -49,7 +48,10 @@ function LinkSection({
     return (
         <span
             onClick={handleClick}
-            className={cn('group relative cursor-pointer flex items-center gap-3', className)}
+            className={cn(
+                'group relative flex cursor-pointer items-center gap-3',
+                className,
+            )}
         >
             <Link
                 href={href}

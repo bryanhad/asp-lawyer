@@ -3,9 +3,12 @@ import { BaseContainer } from '@/components/containers/base-container'
 import Section from '@/components/containers/section'
 import MapBoxWithAddress from '@/components/ui/mapbox-with-address'
 import SectionHeading from '@/components/ui/section-heading'
+import { Locale } from '@/i18n/request'
 import { Clock, MessageCircle, Phone } from 'lucide-react'
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+
+type Props = { params: Promise<{ currentLocale: Locale }> }
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('contactUsPage')
@@ -15,7 +18,16 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export default async function ContactUsPage() {
+export default async function ContactUsPage({ params }: Props) {
+    const { currentLocale } = await params
+    /**
+     * Enable static rendering (just following next-intl's docs)
+     *
+     * Refer to next-intl's documentation:
+     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     */
+    setRequestLocale(currentLocale)
+
     const t = await getTranslations('contactUsPage')
 
     return (
@@ -79,7 +91,7 @@ async function Info() {
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col gap-3 max-md:items-center mt-3">
+            <div className="mt-3 flex flex-col gap-3 max-md:items-center">
                 <div className="flex items-start space-x-4">
                     <Phone className="mt-1 h-6 w-6 shrink-0 text-gray-600 dark:text-primary" />
                     <div>

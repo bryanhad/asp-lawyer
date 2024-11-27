@@ -1,4 +1,3 @@
-import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import LanguageSelect from './language-select'
@@ -8,11 +7,8 @@ import NavLink from './nav-link'
 import Image from 'next/image'
 import { DarkThemeToggle } from './dark-theme-toggle'
 
-type Props = {
-    selectedLocale: Locale
-}
 
-async function Navbar({ selectedLocale }: Props) {
+async function Navbar() {
     const t = await getTranslations('links')
 
     return (
@@ -41,10 +37,10 @@ async function Navbar({ selectedLocale }: Props) {
                     </div>
                 </div>
                 <div className="hidden gap-5 lg:flex lg:items-center">
-                    <LanguageSelect selectedLocale={selectedLocale} />
+                    <LanguageSelect />
                     <DarkThemeToggle />
                 </div>
-                <MobileMenu selectedLocale={selectedLocale} />
+                <MobileMenu />
             </nav>
         </NavHeader>
     )

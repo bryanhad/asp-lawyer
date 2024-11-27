@@ -1,9 +1,9 @@
 import { Link } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
-import { LinkProps } from 'next/link'
 import { PropsWithChildren } from 'react'
 import { Button, ButtonProps } from './button'
+import { LinkProps } from 'next/link'
 
 type Props = { className?: string } & Omit<LinkProps, 'locale'> &
     PropsWithChildren &

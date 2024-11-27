@@ -1,7 +1,6 @@
 'use client'
 
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { Locale } from '@/i18n/request'
 import {
     BriefcaseBusiness,
     Headset,
@@ -11,27 +10,21 @@ import {
     Users,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
 import { DarkThemeToggle } from './dark-theme-toggle'
 import LanguageSelect from './language-select'
 import MobileMenuLink from './mobile-menu-link'
 import { useNavContext } from './nav-context'
+import { usePathname, useRouter } from '@/i18n/routing'
 
-type Props = {
-    selectedLocale: Locale
-}
-
-function MobileMenu({ selectedLocale }: Props) {
+function MobileMenu() {
     const { isOpen, setIsOpen } = useNavContext()
     const router = useRouter()
-
-    const [_, currentLocale, ...restOfPath] = usePathname().split('/')
-    const currentPath = '/' + restOfPath.join('/')
+    const pathname = usePathname()
 
     const t = useTranslations('links')
 
     function onLinkClicked(href: string) {
-        router.push(`/${currentLocale}${href}`)
+        router.push(href)
         setIsOpen(false)
     }
 
@@ -45,7 +38,7 @@ function MobileMenu({ selectedLocale }: Props) {
             >
                 <div className={'flex w-full flex-col gap-2 overflow-hidden'}>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<Home />}
                         href={'/'}
@@ -53,7 +46,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('home')}
                     </MobileMenuLink>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<Info />}
                         href={'/about-us'}
@@ -61,7 +54,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('aboutUs')}
                     </MobileMenuLink>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<BriefcaseBusiness />}
                         href={'/practice-areas'}
@@ -69,7 +62,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('practiceAreas')}
                     </MobileMenuLink>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<Users />}
                         href={'/our-team'}
@@ -77,7 +70,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('ourTeam')}
                     </MobileMenuLink>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<ScrollText />}
                         href={'/blogs'}
@@ -85,7 +78,7 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('blogs')}
                     </MobileMenuLink>
                     <MobileMenuLink
-                        currentPath={currentPath}
+                        currentPath={pathname}
                         onClick={onLinkClicked}
                         icon={<Headset />}
                         href={'/contact-us'}
@@ -93,9 +86,9 @@ function MobileMenu({ selectedLocale }: Props) {
                         {t('contactUs')}
                     </MobileMenuLink>
                 </div>
-                <div className="flex gap-4 px-4 mt-4">
+                <div className="mt-4 flex gap-4 px-4">
                     <DarkThemeToggle className="text-black dark:text-white" />
-                    <LanguageSelect selectedLocale={selectedLocale} />
+                    <LanguageSelect />
                 </div>
             </SheetContent>
         </Sheet>

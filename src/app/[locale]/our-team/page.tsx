@@ -1,13 +1,14 @@
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/components/containers/base-container'
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
-import { getCurrentLocale } from '../layout'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import MemberCards from './_components/member-cards'
 import CardFilter from './_components/member-cards/card-filter'
 import Section from '@/components/containers/section'
+import { Locale } from '@/i18n/request'
 
 type Props = {
+    params: Promise<{ currentLocale: Locale }>
     searchParams: Promise<GenericSearchParams<'role', string | undefined>>
 }
 
@@ -19,10 +20,18 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export default async function MembersPage({ searchParams }: Props) {
-    const { role } = await searchParams
-    const currentLocale = await getCurrentLocale()
-
+export default async function MembersPage({ searchParams, params }: Props) {
+    const { currentLocale } = await params
+    /**
+     * Enable static rendering (just following next-intl's docs)
+    *
+    * Refer to next-intl's documentation:
+    * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+    */
+   setRequestLocale(currentLocale)
+   
+   
+   const { role } = await searchParams
     const t = await getTranslations('ourTeamPage')
 
     return (

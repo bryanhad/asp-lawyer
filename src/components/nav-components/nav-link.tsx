@@ -1,8 +1,7 @@
 'use client'
 
-import { Link } from '@/i18n/routing'
+import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { useSelectedLayoutSegment } from 'next/navigation'
 import React from 'react'
 import { Button } from '../ui/button'
 import { useNavContext } from './nav-context'
@@ -14,8 +13,7 @@ type NavLinkProps = {
 
 function NavLink({ children, href }: NavLinkProps) {
     const { isHomePage, isScrolled } = useNavContext()
-    const selectedLayoutSegment = useSelectedLayoutSegment()
-    const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/'
+    const pathname = usePathname()
     const isActive = pathname === href
 
     return (

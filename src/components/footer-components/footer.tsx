@@ -4,7 +4,6 @@ import { Link } from '@/i18n/routing'
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
-import NextLink from 'next/link'
 
 export default async function Footer() {
     const currentLocale = await getCurrentLocale()
@@ -58,27 +57,27 @@ export default async function Footer() {
                             {t('desc')}
                         </p>
                         <div className="flex space-x-4">
-                            <NextLink
+                            <a
                                 href="#"
                                 className="text-gray-400 hover:text-gray-500"
                             >
                                 <span className="sr-only">Facebook</span>
                                 <Facebook className="h-6 w-6" />
-                            </NextLink>
-                            <NextLink
+                            </a>
+                            <a
                                 href="#"
                                 className="text-gray-400 hover:text-gray-500"
                             >
                                 <span className="sr-only">Instagram</span>
                                 <Instagram className="h-6 w-6" />
-                            </NextLink>
-                            <NextLink
+                            </a>
+                            <a
                                 href="#"
                                 className="text-gray-400 hover:text-gray-500"
                             >
                                 <span className="sr-only">LinkedIn</span>
                                 <Linkedin className="h-6 w-6" />
-                            </NextLink>
+                            </a>
                         </div>
                     </div>
                     <div className="max-md:text-center">

@@ -5,17 +5,15 @@ import { Locale } from '@/i18n/request'
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export type AnimatedCardProps = {
     cardItems: LawyerQuotesData[]
-    autoplay?: boolean
     currentLocale: Locale
 }
 
 const AnimatedCard = ({
     cardItems,
-    autoplay = false,
     currentLocale,
 }: AnimatedCardProps) => {
     const [active, setActive] = useState(0)
@@ -32,12 +30,13 @@ const AnimatedCard = ({
         return index === active
     }
 
-    useEffect(() => {
-        if (autoplay) {
-            const interval = setInterval(handleNext, 5000)
-            return () => clearInterval(interval)
-        }
-    }, [autoplay])
+    // I wont use this auto play feature for now..
+    // useEffect(() => {
+    //     if (autoplay) {
+    //         const interval = setInterval(handleNext, 5000)
+    //         return () => clearInterval(interval)
+    //     }
+    // }, [autoplay, handleNext])
 
     // const randomRotateY = () => {
     //     return Math.floor(Math.random() * 21) - 10
