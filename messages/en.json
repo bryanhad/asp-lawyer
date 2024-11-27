@@ -82,25 +82,7 @@
         },
         "previewContactUs": {
             "titleTop": "Get in Touch,",
-            "titleBottom": "We are Ready",
-            "info": {
-                "address": {
-                    "title": "Address"
-                },
-                "businessHours": {
-                    "title": "Business Hours",
-                    "moday-friday": "Monday - Friday: 9:00 AM - 6:00 PM",
-                    "saturday": "Saturday: 09:00 AM - 1:00 PM",
-                    "sunday": "Sunday: Closed"
-                },
-                "whatsApp": {
-                    "title": "WhatsApp",
-                    "desc": "+62 812 3456 7890"
-                },
-                "socialMedia": {
-                    "title": "Social Media"
-                }
-            }
+            "titleBottom": "We are Ready"
         }
     },
     "aboutPage": {
@@ -180,7 +162,11 @@
         "pageTitle": "Contact Us",
         "titleWhite": "Get in",
         "titlePrimary": "Touch",
-        "desc": "Contact us for consultations and inquiries. We're here to help."
+        "subTitle" : {
+            "titleWhite" : "The First",
+            "titlePrimary": "Step to a Solution"
+        },
+        "desc": "We are here to help you resolve your legal matters with the best solutions. Contact us for a consultation or more information. Our team is ready to listen and provide the support you need."
     },
     "carousels": {
         "homePage": {
@@ -207,6 +193,7 @@
     "contactUs": {
         "title": "Contact Us",
         "address": {
+            "title": "Address",
             "building": "The H Tower, 15th Floor Unit 15 - F",
             "street": "H. R. Rasuna Said Street, No.20, RT.1/RW.5",
             "district": "Karet Kuningan, Setiabudi District",
@@ -215,6 +202,19 @@
         "phone": {
             "title": "Phone",
             "desc": "+62 21 1234 5678"
+        },
+        "businessHours": {
+            "title": "Business Hours",
+            "moday-friday": "Monday - Friday: 9:00 AM - 6:00 PM",
+            "saturday": "Saturday: 09:00 AM - 1:00 PM",
+            "sunday": "Sunday: Closed"
+        },
+        "whatsApp": {
+            "title": "WhatsApp",
+            "desc": "+62 812 3456 7890"
+        },
+        "socialMedia": {
+            "title": "Social Media"
         }
     }
 }

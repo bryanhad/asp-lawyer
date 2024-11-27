@@ -82,25 +82,7 @@
         },
         "previewContactUs": {
             "titleTop": "Hubungi Kami,",
-            "titleBottom": "Kami Selalu Siap",
-            "info": {
-                "address": {
-                    "title": "Alamat"
-                },
-                "businessHours": {
-                    "title": "Jam Operasional",
-                    "moday-friday": "Senin - Jumat: 9:00 - 18:00",
-                    "saturday": "Sabtu: 09:00 - 13:00",
-                    "sunday": "Minggu: Tutup"
-                },
-                "whatsApp": {
-                    "title": "WhatsApp",
-                    "desc": "+62 812 3456 7890"
-                },
-                "socialMedia": {
-                    "title": "Media Sosial"
-                }
-            }
+            "titleBottom": "Kami Selalu Siap"
         }
     },
     "aboutPage": {
@@ -180,7 +162,11 @@
         "pageTitle": "Hubungi Kami",
         "titleWhite": "Hubungi",
         "titlePrimary": "Kami",
-        "desc": "Hubungi kami untuk konsultasi dan pertanyaan. Kami siap membantu."
+        "subTitle": {
+            "titleWhite": "Langkah Pertama",
+            "titlePrimary": "Menuju Solusi Anda"
+        },
+        "desc": "Kami di sini untuk membantu Anda menyelesaikan masalah hukum Anda dengan solusi terbaik. Hubungi kami untuk konsultasi atau informasi lebih lanjut. Tim kami siap mendengarkan dan memberikan dukungan yang Anda butuhkan."
     },
     "carousels": {
         "homePage": {
@@ -207,6 +193,7 @@
     "contactUs": {
         "title": "Hubungi Kami",
         "address": {
+            "title": "Alamat",
             "building": "The H Tower, 15th Floor Unit 15 - F",
             "street": "Jl. H. R. Rasuna Said, No.20, RT.1/RW.5",
             "district": "Karet Kuningan, Kecamatan Setiabudi",
@@ -215,6 +202,19 @@
         "phone": {
             "title": "Telepon",
             "desc": "+62 21 1234 5678"
+        },
+        "businessHours": {
+            "title": "Jam Operasional",
+            "moday-friday": "Senin - Jumat: 9:00 - 18:00",
+            "saturday": "Sabtu: 09:00 - 13:00",
+            "sunday": "Minggu: Tutup"
+        },
+        "whatsApp": {
+            "title": "WhatsApp",
+            "desc": "+62 812 3456 7890"
+        },
+        "socialMedia": {
+            "title": "Media Sosial"
         }
     }
 }

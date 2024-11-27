@@ -42,8 +42,6 @@ export default async function MemberPage({ params }: Props) {
 
     const memberExperiences =
         currentLocale === 'en' ? member.experience.en : member.experience.id
-    // const memberAchievements =
-    //     currentLocale === 'en' ? member.achievement.en : member.achievement.id
 
     return (
         <BaseContainer>
@@ -53,10 +51,10 @@ export default async function MemberPage({ params }: Props) {
                 titleWhite={t('titleWhite')}
                 titlePrimary={member.name}
             />
-            <Section lessYSpacing className="max-md:py-4">
+            <Section lessYSpacing className="max-md:py-8">
                 {/* TOP DESKTOP SECTION */}
-                <div className="flex flex-col items-start gap-2 md:flex-row md:gap-14">
-                    <div className="relative mx-auto w-full max-w-[250px] overflow-hidden rounded-md bg-secondary shadow-sm md:min-w-[300px] lg:min-w-[360px]">
+                <div className="flex flex-col items-start gap-8 md:flex-row md:gap-14">
+                    <div className="relative mx-auto w-full max-w-[350px] overflow-hidden rounded-md bg-secondary shadow-sm md:min-w-[300px] lg:min-w-[360px]">
                         <Image
                             src={member.imageUrl}
                             alt={`Picture of ${member.name}`}
@@ -91,7 +89,7 @@ export default async function MemberPage({ params }: Props) {
                         </div>
                     </div>
                     {/* CONTENT */}
-                    <div className="flex flex-col gap-2 px-6 lg:px-0">
+                    <div className="flex flex-col gap-8 px-6 lg:px-0">
                         <MemberInfo
                             icon={
                                 <NotebookPen className="shrink-0" size={30} />

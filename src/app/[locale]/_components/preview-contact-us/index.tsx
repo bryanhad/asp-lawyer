@@ -1,48 +1,21 @@
+import MapBoxWithAddress from '@/components/ui/mapbox-with-address'
 import SectionHeading from '@/components/ui/section-heading'
 import {
     Clock,
     Facebook,
     Instagram,
-    MapPin,
     MessageCircle,
-    Phone,
+    Phone
 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
-import MapBox from './map-box'
-import { getPrivateUrl } from '@/lib/server-utils'
 
 export default async function PreviewContactUs() {
     const t = await getTranslations('homePage.previewContactUs')
     const tContactUs = await getTranslations('contactUs')
-    const buildingImageUrl = getPrivateUrl(
-        'https://utfs.io/f/4YTZLQcHF0RYOIc7veiVxDy8Li6Atsl1fWqQ7Uz5X0MhuNjP',
-    )
 
     return (
         <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 flex-col gap-6 px-4 py-20 md:py-24 lg:grid-cols-2">
-            <div className="order-2 space-y-2 lg:order-1">
-                <MapBox
-                    className="h-[500px] overflow-hidden rounded-lg"
-                    buildingImageUrl={buildingImageUrl}
-                />
-                <div className="flex items-start space-x-4 rounded-lg border px-4 py-2">
-                    <MapPin className="mt-1 h-6 w-6 text-gray-600 dark:text-primary" />
-                    <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-stone-300">
-                            {t('info.address.title')}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                            {tContactUs('address.building') +
-                                ', ' +
-                                tContactUs('address.street')}
-                            <br />
-                            {tContactUs('address.district') +
-                                ', ' +
-                                tContactUs('address.city')}
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <MapBoxWithAddress className="order-2 lg:order-1" />
             <div className="order-1 space-y-5 lg:order-2">
                 <SectionHeading
                     titleTop={t('titleTop')}
@@ -55,19 +28,19 @@ export default async function PreviewContactUs() {
                             <div className="flex items-center gap-2">
                                 <Clock className="mt-1 h-6 w-6 shrink-0 text-gray-600 dark:text-primary" />
                                 <h4 className="font-semibold text-gray-900 dark:text-stone-300 md:hidden">
-                                    {t('info.businessHours.title')}
+                                    {tContactUs('businessHours.title')}
                                 </h4>
                             </div>
                             <div className="text-center md:text-start">
                                 <h4 className="font-semibold text-gray-900 dark:text-stone-300 max-md:hidden">
-                                    {t('info.businessHours.title')}
+                                    {tContactUs('businessHours.title')}
                                 </h4>
                                 <p className="text-muted-foreground">
-                                    {t('info.businessHours.moday-friday')}
+                                    {tContactUs('businessHours.moday-friday')}
                                     <br />
-                                    {t('info.businessHours.saturday')}
+                                    {tContactUs('businessHours.saturday')}
                                     <br />
-                                    {t('info.businessHours.sunday')}
+                                    {tContactUs('businessHours.sunday')}
                                 </p>
                             </div>
                         </div>
@@ -87,10 +60,10 @@ export default async function PreviewContactUs() {
                                 <MessageCircle className="mt-1 h-6 w-6 shrink-0 text-gray-600 dark:text-primary" />
                                 <div>
                                     <h4 className="font-semibold text-gray-900 dark:text-stone-300">
-                                        {t('info.whatsApp.title')}
+                                        {tContactUs('whatsApp.title')}
                                     </h4>
                                     <p className="text-muted-foreground">
-                                        {t('info.whatsApp.desc')}
+                                        {tContactUs('whatsApp.desc')}
                                     </p>
                                 </div>
                             </div>
@@ -99,7 +72,7 @@ export default async function PreviewContactUs() {
                 </div>
                 <div className="flex flex-col items-center rounded-lg border p-4 lg:items-start">
                     <h4 className="mb-2 font-semibold text-gray-900 dark:text-stone-300">
-                        {t('info.socialMedia.title')}
+                        {tContactUs('socialMedia.title')}
                     </h4>
                     <div className="flex space-x-4">
                         <a

@@ -5,14 +5,12 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 import { NavContext } from './nav-context'
 import { Menu, X } from 'lucide-react'
 import { usePathname } from '@/i18n/routing'
-import { useTheme } from 'next-themes'
 
 type Props = {} & PropsWithChildren
 
 export default function NavHeader({ children }: Props) {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const { resolvedTheme } = useTheme()
 
     const isHomePage = usePathname() === '/'
 
@@ -62,10 +60,10 @@ export default function NavHeader({ children }: Props) {
                         <X className={cn('shrink-0')} />
                     ) : (
                         <Menu
-                            className={cn(
-                                'shrink-0 text-white',
-                                isScrolled && 'text-black dark:text-white',
-                            )}
+                            className={cn('shrink-0 text-white', {
+                                'text-black dark:text-white':
+                                    isScrolled || !isHomePage,
+                            })}
                         />
                     )}
                 </div>
