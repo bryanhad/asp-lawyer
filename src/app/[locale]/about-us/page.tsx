@@ -6,7 +6,6 @@ import VisionAndMissonSection from './_components/vision-and-mission'
 import SeniorQuotesSection from './_components/senior-quotes'
 import AchievementSection from './_components/achievements'
 
-
 // fix this multiple getTranslations, it is inside the childrens too.. look it up
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('aboutPage')
@@ -16,14 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-
 export default async function AboutPage() {
     const t = await getTranslations('aboutPage')
 
     return (
         <BaseContainer>
             <PageTitleWithBackground
-                src={'/home-page/about-us.webp'}
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RYSAXKpsZHRTDgxUjL5NkmeMoW78A3cuz16J0r"
                 alt="Background image of about us page"
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}

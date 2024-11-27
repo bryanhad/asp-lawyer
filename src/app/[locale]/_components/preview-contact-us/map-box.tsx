@@ -10,14 +10,14 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
-type Props = { className?: string }
+type Props = { className?: string; buildingImageUrl: string }
 
 const MAPBOX_TOKEN =
     process.env.NODE_ENV === 'development'
         ? process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN_DEV // Local development token
         : process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN_PROD // Production token set in Vercel
 
-export default function MapBox({ className }: Props) {
+export default function MapBox({ className, buildingImageUrl }: Props) {
     const { theme } = useTheme()
 
     const [coordinate] = useState({
@@ -68,7 +68,7 @@ export default function MapBox({ className }: Props) {
                     >
                         <div className="grid grid-cols-2 gap-2">
                             <Image
-                                src={'/maps/the-h-tower.png'}
+                                src={buildingImageUrl}
                                 alt="The H Tower"
                                 height={200}
                                 width={200}

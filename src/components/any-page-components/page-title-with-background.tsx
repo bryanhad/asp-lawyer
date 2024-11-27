@@ -3,26 +3,35 @@ import { cn } from '@/lib/utils'
 import Image, { ImageProps } from 'next/image'
 import { Scale } from 'lucide-react'
 import { Separator } from '../ui/separator'
+import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
 
-type Props = { titleWhite: string; titlePrimary: string } & ImageProps
+type Props = { titleWhite: string; titlePrimary: string; publicUrlFromUploadThing: string } & Omit<
+    ImageProps,
+    'src'
+>
 
-export default function PageTitleWithBackground({
+export default async function PageTitleWithBackground({
     titleWhite,
     titlePrimary,
-    src,
+    publicUrlFromUploadThing,
     alt,
     fill = true,
     priority = true,
     className,
     ...imageProps
 }: Props) {
+    const imageUrl = getPrivateUrl(publicUrlFromUploadThing)
+    const blurImageUrl = await getBlurredImageUrl(imageUrl)
+
     return (
         <div className="relative flex min-h-[230px] w-full lg:min-h-[250px]">
             <Image
-                src={src}
+                src={imageUrl}
                 alt={alt}
                 fill={fill}
                 priority={priority}
+                placeholder="blur"
+                blurDataURL={blurImageUrl}
                 className={cn('z-10 object-cover object-center', className)}
                 {...imageProps}
             />

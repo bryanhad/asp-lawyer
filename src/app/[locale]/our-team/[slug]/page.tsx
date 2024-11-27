@@ -11,7 +11,7 @@ import { getData } from './action'
 
 import { poppins } from '@/app/[locale]/fonts'
 import { Briefcase, NotebookPen } from 'lucide-react'
-import MemberInfo from './_components/member_info'
+import MemberInfo from './_components/member-info'
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -48,7 +48,7 @@ export default async function MemberPage({ params }: Props) {
     return (
         <BaseContainer>
             <PageTitleWithBackground
-                src={'/home-page/practice-areas.jpg'}
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RY0C07LqvRxZw1sVP7NFXpDebCmyBYLAuWirln"
                 alt="Background image of about us page"
                 titleWhite={t('titleWhite')}
                 titlePrimary={member.name}
@@ -93,7 +93,9 @@ export default async function MemberPage({ params }: Props) {
                     {/* CONTENT */}
                     <div className="flex flex-col gap-2 px-6 lg:px-0">
                         <MemberInfo
-                            icon={<NotebookPen className='shrink-0' size={30}/>}
+                            icon={
+                                <NotebookPen className="shrink-0" size={30} />
+                            }
                             titleTop={t('aboutMe.titlWhite')}
                             titleBottom={''}
                         >
@@ -104,9 +106,10 @@ export default async function MemberPage({ params }: Props) {
                             </p>
                         </MemberInfo>
                         <MemberInfo
-                            icon={<Briefcase className='shrink-0' size={30}/>}
+                            icon={<Briefcase className="shrink-0" size={30} />}
                             titleTop={t('myExperiences.titlWhite')}
-                            titleBottom=''
+                            titleBottom=""
+                            scrollClassName="md:max-h-[300px]"
                         >
                             <ul className="list-disc space-y-1 text-muted-foreground">
                                 {memberExperiences.length > 0 ? (

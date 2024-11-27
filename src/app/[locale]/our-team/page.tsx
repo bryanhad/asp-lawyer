@@ -28,12 +28,12 @@ export default async function MembersPage({ searchParams }: Props) {
     return (
         <BaseContainer>
             <PageTitleWithBackground
-                src={'/home-page/practice-areas.jpg'}
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RY0C07LqvRxZw1sVP7NFXpDebCmyBYLAuWirln"
                 alt="Background image of about us page"
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
             />
-            <Section lessYSpacing className='space-y-6'>
+            <Section lessYSpacing className="space-y-6">
                 <CardFilter searchParams={{ currentRole: role }} />
                 <MemberCards
                     currentLocale={currentLocale}

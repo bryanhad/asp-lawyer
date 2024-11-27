@@ -19,13 +19,13 @@ export default async function PracticeAreasPage() {
     return (
         <BaseContainer>
             <PageTitleWithBackground
-                src={'/home-page/practice-areas.jpg'}
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RY7urtob5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr"
                 alt="Background image of about us page"
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing>
-                <PracticeAreaCards/>
+                <PracticeAreaCards />
             </Section>
         </BaseContainer>
     )

@@ -9,14 +9,22 @@ import {
 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import MapBox from './map-box'
+import { getPrivateUrl } from '@/lib/server-utils'
 
 export default async function PreviewContactUs() {
     const t = await getTranslations('homePage.previewContactUs')
     const tContactUs = await getTranslations('contactUs')
+    const buildingImageUrl = getPrivateUrl(
+        'https://utfs.io/f/4YTZLQcHF0RYOIc7veiVxDy8Li6Atsl1fWqQ7Uz5X0MhuNjP',
+    )
+
     return (
         <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 flex-col gap-6 px-4 py-20 md:py-24 lg:grid-cols-2">
             <div className="order-2 space-y-2 lg:order-1">
-                <MapBox className="h-[500px] overflow-hidden rounded-lg" />
+                <MapBox
+                    className="h-[500px] overflow-hidden rounded-lg"
+                    buildingImageUrl={buildingImageUrl}
+                />
                 <div className="flex items-start space-x-4 rounded-lg border px-4 py-2">
                     <MapPin className="mt-1 h-6 w-6 text-gray-600 dark:text-primary" />
                     <div>

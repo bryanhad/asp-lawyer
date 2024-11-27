@@ -4,13 +4,18 @@ import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import TypeWriterComponent from './typewriter'
 import LinkButton from '@/components/ui/link-button'
+import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
 
 export default async function Hero() {
     const t = await getTranslations('homePage.heroSection')
+    const imageUrl = getPrivateUrl(
+        'https://utfs.io/f/4YTZLQcHF0RYG4Dg0gIaoLOyskZUNupeDcYTQEMr1JHRG8Ff',
+    )
+    const blurImageUrl = await getBlurredImageUrl(imageUrl)
 
     return (
         <div className="w-full overflow-hidden bg-background-suit">
-            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 sm:px-6 md:px-8 py-20 md:grid-cols-3 md:py-24">
+            <div className="relative mx-auto grid h-full w-full max-w-custom-wide grid-cols-1 px-4 py-20 sm:px-6 md:grid-cols-3 md:px-8 md:py-24">
                 <div className="relative z-30 my-16 max-w-3xl space-y-6 md:col-span-3 lg:mt-24">
                     <div className="space-y-4 lg:space-y-6">
                         <h1
@@ -46,7 +51,7 @@ export default async function Hero() {
                         </h2>
                     </div>
 
-                    <p className="max-w-md lg:max-w-xl text-sm text-slate-400 md:text-base">
+                    <p className="max-w-md text-sm text-slate-400 md:text-base lg:max-w-xl">
                         {t('desc')}
                     </p>
 
@@ -63,11 +68,13 @@ export default async function Hero() {
                     <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-52 bg-gradient-to-l from-background-suit to-transparent"></div>
 
                     <Image
-                        src={'/home-page/hero-lawyers.png'}
+                        src={imageUrl}
                         alt="Lawyers"
                         className="object-cover object-center"
                         fill
                         quality={80}
+                        placeholder='blur'
+                        blurDataURL={blurImageUrl}
                         priority
                     />
                 </div>

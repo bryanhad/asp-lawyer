@@ -18,7 +18,7 @@ export default async function BlogsPage() {
     return (
         <BaseContainer>
             <PageTitleWithBackground
-                src={'/home-page/about-us.webp'}
+                publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RYF2K4jaflMU0DgEQ2tYL7nTGNux3VXJqhH9pj"
                 alt="Background image of about us page"
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
