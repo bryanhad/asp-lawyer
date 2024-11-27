@@ -34,17 +34,17 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Mitra Pengelola',
+                value: 'Managing Partner',
             },
             {
                 language: Language.EN,
                 key: MemberTranslationKey.BIO,
-                value: `Arif began his legal career as a junior associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts.\n\nCurrently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.`,
+                value: `Arif began his legal career as a associate at a prominent corporate law firm, where he specialized in mergers and acquisitions. Over the years, he gained substantial experience in handling complex corporate transactions, advising clients on regulatory compliance, and negotiating contracts.\n\nCurrently, Arif is a vital member of our team, supporting high-profile litigation cases and providing strategic legal consultation. His most prominent practice areas include corporate law, dispute resolution, and regulatory compliance. Arif's meticulous research and keen eye for detail have made him a valuable asset in preparing cases and ensuring favorable outcomes for clients.`,
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.BIO,
-                value: 'Arif memulai karir hukumnya sebagai junior associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak.\n\nSaat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
+                value: 'Arif memulai karir hukumnya sebagai associate di firma hukum korporasi terkemuka, di mana ia mengkhususkan diri dalam merger dan akuisisi. Selama bertahun-tahun, ia memperoleh pengalaman yang luas dalam menangani transaksi korporasi yang kompleks, memberikan saran kepada klien tentang kepatuhan terhadap peraturan, dan merancang kontrak.\n\nSaat ini, Arif adalah anggota penting tim kami, mendukung kasus litigasi profil tinggi dan memberikan konsultasi hukum strategis. Area praktik utamanya meliputi hukum korporasi, penyelesaian sengketa, dan kepatuhan terhadap peraturan. Penelitiannya yang teliti dan kemampuannya memperhatikan detail telah menjadikannya aset berharga dalam mempersiapkan kasus dan memastikan hasil yang menguntungkan bagi klien.',
             },
             {
                 language: Language.EN,
@@ -116,7 +116,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Mitra',
+                value: 'Partner',
             },
             {
                 language: Language.EN,
@@ -198,7 +198,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Senior',
+                value: 'Senior Associate',
             },
             {
                 language: Language.EN,
@@ -280,7 +280,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Senior',
+                value: 'Senior Associate',
             },
             {
                 language: Language.EN,
@@ -347,12 +347,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Associate',
+                value: 'Mid-Senior Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi',
+                value: 'Mid-Senior Associate',
             },
             {
                 language: Language.EN,
@@ -424,7 +424,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -496,7 +496,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Senior',
+                value: 'Senior Associate',
             },
             {
                 language: Language.EN,
@@ -563,12 +563,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Associate',
+                value: 'Mid-Senior Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi',
+                value: 'Mid-Senior Associate',
             },
             {
                 language: Language.EN,
@@ -636,12 +636,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Junior Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Junior',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -713,7 +713,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -780,12 +780,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Junior Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Junior',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -852,12 +852,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Junior Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Junior',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -929,7 +929,7 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -996,12 +996,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Trainee Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Pelatihan',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -1068,12 +1068,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Junior Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Junior',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
@@ -1140,12 +1140,12 @@ export const membersSeed: MemberSeed[] = [
             {
                 language: Language.EN,
                 key: MemberTranslationKey.POSITION,
-                value: 'Trainee Associate',
+                value: 'Associate',
             },
             {
                 language: Language.ID,
                 key: MemberTranslationKey.POSITION,
-                value: 'Asosiasi Pelatihan',
+                value: 'Associate',
             },
             {
                 language: Language.EN,
