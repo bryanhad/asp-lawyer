@@ -10,6 +10,7 @@ import Providers from './providers'
 import { poppins } from './fonts'
 import Footer from '@/components/footer-components/footer'
 import { cache } from 'react'
+import { ClerkProvider } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
     title: {
@@ -42,7 +43,7 @@ export default async function RootLayout({
     if (!routing.locales.includes(currentLocale)) {
         notFound()
     }
-    
+
     /**
      * Enable static rendering (just following next-intl's docs)
      *
@@ -57,20 +58,25 @@ export default async function RootLayout({
     const messages = await getMessages()
 
     return (
-        <html lang={currentLocale} suppressHydrationWarning>
-            <body className={`${poppins.className} antialiased`}>
-                <Providers
-                    intlMessages={messages}
-                    initialLocale={currentLocale}
-                >
-                    <Navbar />
-                    <main className="flex min-h-screen flex-col">
-                        {children}
-                    </main>
-                    <Footer />
-                </Providers>
-                <Toaster />
-            </body>
-        </html>
+        <ClerkProvider
+            signInUrl={`/${currentLocale}/sign-in`}
+            signUpUrl={`/${currentLocale}/sign-up`}
+        >
+            <html lang={currentLocale} suppressHydrationWarning>
+                <body className={`${poppins.className} antialiased`}>
+                    <Providers
+                        intlMessages={messages}
+                        initialLocale={currentLocale}
+                    >
+                        <Navbar />
+                        <main className="flex min-h-screen flex-col">
+                            {children}
+                        </main>
+                        <Footer />
+                    </Providers>
+                    <Toaster />
+                </body>
+            </html>
+        </ClerkProvider>
     )
 }
