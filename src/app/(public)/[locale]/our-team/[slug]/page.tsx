@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { cache } from 'react'
 import { getData } from './action'
 
-import { poppins } from '@/app/[locale]/fonts'
+import { poppins } from '@/app/fonts'
 import { Briefcase, NotebookPen } from 'lucide-react'
 import MemberInfo from './_components/member-info'
 import { Locale } from '@/i18n/request'
@@ -25,7 +25,7 @@ const fetchMemberPageContent = cache(async (slug: string) => {
 
 /**
  * We must Nextjs the possible slugs for this dynamic page, this is this dynamic page's structure:
- * /[locale]/our-team/[slug]  
+ * /[locale]/our-team/[slug]
  * So that Nextjs can prebuilt all the possible pages statically!
  */
 export async function generateStaticParams() {

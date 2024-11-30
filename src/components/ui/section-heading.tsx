@@ -1,6 +1,6 @@
 import LinkSection from '@/components/ui/link-section'
 import { cleanString, cn } from '@/lib/utils'
-import { sourceSerif4 } from '@/app/[locale]/fonts'
+import { sourceSerif4 } from '@/app/fonts'
 import { ReactNode } from 'react'
 
 export type Props = {

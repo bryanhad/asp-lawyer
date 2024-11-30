@@ -13,7 +13,6 @@
         "clear-tables-super-dangerous-act": "ts-node scripts/seed/clear-tables.ts"
     },
     "dependencies": {
-        "@clerk/nextjs": "^6.5.1",
         "@hookform/resolvers": "^3.9.0",
         "@lucia-auth/adapter-prisma": "^4.0.1",
         "@plaiceholder/next": "^3.0.0",

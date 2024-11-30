@@ -1,4 +1,4 @@
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import dynamic from 'next/dynamic'
 import SkeletonFallback from './skeleton'
 import { getData } from './action'

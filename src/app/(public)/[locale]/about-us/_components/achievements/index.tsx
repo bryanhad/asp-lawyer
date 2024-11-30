@@ -1,4 +1,4 @@
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import Section from '@/components/containers/section'
 import SectionHeading from '@/components/ui/section-heading'
 import FetchComponent from './fetch-component'

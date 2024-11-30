@@ -1,4 +1,4 @@
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import { cache } from 'react'
 import { getData } from './action'
 import PracticeAreaTagsWithPreview from './tags-with-preview'

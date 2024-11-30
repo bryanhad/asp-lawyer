@@ -1,4 +1,4 @@
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import TeamCarousel from './carousel'
 import { CarouselItem } from '@/components/ui/carousel'
 import { getData } from './action'

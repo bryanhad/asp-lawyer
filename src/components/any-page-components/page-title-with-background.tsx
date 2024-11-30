@@ -1,4 +1,4 @@
-import { sourceSerif4 } from '@/app/[locale]/fonts'
+import { sourceSerif4 } from '@/app/fonts'
 import { cn } from '@/lib/utils'
 import Image, { ImageProps } from 'next/image'
 import { Scale } from 'lucide-react'

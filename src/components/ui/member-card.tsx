@@ -1,4 +1,4 @@
-import { poppins } from '@/app/[locale]/fonts'
+import { poppins } from '@/app/fonts'
 import {
     Popover,
     PopoverContent,

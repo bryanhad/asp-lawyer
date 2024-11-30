@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import SkeletonFallback from './skeleton'
 import { getTranslations } from 'next-intl/server'
 import { getData } from './action'

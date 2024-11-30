@@ -1,5 +1,5 @@
-import { fetchPracticeAreasPreviewData } from '@/app/[locale]/_components/practice-areas/fetch-component'
-import { getCurrentLocale } from '@/app/[locale]/layout'
+import { fetchPracticeAreasPreviewData } from '@/app/(public)/[locale]/_components/practice-areas/fetch-component'
+import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import { Link } from '@/i18n/routing'
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'

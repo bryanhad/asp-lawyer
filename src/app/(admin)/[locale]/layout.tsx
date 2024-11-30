@@ -1,16 +1,12 @@
-import Navbar from '@/components/nav-components/navbar'
 import { Toaster } from '@/components/ui/toaster'
 import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import type { Metadata } from 'next'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import '../globals.css'
-import Providers from './providers'
-import { poppins } from './fonts'
-import Footer from '@/components/footer-components/footer'
+import '../../globals.css'
 import { cache } from 'react'
-import { ClerkProvider } from '@clerk/nextjs'
+import { poppins } from '../../fonts'
 
 export const metadata: Metadata = {
     title: {
@@ -58,25 +54,11 @@ export default async function RootLayout({
     const messages = await getMessages()
 
     return (
-        <ClerkProvider
-            signInUrl={`/${currentLocale}/sign-in`}
-            signUpUrl={`/${currentLocale}/sign-up`}
-        >
-            <html lang={currentLocale} suppressHydrationWarning>
-                <body className={`${poppins.className} antialiased`}>
-                    <Providers
-                        intlMessages={messages}
-                        initialLocale={currentLocale}
-                    >
-                        <Navbar />
-                        <main className="flex min-h-screen flex-col">
-                            {children}
-                        </main>
-                        <Footer />
-                    </Providers>
-                    <Toaster />
-                </body>
-            </html>
-        </ClerkProvider>
+        <html lang={currentLocale} suppressHydrationWarning>
+            <body className={`${poppins.className} antialiased`}>
+                <main className="flex min-h-screen flex-col">{children}</main>
+                <Toaster />
+            </body>
+        </html>
     )
 }
