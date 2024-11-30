@@ -14,11 +14,28 @@ datasource db {
     directUrl = env("DIRECT_URL")
 }
 
+model User {
+    id       Int       @id @default(autoincrement())
+    sessions Session[]
+
+    @@map("users")
+}
+
+model Session {
+    id        String   @id
+    userId    Int
+    expiresAt DateTime
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@map("session")
+}
+
 model Member {
     id          String  @id @default(cuid())
     slug        String  @unique
     order       Int // order position in Members page, carousel, etc..
-        name        String
+    name        String
     imageUrl    String
     linkedInUrl String?
     email       String?

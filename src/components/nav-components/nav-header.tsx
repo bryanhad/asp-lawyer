@@ -1,35 +1,18 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import { PropsWithChildren, useEffect, useState } from 'react'
-import { NavContext } from './nav-context'
-import { Menu, X } from 'lucide-react'
+import { useIsScrolled } from '@/hooks/use-is-scrolled'
 import { usePathname } from '@/i18n/routing'
+import { cn } from '@/lib/utils'
+import { Menu, X } from 'lucide-react'
+import { PropsWithChildren, useState } from 'react'
+import { NavContext } from './nav-context'
 
 type Props = {} & PropsWithChildren
 
 export default function NavHeader({ children }: Props) {
-    const [isScrolled, setIsScrolled] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-
+    const isScrolled = useIsScrolled()
     const isHomePage = usePathname() === '/'
-
-    useEffect(() => {
-        const handleScroll = () => {
-            // Check if the user has scrolled down 50px or more
-            if (window.scrollY > 50) {
-                setIsScrolled(true)
-            } else {
-                setIsScrolled(false)
-            }
-        }
-        // Run once initially
-        handleScroll()
-        window.addEventListener('scroll', handleScroll)
-
-        // Clean up the event listener when the component unmounts
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
 
     return (
         <header
@@ -44,14 +27,13 @@ export default function NavHeader({ children }: Props) {
         >
             <NavContext.Provider
                 value={{
-                    isScrolled,
                     isOpen,
                     setIsOpen,
-                    isHomePage,
                 }}
             >
                 {children}
 
+                {/* mobile nav menu toggler */}
                 <div
                     onClick={() => setIsOpen(!isOpen)}
                     className={cn('my-auto mr-3 p-3 lg:hidden')}

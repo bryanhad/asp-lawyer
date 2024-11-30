@@ -4,11 +4,13 @@ import { Moon, SunMedium } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useNavContext } from './nav-context'
+import { useIsScrolled } from '@/hooks/use-is-scrolled'
+import { usePathname } from '@/i18n/routing'
 
 export function DarkThemeToggle({ className }: { className?: string }) {
     const { setTheme, resolvedTheme } = useTheme()
-    const { isScrolled, isHomePage } = useNavContext()
+    const isScrolled = useIsScrolled()
+    const isHomePage = usePathname() === '/'
 
     return (
         <Button

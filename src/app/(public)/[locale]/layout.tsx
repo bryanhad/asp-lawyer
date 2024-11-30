@@ -13,8 +13,8 @@ import { cache } from 'react'
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | ASP Law firm',
-        default: 'ASP Law firm',
+        template: '%s | ASP Law Firm',
+        default: 'ASP Law Firm',
     },
     description: 'Website ASP',
 }

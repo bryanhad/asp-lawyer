@@ -3,10 +3,8 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
 type NavContext = {
-    isScrolled: boolean
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
-    isHomePage: boolean
 }
 
 export const NavContext = createContext<NavContext | null>(null)

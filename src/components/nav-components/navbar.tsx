@@ -7,7 +7,6 @@ import NavLink from './nav-link'
 import Image from 'next/image'
 import { DarkThemeToggle } from './dark-theme-toggle'
 
-
 async function Navbar() {
     const t = await getTranslations('links')
 
@@ -16,15 +15,13 @@ async function Navbar() {
             <nav className="flex h-full w-full max-w-custom-navbar justify-between px-4 sm:px-6 md:px-8">
                 <div className="flex items-end gap-14 self-center">
                     <Link href={'/'} className="flex items-center">
-                        <h1 className="relative text-xl font-bold text-primary sm:text-2xl">
-                            <Image
-                                src={'/asp-logo-modified.png'}
-                                alt="ASP Logo"
-                                width={50}
-                                height={20}
-                                priority
-                            />
-                        </h1>
+                        <Image
+                            src={'/asp-logo-modified.png'}
+                            alt="ASP Logo"
+                            width={50}
+                            height={20}
+                            priority
+                        />
                     </Link>
                     <div className="hidden gap-10 lg:flex">
                         <NavLink href={'/about-us'}>{t('aboutUs')}</NavLink>

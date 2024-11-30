@@ -36,7 +36,7 @@ export default function TagPreview({
                             'object-cover transition-all duration-300',
                             isLoading ? 'blur-sm' : 'blur-0',
                         )}
-                        onLoadingComplete={() => setIsLoading(false)}
+                        onLoad={() => setIsLoading(false)}
                         priority
                     />
                 </div>

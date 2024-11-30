@@ -2,16 +2,18 @@ import { Toaster } from '@/components/ui/toaster'
 import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
 import type { Metadata } from 'next'
-import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
+import { getLocale, setRequestLocale } from 'next-intl/server'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { notFound } from 'next/navigation'
-import '../../globals.css'
 import { cache } from 'react'
 import { poppins } from '../../fonts'
+import '../../globals.css'
+import Header from './_components/header'
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | ASP Law firm',
-        default: 'ASP Law firm',
+        template: '%s | ASP Law Firm Members',
+        default: 'ASP Law Firm Members',
     },
     description: 'Website ASP',
 }
@@ -49,15 +51,23 @@ export default async function RootLayout({
     // Enable static rendering
     setRequestLocale(currentLocale)
 
-    // Providing all messages to the client
-    // side is the easiest way to get started
-    const messages = await getMessages()
-
     return (
         <html lang={currentLocale} suppressHydrationWarning>
             <body className={`${poppins.className} antialiased`}>
-                <main className="flex min-h-screen flex-col">{children}</main>
-                <Toaster />
+                <NextThemesProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <Header />
+                    <div className="mt16 mx-auto flex w-full max-w-custom-navbar bg-blue-400">
+                        <main className="mt-16 flex min-h-screen flex-[1] flex-col bg-red-400">
+                            {children}
+                        </main>
+                    </div>
+                    <Toaster />
+                </NextThemesProvider>
             </body>
         </html>
     )

@@ -4,7 +4,7 @@ import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import React from 'react'
 import { Button } from '../ui/button'
-import { useNavContext } from './nav-context'
+import { useIsScrolled } from '@/hooks/use-is-scrolled'
 
 type NavLinkProps = {
     children: React.ReactNode
@@ -12,9 +12,8 @@ type NavLinkProps = {
 }
 
 function NavLink({ children, href }: NavLinkProps) {
-    const { isHomePage, isScrolled } = useNavContext()
+    const isScrolled = useIsScrolled()
     const pathname = usePathname()
-    const isActive = pathname === href
 
     return (
         <Button asChild variant="naked" size="naked" className="select-none">
@@ -23,9 +22,9 @@ function NavLink({ children, href }: NavLinkProps) {
                 className={cn(
                     'text-muted-foreground text-slate-300 dark:text-muted-foreground',
                     {
-                        'text-slate-700': isScrolled || !isHomePage,
+                        'text-slate-700': isScrolled || pathname !== '/',
                         'font-semibold text-black dark:font-normal dark:text-primary':
-                            isActive,
+                            pathname === href,
                     },
                 )}
             >

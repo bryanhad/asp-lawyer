@@ -6,11 +6,11 @@ const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
     /* config options here */
-    experimental: {
-        staleTimes: {
-            dynamic: 30,
-        },
-    },
+    // experimental: {
+    //     staleTimes: {
+    //         dynamic: 30,
+    //     },
+    // },
     images: {
         remotePatterns: [
             {
