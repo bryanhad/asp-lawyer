@@ -58,13 +58,15 @@ export default async function RootLayout({
 
     return (
         <html lang={currentLocale} suppressHydrationWarning>
-            <body className={`${poppins.className} antialiased`}>
+            <body
+                className={`${poppins.className} flex min-h-screen flex-col antialiased`}
+            >
                 <Providers
                     intlMessages={messages}
                     initialLocale={currentLocale}
                 >
                     <Navbar />
-                    <main className="flex min-h-screen flex-col">
+                    <main className="mb-24 flex flex-[1] flex-col">
                         {children}
                     </main>
                     <Footer />

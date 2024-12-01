@@ -9,6 +9,7 @@ import { cache } from 'react'
 import { poppins } from '../../fonts'
 import '../../globals.css'
 import Header from './_components/header'
+import Footer from './_components/footer'
 
 export const metadata: Metadata = {
     title: {
@@ -53,7 +54,9 @@ export default async function RootLayout({
 
     return (
         <html lang={currentLocale} suppressHydrationWarning>
-            <body className={`${poppins.className} antialiased`}>
+            <body
+                className={`${poppins.className} flex min-h-screen flex-col antialiased`}
+            >
                 <NextThemesProvider
                     attribute="class"
                     defaultTheme="system"
@@ -61,11 +64,8 @@ export default async function RootLayout({
                     disableTransitionOnChange
                 >
                     <Header />
-                    <div className="mt16 mx-auto flex w-full max-w-custom-navbar bg-blue-400">
-                        <main className="mt-16 flex min-h-screen flex-[1] flex-col bg-red-400">
-                            {children}
-                        </main>
-                    </div>
+                    {children}
+                    <Footer />
                     <Toaster />
                 </NextThemesProvider>
             </body>

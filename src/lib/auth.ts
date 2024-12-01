@@ -88,6 +88,13 @@ export async function validateSessionToken(
     return { session, user }
 }
 
+/**
+ * Use invalidate session when:
+ * - The user logs out
+ * - The user is blocked
+ * 
+ * @param sessionId 
+ */
 export async function invalidateSession(sessionId: string): Promise<void> {
     await prisma.session.delete({ where: { id: sessionId } })
 }
