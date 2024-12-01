@@ -15,8 +15,18 @@ datasource db {
 }
 
 model User {
-    id       Int       @id @default(autoincrement())
-    sessions Session[]
+    id              Int      @id @default(autoincrement())
+    email           String   @unique
+    username        String
+    passwordHash    String
+    emailIsVerified Boolean  @default(false)
+    recovery_code   Bytes
+    createdAt       DateTime @default(now())
+    // totpKey         Bytes
+
+    passwordResetSessions     PasswordResetSession[]
+    emailVerificationRequests EmailVerificationRequest[]
+    sessions                  Session[]
 
     @@map("users")
 }
@@ -25,10 +35,37 @@ model Session {
     id        String   @id
     userId    Int
     expiresAt DateTime
+    // twoFactorIsVerified Boolean  @default(false)
 
     user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 
-    @@map("session")
+    @@map("sessions")
+}
+
+model EmailVerificationRequest {
+    id        String   @id
+    userId    Int
+    email     String
+    code      String
+    expiresAt DateTime
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@map("email_verification_requests")
+}
+
+model PasswordResetSession {
+    id              String   @id
+    userId          Int
+    email           String
+    code            String
+    expiresAt       DateTime
+    emailIsVerified Boolean  @default(false)
+    // twoFactorIsVerified Boolean  @default(false)
+
+    user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@map("password_reset_sessions")
 }
 
 model Member {

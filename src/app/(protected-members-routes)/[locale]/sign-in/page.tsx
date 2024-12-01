@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthCard } from '../_components/auth-card'
-import SignInForm from './_component/form'
+import SignInForm from './_components/form'
 
 export default function SignInPage() {
     return (

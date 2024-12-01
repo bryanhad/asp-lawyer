@@ -1,19 +1,19 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
 import { NextRequest, NextResponse } from 'next/server'
-import { COOKIE_NAME, SESSION_EXPIRY } from './lib/auth'
+import { SESSION_COOKIE_NAME, SESSION_EXPIRY } from './lib/auth'
 
 const nextIntlMiddleware = createMiddleware(routing)
 
 async function customMiddleware(req: NextRequest): Promise<NextResponse> {
     if (req.method === 'GET') {
         const res = NextResponse.next()
-        const token = req.cookies.get(COOKIE_NAME)?.value ?? null
+        const token = req.cookies.get(SESSION_COOKIE_NAME)?.value ?? null
 
         if (token !== null) {
             // Only extend cookie expiration on GET requests,
             // since we can be sure a new session wasn't set when handling this request.
-            res.cookies.set(COOKIE_NAME, token, {
+            res.cookies.set(SESSION_COOKIE_NAME, token, {
                 path: '/',
                 maxAge: SESSION_EXPIRY,
                 sameSite: 'lax',
@@ -65,9 +65,7 @@ async function customMiddleware(req: NextRequest): Promise<NextResponse> {
     return NextResponse.next()
 }
 
-export default async function middleware(
-    req: NextRequest,
-): Promise<NextResponse> {
+export default async function middleware(req: NextRequest): Promise<NextResponse> {
     const res = await customMiddleware(req)
     if (res && res.status !== 200) {
         return res

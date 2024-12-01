@@ -1,13 +1,11 @@
-import type { User, Session } from '@prisma/client'
+import type { Session } from '@prisma/client'
 import crypto from 'crypto'
-import {
-    encodeBase32LowerCaseNoPadding,
-    encodeHexLowerCase,
-} from '@oslojs/encoding'
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding'
 import { sha256 } from '@oslojs/crypto/sha2'
 import prisma from './prisma'
 import { cookies } from 'next/headers'
 import { cache } from 'react'
+import { UserInfo } from '@/app/(protected-members-routes)/lib/server/user'
 
 /**
  * Feeling lost? Oh poor future me..
@@ -17,11 +15,11 @@ import { cache } from 'react'
  */
 
 export const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 30 // 30 days
-export const COOKIE_NAME = 'auth_session'
+export const SESSION_COOKIE_NAME = 'auth_session'
 
-export type SessionValidationResult =
-    | { session: Session; user: User }
-    | { session: null; user: null }
+export type SessionValidationResult = { session: Session; user: UserInfo } | { session: null; user: null }
+
+export type SessionFlags = Pick<Session, 'twoFactorIsVerified'>
 
 /**
  * generates 20 random bytes of string
@@ -29,22 +27,18 @@ export type SessionValidationResult =
  */
 export function generateSessionToken(): string {
     const bytes = crypto.randomBytes(20)
-    const randomBytes = crypto.getRandomValues(bytes)
-    const token = encodeBase32LowerCaseNoPadding(randomBytes)
+    crypto.getRandomValues(bytes)
+    const token = encodeBase32LowerCaseNoPadding(bytes)
     return token
 }
 
-export async function createSession(
-    token: string,
-    userId: number,
-): Promise<Session> {
-    const sessionId = encodeHexLowerCase(
-        sha256(new TextEncoder().encode(token)),
-    )
+export async function createSession(token: string, userId: number, flags: SessionFlags): Promise<Session> {
+    const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
     const session: Session = {
         id: sessionId,
         userId,
         expiresAt: new Date(Date.now() + SESSION_EXPIRY),
+        isTwoFactorVerified: flags.isTwoFactorVerified,
     }
     await prisma.session.create({
         data: session,
@@ -52,16 +46,27 @@ export async function createSession(
     return session
 }
 
-export async function validateSessionToken(
-    token: string,
-): Promise<SessionValidationResult> {
-    const sessionId = encodeHexLowerCase(
-        sha256(new TextEncoder().encode(token)),
-    )
+export async function validateSessionToken(token: string): Promise<SessionValidationResult> {
+    const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
     const result = await prisma.session.findUnique({
+        select: {
+            id: true,
+            twoFactorIsVerified: true,
+            expiresAt: true,
+            userId: true,
+            user: {
+                select: {
+                    id: true,
+                    email: true,
+                    username: true,
+                    emailIsVerified: true,
+                    totpKey: true,
+                },
+            },
+        },
         where: { id: sessionId },
-        include: { user: true },
     })
+
     if (result === null) {
         return { session: null, user: null }
     }
@@ -85,26 +90,29 @@ export async function validateSessionToken(
             data: { expiresAt: session.expiresAt },
         })
     }
-    return { session, user }
+    return {
+        session,
+        user: {
+            ...user,
+            registered2FA: !!user.totpKey,
+        },
+    }
 }
 
 /**
  * Use invalidate session when:
  * - The user logs out
  * - The user is blocked
- * 
- * @param sessionId 
+ *
+ * @param sessionId
  */
 export async function invalidateSession(sessionId: string): Promise<void> {
     await prisma.session.delete({ where: { id: sessionId } })
 }
 
-export async function setSessionTokenCookie(
-    token: string,
-    expiresAt: Date,
-): Promise<void> {
+export async function setSessionTokenCookie(token: string, expiresAt: Date): Promise<void> {
     const cookieStore = await cookies()
-    cookieStore.set(COOKIE_NAME, token, {
+    cookieStore.set(SESSION_COOKIE_NAME, token, {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
@@ -115,7 +123,7 @@ export async function setSessionTokenCookie(
 
 export async function deleteSessionTokenCookie(): Promise<void> {
     const cookieStore = await cookies()
-    cookieStore.set(COOKIE_NAME, '', {
+    cookieStore.set(SESSION_COOKIE_NAME, '', {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
@@ -125,10 +133,10 @@ export async function deleteSessionTokenCookie(): Promise<void> {
 }
 
 export const getCurrentSession = cache(async (): Promise<SessionValidationResult> => {
-    const cookieStore = await cookies();
-    const token = cookieStore.get(COOKIE_NAME)?.value ?? null
+    const cookieStore = await cookies()
+    const token = cookieStore.get(SESSION_COOKIE_NAME)?.value ?? null
     if (token === null) {
-        return {session: null, user: null}
+        return { session: null, user: null }
     }
     const res = await validateSessionToken(token)
     return res
