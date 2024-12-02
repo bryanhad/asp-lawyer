@@ -1,4 +1,3 @@
-import Navbar from '@/components/nav-components/navbar'
 import { Toaster } from '@/components/ui/toaster'
 import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
@@ -11,6 +10,7 @@ import { poppins } from '../../fonts'
 import Footer from '@/app/(public)/_components/footer'
 import { cache } from 'react'
 import { verifyLocale } from '@/lib/server-utils'
+import Navbar from '../_components/nav-components/navbar'
 
 export const metadata: Metadata = {
     title: {

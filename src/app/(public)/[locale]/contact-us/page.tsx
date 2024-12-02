@@ -1,4 +1,3 @@
-import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import MapBoxWithAddress from '@/components/ui/mapbox-with-address'
@@ -7,6 +6,7 @@ import { Locale } from '@/i18n/request'
 import { Clock, MessageCircle, Phone } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
 
 type Props = { params: Promise<{ locale: Locale }> }
 

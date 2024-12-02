@@ -2,8 +2,8 @@ import { BaseContainer } from '@/app/(public)/_components/containers/base-contai
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { BlogForm } from './_components/form'
-import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { Locale } from '@/i18n/request'
+import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
 
 type Props = { params: Promise<{ locale: Locale }> }
 

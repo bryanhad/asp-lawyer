@@ -1,10 +1,10 @@
-import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import PracticeAreaCards from './_components/practice-area-cards'
 import { Locale } from '@/i18n/request'
+import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
 
 type Props = { params: Promise<{ locale: Locale }> }
 

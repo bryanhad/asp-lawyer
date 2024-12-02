@@ -1,4 +1,3 @@
-import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import { capitalizeFirstLetter, cn } from '@/lib/utils'
@@ -14,6 +13,7 @@ import MemberInfo from './_components/member-info'
 import { Locale } from '@/i18n/request'
 import prisma from '@/lib/prisma'
 import { routing } from '@/i18n/routing'
+import PageTitleWithBackground from '@/app/(public)/_components/any-page-components/page-title-with-background'
 
 type Props = {
     params: Promise<{ slug: string; locale: Locale }>

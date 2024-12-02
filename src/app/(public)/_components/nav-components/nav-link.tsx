@@ -3,7 +3,7 @@
 import { Link, usePathname } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import { useIsScrolled } from '@/hooks/use-is-scrolled'
 
 type NavLinkProps = {

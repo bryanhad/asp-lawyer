@@ -2,8 +2,8 @@ import { sourceSerif4 } from '@/app/fonts'
 import { cn } from '@/lib/utils'
 import Image, { ImageProps } from 'next/image'
 import { Scale } from 'lucide-react'
-import { Separator } from '../ui/separator'
 import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
+import { Separator } from '@/components/ui/separator'
 
 type Props = {
     titleWhite?: string

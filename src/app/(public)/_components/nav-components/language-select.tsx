@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { memo } from 'react'
-import { Button } from '../ui/button'
 import flagEN from '/public/flag-en.svg'
 import flagID from '/public/flag-id.svg'
 import { useLocale } from 'next-intl'
+import { Button } from '@/components/ui/button'
 
 export default function LanguageSelect() {
     const router = useRouter()
