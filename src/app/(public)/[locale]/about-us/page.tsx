@@ -7,7 +7,7 @@ import SeniorQuotesSection from './_components/senior-quotes'
 import AchievementSection from './_components/achievements'
 import { Locale } from '@/i18n/request'
 
-type Props = { params: Promise<{ currentLocale: Locale }> }
+type Props = { params: Promise<{ locale: Locale }> }
 
 // fix this multiple getTranslations, it is inside the childrens too.. look it up
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,14 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage({ params }: Props) {
-    const { currentLocale } = await params
+    const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const t = await getTranslations('aboutPage')
 

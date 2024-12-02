@@ -20,7 +20,7 @@ model User {
     username        String
     passwordHash    String
     emailIsVerified Boolean  @default(false)
-    recovery_code   Bytes
+    recoveryCode    Bytes
     createdAt       DateTime @default(now())
     // totpKey         Bytes
 

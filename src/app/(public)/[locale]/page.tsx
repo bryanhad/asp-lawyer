@@ -7,17 +7,17 @@ import PreviewContactUs from './_components/preview-contact-us'
 import { setRequestLocale } from 'next-intl/server'
 import { Locale } from '@/i18n/request'
 
-type Props = { params: Promise<{ currentLocale: Locale }> }
+type Props = { params: Promise<{ locale: Locale }> }
 
 export default async function Home({ params }: Props) {
-    const { currentLocale } = await params
+    const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     return (
         <BaseContainer>

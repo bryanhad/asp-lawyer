@@ -10,6 +10,7 @@ import Providers from './providers'
 import { poppins } from '../../fonts'
 import Footer from '@/components/footer-components/footer'
 import { cache } from 'react'
+import { verifyLocale } from '@/lib/server-utils'
 
 export const metadata: Metadata = {
     title: {
@@ -32,14 +33,11 @@ export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }))
 }
 
-export default async function RootLayout({
-    children,
-    params,
-}: RootLayoutProps) {
+export default async function RootLayout({ children, params }: RootLayoutProps) {
     const { locale: currentLocale } = await params
 
     // Ensure that the incoming `locale` is valid
-    if (!routing.locales.includes(currentLocale)) {
+    if (verifyLocale(currentLocale) === null) {
         notFound()
     }
 
@@ -58,17 +56,10 @@ export default async function RootLayout({
 
     return (
         <html lang={currentLocale} suppressHydrationWarning>
-            <body
-                className={`${poppins.className} flex min-h-screen flex-col antialiased`}
-            >
-                <Providers
-                    intlMessages={messages}
-                    initialLocale={currentLocale}
-                >
+            <body className={`${poppins.className} flex min-h-screen flex-col antialiased`}>
+                <Providers intlMessages={messages} initialLocale={currentLocale}>
                     <Navbar />
-                    <main className="mb-24 flex flex-[1] flex-col">
-                        {children}
-                    </main>
+                    <main className="mb-24 flex flex-[1] flex-col">{children}</main>
                     <Footer />
                 </Providers>
                 <Toaster />

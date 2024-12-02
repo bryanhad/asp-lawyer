@@ -3,18 +3,15 @@ import { routing } from '@/i18n/routing'
 import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import React from 'react'
-import PageTitle from '../_components/page-title'
-import Sidebar from '../_components/sidebar'
+import PageTitle from '../../_components/page-title'
+import Sidebar from '../../_components/sidebar'
 
 type MembersRootLayoutProps = {
     children: React.ReactNode
     params: Promise<{ locale: Locale }>
 }
 
-export default async function MembersLayout({
-    children,
-    params,
-}: MembersRootLayoutProps) {
+export default async function MembersLayout({ children, params }: MembersRootLayoutProps) {
     const { locale: currentLocale } = await params
 
     // Ensure that the incoming `locale` is valid

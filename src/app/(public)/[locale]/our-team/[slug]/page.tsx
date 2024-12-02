@@ -16,7 +16,7 @@ import prisma from '@/lib/prisma'
 import { routing } from '@/i18n/routing'
 
 type Props = {
-    params: Promise<{ slug: string; currentLocale: Locale }>
+    params: Promise<{ slug: string; locale: Locale }>
 }
 
 const fetchMemberPageContent = cache(async (slug: string) => {
@@ -30,9 +30,7 @@ const fetchMemberPageContent = cache(async (slug: string) => {
  */
 export async function generateStaticParams() {
     const locales = routing.locales.map((locale) => locale)
-    const memberSlugs = (
-        await prisma.member.findMany({ select: { slug: true } })
-    ).map((member) => member.slug)
+    const memberSlugs = (await prisma.member.findMany({ select: { slug: true } })).map((member) => member.slug)
 
     const params = []
     for (const locale of locales) {
@@ -56,19 +54,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function MemberPage({ params }: Props) {
-    const { currentLocale, slug } = await params
+    const { locale, slug } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const [t, member] = await fetchMemberPageContent(slug)
 
-    const memberExperiences =
-        currentLocale === 'en' ? member.experience.en : member.experience.id
+    const memberExperiences = locale === 'en' ? member.experience.en : member.experience.id
 
     return (
         <BaseContainer>
@@ -97,37 +94,27 @@ export default async function MemberPage({ params }: Props) {
                             )}
                         >
                             <div className="flex flex-col space-y-1">
-                                <p className="text-lg text-stone-700 dark:text-primary">
-                                    {member.name}
-                                </p>
+                                <p className="text-lg text-stone-700 dark:text-primary">{member.name}</p>
                                 <div className="flex justify-between">
                                     <p className="font-light">
-                                        {currentLocale === 'en'
-                                            ? member.degree.en
-                                            : member.degree.id}
+                                        {locale === 'en' ? member.degree.en : member.degree.id}
                                     </p>
                                 </div>
                             </div>
                             <p className="absolute bottom-0 right-0 z-30 rounded-tl-md bg-primary/80 px-4 py-1 text-white backdrop-blur-sm max-md:text-sm">
-                                {currentLocale === 'en'
-                                    ? member.position.en
-                                    : member.position.id}
+                                {locale === 'en' ? member.position.en : member.position.id}
                             </p>
                         </div>
                     </div>
                     {/* CONTENT */}
                     <div className="flex flex-col gap-8 px-6 lg:px-0">
                         <MemberInfo
-                            icon={
-                                <NotebookPen className="shrink-0" size={30} />
-                            }
+                            icon={<NotebookPen className="shrink-0" size={30} />}
                             titleTop={t('aboutMe.titlWhite')}
                             titleBottom={''}
                         >
                             <p className="whitespace-pre-line text-muted-foreground">
-                                {currentLocale === 'en'
-                                    ? member.bio.en
-                                    : member.bio.id}
+                                {locale === 'en' ? member.bio.en : member.bio.id}
                             </p>
                         </MemberInfo>
                         <MemberInfo
@@ -144,35 +131,12 @@ export default async function MemberPage({ params }: Props) {
                                         </li>
                                     ))
                                 ) : (
-                                    <li className="ml-5">
-                                        {t('myExperiences.fallback')}
-                                    </li>
+                                    <li className="ml-5">{t('myExperiences.fallback')}</li>
                                 )}
                             </ul>
                         </MemberInfo>
                     </div>
                 </div>
-                {/* BOTTOM DESKTOP SECTION */}
-                {/* <div className="grid grid-cols-1 mt-5 md:mt-12 md:grid-cols-2 px-6 lg:px-0">
-                    <MemberInfo
-                        titleTop={t('myAchievement.titlWhite')}
-                        titleBottom={t('myAchievement.titlePrimary')}
-                    >
-                        <ul className="list-disc space-y-1 text-muted-foreground">
-                            {memberAchievements.length > 0 ? (
-                                memberAchievements.map((exp, i) => (
-                                    <li key={i} className="ml-5">
-                                        {exp}
-                                    </li>
-                                ))
-                            ) : (
-                                <li className="ml-5">
-                                    {t('myAchievement.fallback')}
-                                </li>
-                            )}
-                        </ul>
-                    </MemberInfo>
-                </div> */}
             </Section>
         </BaseContainer>
     )

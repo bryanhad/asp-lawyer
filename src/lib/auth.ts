@@ -19,26 +19,23 @@ export const SESSION_COOKIE_NAME = 'auth_session'
 
 export type SessionValidationResult = { session: Session; user: UserInfo } | { session: null; user: null }
 
-export type SessionFlags = Pick<Session, 'twoFactorIsVerified'>
-
 /**
  * generates 20 random bytes of string
  * uses
  */
 export function generateSessionToken(): string {
-    const bytes = crypto.randomBytes(20)
-    crypto.getRandomValues(bytes)
-    const token = encodeBase32LowerCaseNoPadding(bytes)
+    const tokenBytes = new Uint8Array(20)
+    crypto.getRandomValues(tokenBytes)
+    const token = encodeBase32LowerCaseNoPadding(tokenBytes).toLowerCase()
     return token
 }
 
-export async function createSession(token: string, userId: number, flags: SessionFlags): Promise<Session> {
+export async function createSession(token: string, userId: number): Promise<Session> {
     const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
     const session: Session = {
         id: sessionId,
         userId,
         expiresAt: new Date(Date.now() + SESSION_EXPIRY),
-        isTwoFactorVerified: flags.isTwoFactorVerified,
     }
     await prisma.session.create({
         data: session,
@@ -51,7 +48,6 @@ export async function validateSessionToken(token: string): Promise<SessionValida
     const result = await prisma.session.findUnique({
         select: {
             id: true,
-            twoFactorIsVerified: true,
             expiresAt: true,
             userId: true,
             user: {
@@ -60,7 +56,6 @@ export async function validateSessionToken(token: string): Promise<SessionValida
                     email: true,
                     username: true,
                     emailIsVerified: true,
-                    totpKey: true,
                 },
             },
         },
@@ -90,13 +85,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
             data: { expiresAt: session.expiresAt },
         })
     }
-    return {
-        session,
-        user: {
-            ...user,
-            registered2FA: !!user.totpKey,
-        },
-    }
+    return { session, user }
 }
 
 /**

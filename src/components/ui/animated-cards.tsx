@@ -1,6 +1,6 @@
 'use client'
 
-import { LawyerQuotesData } from '@/app/[locale]/about-us/_components/senior-quotes/action'
+import { LawyerQuotesData } from '@/app/(public)/[locale]/about-us/_components/senior-quotes/action'
 import { Locale } from '@/i18n/request'
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import { motion, AnimatePresence } from 'framer-motion'

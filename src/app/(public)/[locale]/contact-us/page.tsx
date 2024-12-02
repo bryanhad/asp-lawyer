@@ -8,7 +8,7 @@ import { Clock, MessageCircle, Phone } from 'lucide-react'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-type Props = { params: Promise<{ currentLocale: Locale }> }
+type Props = { params: Promise<{ locale: Locale }> }
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('contactUsPage')
@@ -19,14 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactUsPage({ params }: Props) {
-    const { currentLocale } = await params
+    const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const t = await getTranslations('contactUsPage')
 

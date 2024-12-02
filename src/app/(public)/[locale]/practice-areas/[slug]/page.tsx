@@ -12,7 +12,7 @@ import prisma from '@/lib/prisma'
 import { routing } from '@/i18n/routing'
 
 type Props = {
-    params: Promise<{ slug: string; currentLocale: Locale }>
+    params: Promise<{ slug: string; locale: Locale }>
 }
 
 const fetchPracticeAreaPageContent = cache(async (slug: string) => {
@@ -21,14 +21,14 @@ const fetchPracticeAreaPageContent = cache(async (slug: string) => {
 
 /**
  * We must Nextjs the possible slugs for this dynamic page, this is this dynamic page's structure:
- * /[locale]/practice-areas/[slug]  
+ * /[locale]/practice-areas/[slug]
  * So that Nextjs can prebuilt all the possible pages statically!
  */
 export async function generateStaticParams() {
     const locales = routing.locales.map((locale) => locale)
-    const practiceAreaSlugs = (
-        await prisma.practiceArea.findMany({ select: { slug: true } })
-    ).map((member) => member.slug)
+    const practiceAreaSlugs = (await prisma.practiceArea.findMany({ select: { slug: true } })).map(
+        (member) => member.slug,
+    )
 
     const params = []
     for (const locale of locales) {
@@ -41,11 +41,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { currentLocale, slug } = await params
+    const { locale, slug } = await params
 
     const { fullName } = await fetchPracticeAreaPageContent(slug)
 
-    const pageTitle = currentLocale === 'en' ? fullName.en : fullName.id
+    const pageTitle = locale === 'en' ? fullName.en : fullName.id
 
     return {
         title: pageTitle,
@@ -53,18 +53,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PracticeAreaPage({ params }: Props) {
-    const { currentLocale, slug } = await params
+    const { locale, slug } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const pa = await fetchPracticeAreaPageContent(slug)
 
-    const htmlContent = currentLocale === 'en' ? pa.content.en : pa.content.id
+    const htmlContent = locale === 'en' ? pa.content.en : pa.content.id
 
     // heavy as shiet.. commented for now..
     // const window = new JSDOM('').window
@@ -76,9 +76,7 @@ export default async function PracticeAreaPage({ params }: Props) {
             <PageTitleWithBackground
                 publicUrlFromUploadThing="https://utfs.io/f/4YTZLQcHF0RY7urtob5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr"
                 alt="Background image of about us page"
-                titleWhite={
-                    currentLocale === 'en' ? pa.fullName.en : pa.fullName.id
-                }
+                titleWhite={locale === 'en' ? pa.fullName.en : pa.fullName.id}
             />
             <Section className="mb-12 space-y-6 py-14">
                 <div className="flex flex-col gap-5 md:flex-row md:gap-8 lg:gap-12">
@@ -93,7 +91,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                         />
                     </div>
                     <p className="practice-area-desc first-letter:text-5xl first-letter:font-semibold">
-                        {currentLocale === 'en' ? pa.desc.en : pa.desc.id}
+                        {locale === 'en' ? pa.desc.en : pa.desc.id}
                     </p>
                 </div>
                 <Separator className="bg-primary/60" />

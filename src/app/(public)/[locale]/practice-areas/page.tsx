@@ -6,7 +6,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import PracticeAreaCards from './_components/practice-area-cards'
 import { Locale } from '@/i18n/request'
 
-type Props = { params: Promise<{ currentLocale: Locale }> }
+type Props = { params: Promise<{ locale: Locale }> }
 
 export async function generateMetadata(): Promise<Metadata> {
     const pageTitle = await getTranslations('practiceAreasPage')
@@ -17,14 +17,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PracticeAreasPage({ params }: Props) {
-    const { currentLocale } = await params
+    const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const t = await getTranslations('practiceAreasPage')
 

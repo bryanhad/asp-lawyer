@@ -10,7 +10,7 @@ import FetchComponent from './_components/member-cards/fetch-component'
 import SkeletonFallback from './_components/member-cards/skeleton'
 
 type Props = {
-    params: Promise<{ currentLocale: Locale }>
+    params: Promise<{ locale: Locale }>
     searchParams: Promise<GenericSearchParams<'role', string | undefined>>
 }
 
@@ -23,21 +23,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MembersPage({ searchParams, params }: Props) {
-    const { currentLocale } = await params
+    const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
-    setRequestLocale(currentLocale)
+    setRequestLocale(locale)
 
     const { role } = await searchParams
 
     const roleSearchParam =
-        role && Object.values(MemberRoles).includes(role as MemberRoles)
-            ? (role as MemberRoles)
-            : undefined
+        role && Object.values(MemberRoles).includes(role as MemberRoles) ? (role as MemberRoles) : undefined
 
     const t = await getTranslations('ourTeamPage')
 

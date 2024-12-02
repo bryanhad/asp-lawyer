@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 import { EllipsisVertical, Mail, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import LinkedInIcon from '@/components/icons/linked-in'
-import { MemberCardData } from '@/app/[locale]/_components/preview-members/action'
+import { MemberCardData } from '@/app/(public)/[locale]/_components/preview-members/action'
 
 export default function MemberCard({
     name,

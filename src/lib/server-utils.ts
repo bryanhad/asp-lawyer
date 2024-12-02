@@ -1,6 +1,10 @@
 import { getPlaiceholder } from 'plaiceholder'
 import kyInstance from './ky'
 import { TranslationQuery } from './types'
+import { routing } from '@/i18n/routing'
+import { Locale } from '@/i18n/request'
+import { cache } from 'react'
+import { getLocale } from 'next-intl/server'
 
 export function getPrivateUrl(publicUploadthingUrl: string) {
     const imageUrlSplit = publicUploadthingUrl.split('/f/')
@@ -44,3 +48,14 @@ export function parse_StringifiedArray_TranslationQuery({
         id: parseStringifiedArray(stringifiedArrOfIndonesianTranslations),
     }
 }
+
+export function verifyLocale(locale: string | undefined): Locale | null {
+    if (routing.locales.includes(locale as Locale)) {
+        return locale as Locale
+    }
+    return null
+}
+
+export const getCurrentLocale = cache(async () => {
+    return (await getLocale()) as Locale
+})
