@@ -1,4 +1,4 @@
-import { fetchPracticeAreasPreviewData } from '@/app/(public)/[locale]/_components/practice-areas/fetch-component'
+import { fetchPracticeAreasPreviewData } from '@/app/(public)/_components/practice-areas/fetch-component'
 import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import { Link } from '@/i18n/routing'
 import { Facebook, Instagram, Linkedin } from 'lucide-react'
@@ -46,35 +46,18 @@ export default async function Footer() {
             <div className="mx-auto max-w-custom-navbar px-4 py-10 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                     <div className="flex flex-col gap-4 max-md:items-center max-md:text-center">
-                        <Image
-                            src={'/asp-logo-modified.png'}
-                            alt="ASP Logo"
-                            width={70}
-                            height={40}
-                            priority
-                        />
-                        <p className="text-sm text-muted-foreground">
-                            {t('desc')}
-                        </p>
+                        <Image src={'/asp-logo-modified.png'} alt="ASP Logo" width={70} height={40} priority />
+                        <p className="text-sm text-muted-foreground">{t('desc')}</p>
                         <div className="flex space-x-4">
-                            <a
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500"
-                            >
+                            <a href="#" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Facebook</span>
                                 <Facebook className="h-6 w-6" />
                             </a>
-                            <a
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500"
-                            >
+                            <a href="#" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">Instagram</span>
                                 <Instagram className="h-6 w-6" />
                             </a>
-                            <a
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500"
-                            >
+                            <a href="#" className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">LinkedIn</span>
                                 <Linkedin className="h-6 w-6" />
                             </a>
@@ -129,26 +112,17 @@ export default async function Footer() {
                             <li>{tContactUs('address.street')}</li>
                             <li>{tContactUs('address.district')}</li>
                             <li>{tContactUs('address.city')}</li>
-                            <li className="mt-3">
-                                {tContactUs('phone.title') +
-                                    ': ' +
-                                    tContactUs('phone.desc')}
-                            </li>
+                            <li className="mt-3">{tContactUs('phone.title') + ': ' + tContactUs('phone.desc')}</li>
                             <li>Email: info@asplawfirm.com</li>
                         </ul>
                     </div>
                 </div>
                 <div className="mt-8 flex flex-col items-center justify-between border-t border-border pt-8 md:flex-row">
-                    <p className="text-sm text-gray-500">
-                        &copy; 2024 ASP Law Firm. {t('allRightsReserved')}
-                    </p>
+                    <p className="text-sm text-gray-500">&copy; 2024 ASP Law Firm. {t('allRightsReserved')}</p>
                     <div className="flex gap-2">
                         <p className="mt-4 text-sm text-gray-500 md:mt-0">
                             {t('designedBy')}{' '}
-                            <Link
-                                href="#"
-                                className="text-primary hover:text-primary/90"
-                            >
+                            <Link href="#" className="text-primary hover:text-primary/90">
                                 Bryan Hadinata
                             </Link>
                         </p>

@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation'
 import '../../globals.css'
 import Providers from './providers'
 import { poppins } from '../../fonts'
-import Footer from '@/components/footer-components/footer'
+import Footer from '@/app/(public)/_components/footer'
 import { cache } from 'react'
 import { verifyLocale } from '@/lib/server-utils'
 

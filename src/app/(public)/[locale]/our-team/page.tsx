@@ -1,6 +1,6 @@
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
-import { BaseContainer } from '@/components/containers/base-container'
-import Section from '@/components/containers/section'
+import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
+import Section from '@/app/(public)/_components/containers/section'
 import { Locale } from '@/i18n/request'
 import { MemberRoles } from '@/lib/enum'
 import { Metadata } from 'next'

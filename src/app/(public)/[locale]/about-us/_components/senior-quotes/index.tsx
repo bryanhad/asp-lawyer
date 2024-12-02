@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import SkeletonFallback from './skeleton'
 import FetchComponent from './fetch-component'
 

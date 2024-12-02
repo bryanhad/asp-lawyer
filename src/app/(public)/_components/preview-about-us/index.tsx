@@ -1,4 +1,4 @@
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import ImageWithBlur from '@/components/ui/image-with-blur'
 import LinkButton from '@/components/ui/link-button'
 import SectionHeading from '@/components/ui/section-heading'
@@ -28,13 +28,8 @@ export default async function PreviewAboutUs() {
                         side={'right'}
                         textAlign={'left'}
                     />
-                    <p className="text-center text-muted-foreground md:text-start">
-                        {t('desc')}
-                    </p>
-                    <LinkButton
-                        className="mt-6 max-md:mx-auto"
-                        href={'/about-us'}
-                    >
+                    <p className="text-center text-muted-foreground md:text-start">{t('desc')}</p>
+                    <LinkButton className="mt-6 max-md:mx-auto" href={'/about-us'}>
                         {t('callToAction')}
                     </LinkButton>
                     <Separator />

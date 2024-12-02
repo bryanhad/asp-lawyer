@@ -1,4 +1,4 @@
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import React, { Suspense } from 'react'
 import SkeletonFallback from './skeleton'
 import LinkButton from '@/components/ui/link-button'
@@ -12,13 +12,8 @@ export default async function PreviewLawyersSection() {
     return (
         <div className="w-full bg-background">
             <Section className="mx-auto flex flex-col items-center gap-6">
-                <SectionHeading
-                    titleTop={t('titleTop')}
-                    titleBottom={t('titleBottom')}
-                />
-                <p className="text-center text-muted-foreground xl:max-w-[50%]">
-                    {t('desc')}
-                </p>
+                <SectionHeading titleTop={t('titleTop')} titleBottom={t('titleBottom')} />
+                <p className="text-center text-muted-foreground xl:max-w-[50%]">{t('desc')}</p>
                 <Suspense fallback={<SkeletonFallback />}>
                     <FetchComponent />
                 </Suspense>

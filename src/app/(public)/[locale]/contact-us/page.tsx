@@ -1,6 +1,6 @@
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
-import { BaseContainer } from '@/components/containers/base-container'
-import Section from '@/components/containers/section'
+import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
+import Section from '@/app/(public)/_components/containers/section'
 import MapBoxWithAddress from '@/components/ui/mapbox-with-address'
 import SectionHeading from '@/components/ui/section-heading'
 import { Locale } from '@/i18n/request'
@@ -49,9 +49,7 @@ export default async function ContactUsPage({ params }: Props) {
                         side="right"
                         textAlign="left"
                     />
-                    <p className="max-w-xl text-muted-foreground max-md:mx-auto max-md:text-center">
-                        {t('desc')}
-                    </p>
+                    <p className="max-w-xl text-muted-foreground max-md:mx-auto max-md:text-center">{t('desc')}</p>
 
                     <div className="hidden md:block">
                         <Info />
@@ -95,12 +93,8 @@ async function Info() {
                 <div className="flex items-start space-x-4">
                     <Phone className="mt-1 h-6 w-6 shrink-0 text-gray-600 dark:text-primary" />
                     <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-stone-300">
-                            {tContactUs('phone.title')}
-                        </h4>
-                        <p className="text-muted-foreground">
-                            {tContactUs('phone.desc')}
-                        </p>
+                        <h4 className="font-semibold text-gray-900 dark:text-stone-300">{tContactUs('phone.title')}</h4>
+                        <p className="text-muted-foreground">{tContactUs('phone.desc')}</p>
                     </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -109,9 +103,7 @@ async function Info() {
                         <h4 className="font-semibold text-gray-900 dark:text-stone-300">
                             {tContactUs('whatsApp.title')}
                         </h4>
-                        <p className="text-muted-foreground">
-                            {tContactUs('whatsApp.desc')}
-                        </p>
+                        <p className="text-muted-foreground">{tContactUs('whatsApp.desc')}</p>
                     </div>
                 </div>
             </div>

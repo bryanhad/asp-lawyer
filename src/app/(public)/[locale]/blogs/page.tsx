@@ -1,4 +1,4 @@
-import { BaseContainer } from '@/components/containers/base-container'
+import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { BlogForm } from './_components/form'
@@ -19,7 +19,7 @@ export default async function BlogsPage({ params }: Props) {
     const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)
-     * 
+     *
      * Refer to next-intl's documentation:
      * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */

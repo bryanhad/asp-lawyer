@@ -21,9 +21,6 @@ export type FormState = {
 }
 
 export async function loginAction(_prevState: FormState, data: FormData): Promise<FormState> {
-    console.log({ GLOBAL_IPB_BEFORE_CONSUME: globalBucket })
-    console.log({ LOGIN_ACTION_ENDPOINT_IPB_BEFORE_CONSUME: ipBucket })
-
     const isAllowed_By_GlobalPOSTRateLimiter = globalPOSTRateLimit()
     console.log({ GLOBAL_IPB_AFTER_CONSUME: globalBucket })
     if (!isAllowed_By_GlobalPOSTRateLimiter) {

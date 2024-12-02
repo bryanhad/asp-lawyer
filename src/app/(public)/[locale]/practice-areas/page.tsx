@@ -1,6 +1,6 @@
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
-import { BaseContainer } from '@/components/containers/base-container'
-import Section from '@/components/containers/section'
+import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
+import Section from '@/app/(public)/_components/containers/section'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import PracticeAreaCards from './_components/practice-area-cards'

@@ -2,7 +2,7 @@ import LinkButton from '@/components/ui/link-button'
 import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 import SkeletonFallback from './skeleton'
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import SectionHeading from '@/components/ui/section-heading'
 import FetchComponent from './fetch-component'
 
@@ -20,13 +20,8 @@ export default async function PreviewPracticeAreas() {
                         side={'right'}
                         textAlign={'left'}
                     />
-                    <p className="text-center text-muted-foreground max-md:hidden md:text-start">
-                        {t('desc')}
-                    </p>
-                    <LinkButton
-                        className="mt-6 max-md:mx-auto max-md:hidden"
-                        href={'/practice-areas'}
-                    >
+                    <p className="text-center text-muted-foreground max-md:hidden md:text-start">{t('desc')}</p>
+                    <LinkButton className="mt-6 max-md:mx-auto max-md:hidden" href={'/practice-areas'}>
                         {t('callToAction')}
                     </LinkButton>
                 </div>
@@ -35,10 +30,7 @@ export default async function PreviewPracticeAreas() {
                     <Suspense fallback={<SkeletonFallback />}>
                         <FetchComponent />
                     </Suspense>
-                    <LinkButton
-                        className="mx-auto mt-6 max-md:mx-auto md:hidden"
-                        href={'/practice-areas'}
-                    >
+                    <LinkButton className="mx-auto mt-6 max-md:mx-auto md:hidden" href={'/practice-areas'}>
                         {t('callToAction')}
                     </LinkButton>
                 </div>

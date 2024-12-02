@@ -4,16 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import SectionHeading from '@/components/ui/section-heading'
 import dynamic from 'next/dynamic'
 import SkeletonFallback from '@/components/ui/tiptap/skeleton'
@@ -38,12 +31,7 @@ type Props = {
     contentPlaceholder: string
 }
 
-export function BlogForm({
-    titleWhite,
-    titlePrimary,
-    titlePlaceholder,
-    contentPlaceholder,
-}: Props) {
+export function BlogForm({ titleWhite, titlePrimary, titlePlaceholder, contentPlaceholder }: Props) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -58,16 +46,9 @@ export function BlogForm({
 
     return (
         <Section lessYSpacing>
-            <SectionHeading
-                titleTop={titleWhite}
-                titleBottom={titlePrimary}
-                oneLine
-            />
+            <SectionHeading titleTop={titleWhite} titleBottom={titlePrimary} oneLine />
             <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
                         control={form.control}
                         name="title"
@@ -75,10 +56,7 @@ export function BlogForm({
                             <FormItem>
                                 <FormLabel>Title</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder={titlePlaceholder}
-                                        {...field}
-                                    />
+                                    <Input placeholder={titlePlaceholder} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

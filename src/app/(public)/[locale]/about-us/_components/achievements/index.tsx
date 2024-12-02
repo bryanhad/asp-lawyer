@@ -1,5 +1,5 @@
 import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
-import Section from '@/components/containers/section'
+import Section from '@/app/(public)/_components/containers/section'
 import SectionHeading from '@/components/ui/section-heading'
 import FetchComponent from './fetch-component'
 import { Suspense } from 'react'

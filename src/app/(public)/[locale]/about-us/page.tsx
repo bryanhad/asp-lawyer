@@ -1,4 +1,4 @@
-import { BaseContainer } from '@/components/containers/base-container'
+import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import PageTitleWithBackground from '@/components/any-page-components/page-title-with-background'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
