@@ -6,6 +6,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { AuthCard } from '../../_components/auth-card'
 import { globalGETRateLimit } from '../../lib/server/request'
 import SignInForm from './_components/form'
+import { Suspense } from 'react'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -33,7 +34,9 @@ export default async function SignInPage({ params }: Props) {
 
     return (
         <main className="flex flex-[1] items-center justify-center">
-            <QueryParamToast param="toast" />
+            <Suspense>
+                <QueryParamToast param="toast" />
+            </Suspense>
             <AuthCard headerLabel="Welcome to ASP Members Sign-in Page">
                 <SignInForm />
             </AuthCard>
