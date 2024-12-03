@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import LoadingButton from '@/components/ui/loading-button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -12,7 +12,7 @@ import { formSchema } from '../validation'
 
 export default function SignInForm() {
     const [isJSEnabled, setIsJSEnabled] = useState(false)
-    const [state, formAction] = useActionState(loginAction, {
+    const [state, formAction, isPending] = useActionState(loginAction, {
         message: '',
     })
 
@@ -31,10 +31,10 @@ export default function SignInForm() {
 
     useEffect(() => {
         setIsJSEnabled(true)
-        if (pRef.current && !state.success) {
-            pRef.current.classList.remove('error-message')
+        if (pRef.current && state.message) {
+            pRef.current.classList.remove('wiggle')
             void pRef.current.offsetWidth // force refloe of element (ensure  browser processes the removal and re-addition of the class.)
-            pRef.current.classList.add('error-message')
+            pRef.current.classList.add('wiggle')
         }
     }, [state])
 
@@ -56,7 +56,7 @@ export default function SignInForm() {
                         formAction(new FormData(formRef.current!))
                     })
                 })}
-                className="space-y-4"
+                className="flex flex-col gap-4"
             >
                 <div className="h-[14px]">
                     <noscript>
@@ -64,7 +64,7 @@ export default function SignInForm() {
                         <p className="text-center text-destructive">{state.message}</p>
                     </noscript>
                     {isJSEnabled && (
-                        <p ref={pRef} className="text-center">
+                        <p ref={pRef} className="text-center text-destructive">
                             {state.message}
                         </p>
                     )}
@@ -101,7 +101,9 @@ export default function SignInForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Sign In</Button>
+                <LoadingButton className="mt-4 w-full" loading={isPending}>
+                    Sign In
+                </LoadingButton>
             </form>
         </Form>
     )

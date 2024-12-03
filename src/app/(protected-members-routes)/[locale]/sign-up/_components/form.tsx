@@ -75,7 +75,7 @@ export default function SignUpForm({ currentLocale }: Props) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Sign In</Button>
+                <Button type="submit">Sign Up</Button>
             </form>
         </Form>
     )

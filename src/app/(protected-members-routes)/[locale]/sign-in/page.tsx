@@ -37,7 +37,7 @@ export default async function SignInPage({ params }: Props) {
             <Suspense>
                 <QueryParamToast param="toast" />
             </Suspense>
-            <AuthCard headerLabel="Welcome to ASP Members Sign-in Page">
+            <AuthCard title='ASP Members' headerLabel="Insert your credentials to sign-in">
                 <SignInForm />
             </AuthCard>
         </main>

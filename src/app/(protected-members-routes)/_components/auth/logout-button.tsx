@@ -1,11 +1,10 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
-import { startTransition, useActionState, useEffect, useRef } from 'react'
-import { logoutAction } from './actions'
+import LoadingButton from '@/components/ui/loading-button'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from '@/i18n/routing'
+import { startTransition, useActionState, useEffect, useRef } from 'react'
+import { logoutAction } from './actions'
 
 export default function LogoutButton() {
     const router = useRouter()
@@ -29,9 +28,7 @@ export default function LogoutButton() {
                 startTransition(() => formAction())
             }}
         >
-            <Button disabled={isPending} type="submit">
-                {isPending ? <Loader2 className="shrink-0 animate-spin" size={18} /> : 'Sign out'}
-            </Button>
+            <LoadingButton loading={isPending}>Sign out</LoadingButton>
         </form>
     )
 }

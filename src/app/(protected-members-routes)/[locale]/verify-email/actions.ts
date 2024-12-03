@@ -3,7 +3,7 @@
 import { redirect } from '@/i18n/routing'
 import { getCurrentSession } from '@/lib/auth'
 import prisma from '@/lib/prisma'
-import { verifyLocale } from '@/lib/server-utils'
+import { getCurrentLocale, getZodIssues, verifyLocale } from '@/lib/server-utils'
 import {
     createEmailVerificationRequest,
     deleteEmailVerificationRequestCookie,
@@ -17,14 +17,18 @@ import { invalidateUserPasswordResetSessions } from '../../lib/server/password-r
 import { ExpiringTokenBucket } from '../../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../../lib/server/request'
 import { updateUserEmailAndSetEmailAsVerified } from '../../lib/server/user'
-import { VerifyEmailFormData, verifyEmailFormSchema } from './validation'
+import { formSchema } from './validation'
 
 const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)
 
-export async function verifyEmailAction(
-    formData: Partial<VerifyEmailFormData>,
-    userLocale: string | undefined,
-): Promise<{ success: boolean; message: string }> {
+type FormState = {
+    message: string
+    success?: boolean
+    fields?: Record<string, string> // to re-populate the input fields which is from the client
+    issues?: ReturnType<typeof getZodIssues<typeof formSchema>> // to show any input errors from the fromschema
+}
+
+export async function verifyEmailAction(_prevState: FormState, data: FormData): Promise<FormState> {
     if (!globalPOSTRateLimit()) {
         return {
             success: false,
@@ -55,19 +59,40 @@ export async function verifyEmailAction(
         }
     }
 
-    const currentLocale = verifyLocale(userLocale)
-    if (currentLocale === null) {
-        throw new Error('Something went wrong')
-    }
-
-    const formDataValidation = verifyEmailFormSchema.safeParse(formData)
-    if (!formDataValidation.success) {
+    const locale = await getCurrentLocale()
+    const currentLocale = verifyLocale(locale)
+    if (!currentLocale) {
         return {
             success: false,
-            message: 'Invalid or missing fields',
+            message: 'Missing locale',
         }
     }
-    const { code } = formDataValidation.data
+
+    const formData = Object.fromEntries(data)
+    const parsedData = formSchema.safeParse(formData)
+
+    if (!parsedData.success) {
+        /**
+         * we have to convert it into an actual object type where the field is a string and the values are also string
+         * which contains the prev values
+         * ex:
+         *  {[field-name]: [field-value], ...}
+         */
+        const fields: Record<string, string> = {}
+        for (const key of Object.keys(formData)) {
+            if (typeof formData[key] === 'string') {
+                fields[key] = formData[key]
+            }
+        }
+        return {
+            success: false,
+            message: 'Invalid field',
+            fields,
+            issues: getZodIssues<typeof formSchema>(parsedData),
+        }
+    }
+
+    const { code } = parsedData.data
 
     if (!bucket.consume(user.id, 1)) {
         return {
@@ -83,12 +108,13 @@ export async function verifyEmailAction(
         )
         await sendVerificationEmail(verificationRequest.email, verificationRequest.code)
         return {
-            success: false,
-            message: 'The verification code was expired. We sent another code to your inbox.',
+            success: true,
+            message: 'The verification code was expired. We have sent another code to your inbox.',
         }
     }
     if (verificationRequest.code !== code) {
         return {
+            fields: parsedData.data,
             success: false,
             message: 'Incorrect code.',
         }
@@ -100,10 +126,13 @@ export async function verifyEmailAction(
         await deleteEmailVerificationRequestCookie()
     })
 
-    return redirect({ href: '/', locale: currentLocale })
+    return redirect({
+        href: `/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`,
+        locale: currentLocale,
+    })
 }
 
-export async function resendEmailVerificationCodeAction(): Promise<{ success: boolean; message: string }> {
+export async function resendEmailVerificationCodeAction(_prevState: FormState): Promise<FormState> {
     const { session, user } = await getCurrentSession()
     if (session === null) {
         return {

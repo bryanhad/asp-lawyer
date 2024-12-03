@@ -36,6 +36,7 @@ export default async function SignUpPage({ params }: Props) {
     return (
         <>
             <AuthCard
+                title='ASP Members'
                 headerLabel="Welcome to ASP Members Sign Up Page"
                 backButtonLabel="Sign in"
                 backButtonHref="/sign-in"

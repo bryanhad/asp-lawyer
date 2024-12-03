@@ -1,12 +1,13 @@
 import Link from 'next/link'
 
-import { redirect } from '@/i18n/routing'
 import { Locale } from '@/i18n/request'
+import { redirect } from '@/i18n/routing'
 import { getCurrentSession } from '@/lib/auth'
+import { setRequestLocale } from 'next-intl/server'
+import { AuthCard } from '../../_components/auth-card'
 import { getUserEmailVerificationRequestFromRequest } from '../../lib/server/email-verification'
 import { globalGETRateLimit } from '../../lib/server/request'
-import { EmailVerificationForm, ResendEmailVerificationCodeForm } from './components'
-import { setRequestLocale } from 'next-intl/server'
+import { VerifyEmailForms } from './components'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -37,14 +38,14 @@ export default async function Page({ params }: Props) {
         return redirect({ href: '/members', locale: locale })
     }
     return (
-        <>
-            <h1>Verify your email address</h1>
-            <p>We sent an 8-digit code to {verificationRequest?.email ?? user.email}.</p>
-            <div className="space-y-2">
-                <EmailVerificationForm currentLocale={locale} />
-                <ResendEmailVerificationCodeForm />
-            </div>
+        <main className="flex flex-[1] flex-col items-center justify-center px-4">
+            <AuthCard
+                title="Verify Your Email Address"
+                headerLabel={`We have sent an 8-digit code to ${verificationRequest?.email ?? user.email}`}
+            >
+                <VerifyEmailForms />
+            </AuthCard>
             <Link href="/settings">Change your email</Link>
-        </>
+        </main>
     )
 }

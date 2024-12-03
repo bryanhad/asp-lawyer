@@ -86,7 +86,7 @@ export async function getUserEmailVerificationRequestFromRequest(): Promise<Emai
     }
     const request = await getUserEmailVerificationRequest(user.id, id)
     if (request === null) {
-        deleteEmailVerificationRequestCookie()
+        await deleteEmailVerificationRequestCookie()
     }
     return request
 }

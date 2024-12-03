@@ -13,7 +13,7 @@ import { formSchema } from './validation'
 const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
 const ipBucket = new RefillingTokenBucket<string>(20, 1)
 
-export type FormState = {
+type FormState = {
     message: string
     success?: boolean
     fields?: Record<string, string> // to re-populate the input fields which is from the client
@@ -121,5 +121,5 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         return redirect({ href: '/verify-email', locale: currentLocale })
     }
 
-    return redirect({ href: `/members?toast=${encodeURIComponent(`Wellcome back ${user.username}!`)}`, locale: currentLocale })
+    return redirect({ href: `/members?toast=${encodeURIComponent(`Welcome back ${user.username}!`)}`, locale: currentLocale })
 }

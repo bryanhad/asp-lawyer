@@ -47,7 +47,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
 
     return (
         <html lang={currentLocale} suppressHydrationWarning>
-            <body className={`${poppins.className} flex min-h-screen flex-col antialiased`}>
+            <body className={`${poppins.className} flex min-h-screen flex-col antialiased pt-16`}>
                 <NextThemesProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                     <Header />
                     {children}
