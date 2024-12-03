@@ -27,6 +27,7 @@ model User {
     passwordResetSessions     PasswordResetSession[]
     emailVerificationRequests EmailVerificationRequest[]
     sessions                  Session[]
+    Blog                      Blog[]
 
     @@map("users")
 }
@@ -113,9 +114,11 @@ model Achievements {
 model Blog {
     id               String @id @default(cuid())
     title            String
+    userId           Int
     contentIndonesia String
     contentEnglish   String
 
+    author    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     createdAt DateTime @default(now())
 
     @@map("blogs")

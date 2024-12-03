@@ -12,8 +12,8 @@ export default function PageTitle({ className }: PageTitleProps) {
 
     const pathnameArr = pathname.split('/')
 
-    const isAddPage = pathnameArr[2] === 'add'
-    const isEditPage = pathnameArr[3] === 'edit'
+    const isAddPage = pathnameArr[3] === 'add'
+    const isEditPage = pathnameArr[4] === 'edit'
     const isNotFound = ![
         '/members',
         '/members/users',
@@ -23,7 +23,7 @@ export default function PageTitle({ className }: PageTitleProps) {
         '/members/settings',
     ].includes(pathname)
 
-    const singularPageTitle = pathnameArr[1].slice(0, -1)
+    const singularPageTitle = pathnameArr.length > 2 ? pathnameArr[2].slice(0, -1) : ''
 
     let title: string
 
@@ -35,7 +35,7 @@ export default function PageTitle({ className }: PageTitleProps) {
             title = `Edit ${singularPageTitle}`
             break
         default:
-            title = pathnameArr[1] === 'members' ? 'Dashboard' : pathnameArr[1]
+            title = pathnameArr[1] === 'members' && pathnameArr.length === 2 ? 'Dashboard' : pathnameArr[2]
             break
     }
 
@@ -44,12 +44,7 @@ export default function PageTitle({ className }: PageTitleProps) {
     }
 
     return (
-        <h1
-            className={cn(
-                'text-2xl font-bold capitalize max-sm:text-center sm:text-3xl md:text-4xl',
-                className,
-            )}
-        >
+        <h1 className={cn('text-2xl font-bold capitalize max-sm:text-center sm:text-3xl md:text-4xl pb-6', className)}>
             {title}
         </h1>
     )

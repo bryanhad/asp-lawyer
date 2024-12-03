@@ -1,9 +1,10 @@
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { BlogForm } from './_components/form'
 import { Locale } from '@/i18n/request'
 import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
+import { Suspense } from 'react'
+import FetchComponent from './_components/fetch-component'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -35,12 +36,9 @@ export default async function BlogsPage({ params }: Props) {
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
             />
-            <BlogForm
-                titleWhite={t('form.addBlog.titleWhite')}
-                titlePrimary={t('form.addBlog.titlePrimary')}
-                titlePlaceholder={t('form.titlePlaceholder')}
-                contentPlaceholder={t('form.contentPlaceholder')}
-            />
+            <Suspense fallback={'Loading...'}>
+                <FetchComponent />
+            </Suspense>
         </BaseContainer>
     )
 }

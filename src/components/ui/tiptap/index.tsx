@@ -12,12 +12,14 @@ type Props = {
     content: string
     onChange: (richText: string) => void
     placeholder?: string
+    onReady: () => void
 }
 
 export default function Tiptap({
     content,
     onChange,
     placeholder = `What's on your mind?`,
+    onReady,
 }: Props) {
     const editor = useEditor({
         extensions: [
@@ -39,6 +41,9 @@ export default function Tiptap({
         onUpdate({ editor }) {
             onChange(editor.getHTML())
         },
+        onCreate() {
+            onReady()
+        }
     })
     return (
         <div className="flex min-h-[15rem] flex-col space-y-2">
