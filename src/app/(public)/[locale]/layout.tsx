@@ -1,16 +1,16 @@
+import Footer from '@/app/(public)/_components/footer'
 import { Toaster } from '@/components/ui/toaster'
 import { Locale } from '@/i18n/request'
 import { routing } from '@/i18n/routing'
+import { verifyLocale } from '@/lib/server-utils'
 import type { Metadata } from 'next'
 import { getLocale, getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import '../../globals.css'
-import Providers from './providers'
-import { poppins } from '../../fonts'
-import Footer from '@/app/(public)/_components/footer'
 import { cache } from 'react'
-import { verifyLocale } from '@/lib/server-utils'
+import { poppins } from '../../fonts'
+import '../../globals.css'
 import Navbar from '../_components/nav-components/navbar'
+import Providers from './providers'
 
 export const metadata: Metadata = {
     title: {

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import Section from '../../app/(public)/_components/containers/section'
+import Section from '../containers/section'
 
 type Props = {
     desc: ReactNode

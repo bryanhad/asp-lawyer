@@ -1,7 +1,7 @@
-import { DarkThemeToggle } from '@/components/nav-components/dark-theme-toggle'
-import LanguageSelect from '@/components/nav-components/language-select'
+import LanguageSelect from '@/app/(public)/_components/nav-components/language-select'
 import NavbarLinkIcon from './navbar-link-icon'
 import HeaderWrapper from './page-header-wrapper'
+import { DarkThemeToggle } from '@/app/(public)/_components/nav-components/dark-theme-toggle'
 
 export default function Header() {
     return (

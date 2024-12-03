@@ -5,6 +5,7 @@ import { routing } from '@/i18n/routing'
 import { Locale } from '@/i18n/request'
 import { cache } from 'react'
 import { getLocale } from 'next-intl/server'
+import { SafeParseError, z, ZodSchema } from 'zod'
 
 export function getPrivateUrl(publicUploadthingUrl: string) {
     const imageUrlSplit = publicUploadthingUrl.split('/f/')
@@ -59,3 +60,20 @@ export function verifyLocale(locale: string | undefined): Locale | null {
 export const getCurrentLocale = cache(async () => {
     return (await getLocale()) as Locale
 })
+
+export function getZodIssues<T extends ZodSchema>(
+    safeParseError: SafeParseError<z.infer<T>>,
+): Partial<Record<keyof z.infer<T>, string>> {
+    const result: Partial<Record<keyof z.infer<T>, string>> = {}
+
+    const fieldErrs = safeParseError.error.formErrors.fieldErrors
+    for (const key in fieldErrs) {
+        const typedKey = key as keyof z.infer<T>
+
+        if (fieldErrs[typedKey]?.length) {
+            result[typedKey] = fieldErrs[typedKey]![0] // Take the first error
+        }
+    }
+
+    return result
+}

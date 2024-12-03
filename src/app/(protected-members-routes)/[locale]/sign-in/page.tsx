@@ -1,11 +1,11 @@
-import React from 'react'
-import { AuthCard } from '../../_components/auth-card'
-import SignInForm from './_components/form'
-import { setRequestLocale } from 'next-intl/server'
+import QueryParamToast from '@/components/ui/query-param-toast'
 import { Locale } from '@/i18n/request'
-import { globalGETRateLimit } from '../../lib/server/request'
-import { getCurrentSession } from '@/lib/auth'
 import { redirect } from '@/i18n/routing'
+import { getCurrentSession } from '@/lib/auth'
+import { setRequestLocale } from 'next-intl/server'
+import { AuthCard } from '../../_components/auth-card'
+import { globalGETRateLimit } from '../../lib/server/request'
+import SignInForm from './_components/form'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -26,14 +26,17 @@ export default async function SignInPage({ params }: Props) {
     const { session, user } = await getCurrentSession()
     if (session) {
         if (!user.emailIsVerified) {
-            return redirect({ href: '/verify-email', locale })
+            redirect({ href: '/verify-email', locale })
         }
-        return redirect({ href: '/', locale })
+        redirect({ href: '/members', locale })
     }
 
     return (
-        <AuthCard headerLabel="Welcome to ASP Members Sign-in Page">
-            <SignInForm />
-        </AuthCard>
+        <main className="flex flex-[1] items-center justify-center">
+            <QueryParamToast param="toast" />
+            <AuthCard headerLabel="Welcome to ASP Members Sign-in Page">
+                <SignInForm />
+            </AuthCard>
+        </main>
     )
 }

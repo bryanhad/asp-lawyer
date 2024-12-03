@@ -5,6 +5,9 @@ import withPlaiceholder from '@plaiceholder/next'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
+    env: {
+        basedir: process.cwd() 
+    },
     /* config options here */
     // experimental: {
     //     staleTimes: {

@@ -1,14 +1,14 @@
 'use server'
 
-import { headers } from 'next/headers'
-import { RefillingTokenBucket, Throttler } from '../../lib/server/rate-limit'
-import { globalBucket, globalPOSTRateLimit } from '../../lib/server/request'
-import { formSchema } from './validation'
-import { getUserFromEmail, getUserPasswordHash } from '../../lib/server/user'
-import { verifyPasswordHash } from '../../lib/server/password'
-import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
 import { redirect } from '@/i18n/routing'
-import { getCurrentLocale, verifyLocale } from '@/lib/server-utils'
+import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
+import { getCurrentLocale, getZodIssues, verifyLocale } from '@/lib/server-utils'
+import { headers } from 'next/headers'
+import { verifyPasswordHash } from '../../lib/server/password'
+import { RefillingTokenBucket, Throttler } from '../../lib/server/rate-limit'
+import { globalPOSTRateLimit } from '../../lib/server/request'
+import { getUserFromEmail, getUserPasswordHash } from '../../lib/server/user'
+import { formSchema } from './validation'
 
 const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
 const ipBucket = new RefillingTokenBucket<string>(20, 1)
@@ -16,21 +16,17 @@ const ipBucket = new RefillingTokenBucket<string>(20, 1)
 export type FormState = {
     message: string
     success?: boolean
-    fields?: Record<string, string>
-    issues?: string[]
+    fields?: Record<string, string> // to re-populate the input fields which is from the client
+    issues?: ReturnType<typeof getZodIssues<typeof formSchema>> // to show any input errors from the fromschema
 }
 
 export async function loginAction(_prevState: FormState, data: FormData): Promise<FormState> {
-    const isAllowed_By_GlobalPOSTRateLimiter = globalPOSTRateLimit()
-    console.log({ GLOBAL_IPB_AFTER_CONSUME: globalBucket })
-    if (!isAllowed_By_GlobalPOSTRateLimiter) {
-        console.log({ GLOBAL_IPB_ERROR: 'TOO MANY REQUESTS' })
+    if (!globalPOSTRateLimit()) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
-
     // TODO: Assumes X-Forwarded-For is always included.
     const headerStore = await headers()
     const clientIP = headerStore.get('X-Forwarded-For')
@@ -44,7 +40,10 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     const locale = await getCurrentLocale()
     const currentLocale = verifyLocale(locale)
     if (!currentLocale) {
-        throw new Error('Something went wrong')
+        return {
+            success: false,
+            message: 'Missing locale',
+        }
     }
 
     const formData = Object.fromEntries(data)
@@ -67,9 +66,10 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
             success: false,
             message: 'Invalid fields',
             fields,
-            issues: parsedData.error.issues.map((issue) => issue.message),
+            issues: getZodIssues<typeof formSchema>(parsedData),
         }
     }
+
     const { email, password } = parsedData.data
 
     const user = await getUserFromEmail(email)
@@ -81,22 +81,13 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         }
     }
 
-    if (clientIP !== null)  {
-        const isAllowed_By_LoginActionRateLimiter = ipBucket.consume(clientIP, 1)
-        console.log({ LOGIN_ACTION_ENDPOINT_IPB_AFTER_CONSUME: ipBucket })
-        if (!isAllowed_By_LoginActionRateLimiter) {
-        console.log({ LOGIN_ACTION_ENDPOINT_IPB_ERROR: 'TOO MANY REQUESTS' })
-            return {
-                message: 'Too many requests',
-            }
+    if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
+        return {
+            success: false,
+            message: 'Too many requests',
         }
     }
 
-    // if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
-    //     return {
-    //         message: 'Too many requests',
-    //     }
-    // }
     if (!throttler.consume(user.id)) {
         return {
             success: false,
@@ -106,6 +97,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     const passwordHash = await getUserPasswordHash(user.id)
     if (!passwordHash) {
         return {
+            fields: parsedData.data,
             success: false,
             message: 'Invalid User',
         }
@@ -113,6 +105,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     const validPassword = await verifyPasswordHash(passwordHash, password)
     if (!validPassword) {
         return {
+            fields: parsedData.data,
             success: false,
             message: 'Invalid password',
         }
@@ -127,8 +120,6 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     if (!user.emailIsVerified) {
         return redirect({ href: '/verify-email', locale: currentLocale })
     }
-    return {
-        success: true,
-        message: `Wellcome back ${user.username}!`,
-    }
+
+    return redirect({ href: `/members?toast=${encodeURIComponent(`Wellcome back ${user.username}!`)}`, locale: currentLocale })
 }

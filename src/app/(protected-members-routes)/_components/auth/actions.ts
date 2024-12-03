@@ -2,13 +2,28 @@
 
 import { deleteSessionTokenCookie, getCurrentSession, invalidateSession } from '@/lib/auth'
 import { globalPOSTRateLimit } from '../../lib/server/request'
+import { getCurrentLocale, verifyLocale } from '@/lib/server-utils'
+import { redirect } from '@/i18n/routing'
 
-export async function logoutAction(): Promise<{ success: boolean; message: string }> {
-    console.log('clicekd!')
+export type FormState = {
+    success?: boolean
+    message: string
+}
+
+export async function logoutAction(_prevState: FormState): Promise<FormState> {
     if (!globalPOSTRateLimit()) {
         return {
             success: false,
             message: 'Too many requests',
+        }
+    }
+
+    const locale = await getCurrentLocale()
+    const currentLocale = verifyLocale(locale)
+    if (!currentLocale) {
+        return {
+            success: false,
+            message: 'Missing locale',
         }
     }
 
@@ -19,10 +34,7 @@ export async function logoutAction(): Promise<{ success: boolean; message: strin
             message: 'Not authenticated',
         }
     }
-    await new Promise((res) => setTimeout(res, 5000))
     await Promise.all([invalidateSession(session.id), deleteSessionTokenCookie()])
-    return {
-        success: true,
-        message: 'Logout Successful',
-    }
+    // Redirect to the sign-in page with a success query parameter
+    return redirect({ href: `/sign-in?toast=${encodeURIComponent('Logout Successful')}`, locale: currentLocale })
 }

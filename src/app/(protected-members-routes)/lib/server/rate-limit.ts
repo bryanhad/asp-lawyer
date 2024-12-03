@@ -12,7 +12,7 @@ export class RefillingTokenBucket<_Key> {
     public check(key: _Key, cost: number): boolean {
         const bucket = this.storage.get(key) ?? null
         if (bucket === null) {
-            console.log(`New Bucket for key "${key}". (max: ${this.max}).`)
+            // console.log(`New Bucket for key "${key}". (max: ${this.max}).`)
 
             return true
         }
@@ -20,7 +20,7 @@ export class RefillingTokenBucket<_Key> {
         const refill = Math.floor((now - bucket.refilledAt) / (this.refillIntervalSeconds * 1000))
         const availableTokens = Math.min(bucket.count + refill, this.max)
 
-        console.log(`Bucket for key "${key}" has ${availableTokens} tokens available.`)
+        // console.log(`Bucket for key "${key}" has ${availableTokens} tokens available.`)
 
         if (refill > 0) {
             return availableTokens >= cost
@@ -29,7 +29,7 @@ export class RefillingTokenBucket<_Key> {
     }
 
     public consume(key: _Key, cost: number): boolean {
-        console.log(`Consume called for key "${key}". Current bucket:`, this.storage.get(key))
+        // logger.info(`Consume called for key "${key}". Current bucket:`, this.storage.get(key))
 
         let bucket = this.storage.get(key) ?? null
         const now = Date.now()
@@ -53,7 +53,8 @@ export class RefillingTokenBucket<_Key> {
         }
         bucket.count -= cost // Consume tokens
         this.storage.set(key, bucket) // Update storage with the modified bucket
-        console.log(`After consume: "${key}" bucket:`, this.storage.get(key))
+        
+        // logger.info(`After consume: "${key}" bucket:`, this.storage.get(key))
 
         return true
     }

@@ -1,10 +1,10 @@
-import BackgroundCarousel from '@/components/any-page-components/background-carousel'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'
 import { Button } from '../ui/button'
 import ImageWithBlur from '../ui/image-with-blur'
 import { CarouselItem } from '../ui/carousel'
+import BackgroundCarousel from '@/app/(public)/_components/any-page-components/background-carousel'
 
 type CarouselItemData = {
     backgroundImagePath: string

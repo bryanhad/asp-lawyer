@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 import PageTitle from '../../_components/page-title'
 import Sidebar from '../../_components/sidebar'
+import QueryParamToast from '@/components/ui/query-param-toast'
 
 type MembersRootLayoutProps = {
     children: React.ReactNode
@@ -30,6 +31,7 @@ export default async function MembersLayout({ children, params }: MembersRootLay
 
     return (
         <div className="mx-auto mt-16 flex w-full max-w-custom-wide flex-[1] gap-12">
+            <QueryParamToast param="toast" />
             <Sidebar />
             <main className="flex-[1] py-6">
                 <PageTitle />

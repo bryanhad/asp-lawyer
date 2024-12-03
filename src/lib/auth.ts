@@ -96,7 +96,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
  * @param sessionId
  */
 export async function invalidateSession(sessionId: string): Promise<void> {
-    await prisma.session.delete({ where: { id: sessionId } })
+    await prisma.session.deleteMany({ where: { id: sessionId } })
 }
 
 export async function setSessionTokenCookie(token: string, expiresAt: Date): Promise<void> {
