@@ -106,7 +106,7 @@ export function EmailVerificationForm({ isJSEnabled }: { isJSEnabled: boolean })
                     )}
                 />
                 <LoadingButton className="mt-4 w-full" loading={isPending}>
-                    Verify
+                    Verify Code
                 </LoadingButton>
             </form>
         </Form>

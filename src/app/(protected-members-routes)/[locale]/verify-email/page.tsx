@@ -28,7 +28,7 @@ export default async function Page({ params }: Props) {
     const { user } = await getCurrentSession()
 
     if (user === null) {
-        return redirect({ href: '/login', locale: locale })
+        return redirect({ href: '/sign-in', locale: locale })
     }
 
     // TODO: Ideally we'd sent a new verification email automatically if the previous one is expired,
