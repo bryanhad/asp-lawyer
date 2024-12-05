@@ -1,10 +1,9 @@
 'use client'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ReadonlyURLSearchParams } from 'next/navigation'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { usePathname, useRouter } from '@/i18n/routing'
 
 type PaginationProps = {
     totalAvailablePages: number

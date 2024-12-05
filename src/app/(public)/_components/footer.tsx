@@ -117,7 +117,9 @@ export default async function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="mt-8 flex flex-col items-center justify-between border-t border-border pt-8 md:flex-row">
+            </div>
+            <div className="mt-8 border-t border-border">
+                <div className="mx-auto flex max-w-custom-navbar flex-col items-center justify-between px-4 py-10 sm:px-6 md:flex-row lg:px-8">
                     <p className="text-sm text-gray-500">&copy; 2024 ASP Law Firm. {t('allRightsReserved')}</p>
                     <div className="flex gap-2">
                         <p className="mt-4 text-sm text-gray-500 md:mt-0">

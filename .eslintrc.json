@@ -2,28 +2,28 @@
     "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
     "rules": {
         "@typescript-eslint/no-empty-object-type": "off",
-        "@typescript-eslint/no-unused-vars": [
-            "warn",
-            { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
-        ],
-        "no-restricted-imports": [
-            "error",
-            {
-                "name": "next/link",
-                // only allow named imports. restrict default import which is the Nextjs's native Link component..
-                "importNames": [],
-                "message": "Please import from `@/i18n/routing` instead."
-            },
-            {
-                "name": "next/navigation",
-                "importNames": [
-                    "redirect",
-                    "permanentRedirect",
-                    "useRouter",
-                    "usePathname"
-                ],
-                "message": "Please import from `@/i18n/routing` instead."
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
+    },
+    "overrides": [
+        {
+            // Apply only to files in the (public) directory
+            "files": ["src/app/(public)/**/*.ts", "src/app/(public)/**/*.tsx"],
+            "rules": {
+                "no-restricted-imports": [
+                    "error",
+                    {
+                        "name": "next/link",
+                        // only allow named imports. restrict default import which is the Nextjs's native Link component..
+                        "importNames": [],
+                        "message": "Please import from `@/i18n/routing` instead."
+                    },
+                    {
+                        "name": "next/navigation",
+                        "importNames": ["redirect", "permanentRedirect", "useRouter", "usePathname"],
+                        "message": "Please import from `@/i18n/routing` instead."
+                    }
+                ]
             }
-        ]
-    }
+        }
+    ]
 }

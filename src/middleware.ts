@@ -66,14 +66,32 @@ async function customMiddleware(req: NextRequest): Promise<NextResponse> {
 }
 
 export default async function middleware(req: NextRequest): Promise<NextResponse> {
-    const res = await customMiddleware(req)
-    if (res && res.status !== 200) {
-        return res
+    const pathname = req.nextUrl.pathname
+
+    // Define the paths that should run `customMiddleware`
+    const noInternationalizationPaths = ['/members', '/sign-in', '/sign-up']
+
+    if (noInternationalizationPaths.some((path) => pathname.startsWith(path))) {
+        console.log(pathname)
+        return customMiddleware(req)
     }
+
+    // const res = await customMiddleware(req)
+    // if (res && res.status !== 200) {
+    //     return res
+    // }
+
     return nextIntlMiddleware(req)
 }
 
 export const config = {
-    // Match only internationalized pathnames
-    matcher: ['/', '/(id|en)/:path*'],
+    matcher: [
+        // Match only internationalized pathnames
+        // '/', '/(id|en)/:path*'
+
+        // Match all pathnames except for
+        // - … if they start with `/api`, `/_next` or `/_vercel`
+        // - … the ones containing a dot (e.g. `favicon.ico`)
+        '/((?!api|_next|_vercel|.*\\..*).*)',
+    ],
 }

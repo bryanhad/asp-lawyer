@@ -1,14 +1,14 @@
 'use server'
 
-import { redirect } from '@/i18n/routing'
 import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
 import { getCurrentLocale, getZodIssues, verifyLocale } from '@/lib/server-utils'
 import { headers } from 'next/headers'
-import { verifyPasswordHash } from '../../lib/server/password'
-import { RefillingTokenBucket, Throttler } from '../../lib/server/rate-limit'
-import { globalPOSTRateLimit } from '../../lib/server/request'
-import { getUserFromEmail, getUserPasswordHash } from '../../lib/server/user'
+import { verifyPasswordHash } from '../lib/server/password'
+import { RefillingTokenBucket, Throttler } from '../lib/server/rate-limit'
+import { globalPOSTRateLimit } from '../lib/server/request'
+import { getUserFromEmail, getUserPasswordHash } from '../lib/server/user'
 import { formSchema } from './validation'
+import { redirect } from 'next/navigation'
 
 const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
 const ipBucket = new RefillingTokenBucket<string>(20, 1)
@@ -118,8 +118,8 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     await setSessionTokenCookie(sessionToken, session.expiresAt)
 
     if (!user.emailIsVerified) {
-        return redirect({ href: '/verify-email', locale: currentLocale })
+        return redirect('/verify-email')
     }
 
-    return redirect({ href: `/members?toast=${encodeURIComponent(`Welcome back ${user.username}!`)}`, locale: currentLocale })
+    return redirect(`/members?toast=${encodeURIComponent(`Welcome back ${user.username}!`)}`)
 }

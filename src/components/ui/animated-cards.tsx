@@ -12,10 +12,7 @@ export type AnimatedCardProps = {
     currentLocale: Locale
 }
 
-const AnimatedCard = ({
-    cardItems,
-    currentLocale,
-}: AnimatedCardProps) => {
+const AnimatedCard = ({ cardItems, currentLocale }: AnimatedCardProps) => {
     const [active, setActive] = useState(0)
 
     const handleNext = () => {
@@ -45,13 +42,9 @@ const AnimatedCard = ({
     // redefined sequence of rotation angles that cycle through. The Prev method above with using math.random results in hydration error
     const rotateValues = [-10, -5, 0, 5, 10]
 
-    const randomRotateY = (index: number) =>
-        rotateValues[index % rotateValues.length]
+    const randomRotateY = (index: number) => rotateValues[index % rotateValues.length]
 
-    const quote =
-        currentLocale === 'en'
-            ? cardItems[active].quote.en
-            : cardItems[active].quote.id
+    const quote = currentLocale === 'en' ? cardItems[active].quote.en : cardItems[active].quote.id
 
     return (
         <div className="relative z-10 mx-auto max-w-sm px-4 font-sans antialiased md:max-w-4xl md:px-8 md:py-10 lg:px-12">
@@ -72,12 +65,8 @@ const AnimatedCard = ({
                                         opacity: isActive(index) ? 1 : 0.7,
                                         scale: isActive(index) ? 1 : 0.95,
                                         z: isActive(index) ? 0 : -100,
-                                        rotate: isActive(index)
-                                            ? 0
-                                            : randomRotateY(index),
-                                        zIndex: isActive(index)
-                                            ? 999
-                                            : cardItems.length + 2 - index,
+                                        rotate: isActive(index) ? 0 : randomRotateY(index),
+                                        zIndex: isActive(index) ? 999 : cardItems.length + 2 - index,
                                         y: isActive(index) ? [0, -80, 0] : 0,
                                     }}
                                     exit={{
@@ -128,19 +117,13 @@ const AnimatedCard = ({
                         }}
                     >
                         <h3 className="space-x-2 text-xl font-light text-black dark:text-white md:text-2xl">
-                            <span className="font-medium text-primary">
-                                {cardItems[active].name}
-                            </span>
+                            <span className="font-medium text-primary">{cardItems[active].name}</span>
                             <span className="text-muted-foreground">
-                                {currentLocale === 'en'
-                                    ? cardItems[active].degree.en
-                                    : cardItems[active].degree.id}
+                                {currentLocale === 'en' ? cardItems[active].degree.en : cardItems[active].degree.id}
                             </span>
                         </h3>
                         <p className="mt-1 max-w-max text-gray-500 dark:text-neutral-500">
-                            {currentLocale === 'en'
-                                ? cardItems[active].position.en
-                                : cardItems[active].position.id}
+                            {currentLocale === 'en' ? cardItems[active].position.en : cardItems[active].position.id}
                         </p>
                         <div className="relative mt-8">
                             <Image

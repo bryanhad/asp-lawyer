@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import { DeleteButton, EditButton, ViewButton } from './_components/buttons'
+import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
 import InputorInfo from './_components/inputor-info'
 import Pagination from './_components/pagination'
 import TableDataNotFound from './_components/table-data-not-found'
@@ -34,7 +34,9 @@ export default async function FetchComponent({ searchParams }: Props) {
                             <TableHead className="w-[60px] text-nowrap">No</TableHead>
                             <TableHead className="text-nowrap">Blog</TableHead>
                             <TableHead className="text-nowrap">Input by</TableHead>
-                            <TableHead className="min-w-[140px] xl:min-w-[200px] text-nowrap text-right max-md:hidden">Action</TableHead>
+                            <TableHead className="min-w-[140px] text-nowrap text-right max-md:hidden xl:min-w-[200px]">
+                                Action
+                            </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -69,15 +71,15 @@ export default async function FetchComponent({ searchParams }: Props) {
                                         <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
                                             <ViewButton
                                                 href={`/members/blogs/${blog.id}`}
-                                                className="col-span-2 min-w-min xl:col-span-1 xl:order-3"
+                                                className="col-span-2 min-w-min xl:order-3 xl:col-span-1"
                                                 small
                                             />
-                                                <DeleteButton
-                                                    small
-                                                    className="min-w-min"
-                                                    toBeDeletedName={blog.title}
-                                                    onApprove={deleteBlogAction.bind(null, blog.id)}
-                                                />
+                                            <DeleteButton
+                                                small
+                                                className="min-w-min"
+                                                toBeDeletedName={blog.title}
+                                                onApprove={deleteBlogAction.bind(null, blog.id)}
+                                            />
                                             <EditButton
                                                 small
                                                 href={`/members/blogs/${blog.id}/edit`}

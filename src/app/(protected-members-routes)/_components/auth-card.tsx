@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { Link } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 type Props = {
     title: string

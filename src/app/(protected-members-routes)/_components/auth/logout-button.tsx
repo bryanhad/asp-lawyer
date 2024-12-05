@@ -2,9 +2,9 @@
 
 import LoadingButton from '@/components/ui/loading-button'
 import { useToast } from '@/hooks/use-toast'
-import { useRouter } from '@/i18n/routing'
 import { startTransition, useActionState, useEffect, useRef } from 'react'
 import { logoutAction } from './actions'
+import { useRouter } from 'next/navigation'
 
 export default function LogoutButton() {
     const router = useRouter()

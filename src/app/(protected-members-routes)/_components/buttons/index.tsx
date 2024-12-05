@@ -4,9 +4,10 @@ import { Button, ButtonProps } from '@/components/ui/button'
 import LoadingButton from '@/components/ui/loading-button'
 import Modal from '@/components/ui/modal'
 import { useToast } from '@/hooks/use-toast'
-import { Link, useRouter } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { Eye, Pencil, Trash } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useActionState, useEffect, useState } from 'react'
 
 type DeleteButtonProps = {

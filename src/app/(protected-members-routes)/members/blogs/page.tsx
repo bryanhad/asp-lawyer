@@ -1,6 +1,6 @@
-import LinkButton from '@/components/ui/link-button'
 import { Suspense } from 'react'
 import FetchComponent from './fetch-component'
+import LinkButton from '@/app/(protected-members-routes)/_components/link-button'
 
 type Props = {
     searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>

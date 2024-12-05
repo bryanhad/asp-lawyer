@@ -1,8 +1,7 @@
 'use client'
 
 import { useToast } from '@/hooks/use-toast'
-import { usePathname, useRouter } from '@/i18n/routing'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 type Props = { param: string }

@@ -4,9 +4,9 @@ import { Locale } from '@/i18n/request'
 import { redirect } from '@/i18n/routing'
 import { getCurrentSession } from '@/lib/auth'
 import { setRequestLocale } from 'next-intl/server'
-import { AuthCard } from '../../_components/auth-card'
-import { getUserEmailVerificationRequestFromRequest } from '../../lib/server/email-verification'
-import { globalGETRateLimit } from '../../lib/server/request'
+import { AuthCard } from '../_components/auth-card'
+import { getUserEmailVerificationRequestFromRequest } from '../lib/server/email-verification'
+import { globalGETRateLimit } from '../lib/server/request'
 import { VerifyEmailForms } from './components'
 
 type Props = { params: Promise<{ locale: Locale }> }

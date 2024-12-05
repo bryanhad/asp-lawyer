@@ -11,10 +11,5 @@ export default async function FetchComponent() {
     const practiceAreasData = await fetchPracticeAreasPreviewData()
     const currentLocale = await getCurrentLocale()
 
-    return (
-        <PracticeAreaTagsWithPreview
-            practiceAreas={practiceAreasData}
-            currentLocale={currentLocale}
-        />
-    )
+    return <PracticeAreaTagsWithPreview practiceAreas={practiceAreasData} currentLocale={currentLocale} />
 }

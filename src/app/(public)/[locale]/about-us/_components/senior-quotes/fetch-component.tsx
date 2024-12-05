@@ -11,10 +11,5 @@ export default async function FetchComponent() {
     const currentLocale = await getCurrentLocale()
     const lawyersWithQuote = await getData()
 
-    return (
-        <AnimatedCards
-            cardItems={lawyersWithQuote}
-            currentLocale={currentLocale}
-        />
-    )
+    return <AnimatedCards cardItems={lawyersWithQuote} currentLocale={currentLocale} />
 }

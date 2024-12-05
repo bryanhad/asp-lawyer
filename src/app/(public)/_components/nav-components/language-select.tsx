@@ -1,10 +1,6 @@
 'use client'
 
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Locale } from '@/i18n/request'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
@@ -34,11 +30,7 @@ export default function LanguageSelect() {
                 <PopoverTrigger>
                     <Image
                         src={currentLocale === 'en' ? flagEN : flagID}
-                        alt={
-                            currentLocale === 'en'
-                                ? 'English Flag'
-                                : 'Indonesian Flag'
-                        }
+                        alt={currentLocale === 'en' ? 'English Flag' : 'Indonesian Flag'}
                         width={24}
                         height={18}
                         priority
@@ -57,9 +49,7 @@ export default function LanguageSelect() {
                         })}
                     >
                         <FlagImage src={flagEN} alt="English flag" />
-                        <p className="leading-none text-muted-foreground">
-                            English
-                        </p>
+                        <p className="leading-none text-muted-foreground">English</p>
                     </Button>
                     <Button
                         onClick={() => handleLanguageChange('id')}
@@ -70,9 +60,7 @@ export default function LanguageSelect() {
                         })}
                     >
                         <FlagImage src={flagID} alt="Indonesian flag" />
-                        <p className="leading-none text-muted-foreground">
-                            Indonesia
-                        </p>
+                        <p className="leading-none text-muted-foreground">Indonesia</p>
                     </Button>
                 </div>
             </PopoverContent>
@@ -80,12 +68,6 @@ export default function LanguageSelect() {
     )
 }
 
-const FlagImage = memo(function FlagImage({
-    src,
-    alt,
-}: {
-    src: string
-    alt: string
-}) {
+const FlagImage = memo(function FlagImage({ src, alt }: { src: string; alt: string }) {
     return <Image src={src} alt={alt} width={24} height={18} priority />
 })

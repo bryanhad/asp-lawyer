@@ -4,7 +4,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import LoadingButton from '@/components/ui/loading-button'
 import SkeletonFallback from '@/components/ui/tiptap/skeleton'
-import { useRouter } from '@/i18n/routing'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
@@ -15,6 +14,7 @@ import { useToast } from '@/hooks/use-toast'
 import Image from 'next/image'
 import { ImageOff } from 'lucide-react'
 import { addBlogAction } from '../../action'
+import { useRouter } from 'next/navigation'
 
 const Tiptap = dynamic(() => import('@/components/ui/tiptap'), {
     loading: () => <SkeletonFallback />,

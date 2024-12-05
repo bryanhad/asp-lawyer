@@ -12,11 +12,11 @@ import {
     sendVerificationEmail,
     sendVerificationEmailBucket,
     setEmailVerificationRequestCookie,
-} from '../../lib/server/email-verification'
-import { invalidateUserPasswordResetSessions } from '../../lib/server/password-reset'
-import { ExpiringTokenBucket } from '../../lib/server/rate-limit'
-import { globalPOSTRateLimit } from '../../lib/server/request'
-import { updateUserEmailAndSetEmailAsVerified } from '../../lib/server/user'
+} from '../lib/server/email-verification'
+import { invalidateUserPasswordResetSessions } from '../lib/server/password-reset'
+import { ExpiringTokenBucket } from '../lib/server/rate-limit'
+import { globalPOSTRateLimit } from '../lib/server/request'
+import { updateUserEmailAndSetEmailAsVerified } from '../lib/server/user'
 import { formSchema } from './validation'
 
 const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)

@@ -12,15 +12,8 @@ export default async function FetchComponent() {
         <>
             <TeamCarousel>
                 {data.map((lawyer) => (
-                    <CarouselItem
-                        key={lawyer.slug}
-                        className="flex pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                    >
-                        <MemberCard
-                            key={lawyer.slug}
-                            {...lawyer}
-                            currentLocale={currentLocale}
-                        />
+                    <CarouselItem key={lawyer.slug} className="flex pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                        <MemberCard key={lawyer.slug} {...lawyer} currentLocale={currentLocale} />
                     </CarouselItem>
                 ))}
             </TeamCarousel>

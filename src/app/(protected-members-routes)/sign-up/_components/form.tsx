@@ -1,20 +1,15 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { signupAction } from '../actions'
-import { Locale } from '@/i18n/request'
 import { useToast } from '@/hooks/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { signupAction } from '../actions'
 import { FormData, formSchema } from '../validation'
 
-type Props = {
-    currentLocale: Locale
-}
-
-export default function SignUpForm({ currentLocale }: Props) {
+export default function SignUpForm() {
     const { toast } = useToast()
 
     const form = useForm<FormData>({
@@ -27,7 +22,7 @@ export default function SignUpForm({ currentLocale }: Props) {
     })
 
     async function onSubmit(values: FormData) {
-        const res = await signupAction(values, currentLocale)
+        const res = await signupAction(values)
         if (!res.success) {
             toast({ variant: 'destructive', title: 'Oh noose!', description: res.message })
         }

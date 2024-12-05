@@ -1,29 +1,23 @@
 'use server'
 
-import { redirect } from '@/i18n/routing'
 import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
-import { verifyLocale } from '@/lib/server-utils'
 import { headers } from 'next/headers'
-import { checkEmailAvailability } from '../../lib/server/email'
+import { redirect } from 'next/navigation'
+import { checkEmailAvailability } from '../lib/server/email'
 import {
     createEmailVerificationRequest,
     sendVerificationEmail,
     setEmailVerificationRequestCookie,
-} from '../../lib/server/email-verification'
-import { verifyPasswordStrength } from '../../lib/server/password'
-import { RefillingTokenBucket } from '../../lib/server/rate-limit'
-import { globalPOSTRateLimit } from '../../lib/server/request'
-import { createUser } from '../../lib/server/user'
+} from '../lib/server/email-verification'
+import { verifyPasswordStrength } from '../lib/server/password'
+import { RefillingTokenBucket } from '../lib/server/rate-limit'
+import { globalPOSTRateLimit } from '../lib/server/request'
+import { createUser } from '../lib/server/user'
 import { FormData, formSchema } from './validation'
 
 const ipBucket = new RefillingTokenBucket<string>(3, 10)
 
-
-
-export async function signupAction(
-    formData: Partial<FormData>,
-    userLocale: string | undefined,
-): Promise<{ success: boolean; message: string }> {
+export async function signupAction(formData: Partial<FormData>): Promise<{ success: boolean; message: string }> {
     if (!globalPOSTRateLimit()) {
         return {
             success: false,
@@ -38,11 +32,6 @@ export async function signupAction(
             success: false,
             message: 'Too many requests',
         }
-    }
-
-    const currentLocale = verifyLocale(userLocale)
-    if (currentLocale === null) {
-        throw new Error('Something went wrong')
     }
 
     const formDataValidation = formSchema.safeParse(formData)
@@ -105,5 +94,5 @@ export async function signupAction(
     const sessionToken = generateSessionToken()
     const session = await createSession(sessionToken, user.id)
     await setSessionTokenCookie(sessionToken, session.expiresAt)
-    return redirect({ href: '/verify-email', locale: currentLocale })
+    return redirect('/verify-email')
 }
