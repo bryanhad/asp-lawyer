@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 import tailwindAnimate from 'tailwindcss-animate'
 import tailwindTypography from '@tailwindcss/typography'
+import { withUt } from "uploadthing/tw";
 
 const config: Config = {
     darkMode: ['class'],
@@ -84,4 +85,4 @@ const config: Config = {
     },
     plugins: [tailwindAnimate, tailwindTypography],
 }
-export default config
+export default withUt(config)

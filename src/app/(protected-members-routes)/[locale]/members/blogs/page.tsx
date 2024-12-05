@@ -1,22 +1,17 @@
 import LinkButton from '@/components/ui/link-button'
-import prisma from '@/lib/prisma'
 import { Suspense } from 'react'
+import FetchComponent from './fetch-component'
 
-export default async function BlogsPage() {
-    const blogs = await prisma.blog.findMany()
+type Props = {
+    searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>
+}
+
+export default async function BlogsPage({ searchParams }: Props) {
+    const sp = await searchParams
     return (
         <div>
             <Suspense fallback={'Loading...'}>
-                {blogs.length > 0 && (
-                    <div className="space-y-2">
-                        {blogs.map((blog) => (
-                            <div key={blog.id} className="border">
-                                {JSON.stringify(blog)}
-                            </div>
-                        ))}
-                    </div>
-                )}
-                {blogs.length < 1 && <p>No Blogs</p>}
+                <FetchComponent searchParams={sp} />
             </Suspense>
             <LinkButton href={'/members/blogs/add'}>Add Blog</LinkButton>
         </div>

@@ -17,7 +17,7 @@ type Props = {
  * A Carousel component for background images with any content
  *
  * Refer to shadcn carousel documentation:
- * https://ui.shadcn.com/docs/components/carousel
+ * @see https://ui.shadcn.com/docs/components/carousel
  *
  * @param items An array of objects. { "backgroundImagePath": string; "content": ReactNode }[]
  *
@@ -37,7 +37,7 @@ export default function BackgroundCarousel({ itemCount, children }: Props) {
              * autoplay will resume when the mouse leaves the carousel container.
              *
              * Refer to Embla Carousel events documentation:
-             * https://www.embla-carousel.com/plugins/autoplay/#stoponmouseenter
+             * @see https://www.embla-carousel.com/plugins/autoplay/#stoponmouseenter
              */
             stopOnMouseEnter: true,
             stopOnInteraction: false,

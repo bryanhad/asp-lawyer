@@ -45,7 +45,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
-     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
     // Enable static rendering
     setRequestLocale(currentLocale)

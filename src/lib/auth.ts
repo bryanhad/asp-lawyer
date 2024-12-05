@@ -11,7 +11,7 @@ import { UserInfo } from '@/app/(protected-members-routes)/lib/server/user'
  * Feeling lost? Oh poor future me..
  *
  * Refer to lucia's documentation:
- * https://lucia-auth.com/sessions/basic-api/prisma
+ * @see https://lucia-auth.com/sessions/basic-api/prisma
  */
 
 export const SESSION_EXPIRY = 1000 * 60 * 60 * 24 * 30 // 30 days

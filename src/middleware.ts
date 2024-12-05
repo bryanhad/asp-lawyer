@@ -29,7 +29,7 @@ async function customMiddleware(req: NextRequest): Promise<NextResponse> {
      * CSRF PROTECTION
      *
      * Refer to lucia's documentation:
-     * https://lucia-auth.com/sessions/cookies/nextjs
+     * @see https://lucia-auth.com/sessions/cookies/nextjs
      */
     const originHeader = req.headers.get('Origin')
     const hostHeader = req.headers.get('Host')

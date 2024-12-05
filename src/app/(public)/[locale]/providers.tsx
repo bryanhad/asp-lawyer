@@ -43,7 +43,7 @@ function getQueryClient() {
  * CONFUSED? NOT KNOWING WHAT THE FUCK IS GOING ON?
  *
  * Refer to shadcn carousel documentation:
- * https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#initial-setup
+ * @see https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#initial-setup
  *
  */
 

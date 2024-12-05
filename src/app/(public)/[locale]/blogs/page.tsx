@@ -5,6 +5,7 @@ import { Locale } from '@/i18n/request'
 import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
 import { Suspense } from 'react'
 import FetchComponent from './_components/fetch-component'
+import Section from '../../_components/containers/section'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -22,7 +23,7 @@ export default async function BlogsPage({ params }: Props) {
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
-     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
     setRequestLocale(locale)
 
@@ -36,9 +37,11 @@ export default async function BlogsPage({ params }: Props) {
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
             />
-            <Suspense fallback={'Loading...'}>
-                <FetchComponent />
-            </Suspense>
+            <Section lessYSpacing className="space-y-6">
+                <Suspense fallback={'Loading...'}>
+                    <FetchComponent />
+                </Suspense>
+            </Section>
         </BaseContainer>
     )
 }

@@ -20,7 +20,7 @@ export default async function SignInPage({ params }: Props) {
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
-     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
     setRequestLocale(locale)
 
@@ -37,7 +37,7 @@ export default async function SignInPage({ params }: Props) {
             <Suspense>
                 <QueryParamToast param="toast" />
             </Suspense>
-            <AuthCard title='ASP Members' headerLabel="Insert your credentials to sign-in">
+            <AuthCard title="ASP Members" headerLabel="Insert your credentials to sign-in">
                 <SignInForm />
             </AuthCard>
         </main>

@@ -19,7 +19,7 @@ export default async function SignUpPage({ params }: Props) {
      * Enable static rendering (just following next-intl's docs)
      *
      * Refer to next-intl's documentation:
-     * https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
+     * @see https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing#static-rendering
      */
     setRequestLocale(locale)
 
@@ -36,7 +36,7 @@ export default async function SignUpPage({ params }: Props) {
     return (
         <>
             <AuthCard
-                title='ASP Members'
+                title="ASP Members"
                 headerLabel="Welcome to ASP Members Sign Up Page"
                 backButtonLabel="Sign in"
                 backButtonHref="/sign-in"
