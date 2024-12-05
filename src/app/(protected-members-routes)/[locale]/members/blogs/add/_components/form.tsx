@@ -10,11 +10,11 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { formSchemaClient } from '../validation'
-import { addBlogAction } from '../action'
+import { formSchemaClient } from '../../validation'
 import { useToast } from '@/hooks/use-toast'
 import Image from 'next/image'
 import { ImageOff } from 'lucide-react'
+import { addBlogAction } from '../../action'
 
 const Tiptap = dynamic(() => import('@/components/ui/tiptap'), {
     loading: () => <SkeletonFallback />,

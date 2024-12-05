@@ -33,7 +33,7 @@ export default async function SignInPage({ params }: Props) {
     }
 
     return (
-        <main className="flex flex-[1] items-center justify-center">
+        <main className="flex flex-[1] items-center justify-center px-4">
             <Suspense>
                 <QueryParamToast param="toast" />
             </Suspense>

@@ -30,12 +30,12 @@ export default async function MembersLayout({ children, params }: MembersRootLay
     setRequestLocale(currentLocale)
 
     return (
-        <div className="mx-auto mt-16 flex w-full max-w-custom-wide flex-[1] gap-12">
+        <div className="mx-auto mt-16 flex w-full max-w-custom-wide flex-[1]">
             <Suspense>
                 <QueryParamToast param="toast" />
             </Suspense>
             <Sidebar />
-            <main className="flex-[1] py-6">
+            <main className="flex-[1] py-6 px-6 xl:px-12">
                 <PageTitle />
                 {children}
             </main>

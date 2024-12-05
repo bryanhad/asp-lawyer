@@ -51,7 +51,7 @@ function Pagination({ totalAvailablePages, totalRowCount, itemsPerPage, totalRow
             <div className="flex flex-[1] items-center justify-between gap-3 md:flex-row">
                 <div className="flex items-center gap-2 md:flex-row">
                     <p className="sm:hidden">Rows</p>
-                    <p className="hidden text-sm font-medium sm:block">Rows per page</p>
+                    <p className="hidden text-sm font-medium sm:block text-nowrap">Rows per page</p>
                     <Select
                         onValueChange={(value) => {
                             router.push(generatePageUrl(1, value), {

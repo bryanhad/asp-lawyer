@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Locale } from '@/i18n/request'
 import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
 import { Suspense } from 'react'
-import FetchComponent from './_components/fetch-component'
+import FetchComponent from './fetch-component'
 import Section from '../../_components/containers/section'
 
 type Props = { params: Promise<{ locale: Locale }> }

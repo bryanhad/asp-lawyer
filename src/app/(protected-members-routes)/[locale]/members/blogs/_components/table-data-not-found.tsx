@@ -50,8 +50,8 @@ function TableDataNotFound({
     }
 
     return (
-        <TableRow className="hover:bg-white">
-            <TableCell colSpan={colSpan} className="hover:bg-white">
+        <TableRow className="hover:bg-background">
+            <TableCell colSpan={colSpan} className="">
                 <div className="flex flex-col gap-2 text-gray-400 text-center items-center py-6">
                     <Database size={50} className="shrink-0" />
                     <p className="font-semibold text-xl">Data Not Found</p>

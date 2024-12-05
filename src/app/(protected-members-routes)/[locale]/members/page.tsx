@@ -35,8 +35,6 @@ export default async function MemberPage({ params }: Props) {
             <h1 className="font-bold">{JSON.stringify(user)}</h1>
             Hello, this is the admin page!
             <LogoutButton />
-            <p>aheeaheah</p>
-            <p>aheeaheah</p>
         </div>
     )
 }

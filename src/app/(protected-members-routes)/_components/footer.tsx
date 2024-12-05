@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <footer className="border-t">
-            <div className="mx-auto flex max-w-custom-navbar flex-col items-center justify-between py-8 md:flex-row">
+            <div className="mx-auto flex max-w-custom-navbar flex-col items-center justify-between px-4 py-10 sm:px-6 lg:px-8 md:flex-row">
                 <p className="text-sm text-gray-500">
                     &copy; 2024 ASP Law Firm. All rights reserved
                 </p>
