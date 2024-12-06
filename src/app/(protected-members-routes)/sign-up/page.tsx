@@ -2,8 +2,8 @@ import { getCurrentSession } from '@/lib/auth'
 import React from 'react'
 import { AuthCard } from '../_components/auth-card'
 import { globalGETRateLimit } from '../lib/server/request'
-import SignUpForm from './_components/form'
 import { redirect } from 'next/navigation'
+import SignUpForm from './form'
 
 export default async function SignUpPage() {
     if (!globalGETRateLimit()) {

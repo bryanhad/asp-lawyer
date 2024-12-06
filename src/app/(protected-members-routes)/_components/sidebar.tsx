@@ -44,7 +44,7 @@ const SIDEBAR_SECTIONS = [
         items: [
             {
                 title: 'Settings',
-                href: '/settings',
+                href: '/members/my-settings',
                 icon: <Settings className="shrink-0" />,
             },
         ],

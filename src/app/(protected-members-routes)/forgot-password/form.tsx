@@ -7,8 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { loginAction } from '../actions'
-import { formSchema } from '../validation'
+import { loginAction } from './actions'
+import { formSchema } from './validation'
 
 export default function SignInForm() {
     const [isJSEnabled, setIsJSEnabled] = useState(false)

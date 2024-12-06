@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { AuthCard } from '../_components/auth-card'
 import { globalGETRateLimit } from '../lib/server/request'
-import SignInForm from './_components/form'
+import SignInForm from './form'
 
 export default async function SignInPage() {
     if (!globalGETRateLimit()) {

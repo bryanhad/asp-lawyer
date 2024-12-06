@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { signupAction } from '../actions'
-import { FormData, formSchema } from '../validation'
+import { signupAction } from './actions'
+import { FormData, formSchema } from './validation'
 
 export default function SignUpForm() {
     const { toast } = useToast()

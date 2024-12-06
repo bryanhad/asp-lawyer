@@ -4,21 +4,18 @@ import LoadingButton from '@/components/ui/loading-button'
 import { useToast } from '@/hooks/use-toast'
 import { startTransition, useActionState, useEffect, useRef } from 'react'
 import { logoutAction } from './actions'
-import { useRouter } from 'next/navigation'
 
-export default function LogoutButton() {
-    const router = useRouter()
+export default function SignOutButton() {
     const { toast } = useToast()
     const [state, formAction, isPending] = useActionState(logoutAction, { message: '' })
 
     const formRef = useRef<HTMLFormElement>(null)
 
     useEffect(() => {
-        if (state.success) {
-            toast({ description: state.message })
-            router.push('/sign-in')
+        if (state.message) {
+            toast({ description: state.message, variant: 'destructive' })
         }
-    }, [state.success, state.message, toast, router])
+    }, [state])
 
     return (
         <form
@@ -28,7 +25,7 @@ export default function LogoutButton() {
                 startTransition(() => formAction())
             }}
         >
-            <LoadingButton loading={isPending}>Sign out</LoadingButton>
+            <LoadingButton variant={'ghost'} loading={isPending}>Sign out</LoadingButton>
         </form>
     )
 }

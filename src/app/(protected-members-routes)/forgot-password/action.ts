@@ -1,26 +1,31 @@
-'use server'
-
-import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
 import { getZodIssues } from '@/lib/server-utils'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { verifyPasswordHash } from '../lib/server/password'
-import { RefillingTokenBucket, Throttler } from '../lib/server/rate-limit'
-import { globalPOSTRateLimit } from '../lib/server/request'
-import { getUserFromEmail, getUserPasswordHash } from '../lib/server/user'
 import { formSchema } from './validation'
+import { globalPOSTRateLimit } from '../lib/server/request'
+import { RefillingTokenBucket } from '../lib/server/rate-limit'
+import { headers } from 'next/headers'
+import { getUserFromEmail } from '../lib/server/user'
+import {
+    createPasswordResetSession,
+    invalidateUserPasswordResetSessions,
+    sendPasswordResetEmail,
+    setPasswordResetSessionTokenCookie,
+} from '../lib/server/password-reset'
+import prisma from '@/lib/prisma'
+import { generateSessionToken } from '@/lib/auth'
+import { redirect } from 'next/navigation'
+import { logger } from '@/lib/logger'
 
-const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
-const ipBucket = new RefillingTokenBucket<string>(20, 1)
+const passwordResetEmailIPBucket = new RefillingTokenBucket<string>(3, 60)
+const passwordResetEmailUserBucket = new RefillingTokenBucket<number>(3, 60)
 
 type FormState = {
     message: string
-    success?: boolean
+    success: boolean
     fields?: Record<string, string> // to re-populate the input fields which is from the client
     issues?: ReturnType<typeof getZodIssues<typeof formSchema>> // to show any input errors from the fromschema
 }
 
-export async function loginAction(_prevState: FormState, data: FormData): Promise<FormState> {
+export async function forgotPasswordAction(_prevState: FormState, data: FormData): Promise<FormState> {
     if (!globalPOSTRateLimit()) {
         return {
             success: false,
@@ -30,7 +35,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     // TODO: Assumes X-Forwarded-For is always included.
     const headerStore = await headers()
     const clientIP = headerStore.get('X-Forwarded-For')
-    if (clientIP !== null && !ipBucket.check(clientIP, 1)) {
+    if (clientIP !== null && !passwordResetEmailIPBucket.check(clientIP, 1)) {
         return {
             success: false,
             message: 'Too many requests',
@@ -61,7 +66,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         }
     }
 
-    const { email, password } = parsedData.data
+    const { email } = parsedData.data
 
     const user = await getUserFromEmail(email)
     if (user === null) {
@@ -71,46 +76,35 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
             fields: parsedData.data,
         }
     }
-
-    if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
+    if (clientIP !== null && !passwordResetEmailIPBucket.consume(clientIP, 1)) {
+        return {
+            success: false,
+            message: 'Too many requests',
+        }
+    }
+    if (!passwordResetEmailUserBucket.consume(user.id, 1)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
 
-    if (!throttler.consume(user.id)) {
+    try {
+        await prisma.$transaction(async (tx) => {
+            await invalidateUserPasswordResetSessions(tx, user.id)
+            const sessionToken = generateSessionToken()
+            const session = await createPasswordResetSession(tx, sessionToken, user.id, user.email)
+
+            await sendPasswordResetEmail(session.email, session.code)
+            await setPasswordResetSessionTokenCookie(sessionToken, session.expiresAt)
+        })
+    } catch (err) {
+        logger.error('Error in password reset transaction', JSON.stringify(err))
         return {
             success: false,
-            message: 'Too many requests',
-        }
-    }
-    const passwordHash = await getUserPasswordHash(user.id)
-    if (!passwordHash) {
-        return {
-            fields: parsedData.data,
-            success: false,
-            message: 'Invalid User',
-        }
-    }
-    const validPassword = await verifyPasswordHash(passwordHash, password)
-    if (!validPassword) {
-        return {
-            fields: parsedData.data,
-            success: false,
-            message: 'Invalid password',
+            message: 'An unexpected error occurred.\nPlease try again later.',
         }
     }
 
-    throttler.reset(user.id)
-
-    const sessionToken = generateSessionToken()
-    const session = await createSession(sessionToken, user.id)
-    await setSessionTokenCookie(sessionToken, session.expiresAt)
-
-    if (!user.emailIsVerified) {
-        return redirect('/verify-email')
-    }
-
-    return redirect(`/members?toast=${encodeURIComponent(`Welcome back ${user.username}!`)}`)
+    return redirect('/reset-password/verify-email')
 }

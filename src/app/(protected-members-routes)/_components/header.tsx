@@ -1,13 +1,18 @@
+import { getCurrentSession } from '@/lib/auth'
 import { DarkThemeToggle } from './dark-theme-toggle'
 import NavbarLinkIcon from './navbar-link-icon'
 import HeaderWrapper from './page-header-wrapper'
+import SignOutButton from './auth/sign-out-button'
 
-export default function Header() {
+export default async function Header() {
+    const { session } = await getCurrentSession()
+
     return (
         <HeaderWrapper>
             <div className="flex h-full w-full max-w-custom-navbar items-center justify-between px-4 sm:px-6 md:px-8">
                 <NavbarLinkIcon />
                 <div className="hidden gap-5 lg:flex lg:items-center">
+                    {session && <SignOutButton />}
                     {/* <LanguageSelect /> */}
                     <DarkThemeToggle />
                 </div>

@@ -1,6 +1,6 @@
 import { getCurrentSession } from '@/lib/auth'
 import React from 'react'
-import LogoutButton from '../_components/auth/logout-button'
+import SignOutButton from '../_components/auth/sign-out-button'
 import { globalGETRateLimit } from '../lib/server/request'
 import { redirect } from 'next/navigation'
 
@@ -22,7 +22,7 @@ export default async function MemberPage() {
         <div>
             <h1 className="font-bold">{JSON.stringify(user)}</h1>
             Hello, this is the admin page!
-            <LogoutButton />
+            <SignOutButton />
         </div>
     )
 }

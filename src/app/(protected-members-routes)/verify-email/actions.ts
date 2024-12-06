@@ -18,6 +18,7 @@ import { ExpiringTokenBucket } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
 import { updateUserEmailAndSetEmailAsVerified } from '../lib/server/user'
 import { formSchema } from './validation'
+import { logger } from '@/lib/logger'
 
 const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)
 
@@ -110,12 +111,21 @@ export async function verifyEmailAction(_prevState: FormState, data: FormData): 
             message: 'Incorrect code.',
         }
     }
-    await prisma.$transaction(async (tx) => {
-        await deleteUserEmailVerificationRequest(tx, user.id)
-        await invalidateUserPasswordResetSessions(tx, user.id)
-        await updateUserEmailAndSetEmailAsVerified(tx, user.id, verificationRequest.email)
-        await deleteEmailVerificationRequestCookie()
-    })
+    try {
+        await prisma.$transaction(async (tx) => {
+            await deleteUserEmailVerificationRequest(tx, user.id)
+            await invalidateUserPasswordResetSessions(tx, user.id)
+            await updateUserEmailAndSetEmailAsVerified(tx, user.id, verificationRequest.email)
+            await deleteEmailVerificationRequestCookie()
+        })
+    } catch (err) {
+        logger.error('Error in email verification transaction', JSON.stringify(err))
+        return {
+            fields: parsedData.data,
+            success: false,
+            message: 'An unexpected error occurred.\nPlease try again later.',
+        }
+    }
 
     return redirect(`/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`)
 }
