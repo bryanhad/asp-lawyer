@@ -11,12 +11,14 @@ import Image from 'next/image'
 import Flag from '@/components/ui/flag'
 
 export type Props = {
-    searchParams: SearchParams
+    searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>
 }
 
-export default async function FetchComponent({ searchParams }: Props) {
+export default async function FetchBlogsPageContent({ searchParams }: Props) {
+    const sp = await searchParams
+
     const { totalDataCount, blogs, totalAvailablePages, isUsingFilter, fetchSize } = await getData({
-        filterValues: searchParams,
+        filterValues: sp,
         defaultFetchSize: 10,
     })
     return (

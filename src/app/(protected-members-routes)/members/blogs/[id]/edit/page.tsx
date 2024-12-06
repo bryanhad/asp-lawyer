@@ -5,7 +5,7 @@ import FetchComponent from './fetch-component'
 import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 
 type Props = {
-    params: Promise<{ id: string }>
+    params: Promise<{ id: string  }>
 }
 
 export default async function EditBlogPage({ params }: Props) {
@@ -17,11 +17,9 @@ export default async function EditBlogPage({ params }: Props) {
         return redirect('/verify-email')
     }
 
-    const { id } = await params
-
     return (
         <Suspense fallback={<PageLoadingIndicator />}>
-            <FetchComponent blogId={id} currentUserId={user.id} />
+            <FetchComponent params={params} currentUserId={user.id} />
         </Suspense>
     )
 }

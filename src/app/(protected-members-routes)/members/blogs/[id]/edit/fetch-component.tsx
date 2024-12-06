@@ -6,8 +6,8 @@ import EditBlogForm from './form'
 import { editBlogAction } from '../../action'
 
 type Props = {
-    blogId: string
     currentUserId: number
+    params: Promise<{ id: string }>
 }
 
 type FetchedBlogEntry = Pick<Blog, 'authorId' | 'imageUrl' | 'imageKey'> & {
@@ -15,7 +15,9 @@ type FetchedBlogEntry = Pick<Blog, 'authorId' | 'imageUrl' | 'imageKey'> & {
     content: { id: string; en: string }
 }
 
-export default async function FetchComponent({ blogId, currentUserId }: Props) {
+export default async function FetchEditBlogPageContent({currentUserId, params }: Props) {
+    const { id: blogId } = await params
+
     const existingBlog = (
         await prisma.$queryRaw<FetchedBlogEntry[]>`
         SELECT b."imageUrl", b."imageKey", b."authorId",

@@ -130,7 +130,10 @@ body {
         @apply ml-4 list-decimal;
     }
     .tiptap.view h1 {
-        @apply mb-2 mt-12;
+        @apply mb-2;
+    }
+    .tiptap.view h1:not(:first-of-type) {
+        @apply mt-12;
     }
     .tiptap.view h2 {
         @apply mb-2 mt-12;

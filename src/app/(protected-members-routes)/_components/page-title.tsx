@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { capitalizeFirstLetter, cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 
 type PageTitleProps = {
@@ -14,6 +14,10 @@ export default function PageTitle({ className }: PageTitleProps) {
 
     const isAddPage = pathnameArr[3] === 'add'
     const isEditPage = pathnameArr[4] === 'edit'
+    const isViewPage =
+        ['blogs', 'members', 'users', 'practice-areas'].includes(pathnameArr[2]) &&
+        pathnameArr[3] &&
+        pathnameArr[3].length > 0
     const isNotFound = ![
         '/members',
         '/members/users',
@@ -34,17 +38,20 @@ export default function PageTitle({ className }: PageTitleProps) {
         case isEditPage:
             title = `Edit ${singularPageTitle}`
             break
+        case isViewPage:
+            title = `View ${capitalizeFirstLetter(singularPageTitle)}`
+            break
         default:
             title = pathnameArr[1] === 'members' && pathnameArr.length === 2 ? 'Dashboard' : pathnameArr[2]
             break
     }
 
-    if (!isAddPage && !isEditPage && isNotFound) {
+    if (!isAddPage && !isEditPage && !isViewPage && isNotFound) {
         return null
     }
 
     return (
-        <h1 className={cn('text-2xl font-bold capitalize max-sm:text-center sm:text-3xl md:text-4xl pb-6', className)}>
+        <h1 className={cn('pb-6 text-2xl font-bold capitalize max-sm:text-center sm:text-3xl md:text-4xl', className)}>
             {title}
         </h1>
     )

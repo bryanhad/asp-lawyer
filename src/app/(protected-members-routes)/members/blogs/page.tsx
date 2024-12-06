@@ -18,15 +18,13 @@ export default async function BlogsPage({ searchParams }: Props) {
         return redirect('/verify-email')
     }
 
-    const sp = await searchParams
-
     return (
         <>
             <LinkButton className="mb-4" href={'/members/blogs/add'}>
                 Add Blog
             </LinkButton>
             <Suspense fallback={<PageLoadingIndicator />}>
-                <FetchComponent searchParams={sp} />
+                <FetchComponent searchParams={searchParams}/>
             </Suspense>
         </>
     )

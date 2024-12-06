@@ -16,6 +16,10 @@ type Props = {
 
 export default function NavLink({ item }: Props) {
     const pathname = usePathname()
+    const pathnameArr = pathname.split('/')
+    const hrefArr = item.href.split('/')
+
+    const isActive = pathname === item.href || pathnameArr[2] === hrefArr[2]
 
     return (
         <Button
@@ -23,8 +27,7 @@ export default function NavLink({ item }: Props) {
             size={'sm'}
             variant={'ghost'}
             className={cn('w-full justify-start px-3', {
-                'bg-accent text-accent-foreground':
-                    pathname === item.href,
+                'bg-accent text-accent-foreground': isActive,
             })}
         >
             <Link href={item.href} className="text-sm">
