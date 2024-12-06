@@ -8,6 +8,7 @@ import { deleteBlogAction, getData } from './action'
 import { SearchParams } from './validation'
 import BlogCard from './_components/card'
 import Image from 'next/image'
+import Flag from '@/components/ui/flag'
 
 export type Props = {
     searchParams: SearchParams
@@ -51,12 +52,21 @@ export default async function FetchComponent({ searchParams }: Props) {
                                             <div className="relative max-h-[150px] min-h-[120px] min-w-[200px] overflow-hidden rounded-md bg-secondary">
                                                 <Image
                                                     className="object-cover object-center dark:brightness-90"
-                                                    alt={`Thumbnail of blog '${blog.title}'`}
+                                                    alt={`Thumbnail of blog '${blog.title.en}'`}
                                                     src={blog.imageUrl}
                                                     fill
                                                 />
                                             </div>
-                                            <h3>{blog.title}</h3>
+                                            <div className="flex flex-col gap-2">
+                                                <div className="flex items-start gap-2">
+                                                    <Flag round flag="en" />
+                                                    <h3 className="line-clamp-2">{blog.title.en}</h3>
+                                                </div>
+                                                <div className="flex items-start gap-2">
+                                                    <Flag round flag="id" />
+                                                    <h3 className="line-clamp-2">{blog.title.id}</h3>
+                                                </div>
+                                            </div>
                                         </div>
                                     </TableCell>
                                     <TableCell>
@@ -77,7 +87,7 @@ export default async function FetchComponent({ searchParams }: Props) {
                                             <DeleteButton
                                                 small
                                                 className="min-w-min"
-                                                toBeDeletedName={blog.title}
+                                                toBeDeletedName={blog.title.en}
                                                 onApprove={deleteBlogAction.bind(null, blog.id)}
                                             />
                                             <EditButton

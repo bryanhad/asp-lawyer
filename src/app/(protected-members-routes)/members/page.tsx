@@ -10,6 +10,7 @@ export default async function MemberPage() {
     }
 
     const { session, user } = await getCurrentSession()
+    console.log(user)
     if (session === null) {
         return redirect('/sign-in')
     }

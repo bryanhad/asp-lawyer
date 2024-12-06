@@ -112,15 +112,13 @@ model Achievements {
 }
 
 model Blog {
-    id               String @id @default(cuid())
-    title            String
-    userId           Int
-    contentIndonesia String
-    contentEnglish   String
-    imageUrl         String
-    imageKey         String
+    id       String @id @default(cuid())
 
-    author    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    imageUrl String
+    imageKey String
+
+    authorId  Int
     createdAt DateTime @default(now())
 
     @@map("blogs")

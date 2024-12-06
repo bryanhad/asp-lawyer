@@ -7,6 +7,7 @@ export enum EntityType {
     MEMBER = 'MEMBER',
     PRACTICE_AREA = 'PRACTICE_AREA',
     ACHIEVEMENT = 'ACHIEVEMENT',
+    BLOG = 'BLOG',
 }
 
 export enum MemberTranslationKey {
@@ -35,4 +36,9 @@ export enum PracticeAreaTranslationKey {
 export enum AchievementsTranslationKey {
     TITLE = 'TITLE',
     DESC = 'DESC',
+}
+
+export enum BlogTranslationKey {
+    TITLE = 'TITLE',
+    CONTENT = 'CONTENT',
 }

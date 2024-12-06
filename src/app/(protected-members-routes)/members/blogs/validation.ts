@@ -9,7 +9,6 @@ export type FilterValues = z.infer<typeof filterSchema>
 
 export type SearchParams = FilterValues & { size?: string; page?: string }
 
-
 const MAX_IMAGE_SIZE = 400_880 // 4 MB
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
 
@@ -28,18 +27,32 @@ export const uploadImageSchema = z
         }
     }, `File size should be less than 4 MB.`)
 
-
-
-export const formSchemaClient = z.object({
-    title: z.string().min(2, {
+export const addBlogFormSchemaClient = z.object({
+    titleID: z.string().min(2, {
         message: 'Title must be at least 5 characters.',
     }),
-    content: z.string().min(10, {
+    titleEN: z.string().min(2, {
+        message: 'Title must be at least 5 characters.',
+    }),
+    contentID: z.string().min(10, {
+        message: 'content must be at least 10 characters.',
+    }),
+    contentEN: z.string().min(10, {
         message: 'content must be at least 10 characters.',
     }),
     thumbnail: uploadImageSchema,
 })
 
-export const formSchemaServer = formSchemaClient.extend({
+export const addBlogFormSchemaServer = addBlogFormSchemaClient.extend({
     thumbnail: z.custom<File>((val) => val instanceof File, 'Picture must be a file type'),
+})
+
+export const editBlogFormSchemaClient = addBlogFormSchemaClient.extend({
+    thumbnail: uploadImageSchema.optional(),
+})
+
+export const editBlogFormSchemaServer = editBlogFormSchemaClient.extend({
+    blogId: z.string(),
+    thumbnail: z.custom<File>((val) => val instanceof File, 'Picture must be a file type').optional(),
+    currentBlogImageKey: z.string()
 })

@@ -39,7 +39,7 @@ body {
         --accent-foreground: 24 9.8% 10%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 60 9.1% 97.8%;
-        --successful: 142 76% 36%;  /* green-600 */
+        --successful: 142 76% 36%; /* green-600 */
         --border: 20 5.9% 90%;
         --input: 20 5.9% 90%;
         --ring: 20 14.3% 4.1%;
@@ -168,6 +168,45 @@ body {
         }
         100% {
             transform: translateX(0);
+        }
+    }
+
+    /* Custom loading indicator */
+    .my-loading-indicator {
+        width: 60px;
+        aspect-ratio: 2;
+        --_g: no-repeat radial-gradient(circle closest-side, #616161 90%, #0000);
+        background:
+            var(--_g) 0% 50%,
+            var(--_g) 50% 50%,
+            var(--_g) 100% 50%;
+        background-size: calc(100% / 3) 50%;
+        animation: loading-bounce 1s infinite linear;
+    }
+    @keyframes loading-bounce {
+        20% {
+            background-position:
+                0% 0%,
+                50% 50%,
+                100% 50%;
+        }
+        40% {
+            background-position:
+                0% 100%,
+                50% 0%,
+                100% 50%;
+        }
+        60% {
+            background-position:
+                0% 50%,
+                50% 100%,
+                100% 0%;
+        }
+        80% {
+            background-position:
+                0% 50%,
+                50% 50%,
+                100% 100%;
         }
     }
 }

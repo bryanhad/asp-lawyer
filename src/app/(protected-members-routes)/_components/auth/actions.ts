@@ -2,8 +2,7 @@
 
 import { deleteSessionTokenCookie, getCurrentSession, invalidateSession } from '@/lib/auth'
 import { globalPOSTRateLimit } from '../../lib/server/request'
-import { getCurrentLocale, verifyLocale } from '@/lib/server-utils'
-import { redirect } from '@/i18n/routing'
+import { redirect } from 'next/navigation'
 
 export type FormState = {
     success?: boolean
@@ -18,15 +17,6 @@ export async function logoutAction(_prevState: FormState): Promise<FormState> {
         }
     }
 
-    const locale = await getCurrentLocale()
-    const currentLocale = verifyLocale(locale)
-    if (!currentLocale) {
-        return {
-            success: false,
-            message: 'Missing locale',
-        }
-    }
-
     const { session } = await getCurrentSession()
     if (session === null) {
         return {
@@ -36,5 +26,5 @@ export async function logoutAction(_prevState: FormState): Promise<FormState> {
     }
     await Promise.all([invalidateSession(session.id), deleteSessionTokenCookie()])
     // Redirect to the sign-in page with a success query parameter
-    return redirect({ href: `/sign-in?toast=${encodeURIComponent('Logout Successful')}`, locale: currentLocale })
+    return redirect(`/sign-in?toast=${encodeURIComponent('Logout Successful')}`)
 }

@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
-import { routing } from './i18n/routing'
 import { NextRequest, NextResponse } from 'next/server'
+import { routing } from './i18n/routing'
 import { SESSION_COOKIE_NAME, SESSION_EXPIRY } from './lib/auth'
 
 const nextIntlMiddleware = createMiddleware(routing)
@@ -69,7 +69,7 @@ export default async function middleware(req: NextRequest): Promise<NextResponse
     const pathname = req.nextUrl.pathname
 
     // Define the paths that should run `customMiddleware`
-    const noInternationalizationPaths = ['/members', '/sign-in', '/sign-up']
+    const noInternationalizationPaths = ['/members', '/sign-in', '/sign-up', '/verify-email']
 
     if (noInternationalizationPaths.some((path) => pathname.startsWith(path))) {
         console.log(pathname)

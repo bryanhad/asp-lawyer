@@ -1,16 +1,13 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import Flag from '@/components/ui/flag'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Locale } from '@/i18n/request'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { ChevronDown } from 'lucide-react'
-import Image from 'next/image'
-import { memo } from 'react'
-import flagEN from '/public/flag-en.svg'
-import flagID from '/public/flag-id.svg'
 import { useLocale } from 'next-intl'
-import { Button } from '@/components/ui/button'
 
 export default function LanguageSelect() {
     const router = useRouter()
@@ -28,13 +25,7 @@ export default function LanguageSelect() {
         <Popover>
             <Button asChild variant="ghost" className="bg-transparent px-2">
                 <PopoverTrigger>
-                    <Image
-                        src={currentLocale === 'en' ? flagEN : flagID}
-                        alt={currentLocale === 'en' ? 'English Flag' : 'Indonesian Flag'}
-                        width={24}
-                        height={18}
-                        priority
-                    />
+                    <Flag flag={currentLocale} />
                     <ChevronDown className="text-muted-foreground" />
                 </PopoverTrigger>
             </Button>
@@ -48,7 +39,7 @@ export default function LanguageSelect() {
                             'bg-muted': currentLocale === 'en',
                         })}
                     >
-                        <FlagImage src={flagEN} alt="English flag" />
+                        <Flag flag="en" />
                         <p className="leading-none text-muted-foreground">English</p>
                     </Button>
                     <Button
@@ -59,7 +50,7 @@ export default function LanguageSelect() {
                             'bg-muted': currentLocale === 'id',
                         })}
                     >
-                        <FlagImage src={flagID} alt="Indonesian flag" />
+                        <Flag flag="id" />
                         <p className="leading-none text-muted-foreground">Indonesia</p>
                     </Button>
                 </div>
@@ -67,7 +58,3 @@ export default function LanguageSelect() {
         </Popover>
     )
 }
-
-const FlagImage = memo(function FlagImage({ src, alt }: { src: string; alt: string }) {
-    return <Image src={src} alt={alt} width={24} height={18} priority />
-})

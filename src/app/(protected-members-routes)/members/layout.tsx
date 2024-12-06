@@ -1,11 +1,7 @@
-import { Locale } from '@/i18n/request'
-import { routing } from '@/i18n/routing'
-import { setRequestLocale } from 'next-intl/server'
-import { notFound } from 'next/navigation'
+import QueryParamToast from '@/components/ui/query-param-toast'
 import React, { Suspense } from 'react'
 import PageTitle from '../_components/page-title'
 import Sidebar from '../_components/sidebar'
-import QueryParamToast from '@/components/ui/query-param-toast'
 
 type MembersRootLayoutProps = {
     children: React.ReactNode
@@ -18,7 +14,7 @@ export default async function MembersLayout({ children }: MembersRootLayoutProps
                 <QueryParamToast param="toast" />
             </Suspense>
             <Sidebar />
-            <main className="flex-[1] py-6 px-6 xl:px-12">
+            <main className="flex-[1] py-6 px-6 xl:px-12 flex flex-col">
                 <PageTitle />
                 {children}
             </main>

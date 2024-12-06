@@ -1,10 +1,16 @@
 import React from 'react'
-import { BlogForm } from './_components/form'
+import AddBlogForm from './form'
+import { getCurrentSession } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
-export default function AddBlogPage() {
-    return (
-        <div>
-            <BlogForm titlePlaceholder="Write something!" contentPlaceholder="blah blah blah" />
-        </div>
-    )
+export default async function AddBlogPage() {
+    const { session, user } = await getCurrentSession()
+    if (session === null) {
+        return redirect('/sign-in')
+    }
+    if (!user.emailIsVerified) {
+        return redirect('/verify-email')
+    }
+
+    return <AddBlogForm />
 }

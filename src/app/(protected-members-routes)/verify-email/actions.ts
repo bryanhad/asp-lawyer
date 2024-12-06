@@ -1,9 +1,9 @@
 'use server'
 
-import { redirect } from '@/i18n/routing'
 import { getCurrentSession } from '@/lib/auth'
 import prisma from '@/lib/prisma'
-import { getCurrentLocale, getZodIssues, verifyLocale } from '@/lib/server-utils'
+import { getZodIssues } from '@/lib/server-utils'
+import { redirect } from 'next/navigation'
 import {
     createEmailVerificationRequest,
     deleteEmailVerificationRequestCookie,
@@ -56,15 +56,6 @@ export async function verifyEmailAction(_prevState: FormState, data: FormData): 
         return {
             success: false,
             message: 'Not authenticated',
-        }
-    }
-
-    const locale = await getCurrentLocale()
-    const currentLocale = verifyLocale(locale)
-    if (!currentLocale) {
-        return {
-            success: false,
-            message: 'Missing locale',
         }
     }
 
@@ -126,10 +117,7 @@ export async function verifyEmailAction(_prevState: FormState, data: FormData): 
         await deleteEmailVerificationRequestCookie()
     })
 
-    return redirect({
-        href: `/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`,
-        locale: currentLocale,
-    })
+    return redirect(`/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`)
 }
 
 export async function resendEmailVerificationCodeAction(_prevState: FormState): Promise<FormState> {
