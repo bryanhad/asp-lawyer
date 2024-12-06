@@ -26,6 +26,14 @@ export async function createUser(email: string, username: string, password: stri
     return user
 }
 
+export async function updateUserPassword(tx: Prisma.TransactionClient, userId: number, password: string) {
+    const passwordHash = await hashPassword(password)
+    await tx.user.update({
+        data: { passwordHash },
+        where: { id: userId },
+    })
+}
+
 export async function getUserPasswordHash(userId: number): Promise<string | null> {
     const user = await prisma.user.findUnique({ select: { passwordHash: true }, where: { id: userId } })
     if (!user) {

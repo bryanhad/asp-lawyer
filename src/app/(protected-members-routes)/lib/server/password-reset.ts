@@ -105,7 +105,6 @@ export async function setPasswordResetSessionTokenCookie(token: string, expiresA
 
 export async function deletePasswordResetSessionTokenCookie() {
     const cookieStore = await cookies()
-
 	cookieStore.set(PASSWORD_RESET_SESSION_COOKIE, "", {
 		maxAge: 0,
 		sameSite: "lax",

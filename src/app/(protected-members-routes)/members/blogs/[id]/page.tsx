@@ -1,5 +1,5 @@
 import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import FetchComponent from './fetch-component'
@@ -21,4 +21,5 @@ export default async function ViewBlogPage({ params }: Props) {
         <Suspense fallback={<PageLoadingIndicator />}>
             <FetchComponent params={params} currentUserId={user.id} />
         </Suspense>
-    )}
+    )
+}

@@ -1,6 +1,10 @@
 'use server'
 
-import { deleteSessionTokenCookie, getCurrentSession, invalidateSession } from '@/lib/auth'
+import {
+    deleteSessionTokenCookie,
+    getCurrentSession,
+    invalidateSession,
+} from '@/app/(protected-members-routes)/lib/server/auth'
 import { globalPOSTRateLimit } from '../../lib/server/request'
 import { redirect } from 'next/navigation'
 

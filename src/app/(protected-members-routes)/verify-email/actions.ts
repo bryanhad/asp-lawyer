@@ -1,6 +1,6 @@
 'use server'
 
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import prisma from '@/lib/prisma'
 import { getZodIssues } from '@/lib/server-utils'
 import { redirect } from 'next/navigation'
@@ -126,7 +126,7 @@ export async function verifyEmailAction(_prevState: FormState, data: FormData): 
             message: 'An unexpected error occurred.\nPlease try again later.',
         }
     }
-
+    logger.info('sampe 5?')
     return redirect(`/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`)
 }
 

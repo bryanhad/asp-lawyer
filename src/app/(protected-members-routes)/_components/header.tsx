@@ -1,4 +1,4 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { DarkThemeToggle } from './dark-theme-toggle'
 import NavbarLinkIcon from './navbar-link-icon'
 import HeaderWrapper from './page-header-wrapper'

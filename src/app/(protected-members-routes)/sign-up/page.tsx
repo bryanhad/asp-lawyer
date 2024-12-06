@@ -1,4 +1,4 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import React from 'react'
 import { AuthCard } from '../_components/auth-card'
 import { globalGETRateLimit } from '../lib/server/request'

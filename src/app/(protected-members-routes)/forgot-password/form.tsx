@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { loginAction } from './actions'
 import { formSchema } from './validation'
+import { forgotPasswordAction } from './action'
 
-export default function SignInForm() {
+export default function ForgotPasswordForm() {
     const [isJSEnabled, setIsJSEnabled] = useState(false)
-    const [state, formAction, isPending] = useActionState(loginAction, {
+    const [state, formAction, isPending] = useActionState(forgotPasswordAction, {
+        success: false,
         message: '',
     })
 
@@ -20,7 +21,6 @@ export default function SignInForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: '',
-            password: '',
             /**
              * if the server sends the previous input fields,
              * override the current state of input fields in client side
@@ -85,24 +85,8 @@ export default function SignInForm() {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input placeholder={'******'} type="password" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                            <noscript>
-                                <p className="text-destructive">{state?.issues?.password}</p>
-                            </noscript>
-                        </FormItem>
-                    )}
-                />
                 <LoadingButton className="mt-4 w-full" loading={isPending}>
-                    Sign In
+                    Verify Email Address
                 </LoadingButton>
             </form>
         </Form>

@@ -3,7 +3,7 @@ import { EmailVerificationRequest, Prisma } from '@prisma/client'
 import { encodeBase32 } from '@oslojs/encoding'
 import { generateRandomOTP } from './utils'
 import { cookies } from 'next/headers'
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { ExpiringTokenBucket } from './rate-limit'
 
 const EMAIL_VERIFICATION_COOKIE = 'email_verification'
@@ -91,4 +91,4 @@ export async function getUserEmailVerificationRequestFromRequest(): Promise<Emai
     return request
 }
 
-export const sendVerificationEmailBucket = new ExpiringTokenBucket<number>(3, 60 * 10);
+export const sendVerificationEmailBucket = new ExpiringTokenBucket<number>(3, 60 * 10)

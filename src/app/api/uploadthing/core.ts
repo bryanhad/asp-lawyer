@@ -1,4 +1,4 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { logger } from '@/lib/logger'
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { UploadThingError, UTApi } from 'uploadthing/server'

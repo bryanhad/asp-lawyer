@@ -1,11 +1,11 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { redirect } from 'next/navigation'
 import React, { Suspense } from 'react'
 import FetchComponent from './fetch-component'
 import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 
 type Props = {
-    params: Promise<{ id: string  }>
+    params: Promise<{ id: string }>
 }
 
 export default async function EditBlogPage({ params }: Props) {

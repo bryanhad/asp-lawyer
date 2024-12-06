@@ -1,4 +1,4 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import React from 'react'
 import SignOutButton from '../_components/auth/sign-out-button'
 import { globalGETRateLimit } from '../lib/server/request'

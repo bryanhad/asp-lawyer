@@ -1,6 +1,10 @@
 'use server'
 
-import { createSession, generateSessionToken, setSessionTokenCookie } from '@/lib/auth'
+import {
+    createSession,
+    generateSessionToken,
+    setSessionTokenCookie,
+} from '@/app/(protected-members-routes)/lib/server/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { checkEmailAvailability } from '../lib/server/email'

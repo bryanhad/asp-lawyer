@@ -1,3 +1,5 @@
+'use server'
+
 import { getZodIssues } from '@/lib/server-utils'
 import { formSchema } from './validation'
 import { globalPOSTRateLimit } from '../lib/server/request'
@@ -11,7 +13,7 @@ import {
     setPasswordResetSessionTokenCookie,
 } from '../lib/server/password-reset'
 import prisma from '@/lib/prisma'
-import { generateSessionToken } from '@/lib/auth'
+import { generateSessionToken } from '@/app/(protected-members-routes)/lib/server/auth'
 import { redirect } from 'next/navigation'
 import { logger } from '@/lib/logger'
 

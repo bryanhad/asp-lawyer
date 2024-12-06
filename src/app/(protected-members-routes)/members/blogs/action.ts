@@ -1,7 +1,7 @@
 'use server'
 
 import { utapi } from '@/app/api/uploadthing/core'
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { BlogTranslationKey, EntityType, Language } from '@/lib/enum'
 import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'

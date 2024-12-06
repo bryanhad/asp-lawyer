@@ -1,4 +1,7 @@
+import { AuthCard } from '../_components/auth-card'
+import AuthPageContainer from '../_components/auth-page-container'
 import { globalGETRateLimit } from '../lib/server/request'
+import ForgotPasswordForm from './form'
 
 export default function ForgotPasswordPage() {
     if (!globalGETRateLimit()) {
@@ -6,10 +9,10 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <>
-            <h1>Forgot your password?</h1>
-            <ForgotPasswordForm />
-            <Link href="/login">Sign in</Link>
-        </>
+        <AuthPageContainer>
+            <AuthCard title="Forgot your password?" headerLabel="Enter your email so we can help you">
+                <ForgotPasswordForm />
+            </AuthCard>
+        </AuthPageContainer>
     )
 }

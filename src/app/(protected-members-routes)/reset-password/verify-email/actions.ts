@@ -1,10 +1,10 @@
 'use server'
 
 import { getZodIssues } from '@/lib/server-utils'
-import { globalPOSTRateLimit } from '../lib/server/request'
-import { validatePasswordResetSessionRequest } from '../lib/server/password-reset'
-import { ExpiringTokenBucket } from '../lib/server/rate-limit'
-import { formSchema } from './validation'
+import { globalPOSTRateLimit } from '@/app/(protected-members-routes)/lib/server/request'
+import { validatePasswordResetSessionRequest } from '@/app/(protected-members-routes)/lib/server/password-reset'
+import { ExpiringTokenBucket } from '@/app/(protected-members-routes)/lib/server/rate-limit'
+import { emailVerificationFormSchema } from './validation'
 import prisma from '@/lib/prisma'
 import { logger } from '@/lib/logger'
 import { redirect } from 'next/navigation'
@@ -13,7 +13,7 @@ type FormState = {
     message: string
     success: boolean
     fields?: Record<string, string> // to re-populate the input fields which is from the client
-    issues?: ReturnType<typeof getZodIssues<typeof formSchema>> // to show any input errors from the fromschema
+    issues?: ReturnType<typeof getZodIssues<typeof emailVerificationFormSchema>> // to show any input errors from the fromschema
 }
 
 const emailVerificationBucket = new ExpiringTokenBucket<number>(5, 60 * 30)
@@ -29,7 +29,7 @@ export default async function verifyPasswordResetEmailAction(
         }
     }
 
-    const { session, user } = await validatePasswordResetSessionRequest()
+    const { session } = await validatePasswordResetSessionRequest()
     if (session === null) {
         return {
             success: false,
@@ -54,7 +54,7 @@ export default async function verifyPasswordResetEmailAction(
     }
 
     const formData = Object.fromEntries(data)
-    const parsedData = formSchema.safeParse(formData)
+    const parsedData = emailVerificationFormSchema.safeParse(formData)
 
     if (!parsedData.success) {
         /**
@@ -73,7 +73,7 @@ export default async function verifyPasswordResetEmailAction(
             success: false,
             message: 'Invalid field',
             fields,
-            issues: getZodIssues<typeof formSchema>(parsedData),
+            issues: getZodIssues<typeof emailVerificationFormSchema>(parsedData),
         }
     }
 
@@ -123,5 +123,5 @@ export default async function verifyPasswordResetEmailAction(
         }
     }
 
-    return redirect(`/members?toast=${encodeURIComponent(`Welcome aboard ${user.username}!`)}`)
+    return redirect(`/reset-password?toast=${encodeURIComponent(`Your email has been verified`)}`)
 }

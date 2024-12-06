@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import FetchComponent from './fetch-component'
 import LinkButton from '@/app/(protected-members-routes)/_components/link-button'
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { redirect } from 'next/navigation'
 import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 
@@ -24,7 +24,7 @@ export default async function BlogsPage({ searchParams }: Props) {
                 Add Blog
             </LinkButton>
             <Suspense fallback={<PageLoadingIndicator />}>
-                <FetchComponent searchParams={searchParams}/>
+                <FetchComponent searchParams={searchParams} />
             </Suspense>
         </>
     )

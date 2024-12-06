@@ -1,8 +1,8 @@
-import type { Session } from '@prisma/client'
+import type { Prisma, Session } from '@prisma/client'
 import crypto from 'crypto'
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding'
 import { sha256 } from '@oslojs/crypto/sha2'
-import prisma from './prisma'
+import prisma from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { cache } from 'react'
 import { UserInfo } from '@/app/(protected-members-routes)/lib/server/user'
@@ -30,16 +30,26 @@ export function generateSessionToken(): string {
     return token
 }
 
-export async function createSession(token: string, userId: number): Promise<Session> {
+export async function createSession(
+    token: string,
+    userId: number,
+    tx?: Prisma.TransactionClient
+): Promise<Session> {
     const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
     const session: Session = {
         id: sessionId,
         userId,
         expiresAt: new Date(Date.now() + SESSION_EXPIRY),
     }
-    await prisma.session.create({
-        data: session,
-    })
+    if (!tx) {
+        await prisma.session.create({
+            data: session,
+        })
+    } else {
+        await tx.session.create({
+            data: session,
+        })
+    }
     return session
 }
 
@@ -95,11 +105,15 @@ export async function validateSessionToken(token: string): Promise<SessionValida
  *
  * @param sessionId
  */
-export async function invalidateSession(sessionId: string): Promise<void> {
+export async function invalidateSession(sessionId: string) {
     await prisma.session.deleteMany({ where: { id: sessionId } })
 }
 
-export async function setSessionTokenCookie(token: string, expiresAt: Date): Promise<void> {
+export async function invalidateUserSessions(tx: Prisma.TransactionClient, userId: number) {
+    await tx.session.deleteMany({ where: { userId } })
+}
+
+export async function setSessionTokenCookie(token: string, expiresAt: Date) {
     const cookieStore = await cookies()
     cookieStore.set(SESSION_COOKIE_NAME, token, {
         httpOnly: true,
@@ -110,7 +124,7 @@ export async function setSessionTokenCookie(token: string, expiresAt: Date): Pro
     })
 }
 
-export async function deleteSessionTokenCookie(): Promise<void> {
+export async function deleteSessionTokenCookie() {
     const cookieStore = await cookies()
     cookieStore.set(SESSION_COOKIE_NAME, '', {
         httpOnly: true,

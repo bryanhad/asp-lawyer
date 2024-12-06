@@ -1,4 +1,4 @@
-import { getCurrentSession } from '@/lib/auth'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
