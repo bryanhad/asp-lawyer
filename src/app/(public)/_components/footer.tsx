@@ -46,7 +46,13 @@ export default async function Footer() {
             <div className="mx-auto max-w-custom-navbar px-4 py-10 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                     <div className="flex flex-col gap-4 max-md:items-center max-md:text-center">
-                        <Image src={'/asp-logo-modified.png'} alt="ASP Logo" width={70} height={40} priority />
+                        <Image
+                            src={'/asp-logo-modified.png'}
+                            alt="ASP Logo"
+                            width={70}
+                            height={40}
+                            className="w-auto max-w-[70px]"
+                        />
                         <p className="text-sm text-muted-foreground">{t('desc')}</p>
                         <div className="flex space-x-4">
                             <a href="#" className="text-gray-400 hover:text-gray-500">

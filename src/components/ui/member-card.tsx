@@ -26,11 +26,11 @@ export default function MemberCard({
                         alt={`Picture of ${slug}`}
                         src={imageUrl}
                         height={300}
-                        width={250}
+                        width={250}                        
                         // removed blur cuz it always gittering up on rerender (on filter)
                         // placeholder={'blur'}
                         // blurDataURL={blurImageUrl}
-                        className="z-20 object-cover contrast-[90%] duration-300 group-hover:scale-105 group-hover:contrast-100"
+                        className="z-20 w-auto object-cover contrast-[90%] duration-300 group-hover:scale-105 group-hover:contrast-100"
                     />
                     <div className="absolute inset-x-0 bottom-0 top-[40%] z-30 bg-gradient-to-t from-slate-600/20 via-transparent to-transparent dark:top-[40%] dark:from-zinc-600/[15%]" />
 

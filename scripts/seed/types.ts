@@ -4,6 +4,7 @@ import {
     MemberTranslationKey,
     AchievementsTranslationKey,
     MemberRoles,
+    BlogTranslationKey,
 } from '@/lib/enum'
 
 export type TranslationSeed<TranslationKey, ValueType = string> = {
@@ -35,4 +36,18 @@ export type AchievementsSeed = {
     order: number
     imageUrl: string
     translations: TranslationSeed<AchievementsTranslationKey>[]
+}
+
+export type BlogsSeed = {
+    id:string
+    imageUrl: string
+    imageKey: string
+    translations: TranslationSeed<BlogTranslationKey>[]
+}
+
+export type UsersSeed = {
+    id: number,
+    email:string,
+    username:string,
+    password:string,
 }

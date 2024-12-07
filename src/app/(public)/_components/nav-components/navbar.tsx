@@ -20,14 +20,13 @@ async function Navbar() {
                             alt="ASP Logo"
                             width={50}
                             height={20}
+                            className="w-auto"
                             priority
                         />
                     </Link>
                     <div className="hidden gap-10 lg:flex">
                         <NavLink href={'/about-us'}>{t('aboutUs')}</NavLink>
-                        <NavLink href={'/practice-areas'}>
-                            {t('practiceAreas')}
-                        </NavLink>
+                        <NavLink href={'/practice-areas'}>{t('practiceAreas')}</NavLink>
                         <NavLink href={'/our-team'}>{t('ourTeam')}</NavLink>
                         <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
                         <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>

@@ -7,7 +7,7 @@
         "build": "prisma generate && next build",
         "start": "next start",
         "lint": "next lint",
-        "seed-main": "ts-node scripts/seed/main.ts",
+        "seed-main": "npx tsx scripts/seed/main.ts",
         "seed-members": "ts-node scripts/seed/members.ts",
         "seed-images-lawyer": "ts-node scripts/seed/lawyer-images.ts",
         "clear-tables-super-dangerous-act": "ts-node scripts/seed/clear-tables.ts"

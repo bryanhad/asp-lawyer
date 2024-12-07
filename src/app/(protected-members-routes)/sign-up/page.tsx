@@ -22,12 +22,7 @@ export default async function SignUpPage() {
 
     return (
         <main className="flex flex-[1] items-center justify-center px-4">
-            <AuthCard
-                title="ASP Members"
-                headerLabel="Welcome to ASP Members Sign Up Page"
-                backButtonLabel="Sign in"
-                backButtonHref="/sign-in"
-            >
+            <AuthCard title="ASP Members" headerLabel="Welcome to ASP Members Sign Up Page">
                 <SignUpForm />
             </AuthCard>
         </main>

@@ -77,7 +77,7 @@ const PinContainer = ({
                                 alt={`Picture of "${title}"`}
                                 width={imageWidth}
                                 height={imageHeight}
-                                className="dark:brightness-[80%]"
+                                className="w-auto dark:brightness-[80%]"
                             />
                             <div className="p-4 text-center">
                                 {currentLocale === 'en' ? title.en : title.id}

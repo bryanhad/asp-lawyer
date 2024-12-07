@@ -3,8 +3,10 @@ import { seedAchievements } from './functions/achievements'
 import { seedPracticeAreas } from './functions/practice-areas'
 import {
     seedAchievementTranslations,
+    seedBlogTranslations,
     seedPracticeAreaTranslations,
 } from './functions/translations'
+import { seedUsersAndBlogs } from './functions/user-and-blog'
 
 const prisma = new PrismaClient()
 
@@ -32,6 +34,13 @@ async function main() {
             console.log(`🚀 Seeding 'achievments' translations...`)
             await seedAchievementTranslations(tx, upsertedAchievements)
             console.log(`🏁 Successfully seed 'achievements' translations!`)
+            
+            const upsertedBlogs = await seedUsersAndBlogs(tx)
+
+            // Blog Translation batch
+            console.log(`🚀 Seeding 'blogs' translations...`)
+            await seedBlogTranslations(tx, upsertedBlogs)
+            console.log(`🏁 Successfully seed 'blogs' translations!`)
         },
         {
             maxWait: 5000, // 5 seconds max wait to connect to prisma

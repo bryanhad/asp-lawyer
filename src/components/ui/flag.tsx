@@ -15,7 +15,7 @@ const Flag = memo(function Flag({ flag, round = false }: Props) {
             <SimplePopover tip={flag === 'en' ? 'English' : 'Indonesian'} className='border-none p-0'>
                 <div className="relative aspect-square w-[20px] overflow-hidden rounded-full ring-[1px] ring-foreground/20">
                     <Image
-                        className="scale-150"
+                        className="w-auto scale-150"
                         src={flag === 'en' ? flagEN : flagID}
                         alt={flag === 'en' ? 'English Flag' : 'Indonesian Flag'}
                         width={20}
@@ -32,6 +32,7 @@ const Flag = memo(function Flag({ flag, round = false }: Props) {
             alt={flag === 'en' ? 'English Flag' : 'Indonesian Flag'}
             width={24}
             height={18}
+            className='w-auto'
             priority
         />
     )

@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
     env: {
-        basedir: process.cwd() 
+        basedir: process.cwd(),
     },
     /* config options here */
     // experimental: {
@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
     //     },
     // },
     images: {
+        // overwrite nextjs's deviceSizes config with tailwind breakpoints
+        deviceSizes: [640, 768, 1024, 1280],
         remotePatterns: [
             {
                 protocol: 'https',

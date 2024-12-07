@@ -1,32 +1,22 @@
 import { TranslationQuery } from '../../../src/lib/types'
 import { Prisma, Translation } from '@prisma/client'
-import {
-    EntityType,
-    Language,
-    MemberTranslationKey,
-} from '../../../src/lib/enum'
+import { EntityType, Language, MemberTranslationKey } from '../../../src/lib/enum'
 import { achievementsSeed } from '../data/achievements'
-import {
-    dummyMemberAchievements,
-    dummyMemberBios,
-    dummyMemberEducations,
-    dummyMemberExperiences,
-} from '../data/dummy'
+import { dummyMemberAchievements, dummyMemberBios, dummyMemberEducations, dummyMemberExperiences } from '../data/dummy'
 import { membersSeed } from '../data/members'
 import { practiceAreaSeed } from '../data/practice-areas'
 import { TranslationSeed } from '../types'
 import { seedAchievements } from './achievements'
 import { seedMembers } from './members'
 import { seedPracticeAreas } from './practice-areas'
-import {
-    getRandomElement,
-    getRandomSubsetFromArray,
-    separateLanguages,
-} from './util'
+import { getRandomElement, getRandomSubsetFromArray, separateLanguages } from './util'
+import { seedUsersAndBlogs } from './user-and-blog'
+import { usersAndBlogsSeed } from '../data/users-and-blogs'
 
 type UpsertedMembers = Awaited<ReturnType<typeof seedMembers>>
-type UspertedPracticeAreas = Awaited<ReturnType<typeof seedPracticeAreas>>
-type UspertedAchievements = Awaited<ReturnType<typeof seedAchievements>>
+type UpsertedPracticeAreas = Awaited<ReturnType<typeof seedPracticeAreas>>
+type UpsertedAchievements = Awaited<ReturnType<typeof seedAchievements>>
+type UpsertedBlogs = Awaited<ReturnType<typeof seedUsersAndBlogs>>
 
 // Helper function to create the Prisma upsert promise
 function createTranslationPromise({
@@ -61,9 +51,7 @@ function createTranslationPromise({
 }
 
 // Helper function to get dummy data based on the key
-function getDummyData_By_TranslationKey(
-    key: MemberTranslationKey,
-): TranslationQuery[] | null {
+function getDummyData_By_TranslationKey(key: MemberTranslationKey): TranslationQuery[] | null {
     switch (key) {
         case MemberTranslationKey.EXPERIENCE:
             return dummyMemberExperiences
@@ -78,17 +66,12 @@ function getDummyData_By_TranslationKey(
     }
 }
 
-export async function seedMemberTranslations(
-    prisma: Prisma.TransactionClient,
-    upsertedMembers: UpsertedMembers,
-) {
+export async function seedMemberTranslations(prisma: Prisma.TransactionClient, upsertedMembers: UpsertedMembers) {
     for (const [index, memberData] of membersSeed.entries()) {
         const translationPromises: Promise<Translation>[] = []
         // const processedKeys = new Set<string>() // Flag variable to track processed keys
 
-        console.log(
-            `  ⚙️  Seeding translation for member "${memberData.slug}"...`,
-        )
+        console.log(`  ⚙️  Seeding translation for member "${memberData.slug}"...`)
 
         // get each member id
         const memberId = upsertedMembers[index].id
@@ -100,9 +83,9 @@ export async function seedMemberTranslations(
              *  if the seed data actually contians the value, I want this to run both for the id and en,
              * but for if it is empty I want it to run once.. but I think it is okay to not care about this..
              * since the this currently works haha..
-             * 
+             *
              * So I commented the flagging for now.. hopefully this works fine..
-             * 
+             *
              */
 
             /**
@@ -145,17 +128,12 @@ export async function seedMemberTranslations(
                     )
                 } else {
                     // Handle empty string case based on the key
-                    const dummyData = getDummyData_By_TranslationKey(
-                        translationData.key,
-                    )
+                    const dummyData = getDummyData_By_TranslationKey(translationData.key)
                     if (dummyData) {
                         // Pick a random TranslationQuery object
-                        const randomDummy =
-                            getRandomElement<TranslationQuery>(dummyData)
+                        const randomDummy = getRandomElement<TranslationQuery>(dummyData)
 
-                        for (const [language, value] of Object.entries(
-                            randomDummy,
-                        )) {
+                        for (const [language, value] of Object.entries(randomDummy)) {
                             translationPromises.push(
                                 createTranslationPromise({
                                     prisma,
@@ -189,9 +167,7 @@ export async function seedMemberTranslations(
                     )
                 } else {
                     // Handle empty array case based on the translation key
-                    const dummyData = getDummyData_By_TranslationKey(
-                        translationData.key,
-                    )
+                    const dummyData = getDummyData_By_TranslationKey(translationData.key)
                     if (dummyData) {
                         // Pick a random subset from dummy data
                         /**
@@ -213,12 +189,9 @@ export async function seedMemberTranslations(
                          *      id: [id_dummy_experience_1, id_dummy_experience_2, ...],
                          * }
                          */
-                        const ID_AND_EN_TRANSLATION =
-                            separateLanguages(randomSubset)
+                        const ID_AND_EN_TRANSLATION = separateLanguages(randomSubset)
 
-                        for (const [language, value] of Object.entries(
-                            ID_AND_EN_TRANSLATION,
-                        )) {
+                        for (const [language, value] of Object.entries(ID_AND_EN_TRANSLATION)) {
                             translationPromises.push(
                                 createTranslationPromise({
                                     prisma,
@@ -237,22 +210,18 @@ export async function seedMemberTranslations(
             }
         }
         await Promise.all(translationPromises)
-        console.log(
-            `  ✅ Successfully seeded translations for member "${memberData.slug}"!`,
-        )
+        console.log(`  ✅ Successfully seeded translations for member "${memberData.slug}"!`)
     }
 }
 
 export async function seedPracticeAreaTranslations(
     prisma: Prisma.TransactionClient,
-    upsertedPracticeAreas: UspertedPracticeAreas,
+    upsertedPracticeAreas: UpsertedPracticeAreas,
 ) {
     for (const [index, practiceAreasData] of practiceAreaSeed.entries()) {
         const translationPromises: Promise<Translation>[] = []
 
-        console.log(
-            `  ⚙️  Seeding translation for practice_area "${practiceAreasData.slug}"...`,
-        )
+        console.log(`  ⚙️  Seeding translation for practice_area "${practiceAreasData.slug}"...`)
 
         const practiceAreasId = upsertedPracticeAreas[index].id
 
@@ -279,15 +248,13 @@ export async function seedPracticeAreaTranslations(
             )
         }
         await Promise.all(translationPromises)
-        console.log(
-            `  ✅ Successfully seeded translations for practice area "${practiceAreasData.slug}"!`,
-        )
+        console.log(`  ✅ Successfully seeded translations for practice area "${practiceAreasData.slug}"!`)
     }
 }
 
 export async function seedAchievementTranslations(
     prisma: Prisma.TransactionClient,
-    upsertedAchievements: UspertedAchievements,
+    upsertedAchievements: UpsertedAchievements,
 ) {
     const translationPromises: Promise<Translation>[] = []
 
@@ -315,6 +282,40 @@ export async function seedAchievementTranslations(
                     },
                 }),
             )
+        }
+    }
+    await Promise.all(translationPromises)
+}
+
+export async function seedBlogTranslations(prisma: Prisma.TransactionClient, upsertedBlogs: UpsertedBlogs) {
+    const translationPromises: Promise<Translation>[] = []
+
+    for (const user of usersAndBlogsSeed) {
+        for (const [index, blogsData] of user.blogs.entries()) {
+            const blogsId = upsertedBlogs[index].id
+
+            for (const translationData of blogsData.translations) {
+                translationPromises.push(
+                    prisma.translation.upsert({
+                        where: {
+                            entityId_entityType_language_key: {
+                                entityId: blogsId,
+                                entityType: EntityType.BLOG,
+                                language: translationData.language,
+                                key: translationData.key,
+                            },
+                        },
+                        update: {},
+                        create: {
+                            entityId: blogsId,
+                            entityType: EntityType.BLOG,
+                            language: translationData.language,
+                            key: translationData.key,
+                            value: translationData.value,
+                        },
+                    }),
+                )
+            }
         }
     }
     await Promise.all(translationPromises)

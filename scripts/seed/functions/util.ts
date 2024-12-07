@@ -42,3 +42,11 @@ export function separateLanguages(
         [Language.ID]: idArray,
     }
 }
+
+export const objectToFormData = (obj: Record<string, string >) => {
+    const formData = new FormData();
+    for (const key in obj) {
+        formData.append(key, obj[key]);
+    }
+    return formData;
+  };
