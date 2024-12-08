@@ -1,10 +1,10 @@
-import BackgroundCarousel from '@/components/any-page-components/background-carousel'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'
 import { Button } from '../ui/button'
 import ImageWithBlur from '../ui/image-with-blur'
 import { CarouselItem } from '../ui/carousel'
+import BackgroundCarousel from '@/app/(public)/_components/any-page-components/background-carousel'
 
 type CarouselItemData = {
     backgroundImagePath: string
@@ -64,9 +64,7 @@ export default async function HeroCarousel() {
                             className="object-cover"
                         />
                         <div className="absolute inset-0 bg-black/50" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            {item.content}
-                        </div>
+                        <div className="absolute inset-0 flex items-center justify-center">{item.content}</div>
                     </div>
                 </CarouselItem>
             ))}
@@ -74,15 +72,7 @@ export default async function HeroCarousel() {
     )
 }
 
-function ContentContainer({
-    title,
-    desc,
-    cta,
-}: {
-    title: ReactNode
-    desc: ReactNode
-    cta: ReactNode
-}) {
+function ContentContainer({ title, desc, cta }: { title: ReactNode; desc: ReactNode; cta: ReactNode }) {
     return (
         <div className="flex w-full max-w-[90%] flex-col items-center text-center text-white">
             <div
@@ -114,11 +104,7 @@ function Title({ children }: PropsWithChildren) {
 }
 
 function Description({ children }: PropsWithChildren) {
-    return (
-        <p className="w-full max-w-[80%] text-sm leading-snug sm:text-base lg:text-lg xl:text-xl">
-            {children}
-        </p>
-    )
+    return <p className="w-full max-w-[80%] text-sm leading-snug sm:text-base lg:text-lg xl:text-xl">{children}</p>
 }
 
 function CTA({ href, text }: { href: string; text: string }) {

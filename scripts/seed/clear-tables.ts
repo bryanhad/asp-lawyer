@@ -8,19 +8,21 @@ async function main() {
         await tx.member.deleteMany()
         console.log(`🏁 Successfully deleted all entries in 'members' table!`)
         await tx.practiceArea.deleteMany()
-        console.log(
-            `🏁 Successfully deleted all entries in 'practice_areas' table!`,
-        )
+        console.log(`🏁 Successfully deleted all entries in 'practice_areas' table!`)
         await tx.translation.deleteMany()
-        console.log(
-            `🏁 Successfully deleted all entries in 'translations' table!`,
-        )
+        console.log(`🏁 Successfully deleted all entries in 'translations' table!`)
         await tx.achievements.deleteMany()
-        console.log(
-            `🏁 Successfully deleted all entries in 'achievements' table!`,
-        )
+        console.log(`🏁 Successfully deleted all entries in 'achievements' table!`)
         await tx.blog.deleteMany()
         console.log(`🏁 Successfully deleted all entries in 'blogs' table!`)
+        await tx.passwordResetSession.deleteMany()
+        console.log(`🏁 Successfully deleted all entries in 'password_reset_sessions' table!`)
+        await tx.emailVerificationRequest.deleteMany()
+        console.log(`🏁 Successfully deleted all entries in 'email_verification_requests' table!`)
+        await tx.session.deleteMany()
+        console.log(`🏁 Successfully deleted all entries in 'session' table!`)
+        await tx.user.deleteMany()
+        console.log(`🏁 Successfully deleted all entries in 'users' table!`)
     })
 
     // reset the user_id sequence back to 1.

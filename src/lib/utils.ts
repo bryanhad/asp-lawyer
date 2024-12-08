@@ -53,3 +53,28 @@ export function capitalizeFirstLetter(str: string): string {
 export function cleanString(str: string): string {
     return str.replace(/[^a-zA-Z0-9\s]/g, '')
 }
+
+
+export function getNameInitial(name:string) {
+    const formattedName = name.replace(/\s+/g, ' ').trim()
+
+    const words = formattedName.split(' ')
+
+    if (words.length === 1) {
+      return name[0]
+    }
+    return `${words[0][0]}${words[1][0]}`
+}
+
+export function formatDateToLocale(
+    date: Date,
+    locales: Intl.LocalesArgument = "id-ID",
+    short?: boolean
+) {
+    return new Date(date).toLocaleDateString(locales, {
+        year: "numeric",
+        month: short ? "2-digit" : "long",
+        day: "numeric",
+        weekday: short ? undefined : "long",
+    })
+}

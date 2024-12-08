@@ -39,6 +39,7 @@ body {
         --accent-foreground: 24 9.8% 10%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 60 9.1% 97.8%;
+        --successful: 142 76% 36%; /* green-600 */
         --border: 20 5.9% 90%;
         --input: 20 5.9% 90%;
         --ring: 20 14.3% 4.1%;
@@ -48,6 +49,14 @@ body {
         --chart-3: 197 37% 24%;
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
     }
 
     .dark {
@@ -55,7 +64,7 @@ body {
         /* --background-suit: 20 14.3% 4.1%; stone-950 */
         --background-suit: 240 16% 15%; /* zinc-950 slightly blue */
         --foreground: 60 9.1% 97.8%; /* stone-50 */
-        --card: 20 14.3% 4.1%;
+        --card: 240 15% 12%;
         --card-foreground: 60 9.1% 97.8%;
         --popover: 20 14.3% 4.1%;
         --popover-foreground: 60 9.1% 97.8%;
@@ -71,6 +80,7 @@ body {
         --accent-foreground: 60 9.1% 97.8%;
         --destructive: 0 84% 60%; /* red-500 */
         --destructive-foreground: 60 9.1% 97.8%;
+        --successful: 142 76% 36%; /* green-600 */
         --border: 240 9% 20%;
         --input: 240 9% 20%;
         --ring: 0 0% 100%; /* white */
@@ -79,6 +89,14 @@ body {
         --chart-3: 30 80% 55%;
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
     }
 }
 
@@ -89,14 +107,13 @@ body {
     body {
         @apply bg-background text-foreground;
     }
-
-    .tiptap h1 {
-        @apply text-3xl font-bold;
-    }
     .tiptap h2 {
         @apply text-2xl font-bold;
     }
     .tiptap h3 {
+        @apply text-xl font-bold;
+    }
+    .tiptap h4 {
         @apply text-lg font-bold;
     }
     .tiptap strong {
@@ -111,21 +128,98 @@ body {
     .tiptap ol {
         @apply ml-4 list-decimal;
     }
-    .tiptap.view h1 {
-        @apply mb-2 mt-12;
+    .tiptap.view h2:not(:first-child) {
+        @apply mt-12;
     }
-    .tiptap.view h2 {
-        @apply mb-2 mt-12;
+    .tiptap.view h3:not(:first-child) {
+        @apply mt-12;
     }
-    .tiptap.view h3 {
-        @apply mb-2 mt-12;
+    .tiptap.view h4:not(:first-child) {
+        @apply mt-12;
     }
-    .tiptap.view ul,
-    ol {
+    .tiptap.view ul {
         @apply flex flex-col gap-1;
+    }
+    .tiptap.view ul:not(:first-child) {
+        @apply mt-2;
+    }
+    .tiptap.view ol {
+        @apply flex flex-col gap-1;
+    }
+    .tiptap.view ol:not(:first-child) {
+        @apply mt-2;
+    }
+    .tiptap.view p {
+        @apply mb-5;
+    }
+    .tiptap.view p:not(:first-child) {
+        @apply mt-6 mb-0;
     }
 
     .tiptap.view strong {
         @apply text-primary;
+    }
+
+    .wiggle {
+        font-size: 14px;
+        animation: wiggle 0.5s ease-in-out;
+    }
+
+    /* Wiggle animation */
+    @keyframes wiggle {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-5px);
+        }
+        50% {
+            transform: translateX(5px);
+        }
+        75% {
+            transform: translateX(-5px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* Custom loading indicator */
+    .my-loading-indicator {
+        width: 60px;
+        aspect-ratio: 2;
+        --_g: no-repeat radial-gradient(circle closest-side, #616161 90%, #0000);
+        background:
+            var(--_g) 0% 50%,
+            var(--_g) 50% 50%,
+            var(--_g) 100% 50%;
+        background-size: calc(100% / 3) 50%;
+        animation: loading-bounce 1s infinite linear;
+    }
+    @keyframes loading-bounce {
+        20% {
+            background-position:
+                0% 0%,
+                50% 50%,
+                100% 50%;
+        }
+        40% {
+            background-position:
+                0% 100%,
+                50% 0%,
+                100% 50%;
+        }
+        60% {
+            background-position:
+                0% 50%,
+                50% 100%,
+                100% 0%;
+        }
+        80% {
+            background-position:
+                0% 50%,
+                50% 50%,
+                100% 100%;
+        }
     }
 }

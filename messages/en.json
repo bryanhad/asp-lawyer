@@ -1,4 +1,7 @@
 {
+    "signinPage": {
+        "title": "Wellcome to ASP Admin Page"
+    },
     "links": {
         "home": "Home",
         "aboutUs": "About Us",

@@ -7,6 +7,8 @@ export enum EntityType {
     MEMBER = 'MEMBER',
     PRACTICE_AREA = 'PRACTICE_AREA',
     ACHIEVEMENT = 'ACHIEVEMENT',
+    BLOG = 'BLOG',
+    // USER = 'USER',
 }
 
 export enum MemberTranslationKey {
@@ -19,7 +21,7 @@ export enum MemberTranslationKey {
     ACHIEVEMENT = 'ACHIEVEMENT',
 }
 
-export enum MemberRoles {
+export enum MemberRole {
     PARTNER = 'PARTNER',
     ASSOCIATE = 'ASSOCIATE',
     SUPPORT = 'SUPPORT',
@@ -36,3 +38,26 @@ export enum AchievementsTranslationKey {
     TITLE = 'TITLE',
     DESC = 'DESC',
 }
+
+export enum BlogTranslationKey {
+    TITLE = 'TITLE',
+    CONTENT = 'CONTENT',
+}
+
+
+/**
+ * Perhaps in the future..
+ * Cuz I need to actually finish this project fast :)
+ */
+
+// export enum UserRole {
+//     SUPER_ADMIN = 'SUPER_ADMIN',
+//     ADMIN = 'ADMIN',
+//     USER = 'USER',
+// }
+
+// export enum Permission {
+//     MANAGE_ANY = 'MANAGE_ANY', // can update & delete anyone's stuffs
+//     MANAGE_OWN = 'MANAGE_OWN', // can update & delete own's stuffs
+//     UPDATE = 'UPDATE', // can only update
+// }

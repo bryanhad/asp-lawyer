@@ -1,4 +1,7 @@
 {
+    "signinPage": {
+        "title": "Selamat datang di halaman ASP Admin"
+    },
     "links": {
         "home": "Beranda",
         "aboutUs": "Tentang Kami",

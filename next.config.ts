@@ -5,13 +5,18 @@ import withPlaiceholder from '@plaiceholder/next'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig: NextConfig = {
-    /* config options here */
-    experimental: {
-        staleTimes: {
-            dynamic: 30,
-        },
+    env: {
+        basedir: process.cwd(),
     },
+    /* config options here */
+    // experimental: {
+    //     staleTimes: {
+    //         dynamic: 30,
+    //     },
+    // },
     images: {
+        // overwrite nextjs's deviceSizes config with tailwind breakpoints
+        deviceSizes: [640, 768, 1024, 1280],
         remotePatterns: [
             {
                 protocol: 'https',
