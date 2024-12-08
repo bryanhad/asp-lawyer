@@ -32,7 +32,6 @@ export default function NavHeader({ children }: Props) {
                 }}
             >
                 {children}
-
                 {/* mobile nav menu toggler */}
                 <div
                     onClick={() => setIsOpen(!isOpen)}

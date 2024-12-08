@@ -13,7 +13,7 @@ function LoadingIndicator({ className, sizeInPx = 100 }: Props) {
 
 function PageLoadingIndicator({ className, sizeInPx = 100 }: Props) {
     return (
-        <div className="grid flex-[1] place-content-center">
+        <div className="mb-32 grid flex-[1] place-content-center">
             <LoadingIndicator className={className} sizeInPx={sizeInPx} />
         </div>
     )

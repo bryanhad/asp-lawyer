@@ -78,7 +78,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                 alt="Background image of about us page"
                 titleWhite={locale === 'en' ? pa.fullName.en : pa.fullName.id}
             />
-            <Section className="mb-12 space-y-6 py-14">
+            <Section className="mb-12 space-y-6 py-12 max-w-[1200px]">
                 <div className="flex flex-col gap-5 md:flex-row md:gap-8 lg:gap-12">
                     <div className="relative aspect-[4/1.8] w-full dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px]">
                         <Image
@@ -96,7 +96,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                 </div>
                 <Separator className="bg-primary/60" />
                 <div
-                    className="tiptap view mt-6"
+                    className="tiptap view mt-6 w-full px-12"
                     dangerouslySetInnerHTML={{
                         __html: htmlContent,
                     }}

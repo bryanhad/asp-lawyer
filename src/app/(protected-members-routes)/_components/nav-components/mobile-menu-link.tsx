@@ -15,14 +15,14 @@ function MobileMenuLink({ children, currentPathname, icon, href, onClick }: Mobi
     const pathnameArr = currentPathname.split('/')
     const hrefArr = href.split('/')
 
-    const isActive = currentPathname === href || pathnameArr[1] === hrefArr[1]
+    const isActive = currentPathname === href || pathnameArr[2] === hrefArr[2]
 
     function handleClick() {
         onClick(href)
     }
 
     return (
-        <div className="relative flex flex-col">
+        <li className="relative flex flex-col">
             <Button
                 role="link"
                 variant={'ghost'}
@@ -37,7 +37,7 @@ function MobileMenuLink({ children, currentPathname, icon, href, onClick }: Mobi
                 </>
             </Button>
             {isActive && <div className="absolute left-0 z-10 h-full w-2 translate-x-[-50%] rounded-full bg-primary" />}
-        </div>
+        </li>
     )
 }
 

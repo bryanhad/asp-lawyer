@@ -4,7 +4,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { poppins } from '../fonts'
 import '../globals.css'
 import Footer from './_components/footer'
-import Header from './_components/header'
+import Header from './_components/nav-components/header'
 
 export const metadata: Metadata = {
     title: {

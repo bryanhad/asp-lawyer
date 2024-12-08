@@ -1,8 +1,8 @@
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import React from 'react'
-import SignOutButton from '../_components/auth/sign-out-button'
 import { globalGETRateLimit } from '../lib/server/request'
 import { redirect } from 'next/navigation'
+import { capitalizeFirstLetter } from '@/lib/utils'
 
 export default async function MemberPage() {
     if (!globalGETRateLimit()) {
@@ -18,10 +18,11 @@ export default async function MemberPage() {
     }
 
     return (
-        <div>
-            <h1 className="font-bold">{JSON.stringify(user)}</h1>
-            Hello, this is the admin page!
-            <SignOutButton />
+        <div className="">
+            <h2 className="text-center text-xl leading-none sm:text-start">
+                Welcome back,{' '}
+                <span className="text-nowrap font-semibold text-primary">{capitalizeFirstLetter(user.username)}!</span>
+            </h2>
         </div>
     )
 }

@@ -1,15 +1,12 @@
 import { Link } from '@/i18n/routing'
-import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
+import { DarkThemeToggle } from './dark-theme-toggle'
 import LanguageSelect from './language-select'
 import MobileMenu from './mobile-menu'
 import NavHeader from './nav-header'
-import NavLink from './nav-link'
-import Image from 'next/image'
-import { DarkThemeToggle } from './dark-theme-toggle'
+import NavLinks from './nav-links'
 
 async function Navbar() {
-    const t = await getTranslations('links')
-
     return (
         <NavHeader>
             <nav className="flex h-full w-full max-w-custom-navbar justify-between px-4 sm:px-6 md:px-8">
@@ -24,13 +21,7 @@ async function Navbar() {
                             priority
                         />
                     </Link>
-                    <div className="hidden gap-10 lg:flex">
-                        <NavLink href={'/about-us'}>{t('aboutUs')}</NavLink>
-                        <NavLink href={'/practice-areas'}>{t('practiceAreas')}</NavLink>
-                        <NavLink href={'/our-team'}>{t('ourTeam')}</NavLink>
-                        <NavLink href={'/blogs'}>{t('blogs')}</NavLink>
-                        <NavLink href={'/contact-us'}>{t('contactUs')}</NavLink>
-                    </div>
+                    <NavLinks />
                 </div>
                 <div className="hidden gap-5 lg:flex lg:items-center">
                     <LanguageSelect />

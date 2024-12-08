@@ -15,7 +15,13 @@ export default async function FetchComponent() {
     return (
         <div className="relative z-10 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
             {achievements.map((a) => (
-                <PinContainer imageHeight={271} imageWidth={300} key={a.id} {...a} currentLocale={currentLocale} />
+                <PinContainer
+                    className="min-h-[330px]"
+                    imageContainerClassName="h-[250px]"
+                    key={a.id}
+                    {...a}
+                    currentLocale={currentLocale}
+                />
             ))}
         </div>
     )

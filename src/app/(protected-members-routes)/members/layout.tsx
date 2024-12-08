@@ -1,7 +1,7 @@
 import QueryParamToast from '@/components/ui/query-param-toast'
 import React, { Suspense } from 'react'
 import PageTitle from '../_components/page-title'
-import Sidebar from '../_components/sidebar'
+import Sidebar from '../_components/nav-components/sidebar'
 
 type MembersRootLayoutProps = {
     children: React.ReactNode
@@ -14,7 +14,7 @@ export default async function MembersLayout({ children }: MembersRootLayoutProps
                 <QueryParamToast param="toast" />
             </Suspense>
             <Sidebar />
-            <main className="flex-[1] py-6 px-6 xl:px-12 flex flex-col">
+            <main className="flex flex-[1] flex-col px-6 py-6 xl:px-12">
                 <PageTitle />
                 {children}
             </main>

@@ -1,8 +1,9 @@
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
-import { DarkThemeToggle } from './dark-theme-toggle'
-import NavbarLinkIcon from './navbar-link-icon'
-import HeaderWrapper from './page-header-wrapper'
-import SignOutButton from './auth/sign-out-button'
+import { DarkThemeToggle } from '../dark-theme-toggle'
+import NavbarLinkIcon from '../navbar-link-icon'
+import HeaderWrapper from './header-wrapper'
+import SignOutButton from '../auth/sign-out-button'
+import MobileMenu from './mobile-menu'
 
 export default async function Header() {
     const { session } = await getCurrentSession()
@@ -17,6 +18,7 @@ export default async function Header() {
                     <DarkThemeToggle />
                 </div>
             </div>
+            <MobileMenu />
         </HeaderWrapper>
     )
 }

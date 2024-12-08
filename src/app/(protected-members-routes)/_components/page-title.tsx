@@ -20,7 +20,7 @@ export default function PageTitle({ className }: PageTitleProps) {
             break
         case pathnameArr.length === 2:
             title =
-                pathnameArr[1] === 'my-settings' ? 'My Settings' : capitalizeFirstLetter(pathnameArr[1].slice(0, -1))
+                pathnameArr[1] === 'my-settings' ? 'My Settings' : capitalizeFirstLetter(pathnameArr[1])
             break
         case pathnameArr.length === 3:
             title =

@@ -16,11 +16,11 @@ type Props = {
     containerClassName?: string
     pinContainerClassName?: string
     pinHeightClassName?: string
+    imageContainerClassName?: string
+    titleClassName?: string
     currentLocale: Locale
     href?: string
     hrefText?: string
-    imageWidth?: number
-    imageHeight?:number
 }
 
 const PinContainer = ({
@@ -33,14 +33,12 @@ const PinContainer = ({
     currentLocale,
     pinHeightClassName,
     pinContainerClassName,
+    imageContainerClassName,
+    titleClassName,
     href,
     hrefText,
-    imageHeight=200,
-    imageWidth=300
 }: Props) => {
-    const [transform, setTransform] = useState(
-        'translate(-50%,-50%) rotateX(0deg)',
-    )
+    const [transform, setTransform] = useState('translate(-50%,-50%) rotateX(0deg)')
 
     const onMouseEnter = () => {
         setTransform('translate(-50%,-50%) rotateX(40deg) scale(0.8)')
@@ -66,23 +64,24 @@ const PinContainer = ({
                     style={{
                         transform: transform,
                     }}
-                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-md bg-background dark:bg-secondary shadow-lg transition duration-700 group-hover/pin:border-white/[0.2]"
+                    className="absolute left-1/2 top-1/2 flex items-start justify-start overflow-hidden rounded-md bg-background shadow-lg transition duration-700 group-hover/pin:border-white/[0.2] dark:bg-secondary"
                 >
-                    <div className={cn('relative z-50', className)}>
-                        <div className="mx-auto w-[300px]">
-                            <Image
-                                src={src}
-                                placeholder="blur"
-                                blurDataURL={blurDataUrl}
-                                alt={`Picture of "${title}"`}
-                                width={imageWidth}
-                                height={imageHeight}
-                                className="w-auto dark:brightness-[80%]"
-                            />
-                            <div className="p-4 text-center">
-                                {currentLocale === 'en' ? title.en : title.id}
+                    <div className={cn('relative z-50 min-h-[280px]', className)}>
+                        <div className={cn('mx-auto flex flex-col')}>
+                            <div className={cn('relative h-[200px] w-[300px] xl:w-[380px]', imageContainerClassName)}>
+                                <Image
+                                    src={src}
+                                    placeholder="blur"
+                                    blurDataURL={blurDataUrl}
+                                    alt={`Picture of "${title}"`}
+                                    fill
+                                    className="w-auto object-cover object-center dark:brightness-[80%]"
+                                />
                             </div>
-                        </div>{' '}
+                            <div className={cn('p-4 text-center flex-[1]', titleClassName)}>
+                                <p>{currentLocale === 'en' ? title.en : title.id}</p>
+                            </div>
+                        </div>
                     </div>
                     <div className="absolute inset-0 z-[60] bg-black bg-opacity-0 transition duration-500 group-hover/pin:bg-opacity-30 dark:bg-black dark:bg-opacity-0"></div>
                 </div>

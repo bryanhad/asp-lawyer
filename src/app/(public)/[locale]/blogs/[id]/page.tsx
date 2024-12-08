@@ -85,7 +85,7 @@ export default async function BlogPage({ params }: Props) {
                     }).format(blog.createdAt)}
                 </p>
 
-                <div className="relative aspect-[4/2.2] w-full dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px] max-w-[768px]">
+                <div className="relative aspect-[4/2.2] w-full dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px] max-w-[640px] xl:max-w-[768px]">
                     <Image
                         className="rounded-md object-cover object-center shadow-md"
                         src={blog.imageUrl}

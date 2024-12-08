@@ -1,10 +1,12 @@
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
+import { Locale } from '@/i18n/request'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import PracticeAreaCards from './_components/practice-area-cards'
-import { Locale } from '@/i18n/request'
+import { Suspense } from 'react'
 import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
+import FetchComponent from './_components/fetch-component'
+import SkeletonFallback from './_components/skeleton'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -37,7 +39,9 @@ export default async function PracticeAreasPage({ params }: Props) {
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing>
-                <PracticeAreaCards />
+                <Suspense fallback={<SkeletonFallback />}>
+                    <FetchComponent />
+                </Suspense>
             </Section>
         </BaseContainer>
     )

@@ -8,7 +8,7 @@ export default function SkeletonFallback() {
                     key={index}
                     className="grid shrink-0 grow-0 basis-full place-items-center md:basis-1/2 lg:basis-1/3"
                 >
-                    <Skeleton className="h-[325px] w-[300px]" />
+                    <Skeleton className="h-[330px] w-[300px] xl:w-[380px]" />
                 </div>
             ))}
         </div>

@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { getCurrentLocale } from '@/app/(public)/[locale]/layout'
 import SkeletonFallback from './skeleton'
 import { getTranslations } from 'next-intl/server'
-import { getData } from './action'
+import { getData } from '../action'
 
 const PinContainer = dynamic(() => import('@/components/ui/animated-pin'), {
     loading: () => <SkeletonFallback />,
@@ -23,6 +23,8 @@ export default async function FetchComponent() {
                     currentLocale={currentLocale}
                     pinContainerClassName="rounded-full px-4 py-1 text-sm"
                     pinHeightClassName="h-80"
+                    titleClassName='text-lg'
+                    className='flex flex-col'
                     hrefText={t('learnMore')}
                 />
             ))}

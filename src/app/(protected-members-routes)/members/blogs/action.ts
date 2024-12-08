@@ -50,8 +50,6 @@ export async function getData({
     const currentPage = Number(page) || 1
     const fetchSize = Number(size) || defaultFetchSize
 
-    console.log({fetchSize})
-
     const searchString = q
         ?.split(' ')
         .filter((word) => word.length > 0)

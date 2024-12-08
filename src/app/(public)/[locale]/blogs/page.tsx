@@ -6,6 +6,7 @@ import PageTitleWithBackground from '../../_components/any-page-components/page-
 import { Suspense } from 'react'
 import FetchComponent from './fetch-component'
 import Section from '../../_components/containers/section'
+import SkeletonFallback from './skeleton'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -38,7 +39,7 @@ export default async function BlogsPage({ params }: Props) {
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing className="space-y-6">
-                <Suspense fallback={'Loading...'}>
+                <Suspense fallback={<SkeletonFallback/>}>
                     <FetchComponent />
                 </Suspense>
             </Section>
