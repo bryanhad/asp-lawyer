@@ -10,43 +10,29 @@ type PageTitleProps = {
 export default function PageTitle({ className }: PageTitleProps) {
     const pathname = usePathname()
 
-    const pathnameArr = pathname.split('/')
+    const pathnameArr = pathname.split('/').slice(1)
 
-    const isAddPage = pathnameArr[3] === 'add'
-    const isEditPage = pathnameArr[4] === 'edit'
-    const isViewPage =
-        ['blogs', 'members', 'users', 'practice-areas'].includes(pathnameArr[2]) &&
-        pathnameArr[3] &&
-        pathnameArr[3].length > 0
-    const isNotFound = ![
-        '/members',
-        '/members/users',
-        '/members/team-members',
-        '/members/blogs',
-        '/members/practice-areas',
-        '/members/settings',
-    ].includes(pathname)
-
-    const singularPageTitle = pathnameArr.length > 2 ? pathnameArr[2].slice(0, -1) : ''
-
-    let title: string
+    let title: string = ''
 
     switch (true) {
-        case isAddPage:
-            title = `Add ${singularPageTitle}`
+        case pathnameArr.length === 1:
+            title = 'Dashboard'
             break
-        case isEditPage:
-            title = `Edit ${singularPageTitle}`
+        case pathnameArr.length === 2:
+            title =
+                pathnameArr[1] === 'my-settings' ? 'My Settings' : capitalizeFirstLetter(pathnameArr[1].slice(0, -1))
             break
-        case isViewPage:
-            title = `View ${capitalizeFirstLetter(singularPageTitle)}`
+        case pathnameArr.length === 3:
+            title =
+                pathnameArr[2] === 'add'
+                    ? `Add ${pathnameArr[1].slice(0, -1)}`
+                    : `View ${capitalizeFirstLetter(pathnameArr[1].slice(0, -1))}`
             break
         default:
-            title = pathnameArr[1] === 'members' && pathnameArr.length === 2 ? 'Dashboard' : pathnameArr[2]
-            break
+            title = `Edit ${pathnameArr[1].slice(0, -1)}`
     }
 
-    if (!isAddPage && !isEditPage && !isViewPage && isNotFound) {
+    if (title.length === 0) {
         return null
     }
 
