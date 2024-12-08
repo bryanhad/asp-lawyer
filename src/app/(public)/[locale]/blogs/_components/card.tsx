@@ -16,6 +16,8 @@ export default function BlogCard({ currentLocale, ...blog }: Props) {
                     <Image
                         className="object-cover object-center dark:brightness-90 group-hover:scale-[1.02] duration-300"
                         src={blog.imageUrl}
+                        placeholder='blur'
+                        blurDataURL={blog.blurImageUrl}
                         fill
                         alt={`Thumbnail of blog ${blog.title.en}`}
                     />
