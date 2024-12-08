@@ -1,9 +1,9 @@
-import { MemberRoles } from '@/lib/enum'
+import { MemberRole } from '@/lib/enum'
 import { getData } from './action'
 import MemberCards from './member-cards'
 
 type Props = {
-    currentRole?: MemberRoles
+    currentRole?: MemberRole
 }
 
 export default async function FetchComponent({ currentRole }: Props) {

@@ -19,7 +19,7 @@ export default function MemberCard({
     currentLocale,
 }: MemberCardData & { currentLocale: Locale }) {
     return (
-        <div className="relative w-full">
+        <div className="relative w-full max-w-[250px] lg:max-w-[300px] xl:max-w-full place-self-center">
             <Link href={`/our-team/${slug}`} className="group relative z-10 flex-[1] cursor-pointer">
                 <div className="relative flex flex-col overflow-hidden rounded-lg pt-2 duration-300">
                     <Image

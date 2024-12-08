@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export default async function AboutPage({ params }: Props) {
+export default async function AboutPage({ params }: Props)  {
     const { locale } = await params
     /**
      * Enable static rendering (just following next-intl's docs)

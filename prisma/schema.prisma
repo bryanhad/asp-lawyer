@@ -22,8 +22,7 @@ model User {
     emailIsVerified Boolean  @default(false)
     recoveryCode    Bytes
     createdAt       DateTime @default(now())
-    // totpKey         Bytes
-
+    
     passwordResetSessions     PasswordResetSession[]
     emailVerificationRequests EmailVerificationRequest[]
     sessions                  Session[]
@@ -31,6 +30,18 @@ model User {
 
     @@map("users")
 }
+
+// model Role {
+//     id          Int    @id @default(autoincrement())
+//     name        String @unique
+//     description String
+// }
+
+// model Permission {
+//     id     Int    @id @default(autoincrement())
+//     name   String @unique
+//     entity String
+// }
 
 model Session {
     id        String   @id
@@ -112,7 +123,7 @@ model Achievements {
 }
 
 model Blog {
-    id       String @id @default(cuid())
+    id String @id @default(cuid())
 
     author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
     imageUrl String

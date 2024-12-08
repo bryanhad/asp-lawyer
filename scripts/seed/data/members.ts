@@ -1,18 +1,13 @@
-import {
-    Language,
-    MemberRoles,
-    MemberTranslationKey,
-} from '../../../src/lib/enum'
+import { Language, MemberRole, MemberTranslationKey } from '../../../src/lib/enum'
 import { MemberSeed } from '../types'
 
 export const membersSeed: MemberSeed[] = [
     {
         slug: 'arif',
         order: 1,
-        role: MemberRoles.PARTNER,
+        role: MemberRole.PARTNER,
         name: 'Muhamad Arifudin',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RY7zQU2j5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RY7zQU2j5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
         linkedInUrl: 'https://www.linkedin.com/in/arif',
         email: 'arif@lawfirm.com',
         translations: [
@@ -91,10 +86,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'herlin',
         order: 2,
-        role: MemberRoles.PARTNER,
+        role: MemberRole.PARTNER,
         name: 'Herlin Susanto',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYfWZNn4lEKatOVHoSUhk9zbDc2s70CIGmEM1r',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYfWZNn4lEKatOVHoSUhk9zbDc2s70CIGmEM1r',
         linkedInUrl: 'https://www.linkedin.com/in/herlin',
         email: 'herlin@lawfirm.com',
         translations: [
@@ -173,10 +167,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'dani',
         order: 3,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Rakhmadani Hutama',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYd0IGuq2mcg8TAxuZ7joSfbs3Mv40w9YWdnkr',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYd0IGuq2mcg8TAxuZ7joSfbs3Mv40w9YWdnkr',
         linkedInUrl: 'https://www.linkedin.com/in/dani',
         email: 'dani@lawfirm.com',
         translations: [
@@ -255,10 +248,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'agung',
         order: 4,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Muhammad Agung Laksana',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYckefdl3P2y0Sdi6Jcb3wNU9O1MW8KLR54nHG',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYckefdl3P2y0Sdi6Jcb3wNU9O1MW8KLR54nHG',
         linkedInUrl: 'https://www.linkedin.com/in/agung',
         email: 'agung@lawfirm.com',
         translations: [
@@ -327,10 +319,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'andy',
         order: 5,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Andy Arly Gustiawan',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYzd6Ck17aIrqWp4fKbB8vUlz7E16MPQAdkhx3',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYzd6Ck17aIrqWp4fKbB8vUlz7E16MPQAdkhx3',
         linkedInUrl: 'https://www.linkedin.com/in/andy',
         email: 'andy@lawfirm.com',
         translations: [
@@ -399,10 +390,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'kharis',
         order: 6,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Christian Kharis Wicaksono',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYE4PciUwptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYE4PciUwptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ',
         linkedInUrl: 'https://www.linkedin.com/in/kharis',
         email: 'kharis@lawfirm.com',
         translations: [
@@ -471,10 +461,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'fahmi',
         order: 7,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Akhmad Fahmi Budiman',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYhDfsKltN8g1qOs04ZHVmLUQMjt9XCRG7wid5',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYhDfsKltN8g1qOs04ZHVmLUQMjt9XCRG7wid5',
         linkedInUrl: 'https://www.linkedin.com/in/fahmi',
         email: 'fahmi@lawfirm.com',
         translations: [
@@ -543,10 +532,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'adnan',
         order: 8,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Adnan Dika Prawira Wardhana',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYA2Ob6FhR2VPiZ7nNvJ5ClqKBfGWRgxX3AMht',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYA2Ob6FhR2VPiZ7nNvJ5ClqKBfGWRgxX3AMht',
         linkedInUrl: 'https://www.linkedin.com/in/adnan',
         email: 'adnan@lawfirm.com',
         translations: [
@@ -616,10 +604,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'betti',
         order: 9,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Betti',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYjAnobLBI49DHVPSikv0CFsfo7lbJacRYmK3x',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYjAnobLBI49DHVPSikv0CFsfo7lbJacRYmK3x',
         linkedInUrl: 'https://www.linkedin.com/in/betti',
         email: 'betti@lawfirm.com',
         translations: [
@@ -688,10 +675,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'rizki',
         order: 10,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Muhammad Rizki Aditya',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RY7OAYqE5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RY7OAYqE5DOJvheu1RKs3ZwfbE2xA6jHUTBPgr',
         linkedInUrl: 'https://www.linkedin.com/in/rizki',
         email: 'rizki@lawfirm.com',
         translations: [
@@ -760,10 +746,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'erwin',
         order: 11,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Erwin Hardi Pramana',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYAPeZOjR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAPeZOjR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
         linkedInUrl: 'https://www.linkedin.com/in/erwin',
         email: 'erwin@lawfirm.com',
         translations: [
@@ -832,10 +817,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'faras',
         order: 12,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Faras Salwaa Janvira',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYM9o0RpVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYM9o0RpVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
         linkedInUrl: 'https://www.linkedin.com/in/faras',
         email: 'faras@lawfirm.com',
         translations: [
@@ -904,10 +888,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'indah',
         order: 13,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Indah Try Harsanti',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYZS33EkGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYZS33EkGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
         linkedInUrl: 'https://www.linkedin.com/in/indah',
         email: 'indah@lawfirm.com',
         translations: [
@@ -976,10 +959,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'richard',
         order: 14,
-        role: MemberRoles.SUPPORT,
+        role: MemberRole.SUPPORT,
         name: 'Richard Goenawan',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RY5SJWuEjp8gy6AjzTCmMu1JFUwQqNSPVeXG9H',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RY5SJWuEjp8gy6AjzTCmMu1JFUwQqNSPVeXG9H',
         linkedInUrl: 'https://www.linkedin.com/in/richard',
         email: 'richard@lawfirm.com',
         translations: [
@@ -1048,11 +1030,10 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'ratna',
         order: 15,
-        role: MemberRoles.ASSOCIATE,
+        role: MemberRole.ASSOCIATE,
         name: 'Ratna Sumirat',
         linkedInUrl: 'https://www.linkedin.com/in/ratna',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYB5vcL8hoqp60xSgMRAuJPfbCHtv9sT3hF4YD',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYB5vcL8hoqp60xSgMRAuJPfbCHtv9sT3hF4YD',
         email: 'ratna@lawfirm.com',
         translations: [
             {
@@ -1120,10 +1101,9 @@ export const membersSeed: MemberSeed[] = [
     {
         slug: 'reza',
         order: 16,
-        role: MemberRoles.SUPPORT,
+        role: MemberRole.SUPPORT,
         name: 'Reza Rahmawati',
-        imageUrl:
-            'https://utfs.io/f/4YTZLQcHF0RYDlQxpEaGNSpAXJcwOzx8ZFt1vWi2sdkUKrae',
+        imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYDlQxpEaGNSpAXJcwOzx8ZFt1vWi2sdkUKrae',
         linkedInUrl: 'https://www.linkedin.com/in/reza',
         email: 'reza@lawfirm.com',
         translations: [

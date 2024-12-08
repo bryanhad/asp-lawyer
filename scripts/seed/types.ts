@@ -3,7 +3,7 @@ import {
     Language,
     MemberTranslationKey,
     AchievementsTranslationKey,
-    MemberRoles,
+    MemberRole,
     BlogTranslationKey,
 } from '@/lib/enum'
 
@@ -22,7 +22,7 @@ export type MemberSeed = {
     linkedInUrl?: string
     email?: string
     translations: TranslationSeed<MemberTranslationKey, string[] | string>[]
-    role: MemberRoles
+    role: MemberRole
 }
 
 export type PracticeAreaSeed = {
@@ -39,15 +39,15 @@ export type AchievementsSeed = {
 }
 
 export type BlogsSeed = {
-    id:string
+    id: string
     imageUrl: string
     imageKey: string
     translations: TranslationSeed<BlogTranslationKey>[]
 }
 
 export type UsersSeed = {
-    id: number,
-    email:string,
-    username:string,
-    password:string,
+    id: number
+    email: string
+    username: string
+    password: string
 }

@@ -1,7 +1,7 @@
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import { Locale } from '@/i18n/request'
-import { MemberRoles } from '@/lib/enum'
+import { MemberRole } from '@/lib/enum'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Suspense } from 'react'
@@ -35,7 +35,7 @@ export default async function MembersPage({ searchParams, params }: Props) {
     const { role } = await searchParams
 
     const roleSearchParam =
-        role && Object.values(MemberRoles).includes(role as MemberRoles) ? (role as MemberRoles) : undefined
+        role && Object.values(MemberRole).includes(role as MemberRole) ? (role as MemberRole) : undefined
 
     const t = await getTranslations('ourTeamPage')
 

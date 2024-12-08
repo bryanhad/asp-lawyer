@@ -59,7 +59,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             <body className={`${poppins.className} flex min-h-screen flex-col antialiased`}>
                 <Providers intlMessages={messages} initialLocale={currentLocale}>
                     <Navbar />
-                    <main className="mb-24 flex flex-[1] flex-col">{children}</main>
+                    <main className="mb-20 flex flex-[1] flex-col">{children}</main>
                     <Footer />
                 </Providers>
                 <Toaster />

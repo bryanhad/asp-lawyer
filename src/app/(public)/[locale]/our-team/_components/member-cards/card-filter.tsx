@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { usePathname, useRouter } from '@/i18n/routing'
-import { MemberRoles } from '@/lib/enum'
+import { MemberRole } from '@/lib/enum'
 import { cn } from '@/lib/utils'
 import { FilterOptions } from './member-cards'
 
@@ -11,10 +11,7 @@ export type Props = {
     onClick: (clickedFilter: FilterOptions) => void
 }
 
-export default function CardFilter({
-    currentSelectedRole,
-    onClick,
-}: Props) {
+export default function CardFilter({ currentSelectedRole, onClick }: Props) {
     const pathname = usePathname()
     const router = useRouter()
 
@@ -26,7 +23,7 @@ export default function CardFilter({
             queryParams.set('role', value)
         }
 
-        router.push(`${pathname}?${queryParams.toString()}`)
+        router.push(`${pathname}?${queryParams.toString()}`, {scroll: false})
         onClick(value)
     }
 
@@ -43,7 +40,7 @@ export default function CardFilter({
             >
                 ALL
             </Button>
-            {Object.values(MemberRoles).map((role) => (
+            {Object.values(MemberRole).map((role) => (
                 <Button
                     key={role}
                     type="button"
