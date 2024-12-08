@@ -1,13 +1,15 @@
 'use server'
 
-import { utapi } from '@/app/api/uploadthing/core'
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
+import { utapi } from '@/app/api/uploadthing/core'
 import { BlogTranslationKey, EntityType, Language } from '@/lib/enum'
 import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'
 import { Blog, Prisma, User } from '@prisma/client'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { redirect } from 'next/navigation'
 import { UploadThingError } from 'uploadthing/server'
+import { FileEsque, UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { globalPOSTRateLimit } from '../../lib/server/request'
 import {
@@ -17,12 +19,15 @@ import {
     editBlogFormSchemaServer,
     SearchParams,
 } from './validation'
-import { FileEsque, UploadedFileData, UploadFileResult } from 'uploadthing/types'
-import { redirect } from 'next/navigation'
+import { getBlurredImageUrls } from '@/lib/server-utils'
 
 type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
     title: { id: string; en: string }
     author: Pick<User, 'id' | 'username'>
+}
+
+type BlogData = FetchedBlogEntry & {
+    blurImageUrl: string
 }
 
 export async function getData({
@@ -33,11 +38,19 @@ export async function getData({
     filterValues: SearchParams
     defaultFetchSize: number
     createdByUserId?: string
-}) {
+}): Promise<{
+    blogs: BlogData[]
+    totalDataCount: number
+    totalAvailablePages: number
+    isUsingFilter: boolean
+    fetchSize: number
+}> {
     const { q, page, size } = filterValues
     const isUsingFilter = !!q
     const currentPage = Number(page) || 1
     const fetchSize = Number(size) || defaultFetchSize
+
+    console.log({fetchSize})
 
     const searchString = q
         ?.split(' ')
@@ -64,7 +77,7 @@ export async function getData({
 
     const offset = (currentPage - 1) * fetchSize
 
-    const [blogs, countRes] = await Promise.all([
+    const [query, countRes] = await Promise.all([
         prisma.$queryRaw<FetchedBlogEntry[]>`
              SELECT 
             b."id", b."imageUrl", b."createdAt", 
@@ -91,12 +104,25 @@ export async function getData({
         prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count ${baseQuery}`,
     ])
 
-    const totalDataCount = Number(countRes[0].count)
+    // Step 1: Collect image URLs
+    const imageUrls = query.map((blog) => blog.imageUrl)
+    // Step 2: Get blurred images for all URLs concurrently
+    const blurredImageUrls = await getBlurredImageUrls(imageUrls)
+    // // Step 3: Transform lawyers data, including blurred images
+    const transformedBlog = query.map((blog, i) => {
+        const result = {
+            ...blog,
+            imageUrl: imageUrls[i],
+            blurImageUrl: blurredImageUrls[i],
+        }
+        return result
+    })
 
+    const totalDataCount = Number(countRes[0].count)
     const totalAvailablePages = Math.ceil(Number(totalDataCount) / fetchSize)
 
     return {
-        blogs,
+        blogs: transformedBlog,
         totalDataCount,
         totalAvailablePages,
         isUsingFilter,

@@ -107,14 +107,13 @@ body {
     body {
         @apply bg-background text-foreground;
     }
-
-    .tiptap h1 {
-        @apply text-3xl font-bold;
-    }
     .tiptap h2 {
         @apply text-2xl font-bold;
     }
     .tiptap h3 {
+        @apply text-xl font-bold;
+    }
+    .tiptap h4 {
         @apply text-lg font-bold;
     }
     .tiptap strong {
@@ -129,21 +128,32 @@ body {
     .tiptap ol {
         @apply ml-4 list-decimal;
     }
-    .tiptap.view h1 {
-        @apply mb-2;
-    }
-    .tiptap.view h1:not(:first-of-type) {
+    .tiptap.view h2:not(:first-child) {
         @apply mt-12;
     }
-    .tiptap.view h2 {
-        @apply mb-2 mt-12;
+    .tiptap.view h3:not(:first-child) {
+        @apply mt-12;
     }
-    .tiptap.view h3 {
-        @apply mb-2 mt-12;
+    .tiptap.view h4:not(:first-child) {
+        @apply mt-12;
     }
-    .tiptap.view ul,
-    ol {
+    .tiptap.view ul {
         @apply flex flex-col gap-1;
+    }
+    .tiptap.view ul:not(:first-child) {
+        @apply mt-2;
+    }
+    .tiptap.view ol {
+        @apply flex flex-col gap-1;
+    }
+    .tiptap.view ol:not(:first-child) {
+        @apply mt-2;
+    }
+    .tiptap.view p {
+        @apply mb-5;
+    }
+    .tiptap.view p:not(:first-child) {
+        @apply mt-6 mb-0;
     }
 
     .tiptap.view strong {

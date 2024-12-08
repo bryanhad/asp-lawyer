@@ -1,14 +1,13 @@
+import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
+import Flag from '@/components/ui/flag'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
+import Image from 'next/image'
+import BlogCard from './_components/card'
 import InputorInfo from './_components/inputor-info'
 import Pagination from './_components/pagination'
 import TableDataNotFound from './_components/table-data-not-found'
 import { deleteBlogAction, getData } from './action'
-import { SearchParams } from './validation'
-import BlogCard from './_components/card'
-import Image from 'next/image'
-import Flag from '@/components/ui/flag'
 
 export type Props = {
     searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>
@@ -57,6 +56,8 @@ export default async function FetchBlogsPageContent({ searchParams }: Props) {
                                                     alt={`Thumbnail of blog '${blog.title.en}'`}
                                                     src={blog.imageUrl}
                                                     fill
+                                                    placeholder='blur'
+                                                    blurDataURL={blog.blurImageUrl}
                                                 />
                                             </div>
                                             <div className="flex flex-col gap-2">

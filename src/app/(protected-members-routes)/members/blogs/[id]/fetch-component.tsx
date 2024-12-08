@@ -7,6 +7,7 @@ import { getBlurredImageUrl } from '@/lib/server-utils'
 import { Blog, User } from '@prisma/client'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import InputorInfo from '../_components/inputor-info'
 
 type Props = {
     currentUserId: number
@@ -60,6 +61,7 @@ export default async function FetchViewBlogPageContent({ currentUserId, params }
                 AND t."key" IN (${BlogTranslationKey.TITLE}, ${BlogTranslationKey.CONTENT})
             LEFT JOIN users u
                 ON u."id" = b."authorId"
+        WHERE b."id" = ${blogId}
         GROUP BY b."id", b."imageUrl", b."createdAt", u."id"
    `
     )[0]
@@ -70,9 +72,21 @@ export default async function FetchViewBlogPageContent({ currentUserId, params }
 
     return (
         <>
-            <LinkButton className="mb-4 max-md:mx-auto" href={`/members/blogs/${blogId}/edit`}>
-                Edit Blog
-            </LinkButton>
+            <div className="mb-4 flex flex-col-reverse items-center justify-between gap-2 md:flex-row">
+                <div>
+                    <p className="mb-2 text-center text-sm text-muted-foreground md:text-start">Created By</p>
+                    <InputorInfo
+                        authorId={existingBlog.author.id}
+                        authorName={existingBlog.author.username}
+                        inputedAt={existingBlog.createdAt}
+                        className=""
+                        moreInfo
+                    />
+                </div>
+                <LinkButton className="max-md:mx-auto" href={`/members/blogs/${blogId}/edit`}>
+                    Edit Blog
+                </LinkButton>
+            </div>
             <section>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="relative mx-auto aspect-[4/1.8] w-full dark:brightness-[85%] max-md:max-h-[250px] max-md:max-w-[400px]">
@@ -106,7 +120,7 @@ export default async function FetchViewBlogPageContent({ currentUserId, params }
                 <div>
                     <div className="flex items-start gap-2 rounded-md border p-4">
                         <Flag round flag="id" />
-                        <div className=''>
+                        <div className="">
                             <p>Content:</p>
                             <div
                                 className="tiptap view"

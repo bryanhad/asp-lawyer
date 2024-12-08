@@ -50,4 +50,5 @@ export type UsersSeed = {
     email: string
     username: string
     password: string
+    emailIsVerified: true
 }

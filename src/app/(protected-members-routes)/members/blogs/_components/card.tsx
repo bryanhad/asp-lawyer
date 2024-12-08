@@ -19,6 +19,8 @@ function BlogCard({ className, ...blog }: Props) {
                         className="object-cover object-center dark:brightness-90"
                         alt={`Thumbnail of blog '${blog.title}'`}
                         src={blog.imageUrl}
+                        placeholder="blur"
+                        blurDataURL={blog.blurImageUrl}
                         fill
                     />
                 </div>

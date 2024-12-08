@@ -43,6 +43,7 @@ export async function seedUsersAndBlogs(prisma: Prisma.TransactionClient) {
                 email: user.email,
                 passwordHash,
                 username: user.username,
+                emailIsVerified: user.emailIsVerified,
                 recoveryCode: Buffer.from(encryptedRecoveryCode), //convert Uint8Array to Buffer
             },
         })

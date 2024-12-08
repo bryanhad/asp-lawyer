@@ -40,7 +40,7 @@ export async function getData(): Promise<BlogCardData[]> {
         `
 
         // Step 1: Collect image URLs
-        const imageUrls = query.map((lawyer) => lawyer.imageUrl)
+        const imageUrls = query.map((blog) => blog.imageUrl)
 
         // Step 2: Get blurred images for all URLs concurrently
         const blurredImageUrls = await getBlurredImageUrls(imageUrls)
