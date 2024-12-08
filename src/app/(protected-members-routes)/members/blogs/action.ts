@@ -20,6 +20,7 @@ import {
     SearchParams,
 } from './validation'
 import { getBlurredImageUrls } from '@/lib/server-utils'
+import { revalidatePath } from 'next/cache'
 
 type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
     title: { id: string; en: string }
@@ -399,6 +400,10 @@ export async function editBlogAction(
         }
         return { success: false, message: 'Internal Server Error' }
     }
+    revalidatePath(`/en/blogs`)
+    revalidatePath(`/id/blogs`)
+    revalidatePath(`/en/blogs/${blogId}`)
+    revalidatePath(`/id/blogs/${blogId}`)
     return redirect(`/members/blogs?toast=${encodeURIComponent(`Successfully updated blog`)}`)
 }
 
