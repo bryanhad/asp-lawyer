@@ -48,6 +48,7 @@ async function customMiddleware(req: NextRequest): Promise<NextResponse> {
     let origin: URL
     try {
         origin = new URL(originHeader)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_err) {
         return new NextResponse(null, {
             status: 403,

@@ -20,7 +20,8 @@ type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
     author: Pick<User, 'id' | 'username'>
 }
 
-export default async function FetchViewBlogPageContent({ currentUserId, params }: Props) {
+// TODO: only show edit blog link if the current user id is the SAME as the author of the blog
+export default async function FetchViewBlogPageContent({ currentUserId: _currentUserId, params }: Props) {
     const { id: blogId } = await params
 
     const existingBlog = (

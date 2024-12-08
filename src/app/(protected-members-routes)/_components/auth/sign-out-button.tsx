@@ -15,7 +15,7 @@ export default function SignOutButton() {
         if (state.message) {
             toast({ description: state.message, variant: 'destructive' })
         }
-    }, [state])
+    }, [state, toast])
 
     return (
         <form

@@ -1,10 +1,7 @@
 import {
-    Briefcase,
     LayoutDashboard,
     ScrollText,
-    Settings,
-    UserRound,
-    Users,
+    Settings
 } from 'lucide-react'
 import NavLink from './nav-link'
 

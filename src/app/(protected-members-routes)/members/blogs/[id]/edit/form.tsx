@@ -21,7 +21,7 @@ const Tiptap = dynamic(() => import('@/components/ui/tiptap'), {
 })
 
 type Props = {
-    onSubmit: (data: any) => Promise<{ success: boolean; message: string }>
+    onSubmit: (data: Partial<z.infer<typeof editBlogFormSchemaClient>>) => Promise<{ success: boolean; message: string }>
     devaultValues?: Omit<z.infer<typeof editBlogFormSchemaClient>, 'thumbnail'> & { imageUrl: string }
 }
 
