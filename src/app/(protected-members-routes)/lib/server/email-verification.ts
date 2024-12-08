@@ -27,6 +27,7 @@ export async function getUserEmailVerificationRequest(
 export async function createEmailVerificationRequest(userId: number, email: string): Promise<EmailVerificationRequest> {
     const emailVerificationRequest = await prisma.$transaction(async (tx) => {
         await deleteUserEmailVerificationRequest(tx, userId)
+        // create emailVerification id
         const idBytes = new Uint8Array(20)
         crypto.getRandomValues(idBytes)
         const id = encodeBase32(idBytes).toLowerCase()

@@ -6,6 +6,8 @@ import { AuthCard } from '../_components/auth-card'
 import { getUserEmailVerificationRequestFromRequest } from '../lib/server/email-verification'
 import { globalGETRateLimit } from '../lib/server/request'
 import { VerifyEmailForms } from './components'
+import { Suspense } from 'react'
+import QueryParamToast from '@/components/ui/query-param-toast'
 
 export default async function Page() {
     if (!globalGETRateLimit()) {
@@ -26,6 +28,9 @@ export default async function Page() {
     }
     return (
         <main className="flex flex-[1] flex-col items-center justify-center px-4">
+            <Suspense>
+                <QueryParamToast param="toast" />
+            </Suspense>
             <AuthCard
                 title="Verify Your Email Address"
                 headerLabel={`We have sent an 8-digit code to ${verificationRequest?.email ?? user.email}`}

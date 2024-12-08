@@ -94,7 +94,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         return {
             fields: parsedData.data,
             success: false,
-            message: 'Invalid User',
+            message: 'Invalid user',
         }
     }
     const validPassword = await verifyPasswordHash(passwordHash, password)
