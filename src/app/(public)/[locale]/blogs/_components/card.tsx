@@ -38,7 +38,7 @@ export default function BlogCard({ currentLocale, ...blog }: Props) {
                         </p>
                         <div className="flex items-center">
                             <p className="text-sm text-primary">
-                                {currentLocale === 'en' ? 'See More' : 'Baca Sselengkapnya'}
+                                {currentLocale === 'en' ? 'See More' : 'Selengkapnya'}
                             </p>
                             <ChevronRight className="shrink-0 text-primary" size={20} />
                         </div>

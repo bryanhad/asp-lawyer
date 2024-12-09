@@ -96,7 +96,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                 </div>
                 <Separator className="bg-primary/60" />
                 <div
-                    className="tiptap view mt-6 w-full px-12"
+                    className="tiptap view mt-6 w-full md:px-12 px-2"
                     dangerouslySetInnerHTML={{
                         __html: htmlContent,
                     }}

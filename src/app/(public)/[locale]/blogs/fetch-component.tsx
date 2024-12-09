@@ -4,7 +4,6 @@ import BlogCard from './_components/card'
 import { getData } from './action'
 
 export default async function FetchComponent() {
-    // await new Promise((res) => setTimeout(res, 500000000))
     const blogs = await getData()
     const currentLocale = await getCurrentLocale()
 
