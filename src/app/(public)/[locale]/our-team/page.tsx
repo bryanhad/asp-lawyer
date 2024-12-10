@@ -1,28 +1,16 @@
+import PageTitleWithBackground from '@/app/(public)/_components/any-page-components/page-title-with-background'
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import { Locale } from '@/i18n/request'
-import { Metadata } from 'next'
+import { getQueryClient } from '@/lib/tanstack-query-client'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { Suspense } from 'react'
-import FetchComponent from './_components/member-cards/fetch-component'
-import SkeletonFallback from './_components/member-cards/skeleton'
-import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
+import MemberCards from './_components/member-cards'
+import { getData } from './_components/action'
 
-type Props = {
-    params: Promise<{ locale: Locale }>
-    searchParams: Promise<GenericSearchParams<'role', string | undefined>>
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-    const pageTitle = await getTranslations('ourTeamPage')
-
-    return {
-        title: pageTitle('pageTitle'),
-    }
-}
-
-export default async function MembersPage({ searchParams, params }: Props) {
+export default async function Page({ params }: { params: Promise<{ locale: Locale }> }) {
     const { locale } = await params
+    const t = await getTranslations('ourTeamPage')
     /**
      * Enable static rendering (just following next-intl's docs)
      *
@@ -31,7 +19,15 @@ export default async function MembersPage({ searchParams, params }: Props) {
      */
     setRequestLocale(locale)
 
-    const t = await getTranslations('ourTeamPage')
+    /**
+     * Refer to tanstack's docs:
+     * @see https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
+     */
+    const queryClient = getQueryClient()
+    queryClient.prefetchQuery({
+        queryKey: ['team-members'],
+        queryFn: getData,
+      })
 
     return (
         <BaseContainer>
@@ -42,9 +38,9 @@ export default async function MembersPage({ searchParams, params }: Props) {
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing className="space-y-6">
-                <Suspense fallback={<SkeletonFallback />}>
-                    <FetchComponent searchParams={searchParams} />
-                </Suspense>
+                <HydrationBoundary state={dehydrate(queryClient)}>
+                    <MemberCards/>
+                </HydrationBoundary>
             </Section>
         </BaseContainer>
     )

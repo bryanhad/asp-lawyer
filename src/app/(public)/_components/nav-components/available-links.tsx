@@ -31,4 +31,9 @@ export const AVAILABLE_LINKS = [
         icon: <Headset className="shrink-0" size={30} />,
         translationKey: 'contactUs'
     },
+    {
+        href: '/test',
+        icon: <Headset className="shrink-0" size={30} />,
+        translationKey: 'contactUs'
+    },
 ] as const

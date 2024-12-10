@@ -1,29 +1,37 @@
 'use client'
 
 import MemberCard from '@/components/ui/member-card'
-import { MembersData } from './action'
 import { Locale } from '@/i18n/request'
-import { useState } from 'react'
 import { MemberRole } from '@/lib/enum'
-import CardFilter from './card-filter'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useLocale } from 'next-intl'
-
-type Props = {
-    searchParams: { currentRole?: MemberRole }
-    members: MembersData
-}
+import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import { getData } from './action'
+import CardFilter from './card-filter'
+import SkeletonFallback from './skeleton'
 
 export type FilterOptions = MemberRole | 'ALL'
 
-export default function MemberCards({ members, searchParams: { currentRole } }: Props) {
+export default function MemberCards() {
     const currentLocale = useLocale() as Locale
-    const [selectedRole, setSelectedRole] = useState<FilterOptions>(currentRole || 'ALL')
+    const searchParams = useSearchParams()
+    const roleSP = searchParams.get('role') as string | null
+    const roleSearchParam =
+        roleSP && Object.values(MemberRole).includes(roleSP as MemberRole) ? (roleSP as MemberRole) : undefined
+
+    const [selectedRole, setSelectedRole] = useState<FilterOptions>(roleSearchParam || 'ALL')
+    const { data, isPending } = useSuspenseQuery({ queryKey: ['team-members'], queryFn: getData })
+
+    if (isPending) {
+        return <SkeletonFallback />
+    }
 
     // Filter members based on the selected role
-    const filteredMembers = selectedRole === 'ALL' ? members : members.filter((member) => member.role === selectedRole)
+    const filteredMembers = selectedRole === 'ALL' ? data : data.filter((member) => member.role === selectedRole)
 
     return (
-        <div>
+        <>
             <CardFilter
                 onClick={(r) => {
                     if (r === selectedRole) {
@@ -38,6 +46,6 @@ export default function MemberCards({ members, searchParams: { currentRole } }: 
                     <MemberCard key={member.slug} {...member} currentLocale={currentLocale} />
                 ))}
             </div>
-        </div>
+        </>
     )
 }
