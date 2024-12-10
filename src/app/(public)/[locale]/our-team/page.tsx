@@ -1,7 +1,6 @@
 import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
 import Section from '@/app/(public)/_components/containers/section'
 import { Locale } from '@/i18n/request'
-import { MemberRole } from '@/lib/enum'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Suspense } from 'react'
@@ -32,11 +31,6 @@ export default async function MembersPage({ searchParams, params }: Props) {
      */
     setRequestLocale(locale)
 
-    const { role } = await searchParams
-
-    const roleSearchParam =
-        role && Object.values(MemberRole).includes(role as MemberRole) ? (role as MemberRole) : undefined
-
     const t = await getTranslations('ourTeamPage')
 
     return (
@@ -49,7 +43,7 @@ export default async function MembersPage({ searchParams, params }: Props) {
             />
             <Section lessYSpacing className="space-y-6">
                 <Suspense fallback={<SkeletonFallback />}>
-                    <FetchComponent currentRole={roleSearchParam} />
+                    <FetchComponent searchParams={searchParams} />
                 </Suspense>
             </Section>
         </BaseContainer>
