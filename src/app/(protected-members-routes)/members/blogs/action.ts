@@ -234,6 +234,8 @@ export async function addBlogAction(
             message: 'Server Error',
         }
     }
+    revalidatePath(`/en/blogs`)
+    revalidatePath(`/id/blogs`)
     return redirect(`/members/blogs?toast=${encodeURIComponent(`New blog has been added`)}`)
 }
 
@@ -459,18 +461,20 @@ export async function deleteBlogAction(blogId: unknown): Promise<{ success: bool
                 },
             }),
         ])
+        revalidatePath(`/en/blogs`)
+        revalidatePath(`/id/blogs`)
         return {
             success: true,
             message: 'Successfully deleted blog',
         }
     } catch (err) {
+        logger.error(err)
         if (err instanceof PrismaClientKnownRequestError) {
             return {
                 success: false,
                 message: err.message,
             }
         }
-        logger.error(err)
         return {
             success: false,
             message: 'Internal Server Error',
