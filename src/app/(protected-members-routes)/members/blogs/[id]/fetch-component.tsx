@@ -5,9 +5,9 @@ import { BlogTranslationKey, EntityType, Language } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { getBlurredImageUrl } from '@/lib/server-utils'
 import { Blog, User } from '@prisma/client'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import InputorInfo from '../_components/inputor-info'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 type Props = {
     currentUserId: number
@@ -91,13 +91,14 @@ export default async function FetchViewBlogPageContent({ currentUserId: _current
             <section>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="relative mx-auto aspect-[4/1.8] w-full dark:brightness-[85%] max-md:max-h-[250px] max-md:max-w-[400px]">
-                        <Image
+                        <ImageWithFallbackPlaceholder
                             className="rounded-md object-cover object-center shadow-md"
                             src={existingBlog.imageUrl}
                             alt={`Picture of ${existingBlog.title.en}`}
                             fill
                             placeholder="blur"
                             blurDataURL={blurredImageUrl}
+                            variant="absolute-center"
                         />
                     </div>
                     <div className="flex flex-col gap-4 rounded-md border p-4">

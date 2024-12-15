@@ -2,9 +2,9 @@ import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren, ReactNode } from 'react'
 import { Button } from '../ui/button'
-import ImageWithBlur from '../ui/image-with-blur'
 import { CarouselItem } from '../ui/carousel'
 import BackgroundCarousel from '@/app/(public)/_components/any-page-components/background-carousel'
+import Image from 'next/image'
 
 type CarouselItemData = {
     backgroundImagePath: string
@@ -55,7 +55,7 @@ export default async function HeroCarousel() {
             {carouselItems.map((item, index) => (
                 <CarouselItem key={index} className="relative w-full pl-0">
                     <div className="relative aspect-square w-full sm:aspect-[5/4] md:aspect-[10/5] lg:aspect-[16/6]">
-                        <ImageWithBlur
+                        <Image
                             priority
                             src={item.backgroundImagePath}
                             alt={`Carousel image of ${item.backgroundImageAlt}`}

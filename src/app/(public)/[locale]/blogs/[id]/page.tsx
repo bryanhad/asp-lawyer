@@ -7,9 +7,9 @@ import prisma from '@/lib/prisma'
 import { capitalizeFirstLetter } from '@/lib/utils'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import Image from 'next/image'
 import { cache } from 'react'
 import { getData } from './action'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 type Props = {
     params: Promise<{ id: string; locale: Locale }>
@@ -76,7 +76,7 @@ export default async function BlogPage({ params }: Props) {
                 <h1 className="text-center text-3xl font-bold lg:text-5xl">
                     {locale === 'en' ? blog.title.en : blog.title.id}
                 </h1>
-                <p className="text-center mt-4 mb-6 xl:mt-6">
+                <p className="mb-6 mt-4 text-center xl:mt-6">
                     {new Intl.DateTimeFormat(locale === 'en' ? 'en-US' : 'id-ID', {
                         // weekday: 'short', // Full weekday name
                         day: '2-digit', // Two-digit day
@@ -85,8 +85,9 @@ export default async function BlogPage({ params }: Props) {
                     }).format(blog.createdAt)}
                 </p>
 
-                <div className="relative aspect-[4/2.2] w-full dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px] max-w-[640px] xl:max-w-[768px]">
-                    <Image
+                <div className="relative aspect-[4/2.2] w-full max-w-[640px] dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px] xl:max-w-[768px]">
+                    <ImageWithFallbackPlaceholder
+                        variant="absolute-center"
                         className="rounded-md object-cover object-center shadow-md"
                         src={blog.imageUrl}
                         alt={`Picture of ${blog.title.en}`}

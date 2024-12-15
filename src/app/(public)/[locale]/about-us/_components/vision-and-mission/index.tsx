@@ -1,10 +1,13 @@
 import Section from '@/app/(public)/_components/containers/section'
-import ImageWithBlur from '@/components/ui/image-with-blur'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 import SectionHeading from '@/components/ui/section-heading'
+import { getBlurredImageUrl } from '@/lib/server-utils'
 import { getTranslations } from 'next-intl/server'
 
 export default async function VisionAndMissonSection() {
     const t = await getTranslations('aboutPage')
+    const imageUrl = `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`
+    const blurImage = await getBlurredImageUrl(imageUrl)
 
     return (
         <Section className="grid grid-cols-1 gap-6 max-md:px-8 md:grid-cols-2 md:px-6" lessYSpacing>
@@ -35,9 +38,12 @@ export default async function VisionAndMissonSection() {
                 </div>
             </div>
             {/* GRID 2 */}
-            <ImageWithBlur
+            <ImageWithFallbackPlaceholder
+                variant="naked"
                 className="rounded-md shadow-md dark:brightness-[85%]"
-                src={`https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`}
+                src={imageUrl}
+                placeholder="blur"
+                blurDataURL={blurImage}
                 alt="Picture of ASP lawyers"
                 width={649}
                 height={320}

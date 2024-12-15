@@ -1,21 +1,27 @@
 import Section from '@/app/(public)/_components/containers/section'
-import ImageWithBlur from '@/components/ui/image-with-blur'
 import LinkButton from '@/components/ui/link-button'
 import SectionHeading from '@/components/ui/section-heading'
 import { Separator } from '@/components/ui/separator'
 import { getTranslations } from 'next-intl/server'
 import SelfGlazingStats from './self-glazing-stats'
+import { getBlurredImageUrl } from '@/lib/server-utils'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')
+    const imageUrl = `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`
+    const blurImage = await getBlurredImageUrl(imageUrl)
 
     return (
         <div className="w-full bg-secondary/60 dark:bg-secondary">
             <Section className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2">
                 {/* GRID 1 */}
-                <ImageWithBlur
+                <ImageWithFallbackPlaceholder
+                    variant="naked"
                     className="rounded-md shadow-md dark:brightness-[90%]"
-                    src={`https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`}
+                    src={imageUrl}
+                    placeholder="blur"
+                    blurDataURL={blurImage}
                     alt="Picture of ASP lawyers"
                     width={649}
                     height={320}

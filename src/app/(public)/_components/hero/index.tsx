@@ -1,10 +1,10 @@
 import { sourceSerif4 } from '@/app/fonts'
 import { cn } from '@/lib/utils'
 import { getTranslations } from 'next-intl/server'
-import Image from 'next/image'
 import TypeWriterComponent from './typewriter'
 import LinkButton from '@/components/ui/link-button'
 import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 export default async function Hero() {
     const t = await getTranslations('homePage.heroSection')
@@ -66,8 +66,9 @@ export default async function Hero() {
                     {/* image left and right blur */}
                     <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-44 bg-gradient-to-r from-background-suit to-transparent"></div>
                     <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-52 bg-gradient-to-l from-background-suit to-transparent"></div>
-
-                    <Image
+                    
+                    <ImageWithFallbackPlaceholder
+                        variant='absolute-center'
                         src={imageUrl}
                         alt="Lawyers"
                         className="object-cover object-center"

@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
                 titleWhite={t('titleWhite')}
                 titlePrimary={t('titlePrimary')}
             />
-            <Section lessYSpacing className="space-y-6">
+            <Section lessYSpacing className="flex flex-col gap-6">
                 <HydrationBoundary state={dehydrate(queryClient)}>
                     <MemberCards/>
                 </HydrationBoundary>

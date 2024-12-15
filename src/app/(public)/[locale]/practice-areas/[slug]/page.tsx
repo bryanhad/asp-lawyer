@@ -4,12 +4,12 @@ import { Separator } from '@/components/ui/separator'
 import { Locale } from '@/i18n/request'
 import { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
-import Image from 'next/image'
 import { cache } from 'react'
 import { getData } from './action'
 import prisma from '@/lib/prisma'
 import { routing } from '@/i18n/routing'
 import PageTitleWithBackground from '@/app/(public)/_components/any-page-components/page-title-with-background'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 type Props = {
     params: Promise<{ slug: string; locale: Locale }>
@@ -78,10 +78,11 @@ export default async function PracticeAreaPage({ params }: Props) {
                 alt="Background image of about us page"
                 titleWhite={locale === 'en' ? pa.fullName.en : pa.fullName.id}
             />
-            <Section className="mb-12 space-y-6 py-12 max-w-[1200px]">
+            <Section className="mb-12 max-w-[1200px] space-y-6 py-12">
                 <div className="flex flex-col gap-5 md:flex-row md:gap-8 lg:gap-12">
                     <div className="relative aspect-[4/1.8] w-full dark:brightness-[85%] max-md:max-h-[250px] md:min-w-[390px]">
-                        <Image
+                        <ImageWithFallbackPlaceholder
+                            variant="absolute-center"
                             className="rounded-md object-cover object-center shadow-md"
                             src={pa.imageUrl}
                             alt={`Picture of ${pa.slug}`}
@@ -96,7 +97,7 @@ export default async function PracticeAreaPage({ params }: Props) {
                 </div>
                 <Separator className="bg-primary/60" />
                 <div
-                    className="tiptap view mt-6 w-full md:px-12 px-2"
+                    className="tiptap view mt-6 w-full px-2 md:px-12"
                     dangerouslySetInnerHTML={{
                         __html: htmlContent,
                     }}

@@ -26,7 +26,7 @@ function NavLink({ children, href, currentPathname, isScrolled }: NavLinkProps) 
                     'text-muted-foreground text-slate-300 dark:text-muted-foreground',
                     {
                         'text-slate-700': isScrolled || currentPathname !== '/',
-                        'font-semibold text-black dark:font-normal dark:text-primary':
+                        'font-semibold text-primary dark:font-normal dark:text-primary':
                         isActive,
                     },
                 )}

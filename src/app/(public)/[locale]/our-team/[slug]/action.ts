@@ -28,7 +28,7 @@ export type MemberPageSlugData = Omit<
     experience: { id: string[]; en: string[] }
     education: { id: string[]; en: string[] }
     // achievement: { id: string[]; en: string[] }
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData(slug: string): Promise<MemberPageSlugData> {

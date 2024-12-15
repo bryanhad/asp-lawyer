@@ -22,17 +22,16 @@ export function cn(...inputs: ClassValue[]) {
  * @returns A debounced version of the input function.
  */
 
-export function debounce<T extends (...args: unknown[]) => void>(
-    func: T,
+export function debounce<T>(
+    func: (arg: T) => void,
     delay: number,
-): T {
-    let timeout: ReturnType<typeof setTimeout>
-    return ((...args: Parameters<T>) => {
-        clearTimeout(timeout)
-        timeout = setTimeout(() => func(...args), delay)
-    }) as T
+): (arg: T) => void {
+    let timeout: ReturnType<typeof setTimeout>;
+    return (arg: T) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(arg), delay);
+    };
 }
-
 /**
  * Capitalizes the first letter of a string.
  *

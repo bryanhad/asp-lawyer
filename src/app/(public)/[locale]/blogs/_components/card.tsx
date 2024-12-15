@@ -1,8 +1,9 @@
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
-import Image from 'next/image'
-import { BlogCardData } from '../action'
+import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
+import { BlogCardData } from '../action'
 
 export type Props = BlogCardData & {
     currentLocale: Locale
@@ -11,12 +12,17 @@ export type Props = BlogCardData & {
 export default function BlogCard({ currentLocale, ...blog }: Props) {
     return (
         <div key={blog.id} className="flex flex-col overflow-hidden rounded-md border shadow-md">
-            <Link href={`/blogs/${blog.id}`} className='group'>
-                <div className="relative h-[200px] overflow-hidden bg-secondary">
-                    <Image
-                        className="object-cover object-center dark:brightness-90 group-hover:scale-[1.02] duration-300"
+            <Link href={`/blogs/${blog.id}`} className="group">
+                <div
+                    className={cn('relative h-[200px] overflow-hidden bg-secondary', {
+                        border: blog.blurImageUrl === null,
+                    })}
+                >
+                    <ImageWithFallbackPlaceholder
+                        variant="absolute-center"
+                        className="object-cover object-center duration-300 group-hover:scale-[1.02] dark:brightness-90"
                         src={blog.imageUrl}
-                        placeholder='blur'
+                        placeholder="blur"
                         blurDataURL={blog.blurImageUrl}
                         fill
                         alt={`Thumbnail of blog ${blog.title.en}`}

@@ -1,16 +1,17 @@
 import { sourceSerif4 } from '@/app/fonts'
 import { cn } from '@/lib/utils'
-import Image, { ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
 import { Scale } from 'lucide-react'
 import { getBlurredImageUrl, getPrivateUrl } from '@/lib/server-utils'
 import { Separator } from '@/components/ui/separator'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 type Props = {
     titleWhite?: string
     titlePrimary?: string
     publicUrlFromUploadThing: string
     useh2?: boolean
-} & Omit<ImageProps, 'src'>
+} & Omit<ImageProps, 'src' | 'placeholder' | 'blurDataURL'>
 
 export default async function PageTitleWithBackground({
     titleWhite,
@@ -28,7 +29,8 @@ export default async function PageTitleWithBackground({
 
     return (
         <div className="relative flex min-h-[230px] w-full lg:min-h-[250px]">
-            <Image
+            <ImageWithFallbackPlaceholder
+                variant="absolute-center"
                 src={imageUrl}
                 alt={alt}
                 fill={fill}
@@ -38,6 +40,7 @@ export default async function PageTitleWithBackground({
                 className={cn('z-10 object-cover object-center', className)}
                 {...imageProps}
             />
+
             {/* image overlay */}
             <div className="absolute inset-0 z-20 bg-background-suit opacity-[88%]"></div>
             {/* content */}

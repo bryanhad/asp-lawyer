@@ -28,7 +28,7 @@ export default function CardFilter({ currentSelectedRole, onClick }: Props) {
     }
 
     return (
-        <div className="flex select-none flex-wrap items-center justify-center gap-2 mb-8">
+        <div className="flex select-none flex-wrap items-center justify-center gap-2">
             <Button
                 type="button"
                 variant={'outline'}

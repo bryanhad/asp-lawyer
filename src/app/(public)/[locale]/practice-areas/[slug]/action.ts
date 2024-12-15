@@ -13,7 +13,7 @@ type QueryResult = Pick<PracticeArea, 'slug' | 'imageUrl'> & {
 }
 
 export type PracticeAreaPageSlugData = QueryResult & {
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData(slug: string): Promise<PracticeAreaPageSlugData> {

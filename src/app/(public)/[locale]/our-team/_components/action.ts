@@ -13,9 +13,6 @@ type QueryResult = Pick<
 }
 
 export type MembersData = QueryResult[]
-//  & {
-//     blurImageUrl: string
-// }
 
 export async function getData(): Promise<MembersData> {
     const query: QueryResult[] = await prisma.$queryRaw`
@@ -66,22 +63,6 @@ export async function getData(): Promise<MembersData> {
         GROUP BY m."order", m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl"
         ORDER BY m."order"
     `
-
-    // // Step 1: Collect image URLs
-    // const imageUrls = query.map((pa) => pa.imageUrl)
-
-    // // Step 2: Get blurred images for all URLs concurrently
-    // const blurredImageUrls = await getBlurredImageUrls(imageUrls)
-
-    // // Step 3: add blurred images to final data
-    // const data = query.map((pa, i) => {
-    //     const result = {
-    //         ...pa,
-    //         blurImageUrl: blurredImageUrls[i],
-    //     }
-
-    //     return result
-    // })
 
     return query
 }

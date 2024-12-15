@@ -12,7 +12,7 @@ type BlogWithTranslations = Pick<Blog, 'id' | 'createdAt' | 'imageUrl'> & {
 }
 
 export type BlogPageContent = BlogWithTranslations & {
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData(id: string): Promise<BlogPageContent> {

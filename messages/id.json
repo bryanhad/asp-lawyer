@@ -1,6 +1,8 @@
 {
-    "signinPage": {
-        "title": "Selamat datang di halaman ASP Admin"
+    "not-found": {
+        "whoops": "Uups!",
+        "title": "Kami tidak dapat menemukan halaman yang anda cari.",
+        "desc": "Kembali ke halaman beranda"
     },
     "links": {
         "home": "Beranda",

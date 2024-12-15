@@ -1,6 +1,8 @@
 {
-    "signinPage": {
-        "title": "Wellcome to ASP Admin Page"
+    "not-found": {
+        "whoops": "Whoops!",
+        "title": "We couldn't find the page you were looking for.",
+        "desc": "Go back to home page"
     },
     "links": {
         "home": "Home",
@@ -165,8 +167,8 @@
         "pageTitle": "Contact Us",
         "titleWhite": "Get in",
         "titlePrimary": "Touch",
-        "subTitle" : {
-            "titleWhite" : "The First",
+        "subTitle": {
+            "titleWhite": "The First",
             "titlePrimary": "Step to a Solution"
         },
         "desc": "We are here to help you resolve your legal matters with the best solutions. Contact us for a consultation or more information. Our team is ready to listen and provide the support you need."

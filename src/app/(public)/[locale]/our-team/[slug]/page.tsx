@@ -3,7 +3,6 @@ import Section from '@/app/(public)/_components/containers/section'
 import { capitalizeFirstLetter, cn } from '@/lib/utils'
 import { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import Image from 'next/image'
 import { cache } from 'react'
 import { getData } from './action'
 
@@ -14,6 +13,7 @@ import { Locale } from '@/i18n/request'
 import prisma from '@/lib/prisma'
 import { routing } from '@/i18n/routing'
 import PageTitleWithBackground from '@/app/(public)/_components/any-page-components/page-title-with-background'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 type Props = {
     params: Promise<{ slug: string; locale: Locale }>
@@ -79,7 +79,8 @@ export default async function MemberPage({ params }: Props) {
                 {/* TOP DESKTOP SECTION */}
                 <div className="flex flex-col items-start gap-8 md:flex-row md:gap-14">
                     <div className="relative mx-auto w-full max-w-[350px] overflow-hidden rounded-md bg-secondary shadow-sm md:min-w-[300px] lg:min-w-[360px]">
-                        <Image
+                        <ImageWithFallbackPlaceholder
+                            variant='naked'
                             src={member.imageUrl}
                             alt={`Picture of ${member.name}`}
                             width={400}

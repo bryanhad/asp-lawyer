@@ -11,8 +11,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
         blogs: [
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx_1',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYRna1kkdMxNoITly7Q98XdeOL3CjYnziSaf5h',
-                imageKey: '4YTZLQcHF0RYRna1kkdMxNoITly7Q98XdeOL3CjYnziSaf5h',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -38,8 +38,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
             },
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx_2',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYBE6Lpghoqp60xSgMRAuJPfbCHtv9sT3hF4YD',
-                imageKey: '4YTZLQcHF0RYZaA2quGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -65,8 +65,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
             },
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx_3',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYjtHcWMhBI49DHVPSikv0CFsfo7lbJacRYmK3',
-                imageKey: '4YTZLQcHF0RYjtHcWMhBI49DHVPSikv0CFsfo7lbJacRYmK3',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYEydowhptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ0',
+                imageKey: '4YTZLQcHF0RYEydowhptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ0',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -92,8 +92,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
             },
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx_4',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYZaA2quGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
-                imageKey: '4YTZLQcHF0RYZaA2quGjAi2Mf9IXtrOKdo4kpnvmZsHc6WJz',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -119,8 +119,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
             },
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx_5',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYXOy8bLD0jgtPJHeMQbY2EOroZVI4BmaCLwD1',
-                imageKey: '4YTZLQcHF0RYXOy8bLD0jgtPJHeMQbY2EOroZVI4BmaCLwD1',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,

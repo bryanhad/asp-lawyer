@@ -6,6 +6,7 @@ import { Locale } from '@/i18n/request'
 import { cache } from 'react'
 import { getLocale } from 'next-intl/server'
 import { SafeParseError, z, ZodSchema } from 'zod'
+import { logger } from './logger'
 
 export function getPrivateUrl(publicUploadthingUrl: string) {
     const imageUrlSplit = publicUploadthingUrl.split('/f/')
@@ -14,11 +15,16 @@ export function getPrivateUrl(publicUploadthingUrl: string) {
 }
 
 export async function getBlurredImageUrl(imageUrl: string) {
-    const res = await kyInstance.get(imageUrl)
-    const imgBuffer = await res.arrayBuffer()
+    try {
+        const res = await kyInstance.get(imageUrl)
+        const imgBuffer = await res.arrayBuffer()
 
-    const { base64 } = await getPlaiceholder(Buffer.from(imgBuffer))
-    return base64
+        const { base64 } = await getPlaiceholder(Buffer.from(imgBuffer))
+        return base64
+    } catch (err) {
+        logger.error(err)
+        return null
+    }
 }
 
 export async function getBlurredImageUrls(imageUrls: string[]) {
