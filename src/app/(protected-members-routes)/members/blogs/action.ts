@@ -28,7 +28,7 @@ type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
 }
 
 type BlogData = FetchedBlogEntry & {
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData({

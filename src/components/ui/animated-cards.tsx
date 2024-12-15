@@ -4,8 +4,9 @@ import { LawyerQuotesData } from '@/app/(public)/[locale]/about-us/_components/s
 import { Locale } from '@/i18n/request'
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
 import { useState } from 'react'
+import ImageWithFallbackPlaceholder from './image-with-fallback-placeholder'
+import Image from 'next/image'
 
 export type AnimatedCardProps = {
     cardItems: LawyerQuotesData[]
@@ -81,7 +82,8 @@ const AnimatedCard = ({ cardItems, currentLocale }: AnimatedCardProps) => {
                                     }}
                                     className="absolute inset-0 origin-bottom"
                                 >
-                                    <Image
+                                    <ImageWithFallbackPlaceholder
+                                        variant='naked'
                                         src={item.imageUrl}
                                         alt={item.name}
                                         placeholder="blur"

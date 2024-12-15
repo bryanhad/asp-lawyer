@@ -2,12 +2,12 @@ import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-r
 import Flag from '@/components/ui/flag'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import BlogCard from './_components/card'
 import InputorInfo from './_components/inputor-info'
 import Pagination from './_components/pagination'
 import TableDataNotFound from './_components/table-data-not-found'
 import { deleteBlogAction, getData } from './action'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 export type Props = {
     searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>
@@ -51,7 +51,8 @@ export default async function FetchBlogsPageContent({ searchParams }: Props) {
                                     <TableCell className="font-medium">
                                         <div className="flex gap-4">
                                             <div className="relative max-h-[150px] min-h-[120px] min-w-[200px] overflow-hidden rounded-md bg-secondary">
-                                                <Image
+                                                <ImageWithFallbackPlaceholder
+                                                    variant='absolute-center'
                                                     className="object-cover object-center dark:brightness-90"
                                                     alt={`Thumbnail of blog '${blog.title.en}'`}
                                                     src={blog.imageUrl}

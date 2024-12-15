@@ -18,7 +18,7 @@ type QueryResult = Pick<Member, 'slug' | 'name'> & {
 
 export type LawyerQuotesData = QueryResult & {
     imageUrl: string
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData() {

@@ -4,9 +4,9 @@ import { Link } from '@/i18n/routing'
 import { PracticeAreaPreviewData } from './action'
 import { useLocale, useTranslations } from 'next-intl'
 import { Locale } from '@/i18n/request'
-import Image from 'next/image'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 export default function TagPreview({
     fullName,
@@ -25,7 +25,8 @@ export default function TagPreview({
             <div className="relative flex w-full gap-4 overflow-hidden rounded-lg border border-input bg-background">
                 <div className="absolute inset-0 h-full w-full max-lg:brightness-[25%] lg:relative lg:max-w-[200px] lg:min-w-[200px] dark:lg:dark:brightness-75">
                     {/* Main Image */}
-                    <Image
+                    <ImageWithFallbackPlaceholder
+                        variant='absolute-center'
                         src={imageUrl}
                         alt={slug}
                         fill

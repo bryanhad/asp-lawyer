@@ -10,7 +10,7 @@ export type achievementData = {
     title: { id: string; en: string }
     desc: { id: string; en: string }
     src: string
-    blurDataUrl: string
+    blurDataUrl: string | null
 }
 
 type QueryResult = Pick<Achievements, 'id' | 'imageUrl'> & {

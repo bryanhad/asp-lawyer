@@ -3,15 +3,15 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import { Locale } from '@/i18n/request'
 import { Link } from '@/i18n/routing'
+import ImageWithFallbackPlaceholder from './image-with-fallback-placeholder'
 
 type Props = {
     title: { id: string; en: string }
     desc?: { id: string; en: string }
     src: string
-    blurDataUrl: string
+    blurDataUrl: string | null
     className?: string
     containerClassName?: string
     pinContainerClassName?: string
@@ -69,7 +69,8 @@ const PinContainer = ({
                     <div className={cn('relative z-50 min-h-[280px]', className)}>
                         <div className={cn('mx-auto flex flex-col')}>
                             <div className={cn('relative h-[200px] w-[300px] xl:w-[380px]', imageContainerClassName)}>
-                                <Image
+                                <ImageWithFallbackPlaceholder
+                                    variant='absolute-center'
                                     src={src}
                                     placeholder="blur"
                                     blurDataURL={blurDataUrl}

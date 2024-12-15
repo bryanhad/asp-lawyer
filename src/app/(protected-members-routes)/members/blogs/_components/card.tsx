@@ -1,9 +1,9 @@
-import Image from 'next/image'
 import { deleteBlogAction, getData } from '../action'
 import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
 import InputorInfo from './inputor-info'
 import { cn } from '@/lib/utils'
 import Flag from '@/components/ui/flag'
+import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 
 // get the type of single blog of the getData function
 type Props = Awaited<ReturnType<typeof getData>>['blogs'][number] & {
@@ -15,7 +15,8 @@ function BlogCard({ className, ...blog }: Props) {
         <div className={cn('flex flex-col overflow-hidden rounded-md border', className)}>
             <div className="grid grid-cols-3 p-2">
                 <div className="relative max-h-[150px] min-h-[120px] w-full overflow-hidden rounded-md bg-secondary">
-                    <Image
+                    <ImageWithFallbackPlaceholder
+                        variant='absolute-center'
                         className="object-cover object-center dark:brightness-90"
                         alt={`Thumbnail of blog '${blog.title}'`}
                         src={blog.imageUrl}

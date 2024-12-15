@@ -39,23 +39,23 @@ export async function getData(): Promise<BlogCardData[]> {
             ORDER BY b."createdAt" DESC
         `
 
-        const testQuery: BlogWithTranslations[] = [
-            ...query,
-            {
-                ...query[query.length - 1],
-                id: query[query.length - 1].id + 'aeufb',
-                imageUrl: query[query.length - 1].imageUrl + 'abc',
-            },
-        ]
+        // const testQuery: BlogWithTranslations[] = [
+        //     ...query,
+        //     {
+        //         ...query[query.length - 1],
+        //         id: query[query.length - 1].id + 'aeufb',
+        //         imageUrl: query[query.length - 1].imageUrl + 'abc',
+        //     },
+        // ]
 
         // Step 1: Collect image URLs
-        const imageUrls = testQuery.map((blog) => blog.imageUrl)
+        const imageUrls = query.map((blog) => blog.imageUrl)
 
         // Step 2: Get blurred images for all URLs concurrently
         const blurredImageUrls = await getBlurredImageUrls(imageUrls)
 
         // // Step 3: Transform lawyers data, including blurred images
-        const transformedBlog = testQuery.map((blog, i) => {
+        const transformedBlog = query.map((blog, i) => {
             const result = {
                 ...blog,
                 imageUrl: imageUrls[i],

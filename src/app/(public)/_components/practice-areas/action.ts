@@ -12,7 +12,7 @@ export type PracticeAreaPreviewData = Pick<
     fullName: { id: string; en: string }
     shortName: { id: string | null; en: string | null }
     desc: { id: string; en: string }
-    blurImageUrl: string
+    blurImageUrl: string | null
 }
 
 export async function getData() {
