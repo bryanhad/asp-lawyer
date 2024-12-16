@@ -1,12 +1,10 @@
-import { BaseContainer } from '@/app/(public)/_components/containers/base-container'
-import { Metadata } from 'next'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Locale } from '@/i18n/request'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import PageTitleWithBackground from '../../_components/any-page-components/page-title-with-background'
-import { Suspense } from 'react'
-import FetchComponent from './fetch-component'
+import { BaseContainer } from '../../_components/containers/base-container'
 import Section from '../../_components/containers/section'
-import SkeletonFallback from './skeleton'
+import { Metadata } from 'next'
+import BlogsInfiniteQuery from './blogs-infinite-query'
 
 type Props = { params: Promise<{ locale: Locale }> }
 
@@ -39,9 +37,7 @@ export default async function BlogsPage({ params }: Props) {
                 titlePrimary={t('titlePrimary')}
             />
             <Section lessYSpacing className="space-y-6">
-                <Suspense fallback={<SkeletonFallback/>}>
-                    <FetchComponent />
-                </Suspense>
+                <BlogsInfiniteQuery currentLocale={locale} />
             </Section>
         </BaseContainer>
     )

@@ -10,9 +10,9 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
         emailIsVerified: true,
         blogs: [
             {
-                id: 'cm4dpntdw0003tmao7zt3c0nx_1',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
-                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RY4YZQjhyHF0RYbTEXNC9DxgSq6rs3KVGZtIQP',
+                imageKey: '4YTZLQcHF0RY4YZQjhyHF0RYbTEXNC9DxgSq6rs3KVGZtIQP',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -37,9 +37,9 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                 ],
             },
             {
-                id: 'cm4dpntdw0003tmao7zt3c0nx_2',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
-                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYk6J4WuKdCwzsmfXjgnD95pl6WENASGrq327Z',
+                imageKey: '4YTZLQcHF0RYk6J4WuKdCwzsmfXjgnD95pl6WENASGrq327Z',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -64,7 +64,7 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                 ],
             },
             {
-                id: 'cm4dpntdw0003tmao7zt3c0nx_3',
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
                 imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYEydowhptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ0',
                 imageKey: '4YTZLQcHF0RYEydowhptbjaLHTsDWNAOSxPrkuCyUhVQ1cZ0',
                 translations: [
@@ -91,9 +91,9 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                 ],
             },
             {
-                id: 'cm4dpntdw0003tmao7zt3c0nx_4',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
-                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
                 translations: [
                     {
                         key: BlogTranslationKey.TITLE,
@@ -114,33 +114,6 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                         key: BlogTranslationKey.CONTENT,
                         language: Language.ID,
                         value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
-                    },
-                ],
-            },
-            {
-                id: 'cm4dpntdw0003tmao7zt3c0nx_5',
-                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
-                imageKey: '4YTZLQcHF0RYAipUhtR2VPiZ7nNvJ5ClqKBfGWRgxX3AMhtE',
-                translations: [
-                    {
-                        key: BlogTranslationKey.TITLE,
-                        language: Language.EN,
-                        value: 'Effective Strategies for Commercial Litigation',
-                    },
-                    {
-                        key: BlogTranslationKey.TITLE,
-                        language: Language.ID,
-                        value: 'Strategi Efektif untuk Litigasi Komersial',
-                    },
-                    {
-                        key: BlogTranslationKey.CONTENT,
-                        language: Language.EN,
-                        value: "<h2>Effective Strategies for Commercial Litigation</h2><p>Commercial litigation can be a challenging process, involving disputes over contracts, partnerships, or business operations. Successful outcomes often depend on a clear understanding of legal frameworks and effective negotiation skills.</p><p>Our firm provides strategic counsel to clients facing commercial disputes, helping them navigate litigation processes with confidence. From pre-litigation advice to court representation, we are committed to protecting our client's interests while striving for resolutions that align with their business goals.</p>",
-                    },
-                    {
-                        key: BlogTranslationKey.CONTENT,
-                        language: Language.ID,
-                        value: '<h2>Strategi Efektif untuk Litigasi Komersial</h2><p>Litigasi komersial dapat menjadi proses yang menantang, melibatkan perselisihan terkait kontrak, kemitraan, atau operasi bisnis. Keberhasilan sering kali bergantung pada pemahaman yang jelas tentang kerangka hukum dan keterampilan negosiasi yang efektif.</p><p>Firma kami memberikan nasihat strategis kepada klien yang menghadapi sengketa komersial, membantu mereka menavigasi proses litigasi dengan percaya diri. Mulai dari saran sebelum litigasi hingga representasi di pengadilan, kami berkomitmen untuk melindungi kepentingan klien kami sambil mengupayakan resolusi yang sejalan dengan tujuan bisnis mereka.</p>',
                     },
                 ],
             },

@@ -50,7 +50,7 @@ export default function MemberCards() {
                 currentSelectedRole={selectedRole}
             />
             <SearchBar onSearch={(query) => setSearchQuery(query)} />
-            {filteredMembers.length <= 0 && <NotFound singularEntity='member' searchTerm={searchQuery} />}
+            {filteredMembers.length <= 0 && <NotFound singularEntity={{en: 'team member', id: 'anggota team'}} searchTerm={searchQuery} currentLocale={currentLocale}/>}
             {filteredMembers.length > 0 && (
                 <div className="grid w-full flex-[1] grid-cols-1 gap-5 max-lg:px-12 sm:grid-cols-2 sm:gap-12 md:grid-cols-3 xl:grid-cols-4 xl:gap-14">
                     {filteredMembers.map((member) => (

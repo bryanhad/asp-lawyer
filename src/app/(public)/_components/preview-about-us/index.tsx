@@ -9,7 +9,7 @@ import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-pl
 
 export default async function PreviewAboutUs() {
     const t = await getTranslations('homePage.previewAboutUs')
-    const imageUrl = `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYUqloJyzObXmFsjS39BxoYHaeJ0yCUQhf1gO5`
+    const imageUrl = `https://utfs.io/a/${process.env.UPLOADTHING_APP_ID}/4YTZLQcHF0RYuuKehxTtzqiMx6UFXJOGBjwVWfpcnvCoY823`
     const blurImage = await getBlurredImageUrl(imageUrl)
 
     return (

@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
      * @see https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
      */
     const queryClient = getQueryClient()
-    queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
         queryKey: ['team-members'],
         queryFn: getData,
       })
