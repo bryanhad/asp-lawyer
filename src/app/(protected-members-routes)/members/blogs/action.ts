@@ -56,24 +56,6 @@ export async function getData({
         .filter((word) => word.length > 0)
         .join(' ')
 
-    const baseQuery = Prisma.sql`
-        FROM blogs b
-        LEFT JOIN translations AS t 
-            ON t."entityId" = b."id" 
-            AND t."entityType" = ${EntityType.BLOG}
-            AND t."key" IN (${BlogTranslationKey.TITLE})
-        LEFT JOIN users u
-            ON u."id" = b."authorId"
-            ${
-                searchString
-                    ? Prisma.sql`WHERE 
-                        t."value" ILIKE ${`%${searchString}%`} 
-                        OR u."username" ILIKE ${`%${searchString}%`}
-                    `
-                    : Prisma.empty
-            }
-    `
-
     const offset = (currentPage - 1) * fetchSize
 
     const [query, countRes] = await Promise.all([
@@ -96,11 +78,25 @@ export async function getData({
                     THEN t."value" 
                 END)
             ) AS title
-            ${baseQuery}
+            FROM blogs b
+            LEFT JOIN translations AS t 
+                ON t."entityId" = b."id" 
+                AND t."entityType" = ${EntityType.BLOG}
+                AND t."key" IN (${BlogTranslationKey.TITLE})
+            LEFT JOIN users u
+                ON u."id" = b."authorId"
+            ${
+                searchString
+                    ? Prisma.sql`WHERE 
+                        t."value" ILIKE ${`%${searchString}%`} 
+                        OR u."username" ILIKE ${`%${searchString}%`}
+                    `
+                    : Prisma.empty
+            }
             GROUP BY b."id", b."imageUrl", b."createdAt", u."id"
             LIMIT ${fetchSize} OFFSET ${offset}
         `,
-        prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count ${baseQuery}`,
+        prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count FROM blogs b`,
     ])
 
     // Step 1: Collect image URLs
@@ -118,6 +114,7 @@ export async function getData({
     })
 
     const totalDataCount = Number(countRes[0].count)
+    console.log({totalDataCount})
     const totalAvailablePages = Math.ceil(Number(totalDataCount) / fetchSize)
 
     return {
