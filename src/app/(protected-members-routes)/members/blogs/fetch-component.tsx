@@ -18,7 +18,6 @@ export default async function FetchBlogsPageContent({ searchParams }: Props) {
 
     const { totalDataCount, blogs, totalAvailablePages, isUsingFilter, fetchSize } = await getData({
         filterValues: sp,
-        defaultFetchSize: 10,
     })
     return (
         <div className="flex flex-col gap-2 overflow-hidden rounded-md md:min-h-[360px]">

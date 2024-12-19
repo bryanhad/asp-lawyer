@@ -34,22 +34,20 @@ type BlogData = FetchedBlogEntry & {
 export async function getData({
     filterValues,
     createdByUserId: _createdByUserId,
-    defaultFetchSize,
-}: {
+}: Partial<{
     filterValues: SearchParams
-    defaultFetchSize: number
-    createdByUserId?: string
-}): Promise<{
+    createdByUserId: string
+}> = {}): Promise<{
     blogs: BlogData[]
     totalDataCount: number
     totalAvailablePages: number
     isUsingFilter: boolean
     fetchSize: number
 }> {
-    const { q, page, size } = filterValues
+    const { q, page, size } = filterValues ?? {}
     const isUsingFilter = !!q
     const currentPage = Number(page) || 1
-    const fetchSize = Number(size) || defaultFetchSize
+    const fetchSize = Number(size) || 5
 
     const searchString = q
         ?.split(' ')
@@ -114,7 +112,6 @@ export async function getData({
     })
 
     const totalDataCount = Number(countRes[0].count)
-    console.log({totalDataCount})
     const totalAvailablePages = Math.ceil(Number(totalDataCount) / fetchSize)
 
     return {

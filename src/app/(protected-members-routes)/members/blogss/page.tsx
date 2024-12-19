@@ -1,17 +1,13 @@
-import { Suspense } from 'react'
-import FetchComponent from './fetch-component'
 import LinkButton from '@/app/(protected-members-routes)/_components/link-button'
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { redirect } from 'next/navigation'
-import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 import { getQueryClient } from '@/lib/tanstack-query-client'
 import { getData } from './action'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import DisplayBlogs from './display-component'
+import { BLOGS_QUERY_KEY } from './constants'
 
-type Props = {
-    searchParams: Promise<GenericSearchParams<'q' | 'page' | 'size', string | undefined>>
-}
-
-export default async function BlogsPage({ searchParams }: Props) {
+export default async function Blogs2Page() {
     const { session, user } = await getCurrentSession()
     if (session === null) {
         return redirect('/sign-in')
@@ -26,7 +22,7 @@ export default async function BlogsPage({ searchParams }: Props) {
      */
     const queryClient = getQueryClient()
     await queryClient.prefetchQuery({
-        queryKey: ['members-route', 'blogs'],
+        queryKey: BLOGS_QUERY_KEY,
         queryFn: () => getData(),
     })
 
@@ -35,9 +31,9 @@ export default async function BlogsPage({ searchParams }: Props) {
             <LinkButton className="mb-4" href={'/members/blogs/add'}>
                 Add Blog
             </LinkButton>
-            <Suspense fallback={<PageLoadingIndicator />}>
-                <FetchComponent searchParams={searchParams} />
-            </Suspense>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <DisplayBlogs />
+            </HydrationBoundary>
         </>
     )
 }

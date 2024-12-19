@@ -117,6 +117,141 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                     },
                 ],
             },
+            {
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                translations: [
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.EN,
+                        value: 'Safeguarding Your Intellectual Property Rights',
+                    },
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.ID,
+                        value: 'Melindungi Hak Kekayaan Intelektual Anda',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.EN,
+                        value: '<h2>Safeguarding Your Intellectual Property Rights</h2><p>Intellectual property rights are critical assets for businesses and individuals, encompassing trademarks, copyrights, patents, and trade secrets. Protecting these rights is essential to maintaining competitive advantage and fostering innovation.</p><p>Our law firm provides comprehensive intellectual property services, including registration, enforcement, and dispute resolution. We work closely with clients to develop strategies tailored to their specific needs, ensuring their intellectual property is safeguarded against infringement.</p>',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.ID,
+                        value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
+                    },
+                ],
+            },
+            {
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                translations: [
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.EN,
+                        value: 'Safeguarding Your Intellectual Property Rights',
+                    },
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.ID,
+                        value: 'Melindungi Hak Kekayaan Intelektual Anda',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.EN,
+                        value: '<h2>Safeguarding Your Intellectual Property Rights</h2><p>Intellectual property rights are critical assets for businesses and individuals, encompassing trademarks, copyrights, patents, and trade secrets. Protecting these rights is essential to maintaining competitive advantage and fostering innovation.</p><p>Our law firm provides comprehensive intellectual property services, including registration, enforcement, and dispute resolution. We work closely with clients to develop strategies tailored to their specific needs, ensuring their intellectual property is safeguarded against infringement.</p>',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.ID,
+                        value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
+                    },
+                ],
+            },
+            {
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                translations: [
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.EN,
+                        value: 'Safeguarding Your Intellectual Property Rights',
+                    },
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.ID,
+                        value: 'Melindungi Hak Kekayaan Intelektual Anda',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.EN,
+                        value: '<h2>Safeguarding Your Intellectual Property Rights</h2><p>Intellectual property rights are critical assets for businesses and individuals, encompassing trademarks, copyrights, patents, and trade secrets. Protecting these rights is essential to maintaining competitive advantage and fostering innovation.</p><p>Our law firm provides comprehensive intellectual property services, including registration, enforcement, and dispute resolution. We work closely with clients to develop strategies tailored to their specific needs, ensuring their intellectual property is safeguarded against infringement.</p>',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.ID,
+                        value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
+                    },
+                ],
+            },
+            {
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                translations: [
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.EN,
+                        value: 'Safeguarding Your Intellectual Property Rights',
+                    },
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.ID,
+                        value: 'Melindungi Hak Kekayaan Intelektual Anda',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.EN,
+                        value: '<h2>Safeguarding Your Intellectual Property Rights</h2><p>Intellectual property rights are critical assets for businesses and individuals, encompassing trademarks, copyrights, patents, and trade secrets. Protecting these rights is essential to maintaining competitive advantage and fostering innovation.</p><p>Our law firm provides comprehensive intellectual property services, including registration, enforcement, and dispute resolution. We work closely with clients to develop strategies tailored to their specific needs, ensuring their intellectual property is safeguarded against infringement.</p>',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.ID,
+                        value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
+                    },
+                ],
+            },
+            {
+                id: 'cm4dpntdw0003tmao7zt3c0nx',
+                imageUrl: 'https://utfs.io/f/4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                imageKey: '4YTZLQcHF0RYMc7NrRVpTmdbGDSok6Eqnz9hZgHvAascB0jx',
+                translations: [
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.EN,
+                        value: 'Safeguarding Your Intellectual Property Rights',
+                    },
+                    {
+                        key: BlogTranslationKey.TITLE,
+                        language: Language.ID,
+                        value: 'Melindungi Hak Kekayaan Intelektual Anda',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.EN,
+                        value: '<h2>Safeguarding Your Intellectual Property Rights</h2><p>Intellectual property rights are critical assets for businesses and individuals, encompassing trademarks, copyrights, patents, and trade secrets. Protecting these rights is essential to maintaining competitive advantage and fostering innovation.</p><p>Our law firm provides comprehensive intellectual property services, including registration, enforcement, and dispute resolution. We work closely with clients to develop strategies tailored to their specific needs, ensuring their intellectual property is safeguarded against infringement.</p>',
+                    },
+                    {
+                        key: BlogTranslationKey.CONTENT,
+                        language: Language.ID,
+                        value: '<h2>Melindungi Hak Kekayaan Intelektual Anda</h2><p>Hak kekayaan intelektual adalah aset penting bagi bisnis dan individu, mencakup merek dagang, hak cipta, paten, dan rahasia dagang. Melindungi hak-hak ini sangat penting untuk mempertahankan keunggulan kompetitif dan mendorong inovasi.</p><p>Firma hukum kami menyediakan layanan kekayaan intelektual yang komprehensif, termasuk pendaftaran, penegakan, dan penyelesaian sengketa. Kami bekerja sama dengan klien untuk mengembangkan strategi yang disesuaikan dengan kebutuhan spesifik mereka, memastikan hak kekayaan intelektual mereka terlindungi dari pelanggaran.</p>',
+                    },
+                ],
+            },
         ],
     },
 ]
