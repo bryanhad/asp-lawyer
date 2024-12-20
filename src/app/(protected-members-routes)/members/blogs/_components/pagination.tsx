@@ -1,65 +1,53 @@
 'use client'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { ReadonlyURLSearchParams } from 'next/navigation'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { getQueryClient } from '@/lib/tanstack-query-client'
+import { useMutation } from '@tanstack/react-query'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useBlogsData } from './display-component'
+import { useBlogsTableContext } from './table-context'
+import { BLOGS_QUERY_KEY } from '../../constants'
+import { getData } from '../action'
 
-type PaginationProps = {
-    totalAvailablePages: number
-    totalRowCount: number
-    itemsPerPage: number
-    totalRowShown: number
-}
+function Pagination() {
+    const { setIsLoading } = useBlogsTableContext()
+    const { data } = useBlogsData()
+    const queryClient = getQueryClient()
+    const { mutate: paginate } = useMutation({
+        mutationFn: getData,
+        onMutate: () => {
+            setIsLoading(true)
+        },
+        onSuccess: (newData) => {
+            queryClient.setQueryData(BLOGS_QUERY_KEY, newData)
+        },
+        onSettled: () => {
+            setIsLoading(false)
+        },
+    })
 
-export const createPageURL = (
-    pathname: string,
-    searchParams: ReadonlyURLSearchParams,
-    pageNumber: number | string,
-    pageSize?: number | string,
-    // order?: string
-) => {
-    const params = new URLSearchParams(searchParams)
-    params.set('page', pageNumber.toString())
-    if (pageSize) {
-        params.set('size', pageSize.toString())
-    }
-    // if (order) {
-    //     params.set("order", order)
-    // }
-    return `${pathname}?${params.toString()}`
-}
+    if (!data) return null
 
-function Pagination({ totalAvailablePages, totalRowCount, itemsPerPage, totalRowShown }: PaginationProps) {
-    const router = useRouter()
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const currentPage = Number(searchParams.get('page')) || 1
-    const _currentPageSize = Number(searchParams.get('size')) || 10
-
-    // createPageUrl returns the pageUrl with the search params attached
-    function generatePageUrl(pageNumber: number | string, size?: number | string) {
-        return createPageURL(pathname, searchParams, pageNumber, size)
-    }
+    const { fetchSize, fetchedDataCount, totalAvailablePages, totalDataCount, currentPage } = data.fetchDetail
 
     return (
         <div className="mb-4 flex items-center justify-between px-2">
             <div className="hidden flex-[1] text-sm text-muted-foreground md:block">
-                {totalRowShown} of {totalRowCount} row(s) shown.
+                {fetchedDataCount} of {totalDataCount} row(s) shown.
             </div>
             <div className="flex flex-[1] items-center justify-between gap-3 md:flex-row">
                 <div className="flex items-center gap-2 md:flex-row">
                     <p className="sm:hidden">Rows</p>
-                    <p className="hidden text-sm font-medium sm:block text-nowrap">Rows per page</p>
+                    <p className="hidden text-nowrap text-sm font-medium sm:block">Rows per page</p>
                     <Select
                         onValueChange={(value) => {
-                            router.push(generatePageUrl(1, value), {
-                                scroll: false,
-                            })
+                            const newFetchSize = Number(value)
+                            paginate({ filterValues: { size: isNaN(newFetchSize) ? 5 : newFetchSize } })
                         }}
                     >
-                        <SelectTrigger className="h-8 w-[70px]">
-                            <SelectValue placeholder={itemsPerPage} />
+                        <SelectTrigger className="h-8 min-w-[70px]">
+                            <SelectValue placeholder={fetchSize} />
                         </SelectTrigger>
                         <SelectContent side="top">
                             {[5, 10, 15].map((pageSize) => (
@@ -91,8 +79,8 @@ function Pagination({ totalAvailablePages, totalRowCount, itemsPerPage, totalRow
                         className="h-8 w-8 p-0"
                         disabled={currentPage <= 1}
                         onClick={() =>
-                            router.push(generatePageUrl(currentPage - 1), {
-                                scroll: false,
+                            paginate({
+                                filterValues: { page: currentPage - 1 },
                             })
                         }
                     >
@@ -103,26 +91,13 @@ function Pagination({ totalAvailablePages, totalRowCount, itemsPerPage, totalRow
                     <div className="flex w-[100px] items-center justify-center text-sm font-medium md:hidden">
                         Page {currentPage} of {totalAvailablePages}
                     </div>
-                    {/* GO TO NEXT PAGE */}
-                    {/* <Button
-                        asChild
-                        variant="outline"
-                        className="h-8 w-8 p-0"
-                        disabled={currentPage >= totalAvailablePages}
-                    >
-                        <Link href={generatePageUrl(currentPage + 1)}>
-                            <span className="sr-only">Go to next page</span>
-                            <ChevronRight size={16} className="shrink-0" />
-                        </Link>
-                    </Button> */}
-
                     <Button
                         variant="outline"
                         className="h-8 w-8 p-0"
                         disabled={currentPage >= totalAvailablePages}
                         onClick={() =>
-                            router.push(generatePageUrl(currentPage + 1), {
-                                scroll: false,
+                            paginate({
+                                filterValues: { page: currentPage + 1 },
                             })
                         }
                     >

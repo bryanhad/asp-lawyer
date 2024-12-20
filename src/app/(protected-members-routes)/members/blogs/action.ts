@@ -17,14 +17,24 @@ import {
     addBlogFormSchemaServer,
     editBlogFormSchemaClient,
     editBlogFormSchemaServer,
-    SearchParams,
 } from './validation'
 import { getBlurredImageUrls } from '@/lib/server-utils'
 import { revalidatePath } from 'next/cache'
 
+export type SearchParams = { size?: number; page?: number; q?: string }
+
 type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
     title: { id: string; en: string }
     author: Pick<User, 'id' | 'username'>
+}
+
+export type FetchDetail = {
+    totalDataCount: number
+    totalAvailablePages: number
+    isUsingFilter: boolean
+    fetchSize: number
+    fetchedDataCount: number
+    currentPage: number
 }
 
 type BlogData = FetchedBlogEntry & {
@@ -39,15 +49,12 @@ export async function getData({
     createdByUserId: string
 }> = {}): Promise<{
     blogs: BlogData[]
-    totalDataCount: number
-    totalAvailablePages: number
-    isUsingFilter: boolean
-    fetchSize: number
+    fetchDetail: FetchDetail
 }> {
     const { q, page, size } = filterValues ?? {}
     const isUsingFilter = !!q
-    const currentPage = Number(page) || 1
-    const fetchSize = Number(size) || 5
+    const currentPage = page || 1
+    const fetchSize = size || 5
 
     const searchString = q
         ?.split(' ')
@@ -86,8 +93,14 @@ export async function getData({
             ${
                 searchString
                     ? Prisma.sql`WHERE 
-                        t."value" ILIKE ${`%${searchString}%`} 
-                        OR u."username" ILIKE ${`%${searchString}%`}
+                        EXISTS (
+                            SELECT 1 FROM translations sub_t
+                            WHERE sub_t."entityId" = b."id"
+                                AND sub_t."entityType" = ${EntityType.BLOG}
+                                AND sub_t."key" = ${BlogTranslationKey.TITLE}
+                                AND sub_t."value" ILIKE ${`%${searchString}%`}
+                        ) OR
+                        u."username" ILIKE ${`%${searchString}%`}
                     `
                     : Prisma.empty
             }
@@ -113,13 +126,16 @@ export async function getData({
 
     const totalDataCount = Number(countRes[0].count)
     const totalAvailablePages = Math.ceil(Number(totalDataCount) / fetchSize)
-
     return {
         blogs: transformedBlog,
-        totalDataCount,
-        totalAvailablePages,
-        isUsingFilter,
-        fetchSize,
+        fetchDetail: {
+            totalDataCount,
+            totalAvailablePages,
+            isUsingFilter,
+            fetchSize,
+            fetchedDataCount: transformedBlog.length,
+            currentPage,
+        },
     }
 }
 

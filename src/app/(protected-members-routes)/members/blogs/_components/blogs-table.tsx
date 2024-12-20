@@ -4,11 +4,11 @@ import Flag from '@/components/ui/flag'
 import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import { DeleteButton, EditButton, ViewButton } from '../../_components/buttons'
-import BlogCard from '../blogs/_components/card'
-import InputorInfo from '../blogs/_components/inputor-info'
-import TableDataNotFound from '../blogs/_components/table-data-not-found'
-import { deleteBlogAction } from '../blogs/action'
+import { DeleteButton, EditButton, ViewButton } from '../../../_components/buttons'
+import BlogCard from './card'
+import InputorInfo from './inputor-info'
+import TableDataNotFound from './table-data-not-found'
+import { deleteBlogAction } from '../action'
 import { useBlogsData } from './display-component'
 import { SkeletonFallbackDesktop, SkeletonFallbackMobile } from './skeleton'
 import { useBlogsTableContext } from './table-context'
@@ -16,8 +16,12 @@ import { useBlogsTableContext } from './table-context'
 export default function BlogsTable() {
     const { isLoading } = useBlogsTableContext()
     const { data } = useBlogsData()
+
+    if (!data) return null
+
     return (
-        <div className="flex-[1] bg-background md:border md:rounded-md">
+        <div className="flex-[1] bg-background md:rounded-md md:border">
+            <p></p>
             {/* MOBILE */}
             <div className="flex flex-col gap-4 md:hidden">
                 {isLoading && <SkeletonFallbackMobile />}
@@ -56,7 +60,9 @@ export default function BlogsTable() {
                         data.blogs.length > 0 &&
                         data.blogs.map((blog, idx) => (
                             <TableRow key={blog.id}>
-                                <TableCell className="text-center">{idx + 1}</TableCell>
+                                <TableCell className="text-center">
+                                    {idx + 1 + data.fetchDetail.fetchSize * (data.fetchDetail.currentPage - 1)}
+                                </TableCell>
                                 <TableCell className="font-medium">
                                     <div className="flex gap-4">
                                         <div className="relative max-h-[150px] min-h-[120px] min-w-[200px] overflow-hidden rounded-md bg-secondary">
