@@ -10,7 +10,13 @@ import {
       defaultOptions: {
         queries: {
           staleTime: 6 * 1000,
-          refetchInterval: 6 * 1000
+        //   refetchInterval: 6 * 1000 // kinda wonky.. removed it for now..
+        /**
+         * Example of wonkiness:
+         * cuz my getData for a table function is also returning the currentPage..
+         * when the user is on the 2nd page or so, after the refetch interval time is up,
+         * the table automatically updates to first page cuz of the refetch hahaha :)
+         */
         },
         dehydrate: {
           // include pending queries in dehydration
