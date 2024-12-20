@@ -53,7 +53,7 @@ function Modal({
             )}
             <DialogContent
                 disableDefaultCloseButton={disableDefaultCloseButton}
-                className={cn('sm:max-w-md', className)}
+                className={cn('sm:max-w-md w-full max-w-[95%]', className)}
             >
                 {(title || desc) && (
                     <DialogHeader className='space-y-3'>

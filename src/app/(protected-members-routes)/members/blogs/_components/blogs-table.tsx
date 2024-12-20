@@ -6,27 +6,68 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { cn } from '@/lib/utils'
 import { DeleteButton, EditButton, ViewButton } from '../../../_components/buttons'
 import BlogCard from './card'
-import InputorInfo from './inputor-info'
-import TableDataNotFound from './table-data-not-found'
-import { deleteBlogAction } from '../action'
 import { useBlogsData } from './display-component'
+import InputorInfo from './inputor-info'
 import { SkeletonFallbackDesktop, SkeletonFallbackMobile } from './skeleton'
 import { useBlogsTableContext } from './table-context'
+import TableDataNotFound from './table-data-not-found'
+import { useToast } from '@/hooks/use-toast'
+import { useMutation } from '@tanstack/react-query'
+import { deleteBlogAction } from '../action'
+import { BLOGS_QUERY_KEY } from '../../constants'
+import { getQueryClient } from '@/lib/tanstack-query-client'
 
 export default function BlogsTable() {
     const { isLoading } = useBlogsTableContext()
     const { data } = useBlogsData()
 
+    const queryClient = getQueryClient()
+    const { toast } = useToast()
+    // DELETE BLOG MUTATION
+    const {
+        mutate: deleteBlog,
+        isPending: isDeleteBlogPending,
+        isSuccess: isDeleteBlogSuccessful,
+    } = useMutation({
+        mutationFn: deleteBlogAction,
+        onSuccess: ({ success, message }) => {
+            if (success) {
+                // revalidate client cache
+                queryClient.invalidateQueries({ queryKey: BLOGS_QUERY_KEY })
+            }
+            toast({ variant: success ? 'successful' : 'destructive', description: message })
+        },
+        onError: () => {
+            toast({ variant: 'destructive', description: 'Internal server error' })
+        },
+    })
+
     if (!data) return null
 
     return (
         <div className="flex-[1] bg-background md:rounded-md md:border">
-            <p></p>
             {/* MOBILE */}
             <div className="flex flex-col gap-4 md:hidden">
                 {isLoading && <SkeletonFallbackMobile />}
                 {!isLoading && data.blogs.length < 1 && <TableDataNotFound notForTable tableName="blog" />}
-                {!isLoading && data.blogs.length > 0 && data.blogs.map((blog) => <BlogCard key={blog.id} {...blog} />)}
+                {!isLoading &&
+                    data.blogs.length > 0 &&
+                    data.blogs.map((blog) => (
+                        <BlogCard
+                            key={blog.id}
+                            {...blog}
+                            deleteButton={
+                                <DeleteButton
+                                    small
+                                    className="flex-[1]"
+                                    toBeDeletedName={blog.title.en}
+                                    onApprove={() => deleteBlog(blog.id)}
+                                    isPending={isDeleteBlogPending}
+                                    isSuccessful={isDeleteBlogSuccessful}
+                                />
+                            }
+                        />
+                    ))}
             </div>
             {/* DESKTOP */}
             <Table
@@ -107,7 +148,9 @@ export default function BlogsTable() {
                                             small
                                             className="min-w-min"
                                             toBeDeletedName={blog.title.en}
-                                            onApprove={deleteBlogAction.bind(null, blog.id)}
+                                            onApprove={() => deleteBlog(blog.id)}
+                                            isPending={isDeleteBlogPending}
+                                            isSuccessful={isDeleteBlogSuccessful}
                                         />
                                         <EditButton
                                             small

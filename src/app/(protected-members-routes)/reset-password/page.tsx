@@ -1,4 +1,4 @@
-import QueryParamToast from '@/components/ui/query-param-toast'
+import SearchParamHandler from '@/components/ui/SearchParamHandler'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { AuthCard } from '../_components/auth-card'
@@ -21,7 +21,7 @@ export default async function ResetPasswordPage() {
     return (
         <AuthPageContainer>
             <Suspense>
-                <QueryParamToast param="toast" />
+                <SearchParamHandler />
             </Suspense>
             <AuthCard title="Enter your new password" headerLabel={`Remember your password!`}>
                 <PasswordResetForm />

@@ -5,21 +5,22 @@ import { utapi } from '@/app/api/uploadthing/core'
 import { BlogTranslationKey, EntityType, Language } from '@/lib/enum'
 import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'
+import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Blog, Prisma, User } from '@prisma/client'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { UploadThingError } from 'uploadthing/server'
 import { FileEsque, UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { globalPOSTRateLimit } from '../../lib/server/request'
+import { REVALIDATE_CLIENT_CACHE } from '../constants'
 import {
     addBlogFormSchemaClient,
     addBlogFormSchemaServer,
     editBlogFormSchemaClient,
     editBlogFormSchemaServer,
 } from './validation'
-import { getBlurredImageUrls } from '@/lib/server-utils'
-import { revalidatePath } from 'next/cache'
 
 export type SearchParams = { size?: number; page?: number; q?: string }
 
@@ -105,6 +106,7 @@ export async function getData({
                     : Prisma.empty
             }
             GROUP BY b."id", b."imageUrl", b."createdAt", u."id"
+            ORDER BY b."createdAt" DESC
             LIMIT ${fetchSize} OFFSET ${offset}
         `,
         prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count FROM blogs b`,
@@ -246,7 +248,7 @@ export async function addBlogAction(
     }
     revalidatePath(`/en/blogs`)
     revalidatePath(`/id/blogs`)
-    return redirect(`/members/blogs?toast=${encodeURIComponent(`New blog has been added`)}`)
+    return redirect(`/members/blogs?toast=${encodeURIComponent(`New blog has been added`)}&${REVALIDATE_CLIENT_CACHE}`)
 }
 
 /**

@@ -1,4 +1,4 @@
-import QueryParamToast from '@/components/ui/query-param-toast'
+import SearchParamHandler from '@/components/ui/SearchParamHandler'
 // import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 // import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
@@ -24,7 +24,7 @@ export default async function SignInPage() {
     return (
         <AuthPageContainer>
             <Suspense>
-                <QueryParamToast param="toast" />
+                <SearchParamHandler />
             </Suspense>
             <AuthCard title="ASP Members" headerLabel="Insert your credentials to sign-in">
                 <SignInForm />

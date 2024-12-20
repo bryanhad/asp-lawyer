@@ -7,7 +7,7 @@ import { getUserEmailVerificationRequestFromRequest } from '../lib/server/email-
 import { globalGETRateLimit } from '../lib/server/request'
 import { VerifyEmailForms } from './components'
 import { Suspense } from 'react'
-import QueryParamToast from '@/components/ui/query-param-toast'
+import SearchParamHandler from '@/components/ui/SearchParamHandler'
 
 export default async function Page() {
     if (!globalGETRateLimit()) {
@@ -29,7 +29,7 @@ export default async function Page() {
     return (
         <main className="flex flex-[1] flex-col items-center justify-center px-4">
             <Suspense>
-                <QueryParamToast param="toast" />
+                <SearchParamHandler />
             </Suspense>
             <AuthCard
                 title="Verify Your Email Address"
