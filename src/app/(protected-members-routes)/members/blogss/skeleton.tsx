@@ -1,46 +1,11 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { TableCell, TableRow } from '@/components/ui/table'
 
-export default function SkeletonFallback() {
+function SkeletonFallbackDesktop() {
     return (
         <>
             {/* MOBILE SKELETON */}
-            {Array.from({ length: 5 }).map((_, index) => (
-                <div
-                    key={`mobile_skeleton_${index}`}
-                    className={'flex flex-col overflow-hidden rounded-md border border-muted md:hidden'}
-                >
-                    <div className="grid grid-cols-3 p-2">
-                        <Skeleton className="max-h-[150px] min-h-[120px] w-full" />
 
-                        <div className="col-span-2 ml-2 flex flex-col justify-between px-2">
-                            <div className="flex flex-col gap-2">
-                                <div className="flex items-center gap-2">
-                                    <Skeleton className="aspect-square w-[24px] rounded-full" />
-                                    <Skeleton className="h-[17px] w-full max-w-[220px]" />
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Skeleton className="aspect-square w-[24px] rounded-full" />
-                                    <Skeleton className="h-[17px] w-full max-w-[220px]" />
-                                </div>
-                            </div>
-                            <div className="mt-4 space-y-1">
-                                <Skeleton className="h-[17px] w-full max-w-[70px]" />
-
-                                <div className="flex items-center gap-2">
-                                    <Skeleton className="aspect-square w-[38px] rounded-full" />
-                                    <Skeleton className="h-[20px] w-[70px]" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex gap-4 p-2">
-                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
-                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
-                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
-                    </div>
-                </div>
-            ))}
             {/* DESKTOP SKELETON */}
             {Array.from({ length: 5 }).map((_, index) => (
                 <TableRow key={`${`desktop_skeleton_${index}`}`} className="max-md:hidden">
@@ -82,3 +47,48 @@ export default function SkeletonFallback() {
         </>
     )
 }
+
+function SkeletonFallbackMobile() {
+    return (
+        <>
+            {Array.from({ length: 5 }).map((_, index) => (
+                <div
+                    key={`mobile_skeleton_${index}`}
+                    className={'flex flex-col overflow-hidden rounded-md border border-muted md:hidden'}
+                >
+                    <div className="grid grid-cols-3 p-2">
+                        <Skeleton className="max-h-[150px] min-h-[120px] w-full" />
+
+                        <div className="col-span-2 ml-2 flex flex-col justify-between px-2">
+                            <div className="flex flex-col gap-2">
+                                <div className="flex items-center gap-2">
+                                    <Skeleton className="aspect-square w-[24px] rounded-full" />
+                                    <Skeleton className="h-[17px] w-full max-w-[220px]" />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Skeleton className="aspect-square w-[24px] rounded-full" />
+                                    <Skeleton className="h-[17px] w-full max-w-[220px]" />
+                                </div>
+                            </div>
+                            <div className="mt-4 space-y-1">
+                                <Skeleton className="h-[17px] w-full max-w-[70px]" />
+
+                                <div className="flex items-center gap-2">
+                                    <Skeleton className="aspect-square w-[38px] rounded-full" />
+                                    <Skeleton className="h-[20px] w-[70px]" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-4 p-2">
+                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
+                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
+                        <Skeleton className="aspect-square h-[40px] flex-[1]" />
+                    </div>
+                </div>
+            ))}
+        </>
+    )
+}
+
+export {SkeletonFallbackDesktop, SkeletonFallbackMobile}

@@ -18,7 +18,7 @@ function TableDataNotFound({
 }: TableDataNotFoundProps) {
     if (notForTable) {
         return (
-            <div className="flex flex-col items-center gap-2 py-6 text-center text-gray-400">
+            <div className="flex flex-col items-center gap-2 py-6 text-center text-gray-400 border rounded-md">
                 <Database size={50} className="shrink-0" />
                 <p className="text-xl font-semibold">Data Not Found</p>
                 <div className="flex flex-col gap-1">
@@ -26,11 +26,11 @@ function TableDataNotFound({
                     {!simpleMessage && (
                         <>
                             <p>
-                                {hasFilters && `No ${tableName} match the applied filters`}
+                                {hasFilters && `No ${tableName} match the applied search`}
                                 {!hasFilters && `The database does not contain any ${tableName}s`}
                             </p>
                             <p>
-                                {hasFilters && 'Please try using different filters'}
+                                {hasFilters && 'Please try using different term'}
                                 {!hasFilters && (
                                     <>
                                         {tableName === 'user'
@@ -54,11 +54,11 @@ function TableDataNotFound({
                     <p className="text-xl font-semibold">Data Not Found</p>
                     <div className="flex flex-col gap-1">
                         <p>
-                            {hasFilters && `No ${tableName} match the applied filters`}
+                            {hasFilters && `No ${tableName} match the applied search`}
                             {!hasFilters && `The database does not contain any ${tableName}s`}
                         </p>
                         <p>
-                            {hasFilters && 'Please try using different filters'}
+                            {hasFilters && 'Please try using different term'}
                             {!hasFilters && (
                                 <>
                                     {tableName === 'user'

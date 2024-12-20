@@ -5,16 +5,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { getQueryClient } from '@/lib/tanstack-query-client'
 import { useMutation } from '@tanstack/react-query'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
 import { getData } from './action'
 import { BLOGS_QUERY_KEY } from './constants'
 import { useBlogsData } from './display-component'
+import { useBlogsTableContext } from './table-context'
 
-type Props = {
-    setIsMutating: Dispatch<SetStateAction<boolean>>
-}
-
-function Pagination({ setIsMutating }: Props) {
+function Pagination() {
+    const { setIsLoading } = useBlogsTableContext()
     const {
         data: { fetchDetail },
     } = useBlogsData()
@@ -22,13 +19,13 @@ function Pagination({ setIsMutating }: Props) {
     const { mutate: paginate } = useMutation({
         mutationFn: getData,
         onMutate: () => {
-            setIsMutating(true)
+            setIsLoading(true)
         },
         onSuccess: (newData) => {
             queryClient.setQueryData(BLOGS_QUERY_KEY, newData)
         },
         onSettled: () => {
-            setIsMutating(false)
+            setIsLoading(false)
         },
     })
     const { fetchSize, fetchedDataCount, totalAvailablePages, totalDataCount, currentPage } = fetchDetail

@@ -22,7 +22,7 @@ model User {
     emailIsVerified Boolean  @default(false)
     recoveryCode    Bytes
     createdAt       DateTime @default(now())
-    
+
     passwordResetSessions     PasswordResetSession[]
     emailVerificationRequests EmailVerificationRequest[]
     sessions                  Session[]
@@ -102,6 +102,9 @@ model Translation {
     entityType String // Specifies the type, e.g., 'Member' or 'Blog'
 
     @@unique([entityId, entityType, language, key]) // ensures each combination of entityId, entittyType, language, and key in the Translation model is unique.
+    @@index([entityId, entityType]) // for filtering by entity and type
+    @@index([key]) // for filtering by key
+    @@index([language]) // for filtering by language
     @@map("translations")
 }
 

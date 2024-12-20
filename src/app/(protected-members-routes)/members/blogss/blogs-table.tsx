@@ -10,21 +10,19 @@ import InputorInfo from '../blogs/_components/inputor-info'
 import TableDataNotFound from '../blogs/_components/table-data-not-found'
 import { deleteBlogAction } from '../blogs/action'
 import { useBlogsData } from './display-component'
-import SkeletonFallback from './skeleton'
+import { SkeletonFallbackDesktop, SkeletonFallbackMobile } from './skeleton'
+import { useBlogsTableContext } from './table-context'
 
-type Props = {
-    isMutating: boolean
-}
-
-export default function BlogsTable({ isMutating }: Props) {
+export default function BlogsTable() {
+    const { isLoading } = useBlogsTableContext()
     const { data } = useBlogsData()
     return (
-        <div className="flex-[1] bg-background md:border">
+        <div className="flex-[1] bg-background md:border md:rounded-md">
             {/* MOBILE */}
             <div className="flex flex-col gap-4 md:hidden">
-                {isMutating && <SkeletonFallback />}
-                {!isMutating && data.blogs.length < 1 && <TableDataNotFound notForTable tableName="blog" />}
-                {!isMutating && data.blogs.length > 0 && data.blogs.map((blog) => <BlogCard key={blog.id} {...blog} />)}
+                {isLoading && <SkeletonFallbackMobile />}
+                {!isLoading && data.blogs.length < 1 && <TableDataNotFound notForTable tableName="blog" />}
+                {!isLoading && data.blogs.length > 0 && data.blogs.map((blog) => <BlogCard key={blog.id} {...blog} />)}
             </div>
             {/* DESKTOP */}
             <Table
@@ -49,12 +47,12 @@ export default function BlogsTable({ isMutating }: Props) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {isMutating && <SkeletonFallback />}
-                    {!isMutating && data.blogs.length < 1 && (
+                    {isLoading && <SkeletonFallbackDesktop />}
+                    {!isLoading && data.blogs.length < 1 && (
                         // TODO: fix hasFilters
-                        <TableDataNotFound colSpan={7} hasFilters={false} tableName="blog" />
+                        <TableDataNotFound colSpan={7} hasFilters={data.fetchDetail.isUsingFilter} tableName="blog" />
                     )}
-                    {!isMutating &&
+                    {!isLoading &&
                         data.blogs.length > 0 &&
                         data.blogs.map((blog, idx) => (
                             <TableRow key={blog.id}>
