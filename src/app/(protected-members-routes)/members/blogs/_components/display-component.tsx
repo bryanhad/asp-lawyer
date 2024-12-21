@@ -9,10 +9,6 @@ import { useBlogsTableContext } from './table-context'
 import { BLOGS_QUERY_KEY } from '../../constants'
 import { getData } from '../action'
 
-/**
- * Refer to tanstack's docs:
- * @see https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
- */
 export function useBlogsData() {
     return useQuery({
         queryKey: BLOGS_QUERY_KEY,

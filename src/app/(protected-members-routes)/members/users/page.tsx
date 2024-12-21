@@ -1,8 +1,9 @@
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
-import { Smile } from 'lucide-react'
 import { redirect } from 'next/navigation'
+import LinkButton from '../../_components/link-button'
+import DisplayUsers from './_components/display-component'
 
-export default async function BlogsPage() {
+export default async function UsersPage() {
     const { session, user } = await getCurrentSession()
     if (session === null) {
         return redirect('/sign-in')
@@ -13,10 +14,12 @@ export default async function BlogsPage() {
 
     return (
         <>
-            <div className="flex items-end gap-2">
-                <Smile className="shrink-0" size={30} />
-                <h2>Nanti ya.. belum jadii...</h2>
+            <div className="flex justify-between gap-4">
+                <LinkButton className="mb-4" href={'/members/users/add'}>
+                    Add Users
+                </LinkButton>
             </div>
+            <DisplayUsers />
         </>
     )
 }
