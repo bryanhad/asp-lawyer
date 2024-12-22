@@ -11,6 +11,13 @@ export enum EntityType {
     // USER = 'USER',
 }
 
+export enum UserStatus {
+    NOT_VERIFIED = 'NOT_VERIFIED',
+    ON_BOARDING = 'ON_BOARDING',
+    ACTIVE = 'ACTIVE',
+    // HOLD = 'HOLD',
+}
+
 export enum MemberTranslationKey {
     DEGREE = 'DEGREE',
     POSITION = 'POSITION',

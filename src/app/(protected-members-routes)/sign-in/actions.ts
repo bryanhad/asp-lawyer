@@ -1,17 +1,18 @@
 'use server'
 
 import {
-    createSession,
-    generateSessionToken,
-    setSessionTokenCookie,
+    createAndSetSessionCookie
 } from '@/app/(protected-members-routes)/lib/server/auth'
+import { UserStatus } from '@/lib/enum'
+import prisma from '@/lib/prisma'
 import { getZodIssues } from '@/lib/server-utils'
+import { User } from '@prisma/client'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { verifyPasswordHash } from '../lib/server/password'
 import { RefillingTokenBucket, Throttler } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
-import { getUserFromEmail, getUserPasswordHash } from '../lib/server/user'
+import { createRedirectUrl } from '../lib/server/utils'
 import { formSchema } from './validation'
 
 const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
@@ -67,13 +68,54 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
 
     const { email, password } = parsedData.data
 
-    const user = await getUserFromEmail(email)
-    if (user === null) {
+    const userQuery: FetchedUserEntry | null = (
+        await prisma.$queryRaw<FetchedUserEntry[]>`
+        SELECT u."id", u."passwordHash", u."status", u."username", evr."code" AS "emailVerificationCode"
+        FROM users u
+        LEFT JOIN (
+            SELECT "userId", "code", 
+                ROW_NUMBER() OVER (PARTITION BY "userId" ORDER BY "expiresAt" DESC) AS "rank"
+            FROM email_verification_requests
+            WHERE "expiresAt" > NOW() + INTERVAL '3 minutes'
+        ) evr 
+            ON evr."userId" = u."id" AND evr."rank" = 1
+        WHERE u."email" = ${email}
+    `
+    )[0]
+
+    if (userQuery === null) {
         return {
             success: false,
             message: 'Account does not exist',
             fields: parsedData.data,
         }
+    }
+
+    if (userQuery.status === UserStatus.NOT_VERIFIED) {
+        if (userQuery.emailVerificationCode) {
+            await createAndSetSessionCookie(userQuery.id)
+            return redirect(
+                createRedirectUrl('/verify-emaill', {
+                    code: userQuery.emailVerificationCode,
+                    toast: 'Verifying email address',
+                }),
+            )
+        }
+        return {
+            success: false,
+            fields: parsedData.data,
+            message: 'Please notify the admin to send new verification request',
+        }
+    }
+
+    if (userQuery.status === UserStatus.ON_BOARDING || !userQuery.passwordHash) {
+        await createAndSetSessionCookie(userQuery.id)
+        return redirect(
+            createRedirectUrl('/on-boarding', {
+                uid: userQuery.id.toString(),
+                toast: 'Please complete your account',
+            }),
+        )
     }
 
     if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
@@ -83,21 +125,14 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         }
     }
 
-    if (!throttler.consume(user.id)) {
+    if (!throttler.consume(userQuery.id)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
-    const passwordHash = await getUserPasswordHash(user.id)
-    if (!passwordHash) {
-        return {
-            fields: parsedData.data,
-            success: false,
-            message: 'Invalid user',
-        }
-    }
-    const validPassword = await verifyPasswordHash(passwordHash, password)
+
+    const validPassword = await verifyPasswordHash(userQuery.passwordHash, password)
     if (!validPassword) {
         return {
             fields: parsedData.data,
@@ -106,15 +141,16 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         }
     }
 
-    throttler.reset(user.id)
+    throttler.reset(userQuery.id)
 
-    const sessionToken = generateSessionToken()
-    const session = await createSession(sessionToken, user.id)
-    await setSessionTokenCookie(sessionToken, session.expiresAt)
+    await createAndSetSessionCookie(userQuery.id)
+    return redirect(
+        createRedirectUrl('/members', {
+            toast: `Welcome back ${userQuery.username}!`,
+        }),
+    )
+}
 
-    if (!user.emailIsVerified) {
-        return redirect('/verify-email')
-    }
-
-    return redirect(`/members?toast=${encodeURIComponent(`Welcome back ${user.username}!`)}`)
+type FetchedUserEntry = Pick<User, 'id' | 'status' | 'passwordHash' | 'username'> & {
+    emailVerificationCode: string | null
 }

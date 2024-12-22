@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { signupAction } from './actions'
+import { addNewUserAction } from './actions'
 import { FormData, formSchema } from './validation'
 
 export default function AddUserForm() {
@@ -20,10 +20,8 @@ export default function AddUserForm() {
     })
 
     async function onSubmit(values: FormData) {
-        const res = await signupAction(values)
-        if (!res.success) {
-            toast({ variant: 'destructive', title: 'Oh noose!', description: res.message })
-        }
+        const res = await addNewUserAction(values)
+        toast({ variant: res.success ? 'successful' : 'destructive', description: res.message })
     }
 
     return (
@@ -42,7 +40,7 @@ export default function AddUserForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Sign Up</Button>
+                <Button type="submit">Add New User</Button>
             </form>
         </Form>
     )

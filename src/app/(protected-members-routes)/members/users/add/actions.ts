@@ -1,27 +1,21 @@
 'use server'
 
-import {
-    createSession,
-    generateSessionToken,
-    setSessionTokenCookie,
-} from '@/app/(protected-members-routes)/lib/server/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { checkEmailAvailability } from '../lib/server/email'
+import { checkEmailAvailability } from '@/app/(protected-members-routes)/lib/server/email'
 import {
     createEmailVerificationRequest,
-    sendVerificationEmail,
-    setEmailVerificationRequestCookie,
-} from '../lib/server/email-verification'
-import { verifyPasswordStrength } from '../lib/server/password'
-import { RefillingTokenBucket } from '../lib/server/rate-limit'
-import { globalPOSTRateLimit } from '../lib/server/request'
-import { createUser } from '../lib/server/user'
+    sendVerificationEmail
+} from '@/app/(protected-members-routes)/lib/server/email-verification'
+import { RefillingTokenBucket } from '@/app/(protected-members-routes)/lib/server/rate-limit'
+import { globalPOSTRateLimit } from '@/app/(protected-members-routes)/lib/server/request'
+import { UserStatus } from '@/lib/enum'
+import prisma from '@/lib/prisma'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { headers } from 'next/headers'
 import { FormData, formSchema } from './validation'
 
 const ipBucket = new RefillingTokenBucket<string>(3, 10)
 
-export async function signupAction(formData: Partial<FormData>): Promise<{ success: boolean; message: string }> {
+export async function addNewUserAction(formData: Partial<FormData>): Promise<{ success: boolean; message: string }> {
     if (!globalPOSTRateLimit()) {
         return {
             success: false,
@@ -29,6 +23,7 @@ export async function signupAction(formData: Partial<FormData>): Promise<{ succe
         }
     }
 
+    // TODO: check if there is session and whether the user is an admin!
     // TODO: Assumes X-Forwarded-For is always included.
     const clientIP = (await headers()).get('X-Forwarded-For')
     if (clientIP !== null && !ipBucket.check(clientIP, 1)) {
@@ -52,7 +47,7 @@ export async function signupAction(formData: Partial<FormData>): Promise<{ succe
     if (emailAvailable === false) {
         return {
             success: false,
-            message: 'Email is already used',
+            message: 'User with this email already exists',
         }
     }
 
@@ -62,15 +57,35 @@ export async function signupAction(formData: Partial<FormData>): Promise<{ succe
             message: 'Too many requests',
         }
     }
-    // TODO: SHOULD WE USE TRANSATION HERE?
-    const user = await createUser(email, username, password)
-    const emailVerificationRequest = await createEmailVerificationRequest(user.id, user.email)
-    // TODO: ACTUALLY SEND AN EMAIL!!
-    await sendVerificationEmail(emailVerificationRequest.email, emailVerificationRequest.code)
-    await setEmailVerificationRequestCookie(emailVerificationRequest)
-
-    const sessionToken = generateSessionToken()
-    const session = await createSession(sessionToken, user.id)
-    await setSessionTokenCookie(sessionToken, session.expiresAt)
-    return redirect('/verify-email')
+    // create user (maybe move this to the 'user' server lib)
+    try {
+        await prisma.$transaction(async (tx) => {
+            const newUser = await tx.user.create({
+                select: { id: true, email: true },
+                data: {
+                    email,
+                    status: UserStatus.NOT_VERIFIED,
+                },
+            })
+            const emailVerificationRequest = await createEmailVerificationRequest(tx, newUser.id, newUser.email)
+            // TODO: ACTUALLY SEND AN EMAIL!!
+            await sendVerificationEmail(emailVerificationRequest.email, emailVerificationRequest.code)
+        })
+        // perhaps do something to revalidate client cache for any fetched list of users.. (update it duhh)
+        return {
+            success: true,
+            message: 'Email verification successfully sent'
+        }
+    } catch (err) {
+        if (err instanceof PrismaClientKnownRequestError) {
+            return {
+                success: false,
+                message: 'Failed to add new user email',
+            }
+        }
+        return {
+            success: false,
+            message: 'Failed to send verification email',
+        }
+    }
 }

@@ -40,6 +40,7 @@ export async function seedUsersAndBlogs(prisma: Prisma.TransactionClient) {
             update: {},
             create: {
                 id: user.id,
+                status: user.status,
                 email: user.email,
                 passwordHash,
                 username: user.username,

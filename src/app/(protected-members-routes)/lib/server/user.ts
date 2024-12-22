@@ -6,7 +6,7 @@ import { generateRandomRecoveryCode } from './utils'
 import { encryptString } from './encryption'
 import prisma from '@/lib/prisma'
 
-export type UserInfo = Pick<User, 'id' | 'email' | 'username' | 'emailIsVerified'>
+export type UserInfo = Pick<User, 'id' | 'email' | 'username' | 'status'>
 
 export async function createUser(email: string, username: string, password: string): Promise<UserInfo> {
     const passwordHash = await hashPassword(password)
@@ -58,7 +58,7 @@ export async function updateUserEmailAndSetEmailAsVerified(
 
 export async function getUserFromEmail(email: string): Promise<UserInfo | null> {
     return await prisma.user.findUnique({
-        select: { id: true, username: true, email: true, emailIsVerified: true },
+        select: { id: true, username: true, email: true, status: true },
         where: { email },
     })
 }

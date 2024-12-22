@@ -46,21 +46,6 @@ export async function signupAction(formData: Partial<FormData>): Promise<{ succe
         }
     }
 
-    // if (typeof email !== 'string' || typeof username !== 'string' || typeof password !== 'string') {
-    //     return {
-    //         message: 'Invalid or missing fields',
-    //     }
-    // }
-    // if (email === '' || password === '' || username === '') {
-    //     return {
-    //         message: 'Please enter your username, email, and password',
-    //     }
-    // }
-    // if (!verifyEmailInput(email)) {
-    //     return {
-    //         message: 'Invalid email',
-    //     }
-    // }
     const { email, password, username } = formDataValidation.data
 
     const emailAvailable = await checkEmailAvailability(email)
@@ -70,11 +55,7 @@ export async function signupAction(formData: Partial<FormData>): Promise<{ succe
             message: 'Email is already used',
         }
     }
-    // if (!verifyUsernameInput(username)) {
-    //     return {
-    //         message: 'Invalid username',
-    //     }
-    // }
+
     const strongPassword = await verifyPasswordStrength(password)
     if (!strongPassword) {
         return {

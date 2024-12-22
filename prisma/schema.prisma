@@ -57,9 +57,9 @@ model Session {
 
 model EmailVerificationRequest {
     id        String   @id
+    code      String   @unique
     userId    Int
     email     String
-    code      String
     expiresAt DateTime
 
     user User @relation(references: [id], fields: [userId], onDelete: Cascade)

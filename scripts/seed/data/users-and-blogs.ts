@@ -1,4 +1,4 @@
-import { BlogTranslationKey, Language } from '../../../src/lib/enum'
+import { BlogTranslationKey, Language, UserStatus } from '../../../src/lib/enum'
 import { BlogsSeed, UsersSeed } from '../types'
 
 export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
@@ -8,6 +8,7 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
         email: 'admin@gmail.com',
         password: 'sipalingadmin12',
         emailIsVerified: true,
+        status: UserStatus.ACTIVE,
         blogs: [
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx',
