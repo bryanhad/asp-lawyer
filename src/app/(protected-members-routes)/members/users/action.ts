@@ -5,7 +5,7 @@ import { Prisma, User } from '@prisma/client'
 
 export type SearchParams = { size?: number; page?: number; q?: string }
 
-type FetchedUserEntry = Pick<User, 'id' | 'email' | 'username' | 'emailIsVerified'> & {
+type FetchedUserEntry = Pick<User, 'id' | 'email' | 'username' | 'emailIsVerified' | 'status'> & {
     blog_count: number
 }
 
@@ -42,7 +42,7 @@ export async function getData({
     const [usersQueryRes, countRes] = await Promise.all([
         prisma.$queryRaw<FetchedUserEntry[]>`
             SELECT 
-                u."id", u."email", u."username", u."emailIsVerified", 
+                u."id", u."email", u."username", u."emailIsVerified", u."status",
                 COUNT(b."id") as blog_count
             FROM users u
             LEFT JOIN blogs b

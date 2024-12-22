@@ -19,7 +19,7 @@ import { invalidateUserPasswordResetSessions } from '../lib/server/password-rese
 import { ExpiringTokenBucket, RefillingTokenBucket } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
 import { updateUserEmailAndSetEmailAsVerified, UserInfo } from '../lib/server/user'
-import { createRedirectUrl } from '../lib/server/utils'
+import { RedirectUrlArgs, createRedirectUrl } from '../lib/server/utils'
 
 const emailVerificationCodeSchema = z.string().min(8, { message: 'Email verification code is 8-digits' })
 
@@ -29,6 +29,7 @@ const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)
 type FormState = {
     message: string
     success: boolean
+    redirect?: RedirectUrlArgs
 }
 
 /**
@@ -70,7 +71,7 @@ type FetchedEmailVerificationRequestEntry = Pick<EmailVerificationRequest, 'code
     userEmailIsVerified: boolean
 }
 
-async function handleEmailVerificationForNewUser(code: string) {
+async function handleEmailVerificationForNewUser(code: string): Promise<FormState> {
     // TODO: Assumes X-Forwarded-For is always included.
     const headerStore = await headers()
     const clientIP = headerStore.get('X-Forwarded-For')
@@ -88,13 +89,13 @@ async function handleEmailVerificationForNewUser(code: string) {
         }
     }
 
-    const verificationRequest: FetchedEmailVerificationRequestEntry | null = (
+    const verificationRequest: FetchedEmailVerificationRequestEntry | undefined = (
         await prisma.$queryRaw<FetchedEmailVerificationRequestEntry[]>`
-            SELECT evr."code", evr."userId", u."status" as "userStatus", u."emailIsVerified" as "userEmailIsVerified"
+            SELECT evr."code", evr."userId", u."status" as "userStatus", u."emailIsVerified" as "userEmailIsVerified",
                 CASE 
-                    WHEN "expiresAt" < NOW() THEN true
+                    WHEN "expiresAt" < (NOW() AT TIME ZONE 'UTC') THEN true
                     ELSE false
-                END AS "hasExpired"
+                END AS "hasExpired", "expiresAt"
             FROM email_verification_requests evr
             LEFT JOIN users u on u."id" = evr."userId"
             WHERE evr."code" = ${code}
@@ -108,6 +109,7 @@ async function handleEmailVerificationForNewUser(code: string) {
             message: 'Invalid email verification code',
         }
     }
+    logger.info(verificationRequest)
     if (verificationRequest.hasExpired) {
         return {
             success: false,
@@ -132,14 +134,30 @@ async function handleEmailVerificationForNewUser(code: string) {
                 })
             }
         })
-        return redirect(
-            createRedirectUrl('/on-boarding', {
-                uid: verificationRequest.userId.toString(),
-                toast: 'Please complete your account',
-            }),
-        )
+        /**
+         * had to handle redirect client side since this action is called 
+         * client side using useMutation which catches the error..
+         * and since nextjs's redirect is using an error behind the scenes.. it won't work properly
+         */
+        return {
+            success: true,
+            message: 'Redirecting to on-boarding page..',
+            redirect: {
+                path: '/on-boarding',
+                params: {
+                    uid: verificationRequest.userId.toString(),
+                    toast: 'Please complete your account',
+                }
+            }
+        }
+        // return redirect(
+        //     createRedirectUrl('/on-boarding', {
+        //         uid: verificationRequest.userId.toString(),
+        //         toast: 'Please complete your account',
+        //     }),
+        // )
     } catch (err) {
-        logger.error('Error in email verification transaction for NOT_VERIFIED user', JSON.stringify(err))
+        logger.error('Error in email verification transaction for NOT_VERIFIED user', err)
         return {
             success: false,
             message: 'An unexpected error occurred.\nPlease try again later.',

@@ -3,6 +3,7 @@ import React from 'react'
 import { globalGETRateLimit } from '../lib/server/request'
 import { redirect } from 'next/navigation'
 import { capitalizeFirstLetter } from '@/lib/utils'
+import { UserStatus } from '@/lib/enum'
 
 export default async function MemberPage() {
     if (!globalGETRateLimit()) {
@@ -10,11 +11,8 @@ export default async function MemberPage() {
     }
 
     const { session, user } = await getCurrentSession()
-    if (session === null) {
+    if (session === null || user.status !== UserStatus.ACTIVE) {
         return redirect('/sign-in')
-    }
-    if (!user.emailIsVerified) {
-        return redirect('/verify-email')
     }
 
     return (

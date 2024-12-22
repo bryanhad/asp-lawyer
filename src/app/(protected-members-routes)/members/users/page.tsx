@@ -2,15 +2,16 @@ import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/a
 import { redirect } from 'next/navigation'
 import LinkButton from '../../_components/link-button'
 import DisplayUsers from './_components/display-component'
+import { UserStatus } from '@/lib/enum'
 
 export default async function UsersPage() {
     const { session, user } = await getCurrentSession()
-    if (session === null) {
+    if (session === null || user.status !== UserStatus.ACTIVE) {
         return redirect('/sign-in')
     }
-    if (!user.emailIsVerified) {
-        return redirect('/verify-email')
-    }
+    // if (!user.emailIsVerified) {
+    //     return redirect('/verify-emaill')
+    // }
 
     return (
         <>

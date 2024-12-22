@@ -75,8 +75,10 @@ export default async function middleware(req: NextRequest): Promise<NextResponse
         '/sign-in',
         '/sign-up',
         '/verify-email',
+        '/verify-emaill',
+        '/on-boarding',
         '/forgot-password',
-        '/reset-password',
+        '/reset-password',        
     ]
 
     if (noInternationalizationPaths.some((path) => pathname.startsWith(path))) {

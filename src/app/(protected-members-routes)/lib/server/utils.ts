@@ -36,3 +36,5 @@ export function createRedirectUrl(path: string, params: Record<string, string>):
     const queryString = new URLSearchParams(params).toString()
     return `${path}?${queryString}`
 }
+
+export type RedirectUrlArgs = { path: string; params: Record<string, string> }

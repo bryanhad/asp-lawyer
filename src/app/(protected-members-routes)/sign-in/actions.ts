@@ -1,8 +1,6 @@
 'use server'
 
-import {
-    createAndSetSessionCookie
-} from '@/app/(protected-members-routes)/lib/server/auth'
+import { createAndSetSessionCookie } from '@/app/(protected-members-routes)/lib/server/auth'
 import { UserStatus } from '@/lib/enum'
 import prisma from '@/lib/prisma'
 import { getZodIssues } from '@/lib/server-utils'
@@ -54,8 +52,9 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
          */
         const fields: Record<string, string> = {}
         for (const key of Object.keys(formData)) {
-            if (typeof formData[key] === 'string') {
-                fields[key] = formData[key]
+            const value = formData[key];
+            if (typeof value === 'string') {
+                fields[key] = value
             }
         }
         return {
@@ -68,7 +67,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
 
     const { email, password } = parsedData.data
 
-    const userQuery: FetchedUserEntry | null = (
+    const userQuery: FetchedUserEntry | undefined = (
         await prisma.$queryRaw<FetchedUserEntry[]>`
         SELECT u."id", u."passwordHash", u."status", u."username", evr."code" AS "emailVerificationCode"
         FROM users u
@@ -83,7 +82,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     `
     )[0]
 
-    if (userQuery === null) {
+    if (!userQuery) {
         return {
             success: false,
             message: 'Account does not exist',

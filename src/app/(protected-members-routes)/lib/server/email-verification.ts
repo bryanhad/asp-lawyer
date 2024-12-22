@@ -5,9 +5,10 @@ import { generateRandomOTP } from './utils'
 import { cookies } from 'next/headers'
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { ExpiringTokenBucket } from './rate-limit'
+import { logger } from '@/lib/logger'
 
 const EMAIL_VERIFICATION_COOKIE = 'email_verification'
-const EMAIL_VERIFICATION_EXPIRY = 1000 * 60 * 10 //10 minutes
+const EMAIL_VERIFICATION_EXPIRY = 1000 * 60 * 60 //1 hour
 
 export async function getUserEmailVerificationRequest(
     userId: number,
@@ -38,6 +39,7 @@ export async function createEmailVerificationRequest(
 
     const code = generateRandomOTP()
     const expiresAt = new Date(Date.now() + EMAIL_VERIFICATION_EXPIRY)
+    logger.info(`NEW USER EMAIL VERIFICATION REQUEST EXPIRY: ${expiresAt}`)
 
     return await tx.emailVerificationRequest.create({
         data: { id, userId, code, email, expiresAt },

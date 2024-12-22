@@ -12,6 +12,7 @@ import prisma from '@/lib/prisma'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import { headers } from 'next/headers'
 import { FormData, formSchema } from './validation'
+import { logger } from '@/lib/logger'
 
 const ipBucket = new RefillingTokenBucket<string>(3, 10)
 
@@ -68,6 +69,7 @@ export async function addNewUserAction(formData: Partial<FormData>): Promise<{ s
                 },
             })
             const emailVerificationRequest = await createEmailVerificationRequest(tx, newUser.id, newUser.email)
+            logger.info(`CREATED EMAIL VERIFICATION REQUEST:`, emailVerificationRequest)
             // TODO: ACTUALLY SEND AN EMAIL!!
             await sendVerificationEmail(emailVerificationRequest.email, emailVerificationRequest.code)
         })

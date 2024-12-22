@@ -4,11 +4,13 @@ import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 import { useToast } from '@/hooks/use-toast'
 import { useMutation } from '@tanstack/react-query'
 import { FrownIcon, SmileIcon } from 'lucide-react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { verifyEmailAction } from './action'
+import { createRedirectUrl } from '../lib/server/utils'
 
 export default function UserFeedbackComponent() {
+    const router = useRouter()
     const [isLoading, setIsLoading] = useState(true)
     const [isSuccess, setIsSuccess] = useState(false)
     const [message, setMessage] = useState('Verifying your email address..')
@@ -25,6 +27,9 @@ export default function UserFeedbackComponent() {
             setMessage(feedbackMessage)
             toast({ variant: successful ? 'successful' : 'destructive', description: toastDescription })
             setIsLoading(false)
+            if (res?.redirect) {
+                router.push(createRedirectUrl(res.redirect.path, { ...res.redirect.params }))
+            }
         },
     })
 
