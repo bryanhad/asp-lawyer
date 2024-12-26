@@ -20,11 +20,14 @@ export default function SearchParamHandler({ invalidateQueryFilters }: Props) {
     useEffect(() => {
         const toastValue = searchParams.get('toast')
         const revalidateValue = searchParams.get('revalidate')
+
+        // Create a new URLSearchParams instance from the current search params
+        const newSearchParams = new URLSearchParams(searchParams.toString())
+
         if (toastValue) {
             toast({ description: toastValue, variant: 'successful' })
-
-            // Remove the query parameter
-            router.replace(pathname) // Update the URL without the query parameter
+            newSearchParams.delete('toast') // Remove only the 'toast' parameter
+            router.replace(`${pathname}?${newSearchParams.toString()}`) // Update the URL without the query parameter
         }
         if (revalidateValue === 'true' && invalidateQueryFilters) {
             queryClient.invalidateQueries(invalidateQueryFilters)

@@ -6,6 +6,7 @@ import {
     MemberRole,
     BlogTranslationKey,
     UserStatus,
+    UserRole,
 } from '@/lib/enum'
 
 export type TranslationSeed<TranslationKey, ValueType = string> = {
@@ -53,4 +54,5 @@ export type UsersSeed = {
     password: string
     emailIsVerified: true
     status: UserStatus
+    role: UserRole
 }

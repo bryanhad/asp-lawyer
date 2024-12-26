@@ -7,7 +7,7 @@ import { EmailVerificationRequest } from '@prisma/client'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
-import { getCurrentSession } from '../lib/server/auth'
+import { createAndSetSessionCookie, getCurrentSession } from '../lib/server/auth'
 import {
     createEmailVerificationRequest,
     deleteEmailVerificationRequestCookie,
@@ -19,7 +19,7 @@ import { invalidateUserPasswordResetSessions } from '../lib/server/password-rese
 import { ExpiringTokenBucket, RefillingTokenBucket } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
 import { updateUserEmailAndSetEmailAsVerified, UserInfo } from '../lib/server/user'
-import { RedirectUrlArgs, createRedirectUrl } from '../lib/server/utils'
+import { RedirectUrlArgs } from '../lib/server/utils'
 
 const emailVerificationCodeSchema = z.string().min(8, { message: 'Email verification code is 8-digits' })
 
@@ -106,7 +106,7 @@ async function handleEmailVerificationForNewUser(code: string): Promise<FormStat
     if (!verificationRequest) {
         return {
             success: false,
-            message: 'Invalid email verification code',
+            message: 'The verification code has either been used or does not exist',
         }
     }
     logger.info(verificationRequest)
@@ -134,8 +134,9 @@ async function handleEmailVerificationForNewUser(code: string): Promise<FormStat
                 })
             }
         })
+        await createAndSetSessionCookie(verificationRequest.userId)
         /**
-         * had to handle redirect client side since this action is called 
+         * had to handle redirect client side since this action is called
          * client side using useMutation which catches the error..
          * and since nextjs's redirect is using an error behind the scenes.. it won't work properly
          */
@@ -147,15 +148,9 @@ async function handleEmailVerificationForNewUser(code: string): Promise<FormStat
                 params: {
                     uid: verificationRequest.userId.toString(),
                     toast: 'Please complete your account',
-                }
-            }
+                },
+            },
         }
-        // return redirect(
-        //     createRedirectUrl('/on-boarding', {
-        //         uid: verificationRequest.userId.toString(),
-        //         toast: 'Please complete your account',
-        //     }),
-        // )
     } catch (err) {
         logger.error('Error in email verification transaction for NOT_VERIFIED user', err)
         return {

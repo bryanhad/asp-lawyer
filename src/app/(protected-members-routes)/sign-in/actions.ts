@@ -75,7 +75,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
             SELECT "userId", "code", 
                 ROW_NUMBER() OVER (PARTITION BY "userId" ORDER BY "expiresAt" DESC) AS "rank"
             FROM email_verification_requests
-            WHERE "expiresAt" > NOW() + INTERVAL '3 minutes'
+            WHERE "expiresAt" > (NOW() AT TIME ZONE 'UTC') + INTERVAL '3 minutes'
         ) evr 
             ON evr."userId" = u."id" AND evr."rank" = 1
         WHERE u."email" = ${email}
@@ -92,7 +92,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
 
     if (userQuery.status === UserStatus.NOT_VERIFIED) {
         if (userQuery.emailVerificationCode) {
-            await createAndSetSessionCookie(userQuery.id)
+            // await createAndSetSessionCookie(userQuery.id)
             return redirect(
                 createRedirectUrl('/verify-emaill', {
                     code: userQuery.emailVerificationCode,

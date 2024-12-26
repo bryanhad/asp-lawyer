@@ -5,6 +5,8 @@ import { UserStatus } from '@/lib/enum'
 import { createRedirectUrl } from '../lib/server/utils'
 import UserFeedbackComponent from './user-feedback-component'
 import AuthPageContainer from '../_components/auth-page-container'
+import SearchParamHandler from '@/components/ui/SearchParamHandler'
+import { Suspense } from 'react'
 
 export default async function VerifyEmailPage() {
     if (!globalGETRateLimit()) {
@@ -31,6 +33,9 @@ export default async function VerifyEmailPage() {
      */
     return (
         <AuthPageContainer>
+            <Suspense>
+                <SearchParamHandler />
+            </Suspense>
             <UserFeedbackComponent />
         </AuthPageContainer>
     )

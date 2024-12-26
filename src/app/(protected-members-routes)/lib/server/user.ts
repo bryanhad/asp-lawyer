@@ -5,8 +5,9 @@ import { hashPassword } from './password'
 import { generateRandomRecoveryCode } from './utils'
 import { encryptString } from './encryption'
 import prisma from '@/lib/prisma'
+import { UserRole, UserStatus } from '@/lib/enum'
 
-export type UserInfo = Pick<User, 'id' | 'email' | 'username' | 'status'>
+export type UserInfo = Pick<User, 'id' | 'email' | 'username' | 'status' | 'role'>
 
 export async function createUser(email: string, username: string, password: string): Promise<UserInfo> {
     const passwordHash = await hashPassword(password)
@@ -14,8 +15,10 @@ export async function createUser(email: string, username: string, password: stri
     const encryptedRecoveryCode = encryptString(recoveryCode)
 
     const user = await prisma.user.create({
-        select: { id: true, username: true, email: true, emailIsVerified: true },
+        select: { id: true, username: true, email: true, emailIsVerified: true, status: true, role: true },
         data: {
+            role: UserRole.USER,
+            status: UserStatus.ACTIVE,
             email,
             username,
             passwordHash,
@@ -58,7 +61,7 @@ export async function updateUserEmailAndSetEmailAsVerified(
 
 export async function getUserFromEmail(email: string): Promise<UserInfo | null> {
     return await prisma.user.findUnique({
-        select: { id: true, username: true, email: true, status: true },
+        select: { id: true, username: true, email: true, status: true, role: true },
         where: { email },
     })
 }

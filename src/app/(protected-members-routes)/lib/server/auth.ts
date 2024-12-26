@@ -62,6 +62,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
                     email: true,
                     username: true,
                     status: true,
+                    role: true,
                 },
             },
         },

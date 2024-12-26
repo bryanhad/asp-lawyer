@@ -18,6 +18,11 @@ export enum UserStatus {
     // HOLD = 'HOLD',
 }
 
+export enum UserRole {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
+
 export enum MemberTranslationKey {
     DEGREE = 'DEGREE',
     POSITION = 'POSITION',
@@ -50,7 +55,6 @@ export enum BlogTranslationKey {
     TITLE = 'TITLE',
     CONTENT = 'CONTENT',
 }
-
 
 /**
  * Perhaps in the future..

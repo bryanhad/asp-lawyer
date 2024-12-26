@@ -7,14 +7,14 @@ import {
 } from '@/app/(protected-members-routes)/lib/server/email-verification'
 import { RefillingTokenBucket } from '@/app/(protected-members-routes)/lib/server/rate-limit'
 import { globalPOSTRateLimit } from '@/app/(protected-members-routes)/lib/server/request'
-import { UserStatus } from '@/lib/enum'
-import prisma from '@/lib/prisma'
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { headers } from 'next/headers'
-import { FormData, formSchema } from './validation'
+import { getClientIP, isIPNotAllowed, isRequestDenied } from '@/app/(protected-members-routes)/lib/server/utils'
+import { UserRole, UserStatus } from '@/lib/enum'
 import { logger } from '@/lib/logger'
+import prisma from '@/lib/prisma'
+import { FormData, formSchema } from './validation'
+import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 
-const ipBucket = new RefillingTokenBucket<string>(3, 10)
+const tokenBucket = new RefillingTokenBucket<number>('ADD_USER_ACTION', 3, 10)
 
 export async function addNewUserAction(formData: Partial<FormData>): Promise<{ success: boolean; message: string }> {
     if (!globalPOSTRateLimit()) {
@@ -24,13 +24,25 @@ export async function addNewUserAction(formData: Partial<FormData>): Promise<{ s
         }
     }
 
-    // TODO: check if there is session and whether the user is an admin!
-    // TODO: Assumes X-Forwarded-For is always included.
-    const clientIP = (await headers()).get('X-Forwarded-For')
-    if (clientIP !== null && !ipBucket.check(clientIP, 1)) {
+    const { session, user } = await getCurrentSession()
+    if (session === null) {
+        return {
+            success: false,
+            message: 'Not authenticated',
+        }
+    }
+
+    if (isRequestDenied(tokenBucket, user.id)) {
         return {
             success: false,
             message: 'Too many requests',
+        }
+    }
+
+    if (user.role !== UserRole.ADMIN) {
+        return {
+            success: false,
+            message: 'Unauthorized Action'
         }
     }
 

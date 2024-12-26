@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 import { RefillingTokenBucket } from './rate-limit'
 
-export const globalBucket = new RefillingTokenBucket<string>(100, 1)
+export const globalBucket = new RefillingTokenBucket<string>('GLOBAL', 100, 1)
 
 export async function globalGETRateLimit(): Promise<boolean> {
     // Note: Assumes X-Forwarded-For will always be defined.

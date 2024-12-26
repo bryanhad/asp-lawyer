@@ -30,7 +30,7 @@ export async function getData({
     const { q, page, size } = filterValues ?? {}
     const isUsingFilter = !!q
     const currentPage = page || 1
-    const fetchSize = size || 5
+    const fetchSize = size || 100
 
     const searchString = q
         ?.split(' ')
@@ -55,7 +55,7 @@ export async function getData({
                     : Prisma.empty
             }
             GROUP BY u."id", u."email", u."username", u."emailIsVerified"
-            ORDER BY u."username"
+            ORDER BY u."id"
             LIMIT ${fetchSize} OFFSET ${offset}
         `,
         prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count FROM users`,

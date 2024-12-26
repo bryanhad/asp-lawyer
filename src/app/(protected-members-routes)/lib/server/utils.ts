@@ -1,7 +1,7 @@
-import { Locale } from '@/i18n/request'
+import { logger } from '@/lib/logger'
 import { encodeBase32UpperCaseNoPadding } from '@oslojs/encoding'
-import { getLocale } from 'next-intl/server'
-import { cache } from 'react'
+import { headers } from 'next/headers'
+import { RefillingTokenBucket } from './rate-limit'
 
 export function generateRandomOTP(): string {
     const bytes = new Uint8Array(5)
@@ -16,10 +16,6 @@ export function generateRandomRecoveryCode(): string {
     const recoveryCode = encodeBase32UpperCaseNoPadding(recoveryCodeBytes)
     return recoveryCode
 }
-
-export const getCurrentLocale = cache(async () => {
-    return (await getLocale()) as Locale
-})
 
 /**
  * Constructs a URL with a query string from the provided path and parameters.
@@ -38,3 +34,19 @@ export function createRedirectUrl(path: string, params: Record<string, string>):
 }
 
 export type RedirectUrlArgs = { path: string; params: Record<string, string> }
+
+/**
+ * Assumes X-Forwarded-For is always included.
+ */
+export async function getClientIP() {
+    const clientIP = (await headers()).get('X-Forwarded-For')
+    logger.info(`Current client IP: ${clientIP}`)
+    return clientIP
+}
+
+
+export function isRequestDenied<_Key>(ipBucket: RefillingTokenBucket<_Key>, clientIP: _Key | null) {
+    if (clientIP !== null) {
+        return !ipBucket.check(clientIP, 1)
+    }
+}
