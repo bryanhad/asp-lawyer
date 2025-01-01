@@ -34,7 +34,7 @@ export class RefillingTokenBucket<_Key> {
         }
     }
 
-    public check(key: _Key, cost: number): boolean {
+    public isAllowed(key: _Key, cost: number): boolean {
         const tokenStorage = this.bucket.get(key)
         if (!tokenStorage) {
             logger.info(`[${this.name}] New key "${key}" detected. Allowing initial action.`)
@@ -45,6 +45,9 @@ export class RefillingTokenBucket<_Key> {
         return tokenStorage.count >= cost
     }
 
+    /**
+     * @returns {boolean} a boolean, true if token is insufficient on consume
+     */
     public consume(key: _Key, cost: number): boolean {
         let tokenStorage = this.bucket.get(key)
 
@@ -57,7 +60,7 @@ export class RefillingTokenBucket<_Key> {
         this.refillTokens(tokenStorage)
 
         if (tokenStorage.count < cost) {
-            logger.info(`[${this.name}] Key "${key}" denied. Insufficient tokens.`)
+            logger.error(`[${this.name}] Insufficient tokens for key "${key}".`)
             return false
         }
         tokenStorage.count -= cost // Consume tokens

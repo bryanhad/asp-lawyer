@@ -53,7 +53,8 @@ export async function deleteUserEmailVerificationRequest(tx: Prisma.TransactionC
 }
 
 export async function sendVerificationEmail(email: string, code: string) {
-    console.log(`To ${email}: Your verification code is ${code}`)
+    const app_url = process.env.APP_URL ?? 'localhost:3000' 
+    logger.info(`SENT EMAIL TO ${email}: ${app_url}/verify-email?code=${code}`)
 }
 
 export async function setEmailVerificationRequestCookie(request: EmailVerificationRequest) {

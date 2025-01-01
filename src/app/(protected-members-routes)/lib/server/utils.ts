@@ -44,9 +44,26 @@ export async function getClientIP() {
     return clientIP
 }
 
-
-export function isRequestDenied<_Key>(ipBucket: RefillingTokenBucket<_Key>, clientIP: _Key | null) {
-    if (clientIP !== null) {
-        return !ipBucket.check(clientIP, 1)
+/**
+ * @returns {boolean}
+ * - `true` if the key is null or the token is sufficient.
+ * - `false` if the token is insufficient.
+ */
+export function isRequestAllowed<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key | null, cost: number) {
+    if (key !== null) {
+        return bucket.isAllowed(key, cost)
     }
+    return true
+}
+
+/**
+ * @returns {boolean}
+ * - `true` if token is insufficient
+ * - `false` if consume successful or key is null
+ */     
+export function consumeToken<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key | null, cost: number) {
+    if (key !== null) {
+        return !bucket.consume(key, cost)
+    }
+    return false
 }
