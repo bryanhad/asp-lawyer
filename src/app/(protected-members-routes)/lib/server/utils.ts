@@ -1,4 +1,4 @@
-import { logger } from '@/lib/logger'
+import { logAction } from '@/lib/logger'
 import { encodeBase32UpperCaseNoPadding } from '@oslojs/encoding'
 import { headers } from 'next/headers'
 import { RefillingTokenBucket } from './rate-limit'
@@ -17,6 +17,17 @@ export function generateRandomRecoveryCode(): string {
     return recoveryCode
 }
 
+export type RedirectUrlArgs = { path: string; params: Record<string, string> }
+
+/**
+ * Assumes X-Forwarded-For is always included.
+ */
+export async function getClientIP() {
+    const clientIP = (await headers()).get('X-Forwarded-For')
+    logAction('getClientIP', 'Getting client IP from X-Forwarded-For..')
+    return clientIP
+}
+
 /**
  * Constructs a URL with a query string from the provided path and parameters.
  *
@@ -33,37 +44,28 @@ export function createRedirectUrl(path: string, params: Record<string, string>):
     return `${path}?${queryString}`
 }
 
-export type RedirectUrlArgs = { path: string; params: Record<string, string> }
-
 /**
- * Assumes X-Forwarded-For is always included.
- */
-export async function getClientIP() {
-    const clientIP = (await headers()).get('X-Forwarded-For')
-    logger.info(`Current client IP: ${clientIP}`)
-    return clientIP
-}
-
-/**
- * @returns {boolean}
  * - `true` if the key is null or the token is sufficient.
  * - `false` if the token is insufficient.
+ * 
+ * @returns isAllowed
  */
 export function isRequestAllowed<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key | null, cost: number) {
     if (key !== null) {
-        return bucket.isAllowed(key, cost)
+        return bucket.check(key, cost)
     }
     return true
 }
 
 /**
- * @returns {boolean}
  * - `true` if token is insufficient
  * - `false` if consume successful or key is null
- */     
+ *
+ * @returns isError
+ */
 export function consumeToken<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key | null, cost: number) {
     if (key !== null) {
-        return !bucket.consume(key, cost)
+        return bucket.consume(key, cost)
     }
     return false
 }

@@ -1,39 +1,45 @@
 'use server'
 
 import {
-    createSession,
-    generateSessionToken,
-    getCurrentSession,
-    setSessionTokenCookie,
+    getCurrentSession
 } from '@/app/(protected-members-routes)/lib/server/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { checkEmailAvailability } from '../lib/server/email'
-import {
-    createEmailVerificationRequest,
-    sendVerificationEmail,
-    setEmailVerificationRequestCookie,
-} from '../lib/server/email-verification'
-import { verifyPasswordStrength } from '../lib/server/password'
+import { UserStatus } from '@/lib/enum'
+import { logActionError } from '@/lib/logger'
+import prisma from '@/lib/prisma'
+import { encryptString } from '../lib/server/encryption'
+import { hashPassword, verifyPasswordStrength } from '../lib/server/password'
 import { ExpiringTokenBucket, RefillingTokenBucket } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
-import { createUser } from '../lib/server/user'
+import {
+    consumeToken,
+    generateRandomRecoveryCode,
+    getClientIP,
+    isRequestAllowed,
+    RedirectUrlArgs,
+} from '../lib/server/utils'
 import { FormData, formSchema } from './validation'
-import { getZodIssues } from '@/lib/server-utils'
-import prisma from '@/lib/prisma'
 
-const ipBucket = new RefillingTokenBucket<string>(3, 10)
-const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)
+const tokenBucket = new RefillingTokenBucket<string>('ON_BOARDING_TOKEN_BUCKET', 3, 10)
+const expiringTokenBucket = new ExpiringTokenBucket<number>(5, 60 * 30)
+const actionName = 'onBoarding Server Action'
 
 type FormState = {
     message: string
-    success?: boolean
-    fields?: Record<string, string> // to re-populate the input fields which is from the client
-    issues?: ReturnType<typeof getZodIssues<typeof formSchema>> // to show any input errors from the fromschema
+    success: boolean
+    redirect?: RedirectUrlArgs
 }
 
 export async function onBoardingAction(formData: Partial<FormData>): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+    if (!globalPOSTRateLimit(clientIP)) {
+        return {
+            success: false,
+            message: 'Too many requests',
+        }
+    }
+
+    if (isRequestAllowed(tokenBucket, clientIP, 1) === false) {
+        logActionError(actionName, 'request is not allowed')
         return {
             success: false,
             message: 'Too many requests',
@@ -42,13 +48,15 @@ export async function onBoardingAction(formData: Partial<FormData>): Promise<For
 
     const { session, user } = await getCurrentSession()
     if (session === null) {
+        logActionError(actionName, 'unauthenticated')
         return {
             success: false,
             message: 'Not authenticated',
         }
     }
 
-    if (!bucket.check(user.id, 1)) {
+    if (!expiringTokenBucket.check(user.id, 1)) {
+        logActionError(actionName, 'too many requests')
         return {
             success: false,
             message: 'Too many requests',
@@ -57,53 +65,84 @@ export async function onBoardingAction(formData: Partial<FormData>): Promise<For
 
     const formDataValidation = formSchema.safeParse(formData)
     if (!formDataValidation.success) {
+        logActionError(actionName, 'missing fields')
         return {
             success: false,
             message: 'Invalid or missing fields',
         }
     }
 
-    const { username, password, confirmPassword } = formDataValidation.data
+    const { username, password } = formDataValidation.data
 
-    await prisma.user.findUnique({
-        select: {
-            username:true, passwordHash:true, 
-        },
-        where: {
-            email: user.email
-        }
-    })
-
-    const emailAvailable = await checkEmailAvailability(email)
-    if (emailAvailable === false) {
+    const isError = consumeToken(tokenBucket, clientIP, 1)
+    if (isError) {
+        logActionError(actionName, 'consume token error')
         return {
             success: false,
-            message: 'Email is already used',
+            message: 'Something went wrong',
+        }
+    }
+
+    const registeredUser = await prisma.user.findUnique({
+        select: {
+            status: true,
+        },
+        where: {
+            email: user.email,
+        },
+    })
+
+    if (registeredUser === null || registeredUser.status !== UserStatus.ON_BOARDING) {
+        logActionError(actionName, 'unauthorized')
+        return {
+            success: false,
+            message: 'Unauthorized',
         }
     }
 
     const strongPassword = await verifyPasswordStrength(password)
     if (!strongPassword) {
+        logActionError(actionName, 'password is too weak')
         return {
             success: false,
             message: 'Password is too weak',
         }
     }
-    if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
+
+    try {
+        const updatedUser = await prisma.$transaction(async (tx) => {
+            const passwordHash = await hashPassword(password)
+            const recoveryCode = generateRandomRecoveryCode()
+            const encryptedRecoveryCode = encryptString(recoveryCode)
+            return await tx.user.update({
+                select: { username: true },
+                where: { email: user.email },
+                data: {
+                    status: UserStatus.ACTIVE,
+                    username,
+                    passwordHash,
+                    recoveryCode: Buffer.from(encryptedRecoveryCode), //convert Uint8Array to Buffer
+                },
+            })
+        })
+        return {
+            success: true,
+            message: 'Redirecting to dashboard..',
+            redirect: {
+                path: '/members',
+                params: {
+                    toast: `Welcome abroad ${updatedUser.username}!`,
+                },
+            },
+        }
+    } catch (err) {
+        logActionError(
+            actionName,
+            err instanceof Error ? err.message : 'Transaction error :( returning error response..',
+        )
         return {
             success: false,
-            message: 'Too many requests',
+            message: 'An unexpected error occurred. Please try again later.',
         }
     }
-    // TODO: SHOULD WE USE TRANSATION HERE?
-    const user = await createUser(email, username, password)
-    const emailVerificationRequest = await createEmailVerificationRequest(user.id, user.email)
-    // TODO: ACTUALLY SEND AN EMAIL!!
-    await sendVerificationEmail(emailVerificationRequest.email, emailVerificationRequest.code)
-    await setEmailVerificationRequestCookie(emailVerificationRequest)
-
-    const sessionToken = generateSessionToken()
-    const session = await createSession(sessionToken, user.id)
-    await setSessionTokenCookie(sessionToken, session.expiresAt)
-    return redirect('/verify-email')
 }

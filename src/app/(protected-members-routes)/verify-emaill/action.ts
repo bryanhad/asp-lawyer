@@ -1,10 +1,9 @@
 'use server'
 
 import { UserStatus } from '@/lib/enum'
-import { logger } from '@/lib/logger'
+import { logAction, logActionError, logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'
 import { EmailVerificationRequest } from '@prisma/client'
-import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createAndSetSessionCookie, getCurrentSession } from '../lib/server/auth'
@@ -19,12 +18,13 @@ import { invalidateUserPasswordResetSessions } from '../lib/server/password-rese
 import { ExpiringTokenBucket, RefillingTokenBucket } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
 import { updateUserEmailAndSetEmailAsVerified, UserInfo } from '../lib/server/user'
-import { RedirectUrlArgs } from '../lib/server/utils'
+import { consumeToken, getClientIP, isRequestAllowed, RedirectUrlArgs } from '../lib/server/utils'
 
 const emailVerificationCodeSchema = z.string().min(8, { message: 'Email verification code is 8-digits' })
 
-const ipBucket = new RefillingTokenBucket<string>(20, 1)
+const tokenBucket = new RefillingTokenBucket<string>('VERIFY_EMAIL_TOKEN_BUCKET', 20, 1)
 const bucket = new ExpiringTokenBucket<number>(5, 60 * 30)
+const actionName = 'verifyEmail Server Action'
 
 type FormState = {
     message: string
@@ -38,7 +38,16 @@ type FormState = {
  *  2. An active user that wants to change their email (cookie required)
  */
 export async function verifyEmailAction(arg: unknown): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+    if (!globalPOSTRateLimit(clientIP)) {
+        return {
+            success: false,
+            message: 'Too many requests',
+        }
+    }
+
+    if (isRequestAllowed(tokenBucket, clientIP, 1) === false) {
+        logActionError(actionName, 'request is not allowed')
         return {
             success: false,
             message: 'Too many requests',
@@ -49,9 +58,19 @@ export async function verifyEmailAction(arg: unknown): Promise<FormState> {
 
     const parsedData = emailVerificationCodeSchema.safeParse(arg)
     if (!parsedData.success) {
+        logActionError(actionName, 'missing code field')
         return { success: false, message: 'Invalid field' }
     }
     const code = parsedData.data
+
+    const isError = consumeToken(tokenBucket, clientIP, 1)
+    if (isError) {
+        logActionError(actionName, 'consume token error')
+        return {
+            success: false,
+            message: 'Something went wrong',
+        }
+    }
 
     if (session) {
         // a cookie is required for verifying an email change for an active user
@@ -72,23 +91,6 @@ type FetchedEmailVerificationRequestEntry = Pick<EmailVerificationRequest, 'code
 }
 
 async function handleEmailVerificationForNewUser(code: string): Promise<FormState> {
-    // TODO: Assumes X-Forwarded-For is always included.
-    const headerStore = await headers()
-    const clientIP = headerStore.get('X-Forwarded-For')
-    if (clientIP !== null && !ipBucket.check(clientIP, 1)) {
-        return {
-            success: false,
-            message: 'Too many requests',
-        }
-    }
-
-    if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
-        return {
-            success: false,
-            message: 'Too many requests',
-        }
-    }
-
     const verificationRequest: FetchedEmailVerificationRequestEntry | undefined = (
         await prisma.$queryRaw<FetchedEmailVerificationRequestEntry[]>`
             SELECT evr."code", evr."userId", u."status" as "userStatus", u."emailIsVerified" as "userEmailIsVerified",
@@ -104,42 +106,53 @@ async function handleEmailVerificationForNewUser(code: string): Promise<FormStat
     )[0]
 
     if (!verificationRequest) {
+        logActionError(actionName, 'verification code has either been used or does not exist')
         return {
             success: false,
             message: 'The verification code has either been used or does not exist',
         }
     }
-    logger.info(verificationRequest)
-    if (verificationRequest.hasExpired) {
+    if (verificationRequest.userStatus !== UserStatus.NOT_VERIFIED) {
+        logActionError(actionName, 'email is already verified')
         return {
             success: false,
-            message: 'Email verification code has expired.\nPlease notify the admin to send new verification request',
+            message: `User's email is already verified`,
+        }
+    }
+    if (verificationRequest.hasExpired) {
+        logActionError(actionName, 'verification code has expired.')
+        return {
+            success: false,
+            message: 'Email verification code has expired. Please notify the admin to send new verification request',
         }
     }
     try {
         await prisma.$transaction(async (tx) => {
+            logAction(actionName, 'start transaction..')
             await deleteUserEmailVerificationRequest(tx, verificationRequest.userId)
-            /**
-             * I don't really know if this check is even necessary
-             * since this function function should run only for a new user..
-             * The user's status should always be NOT_VERIFIED
-             */
-            if (verificationRequest.userStatus === UserStatus.NOT_VERIFIED) {
-                await tx.user.update({
-                    data: {
-                        status: UserStatus.ON_BOARDING,
-                        emailIsVerified: true,
-                    },
-                    where: { id: verificationRequest.userId },
-                })
-            }
+            logAction(
+                actionName,
+                `updating user status to ${UserStatus.ON_BOARDING} and update verify is verified status..`,
+            )
+            await tx.user.update({
+                data: {
+                    status: UserStatus.ON_BOARDING,
+                    emailIsVerified: true,
+                },
+                where: { id: verificationRequest.userId },
+            })
         })
+        logAction(actionName, `create and set new session to cookie..`)
         await createAndSetSessionCookie(verificationRequest.userId)
         /**
          * had to handle redirect client side since this action is called
          * client side using useMutation which catches the error..
          * and since nextjs's redirect is using an error behind the scenes.. it won't work properly
          */
+        logAction(
+            actionName,
+            `transaction successful! redirecting user to /on-boarding?uid=${verificationRequest.userId}`,
+        )
         return {
             success: true,
             message: 'Redirecting to on-boarding page..',
@@ -152,10 +165,13 @@ async function handleEmailVerificationForNewUser(code: string): Promise<FormStat
             },
         }
     } catch (err) {
-        logger.error('Error in email verification transaction for NOT_VERIFIED user', err)
+        logActionError(
+            actionName,
+            err instanceof Error ? err.message : 'Transaction error :( returning error response..',
+        )
         return {
             success: false,
-            message: 'An unexpected error occurred.\nPlease try again later.',
+            message: 'An unexpected error occurred. Please try refreshing the page',
         }
     }
 }

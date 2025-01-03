@@ -1,4 +1,4 @@
-import { logger } from '@/lib/logger'
+import { logAction } from '@/lib/logger'
 
 type TokenStorage = {
     count: number
@@ -22,7 +22,7 @@ export class RefillingTokenBucket<_Key> {
         public max: number,
         public refillIntervalSeconds: number,
     ) {
-        logger.info(`[${this.name}] Initialization: max=${max} tokens, refill interval=${refillIntervalSeconds}s`)
+        logAction(`${this.name}`, `Initialization: max=${max} tokens, refill interval=${refillIntervalSeconds}s.`)
     }
 
     private refillTokens(tokenStorage: TokenStorage): void {
@@ -34,19 +34,29 @@ export class RefillingTokenBucket<_Key> {
         }
     }
 
-    public isAllowed(key: _Key, cost: number): boolean {
+    /**
+     * - `true` if key is new or token count is >= cost
+     * - `false` if token count is insufficient
+     *
+     * @returns {boolean} isAllowed
+     */
+    public check(key: _Key, cost: number): boolean {
         const tokenStorage = this.bucket.get(key)
         if (!tokenStorage) {
-            logger.info(`[${this.name}] New key "${key}" detected. Allowing initial action.`)
+            logAction(this.name, `New key "${key}" detected. Allowing initial request.`)
             return true
         }
         this.refillTokens(tokenStorage)
-        logger.info(`[${this.name}] Key "${key}" checked. Tokens: ${tokenStorage.count}, Cost: ${cost}`)
+        logAction(this.name, `Key "${key}" checked. Tokens: ${tokenStorage.count}, Cost: ${cost}.`)
+
         return tokenStorage.count >= cost
     }
 
     /**
-     * @returns {boolean} a boolean, true if token is insufficient on consume
+     * - `true` if token is insufficient
+     * - `false` if consume successful
+     *
+     * @returns {boolean} isError
      */
     public consume(key: _Key, cost: number): boolean {
         let tokenStorage = this.bucket.get(key)
@@ -54,18 +64,20 @@ export class RefillingTokenBucket<_Key> {
         if (!tokenStorage) {
             tokenStorage = { count: this.max, refilledAt: Date.now() }
             this.bucket.set(key, tokenStorage)
-            logger.info(`[${this.name}] New key "${key}" registered.`)
+            logAction(this.name, `New key "${key}" registered.`)
+            return false
         }
 
         this.refillTokens(tokenStorage)
 
         if (tokenStorage.count < cost) {
-            logger.error(`[${this.name}] Insufficient tokens for key "${key}".`)
-            return false
+            logAction(this.name, `Insufficient tokens for key "${key}".`)
+            return true
         }
         tokenStorage.count -= cost // Consume tokens
-        logger.info(`[${this.name}] Key "${key}" allowed. Remaining tokens: ${tokenStorage.count}.`)
-        return true
+        logAction(this.name, `Key "${key}" allowed. Remaining tokens: ${tokenStorage.count}.`)
+
+        return false
     }
 }
 

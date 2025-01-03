@@ -5,7 +5,7 @@ import { generateRandomOTP } from './utils'
 import { cookies } from 'next/headers'
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { ExpiringTokenBucket } from './rate-limit'
-import { logger } from '@/lib/logger'
+import { logger, logInfo } from '@/lib/logger'
 
 const EMAIL_VERIFICATION_COOKIE = 'email_verification'
 const EMAIL_VERIFICATION_EXPIRY = 1000 * 60 * 60 //1 hour
@@ -30,31 +30,35 @@ export async function createEmailVerificationRequest(
     userId: number,
     email: string,
 ): Promise<EmailVerificationRequest> {
-    // delete existing email verification request if there is any..
     await deleteUserEmailVerificationRequest(tx, userId)
-    // create emailVerification id
+
+    logInfo(`creating emailVerification id..`)
     const idBytes = new Uint8Array(20)
     crypto.getRandomValues(idBytes)
     const id = encodeBase32(idBytes).toLowerCase()
 
+    logInfo(`generating OTP code for email verification request..`)
     const code = generateRandomOTP()
     const expiresAt = new Date(Date.now() + EMAIL_VERIFICATION_EXPIRY)
-    logger.info(`NEW USER EMAIL VERIFICATION REQUEST EXPIRY: ${expiresAt}`)
+    logInfo(`generated OTP: ${code}, expires at ${expiresAt}`)
 
+    logInfo('inserting email verification request entry to db..')
     return await tx.emailVerificationRequest.create({
         data: { id, userId, code, email, expiresAt },
     })
 }
 
 export async function deleteUserEmailVerificationRequest(tx: Prisma.TransactionClient, userId: number) {
+    logInfo(`delete existing email verification request if there is any..`)
     await tx.emailVerificationRequest.deleteMany({
         where: { userId },
     })
 }
 
 export async function sendVerificationEmail(email: string, code: string) {
-    const app_url = process.env.APP_URL ?? 'localhost:3000' 
-    logger.info(`SENT EMAIL TO ${email}: ${app_url}/verify-email?code=${code}`)
+    logger.info('sending verification email..')
+    const app_url = process.env.APP_URL ?? 'localhost:3000'
+    logger.info(`SENT EMAIL TO ${email}: ${app_url}/verify-emaill?code=${code}`)
 }
 
 export async function setEmailVerificationRequestCookie(request: EmailVerificationRequest) {

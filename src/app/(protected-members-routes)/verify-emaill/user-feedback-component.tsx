@@ -7,7 +7,7 @@ import { FrownIcon, SmileIcon } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { verifyEmailAction } from './action'
-import { createRedirectUrl } from '../lib/server/utils'
+import { createRedirectUrl } from '../lib/client/utils'
 
 export default function UserFeedbackComponent() {
     const router = useRouter()

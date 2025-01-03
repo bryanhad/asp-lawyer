@@ -43,3 +43,15 @@ export const logger = createLogger({
     ),
     transports: [new transports.Console()],
 })
+
+export function logAction(name:string, msg: string) {
+    logger.info(`[${name}] ${msg}`)
+}
+
+export function logInfo(msg:string) {
+    logger.verbose(msg)
+}
+
+export function logActionError(name:string, reason: string) {
+    logger.warn(`[${name}] ACTION ERROR | Reason: ${reason}`)
+}

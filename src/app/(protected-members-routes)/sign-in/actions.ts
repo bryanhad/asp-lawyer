@@ -2,19 +2,20 @@
 
 import { createAndSetSessionCookie } from '@/app/(protected-members-routes)/lib/server/auth'
 import { UserStatus } from '@/lib/enum'
+import { logAction, logActionError } from '@/lib/logger'
 import prisma from '@/lib/prisma'
 import { getZodIssues } from '@/lib/server-utils'
 import { User } from '@prisma/client'
-import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { verifyPasswordHash } from '../lib/server/password'
 import { RefillingTokenBucket, Throttler } from '../lib/server/rate-limit'
 import { globalPOSTRateLimit } from '../lib/server/request'
-import { createRedirectUrl } from '../lib/server/utils'
+import { consumeToken, createRedirectUrl, getClientIP, isRequestAllowed } from '../lib/server/utils'
 import { formSchema } from './validation'
 
 const throttler = new Throttler<number>([1, 2, 4, 8, 16, 30, 60, 180, 300])
-const ipBucket = new RefillingTokenBucket<string>(20, 1)
+const tokenBucket = new RefillingTokenBucket<string>('SIGN_IN_TOKEN_BUCKET', 20, 1)
+const actionName = 'loginAction Server Action'
 
 type FormState = {
     message: string
@@ -24,26 +25,40 @@ type FormState = {
 }
 
 export async function loginAction(_prevState: FormState, data: FormData): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    logAction(actionName, 'start action')
+
+    const clientIP = await getClientIP()
+    
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
+
+    if (isRequestAllowed(tokenBucket, clientIP, 1) === false) {
+        logActionError(actionName, 'request is not allowed')
+        return {
+            success: false,
+            message: 'Too many requests',
+        }
+    }
+
     // TODO: Assumes X-Forwarded-For is always included.
-    const headerStore = await headers()
-    const clientIP = headerStore.get('X-Forwarded-For')
-    if (clientIP !== null && !ipBucket.check(clientIP, 1)) {
-        return {
-            success: false,
-            message: 'Too many requests',
-        }
-    }
+    // const headerStore = await headers()
+    // const clientIP = headerStore.get('X-Forwarded-For')
+    // if (clientIP !== null && !tokenBucket.check(clientIP, 1)) {
+    //     return {
+    //         success: false,
+    //         message: 'Too many requests',
+    //     }
+    // }
 
     const formData = Object.fromEntries(data)
     const parsedData = formSchema.safeParse(formData)
 
     if (!parsedData.success) {
+        logActionError(actionName, 'missing fields')
         /**
          * we have to convert it into an actual object type where the field is a string and the values are also string
          * which contains the prev values
@@ -52,7 +67,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
          */
         const fields: Record<string, string> = {}
         for (const key of Object.keys(formData)) {
-            const value = formData[key];
+            const value = formData[key]
             if (typeof value === 'string') {
                 fields[key] = value
             }
@@ -83,6 +98,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
     )[0]
 
     if (!userQuery) {
+        logActionError(actionName, `user with email '${email}' does not exist`)
         return {
             success: false,
             message: 'Account does not exist',
@@ -92,6 +108,7 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
 
     if (userQuery.status === UserStatus.NOT_VERIFIED) {
         if (userQuery.emailVerificationCode) {
+            logActionError(actionName, 'missing fields')
             // await createAndSetSessionCookie(userQuery.id)
             return redirect(
                 createRedirectUrl('/verify-emaill', {
@@ -117,12 +134,21 @@ export async function loginAction(_prevState: FormState, data: FormData): Promis
         )
     }
 
-    if (clientIP !== null && !ipBucket.consume(clientIP, 1)) {
+    const isError = consumeToken(tokenBucket, clientIP, 1)
+    if (isError) {
+        logActionError(actionName, 'consume token error')
         return {
             success: false,
-            message: 'Too many requests',
+            message: 'Something went wrong',
         }
     }
+
+    // if (clientIP !== null && !tokenBucket.consume(clientIP, 1)) {
+    //     return {
+    //         success: false,
+    //         message: 'Too many requests',
+    //     }
+    // }
 
     if (!throttler.consume(userQuery.id)) {
         return {

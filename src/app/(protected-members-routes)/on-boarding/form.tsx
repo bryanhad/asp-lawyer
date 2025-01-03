@@ -6,10 +6,13 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { addNewUserAction } from './actions'
 import { FormData, formSchema } from './validation'
+import { onBoardingAction } from './actions'
+import { createRedirectUrl } from '../lib/client/utils'
+import { useRouter } from 'next/navigation'
 
 export default function OnBoardingForm() {
+    const router = useRouter()
     const { toast } = useToast()
 
     const form = useForm<FormData>({
@@ -22,8 +25,11 @@ export default function OnBoardingForm() {
     })
 
     async function onSubmit(values: FormData) {
-        const res = await addNewUserAction(values)
+        const res = await onBoardingAction(values)
         toast({ variant: res.success ? 'successful' : 'destructive', description: res.message })
+        if (res?.redirect) {
+            router.push(createRedirectUrl(res.redirect.path, { ...res.redirect.params }))
+        }
     }
 
     return (
