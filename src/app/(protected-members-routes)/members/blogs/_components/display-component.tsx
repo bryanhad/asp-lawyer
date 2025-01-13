@@ -25,9 +25,9 @@ export default function DisplayBlogs() {
         setIsLoading(isPending)
     }, [isPending, setIsLoading])
 
-    if (isPending) {
-        return <PageLoadingIndicator />
-    }
+    // if (isPending) {
+    //     return <PageLoadingIndicator />
+    // }
 
     return (
         <div className="flex flex-col gap-4 overflow-hidden md:min-h-[360px] md:gap-2">

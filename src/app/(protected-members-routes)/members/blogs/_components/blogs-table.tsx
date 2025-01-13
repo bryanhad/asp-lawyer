@@ -42,15 +42,20 @@ export default function BlogsTable() {
         },
     })
 
-    if (!data) return null
+    /**
+     * data is ready when, 
+     * - the fetch isn't loading 
+     * - AND data is present
+     */
+    const DATA_READY = !isLoading && !!data
 
     return (
         <div className="flex-[1] bg-background md:rounded-md md:border">
             {/* MOBILE */}
             <div className="flex flex-col gap-4 md:hidden">
-                {isLoading && <SkeletonFallbackMobile />}
-                {!isLoading && data.blogs.length < 1 && <TableDataNotFound notForTable tableName="blog" />}
-                {!isLoading &&
+                {!DATA_READY && <SkeletonFallbackMobile />}
+                {DATA_READY && data.blogs.length < 1 && <TableDataNotFound notForTable tableName="blog" />}
+                {DATA_READY &&
                     data.blogs.length > 0 &&
                     data.blogs.map((blog) => (
                         <BlogCard
@@ -72,7 +77,7 @@ export default function BlogsTable() {
             {/* DESKTOP */}
             <Table
                 className={cn('flex-[1] max-md:hidden', {
-                    'border-b': data.blogs.length > 0,
+                    'border-b': !data || data.blogs.length > 0,
                 })}
             >
                 <colgroup>
@@ -92,12 +97,12 @@ export default function BlogsTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {isLoading && <SkeletonFallbackDesktop />}
-                    {!isLoading && data.blogs.length < 1 && (
+                    {!DATA_READY && <SkeletonFallbackDesktop />}
+                    {DATA_READY && data.blogs.length < 1 && (
                         // TODO: fix hasFilters
                         <TableDataNotFound colSpan={7} hasFilters={data.fetchDetail.isUsingFilter} tableName="blog" />
                     )}
-                    {!isLoading &&
+                    {DATA_READY &&
                         data.blogs.length > 0 &&
                         data.blogs.map((blog, idx) => (
                             <TableRow key={blog.id}>
