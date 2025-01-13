@@ -9,6 +9,7 @@ import { SkeletonFallbackDesktop, SkeletonFallbackMobile } from './skeleton'
 import { useUsersTableContext } from './table-context'
 import UserAvatar from '@/components/ui/user/avatar'
 import { UserStatus } from '@/lib/enum'
+import UserStatusBadge from '@/app/(protected-members-routes)/_components/tables/user-status-badge'
 
 export default function UsersTable() {
     const { isLoading } = useUsersTableContext()
@@ -70,7 +71,8 @@ export default function UsersTable() {
             >
                 <colgroup>
                     <col style={{ width: '5%' }} />
-                    <col style={{ width: '50%' }} />
+                    <col style={{ width: '30%' }} />
+                    <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '30%' }} />
                 </colgroup>
@@ -81,6 +83,7 @@ export default function UsersTable() {
                     <TableRow className="bg-accent text-accent-foreground duration-300">
                         <TableHead className="w-[60px] text-nowrap">No</TableHead>
                         <TableHead className="text-nowrap">User</TableHead>
+                        <TableHead className="text-nowrap">Email</TableHead>
                         <TableHead className="text-nowrap">Status</TableHead>
                         <TableHead className="min-w-[140px] text-nowrap text-right max-md:hidden xl:min-w-[200px]">
                             Action
@@ -101,15 +104,28 @@ export default function UsersTable() {
                                     {idx + 1 + data.fetchDetail.fetchSize * (data.fetchDetail.currentPage - 1)}
                                 </TableCell>
                                 <TableCell className="font-medium">
-                                    <div className="flex gap-4">
+                                    <div className="flex items-center gap-4">
                                         <UserAvatar username={user.status !== UserStatus.ACTIVE ? '' : user.username} />
-                                        <div className='flex flex-col gap-1'>
-                                            <p>{user.username}</p>
-                                        </div>
-                                        {/* {JSON.stringify(user)} */}
+                                        <p className={cn("line-clamp-1 w-full", {
+                                            "italic text-muted-foreground": user.status !== UserStatus.ACTIVE
+                                        })}>
+                                            {/* TODO: handle if user's status is hold */}
+                                            {user.username === 'PLACEHOLDER_USERNAME'
+                                                ? user.status === UserStatus.NOT_VERIFIED
+                                                    ? 'not verified'
+                                                    : 'onboarding'
+                                                : user.username}
+                                        </p>
                                     </div>
                                 </TableCell>
-                                <TableCell>{user.status}</TableCell>
+                                <TableCell>
+                                    <p className="line-clamp-1">{user.email}</p>
+                                </TableCell>
+                                <TableCell>
+                                    <p className="line-clamp-1">
+                                        <UserStatusBadge userStatus={user.status} />
+                                    </p>
+                                </TableCell>
                                 <TableCell className="max-md:hidden">
                                     <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
                                         <ViewButton

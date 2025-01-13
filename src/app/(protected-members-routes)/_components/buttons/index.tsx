@@ -105,7 +105,7 @@ export function EditButton({ href, small = false, variant = 'outline', className
             asChild
             variant={variant}
             className={cn(
-                'text-blue-400 hover:bg-blue-400 hover:text-white dark:text-blue-500 dark:hover:bg-blue-500',
+                'text-blue-400 hover:bg-blue-400 hover:text-white dark:hover:bg-blue-500',
                 className,
             )}
         >
