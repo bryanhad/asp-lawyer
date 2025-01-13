@@ -2,34 +2,19 @@
 
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { getQueryClient } from '@/lib/tanstack-query-client'
-import { useMutation } from '@tanstack/react-query'
+import { UseMutateFunction } from '@tanstack/react-query'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useBlogsData } from './display-component'
-import { useBlogsTableContext } from './table-context'
-import { BLOGS_QUERY_KEY } from '../../constants'
-import { getData } from '../action'
+import { FilterSearchParams, TableFetchDetail } from '../../lib/types'
 
-function Pagination() {
-    const { setIsLoading } = useBlogsTableContext()
-    const { data } = useBlogsData()
-    const queryClient = getQueryClient()
-    const { mutate: paginate } = useMutation({
-        mutationFn: getData,
-        onMutate: () => {
-            setIsLoading(true)
-        },
-        onSuccess: (newData) => {
-            queryClient.setQueryData(BLOGS_QUERY_KEY, newData)
-        },
-        onSettled: () => {
-            setIsLoading(false)
-        },
-    })
+type Props = {
+    fetchDetail?: TableFetchDetail
+    paginateFn: UseMutateFunction<unknown, Error, Partial<{ filterValues: FilterSearchParams }> | undefined>
+}
 
-    if (!data) return null
+function TablePagination({ fetchDetail, paginateFn }: Props) {
+    if (!fetchDetail) return null
 
-    const { fetchSize, fetchedDataCount, totalAvailablePages, totalDataCount, currentPage } = data.fetchDetail
+    const { fetchSize, fetchedDataCount, totalAvailablePages, totalDataCount, currentPage } = fetchDetail
 
     return (
         <div className="mb-4 flex items-center justify-between px-2">
@@ -43,7 +28,7 @@ function Pagination() {
                     <Select
                         onValueChange={(value) => {
                             const newFetchSize = Number(value)
-                            paginate({ filterValues: { size: isNaN(newFetchSize) ? 5 : newFetchSize } })
+                            paginateFn({ filterValues: { size: isNaN(newFetchSize) ? 5 : newFetchSize } })
                         }}
                     >
                         <SelectTrigger className="h-8 min-w-[70px]">
@@ -79,7 +64,7 @@ function Pagination() {
                         className="h-8 w-8 p-0"
                         disabled={currentPage <= 1}
                         onClick={() =>
-                            paginate({
+                            paginateFn({
                                 filterValues: { page: currentPage - 1 },
                             })
                         }
@@ -96,7 +81,7 @@ function Pagination() {
                         className="h-8 w-8 p-0"
                         disabled={currentPage >= totalAvailablePages}
                         onClick={() =>
-                            paginate({
+                            paginateFn({
                                 filterValues: { page: currentPage + 1 },
                             })
                         }
@@ -122,4 +107,4 @@ function Pagination() {
     )
 }
 
-export default Pagination
+export default TablePagination

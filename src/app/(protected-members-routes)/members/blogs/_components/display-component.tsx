@@ -4,7 +4,7 @@ import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import BlogsTable from './blogs-table'
-import Pagination from './pagination'
+import BlogsPagination from './blogs-pagination'
 import { useBlogsTableContext } from './table-context'
 import { BLOGS_QUERY_KEY } from '../../constants'
 import { getData } from '../action'
@@ -32,7 +32,7 @@ export default function DisplayBlogs() {
     return (
         <div className="flex flex-col gap-4 overflow-hidden md:min-h-[360px] md:gap-2">
             <BlogsTable />
-            <Pagination />
+            <BlogsPagination />
         </div>
     )
 }

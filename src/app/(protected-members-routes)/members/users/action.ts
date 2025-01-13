@@ -30,7 +30,7 @@ export async function getData({
     const { q, page, size } = filterValues ?? {}
     const isUsingFilter = !!q
     const currentPage = page || 1
-    const fetchSize = size || 100
+    const fetchSize = size || 5
 
     const searchString = q
         ?.split(' ')

@@ -10,6 +10,7 @@ import { useUsersTableContext } from './table-context'
 import UserAvatar from '@/components/ui/user/avatar'
 import { UserStatus } from '@/lib/enum'
 import UserStatusBadge from '@/app/(protected-members-routes)/_components/tables/user-status-badge'
+import { PLACEHOLDER_USERNAME } from '../../constants'
 
 export default function UsersTable() {
     const { isLoading } = useUsersTableContext()
@@ -110,7 +111,7 @@ export default function UsersTable() {
                                             "italic text-muted-foreground": user.status !== UserStatus.ACTIVE
                                         })}>
                                             {/* TODO: handle if user's status is hold */}
-                                            {user.username === 'PLACEHOLDER_USERNAME'
+                                            {user.username === PLACEHOLDER_USERNAME
                                                 ? user.status === UserStatus.NOT_VERIFIED
                                                     ? 'not verified'
                                                     : 'onboarding'

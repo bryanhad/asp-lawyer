@@ -7,6 +7,7 @@ import { getData } from '../action'
 import { useEffect } from 'react'
 import { useUsersTableContext } from './table-context'
 import UsersTable from './users-table'
+import UsersPagination from './users-pagination'
 
 export function useUsersData() {
     return useQuery({
@@ -32,6 +33,7 @@ export default function DisplayUsers() {
     return (
         <div className="flex flex-col gap-4 overflow-hidden md:min-h-[360px] md:gap-2">
             <UsersTable />
+            <UsersPagination />
         </div>
     )
 }
