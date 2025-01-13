@@ -22,7 +22,7 @@ export default function ImageWithFallbackPlaceholder({ variant = 'naked', placeh
                 )}
             >
                 <ImageOff className="shrink-0" size={70} />
-                <p>Failed to load image</p>
+                <p className='text-center'>Failed to load image</p>
             </div>
         )
     }

@@ -1,22 +1,40 @@
-import { headers } from 'next/headers'
+import { logAction } from '@/lib/logger'
 import { RefillingTokenBucket } from './rate-limit'
+import { getClientIP } from './utils'
 
-export const globalBucket = new RefillingTokenBucket<string>(100, 1)
+export const globalBucket = new RefillingTokenBucket<string>('GLOBAL_TOKEN_BUCKET', 100, 1)
 
+/**
+ * - `true` if the key is null or the token is sufficient.
+ * - `false` if the token is insufficient.
+ *
+ * @returns isOK
+ */
 export async function globalGETRateLimit(): Promise<boolean> {
-    // Note: Assumes X-Forwarded-For will always be defined.
-    const clientIP = (await headers()).get('X-Forwarded-For')
+    const clientIP = await getClientIP()
     if (clientIP === null) {
+        logAction(globalBucket.name, `client IP from 'X-Forwarded-For' is null. Allowing GET request.`)
         return true
     }
-    return globalBucket.consume(clientIP, 1)
+    const isOK = !globalBucket.consume(clientIP, 1)
+    logAction(globalBucket.name, `${isOK ? 'allow' : 'deny'} GET request`)
+
+    return isOK
 }
 
-export async function globalPOSTRateLimit(): Promise<boolean> {
-    // Note: Assumes X-Forwarded-For will always be defined.
-    const clientIP = (await headers()).get('X-Forwarded-For')
+/**
+ * - `true` if the key is null or the token is sufficient.
+ * - `false` if the token is insufficient.
+ *
+ * @returns isOK
+ */
+export async function globalPOSTRateLimit(clientIP: string | null): Promise<boolean> {
     if (clientIP === null) {
+        logAction(globalBucket.name, `client IP from 'X-Forwarded-For' is null. Allowing POST request.`)
         return true
     }
-    return globalBucket.consume(clientIP, 3)
+    const isOK = !globalBucket.consume(clientIP, 3)
+    logAction(globalBucket.name, `${isOK ? 'allow' : 'deny'} POST request`)
+
+    return isOK
 }

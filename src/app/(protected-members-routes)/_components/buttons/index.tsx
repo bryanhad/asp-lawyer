@@ -3,18 +3,18 @@
 import { Button, ButtonProps } from '@/components/ui/button'
 import LoadingButton from '@/components/ui/loading-button'
 import Modal from '@/components/ui/modal'
-import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 import { Eye, Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useActionState, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type DeleteButtonProps = {
     toBeDeletedName: string
     small?: boolean
     variant?: ButtonProps['variant']
-    onApprove: <T>(id: T) => Promise<{ success: boolean; message: string }>
+    onApprove: <T>(id: T) => unknown
+    isPending: boolean
+    isSuccessful: boolean
     className?: string
 }
 
@@ -23,27 +23,17 @@ export function DeleteButton({
     small = false,
     variant = 'destructive-outline',
     onApprove,
+    isPending,
+    isSuccessful,
     className,
 }: DeleteButtonProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const { toast } = useToast()
-    const router = useRouter()
-
-    const [state, formAction, isPending] = useActionState(onApprove, {
-        success: false,
-        message: '',
-    })
 
     useEffect(() => {
-        console.log(state)
-        if (state.message) {
-            toast({ variant: state.success ? 'successful' : 'destructive', description: state.message })
+        if (isSuccessful) {
             setIsModalOpen(false)
         }
-        if (state.success) {
-            router.refresh()
-        }
-    }, [state, toast, router])
+    }, [isSuccessful])
 
     return (
         <Modal
@@ -70,11 +60,15 @@ export function DeleteButton({
             desc={`Delete entry of '${toBeDeletedName}'`}
         >
             <div className="flex w-full gap-2">
-                <form action={formAction}>
-                    <LoadingButton loading={isPending} type="submit" className="flex-1" variant={'destructive'}>
-                        Yes, delete permanently
-                    </LoadingButton>
-                </form>
+                <LoadingButton
+                    loading={isPending}
+                    type="button"
+                    onClick={onApprove}
+                    className="flex-1"
+                    variant={'destructive'}
+                >
+                    Yes, delete permanently
+                </LoadingButton>
                 <Button className="flex-1" variant={'outline'} onClick={() => setIsModalOpen(false)}>
                     Cancel
                 </Button>
@@ -111,7 +105,7 @@ export function EditButton({ href, small = false, variant = 'outline', className
             asChild
             variant={variant}
             className={cn(
-                'text-blue-400 hover:bg-blue-400 hover:text-white dark:text-blue-500 dark:hover:bg-blue-500',
+                'text-blue-400 hover:bg-blue-400 hover:text-white dark:hover:bg-blue-500',
                 className,
             )}
         >

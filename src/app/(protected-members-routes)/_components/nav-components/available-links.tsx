@@ -25,6 +25,11 @@ export const AVAILABLE_LINKS = [
                 icon: <ScrollText className="shrink-0" />,
             },
             // {
+            //     title: 'Blogss',
+            //     href: '/members/blogss',
+            //     icon: <ScrollText className="shrink-0" />,
+            // },
+            // {
             //     title: 'Practice Areas',
             //     href: '/members/practice-areas',
             //     icon: <Briefcase className="shrink-0" />,

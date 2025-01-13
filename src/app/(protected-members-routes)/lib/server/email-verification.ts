@@ -5,16 +5,17 @@ import { generateRandomOTP } from './utils'
 import { cookies } from 'next/headers'
 import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
 import { ExpiringTokenBucket } from './rate-limit'
+import { logger, logInfo } from '@/lib/logger'
 
 const EMAIL_VERIFICATION_COOKIE = 'email_verification'
-const EMAIL_VERIFICATION_EXPIRY = 1000 * 60 * 10 //10 minutes
+const EMAIL_VERIFICATION_EXPIRY = 1000 * 60 * 60 //1 hour
 
 export async function getUserEmailVerificationRequest(
     userId: number,
     id: string,
 ): Promise<EmailVerificationRequest | null> {
     const emailVerificationRequest = await prisma.emailVerificationRequest.findUnique({
-        where: { id: id, userId: userId },
+        where: { id, userId },
     })
 
     if (!emailVerificationRequest) {
@@ -24,33 +25,40 @@ export async function getUserEmailVerificationRequest(
     return emailVerificationRequest
 }
 
-export async function createEmailVerificationRequest(userId: number, email: string): Promise<EmailVerificationRequest> {
-    const emailVerificationRequest = await prisma.$transaction(async (tx) => {
-        await deleteUserEmailVerificationRequest(tx, userId)
-        // create emailVerification id
-        const idBytes = new Uint8Array(20)
-        crypto.getRandomValues(idBytes)
-        const id = encodeBase32(idBytes).toLowerCase()
+export async function createEmailVerificationRequest(
+    tx: Prisma.TransactionClient,
+    userId: number,
+    email: string,
+): Promise<EmailVerificationRequest> {
+    await deleteUserEmailVerificationRequest(tx, userId)
 
-        const code = generateRandomOTP()
-        const expiresAt = new Date(Date.now() + EMAIL_VERIFICATION_EXPIRY)
+    logInfo(`creating emailVerification id..`)
+    const idBytes = new Uint8Array(20)
+    crypto.getRandomValues(idBytes)
+    const id = encodeBase32(idBytes).toLowerCase()
 
-        return await tx.emailVerificationRequest.create({
-            data: { id, userId, code, email, expiresAt },
-        })
+    logInfo(`generating OTP code for email verification request..`)
+    const code = generateRandomOTP()
+    const expiresAt = new Date(Date.now() + EMAIL_VERIFICATION_EXPIRY)
+    logInfo(`generated OTP: ${code}, expires at ${expiresAt}`)
+
+    logInfo('inserting email verification request entry to db..')
+    return await tx.emailVerificationRequest.create({
+        data: { id, userId, code, email, expiresAt },
     })
-
-    return emailVerificationRequest
 }
 
 export async function deleteUserEmailVerificationRequest(tx: Prisma.TransactionClient, userId: number) {
+    logInfo(`delete existing email verification request if there is any..`)
     await tx.emailVerificationRequest.deleteMany({
         where: { userId },
     })
 }
 
 export async function sendVerificationEmail(email: string, code: string) {
-    console.log(`To ${email}: Your verification code is ${code}`)
+    logger.info('sending verification email..')
+    const app_url = process.env.APP_URL ?? 'localhost:3000'
+    logger.info(`SENT EMAIL TO ${email}: ${app_url}/verify-emaill?code=${code}`)
 }
 
 export async function setEmailVerificationRequestCookie(request: EmailVerificationRequest) {
@@ -90,6 +98,21 @@ export async function getUserEmailVerificationRequestFromRequest(): Promise<Emai
         await deleteEmailVerificationRequestCookie()
     }
     return request
+}
+
+export async function getUserEmailVerificationRequestCode(userId: number): Promise<string | undefined> {
+    const res: { code: string } | undefined = (
+        await prisma.$queryRaw<{ code: string }[]>`
+            SELECT "code" 
+            FROM email_verification_requests
+            WHERE 
+                "expiresAt" > NOW() + INTERVAL '3 minutes'
+                AND evr."userId" = ${userId} 
+            ORDER BY "expiresAt" DESC
+            LIMIT 1
+    `
+    )[0]
+    return res ? res.code : undefined
 }
 
 export const sendVerificationEmailBucket = new ExpiringTokenBucket<number>(3, 60 * 10)

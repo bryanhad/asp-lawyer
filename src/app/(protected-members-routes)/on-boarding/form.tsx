@@ -6,31 +6,40 @@ import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { signupAction } from './actions'
 import { FormData, formSchema } from './validation'
+import { onBoardingAction } from './actions'
+import { createRedirectUrl } from '../lib/client/utils'
+import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
-export default function SignUpForm() {
+type Props = {
+    className?: string
+}
+
+export default function OnBoardingForm({ className }: Props) {
+    const router = useRouter()
     const { toast } = useToast()
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             username: '',
-            email: '',
             password: '',
+            confirmPassword: '',
         },
     })
 
     async function onSubmit(values: FormData) {
-        const res = await signupAction(values)
-        if (!res.success) {
-            toast({ variant: 'destructive', title: 'Oh noose!', description: res.message })
+        const res = await onBoardingAction(values)
+        toast({ variant: res.success ? 'successful' : 'destructive', description: res.message })
+        if (res?.redirect) {
+            router.push(createRedirectUrl(res.redirect.path, { ...res.redirect.params }))
         }
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-4', className)}>
                 <FormField
                     control={form.control}
                     name="username"
@@ -38,20 +47,7 @@ export default function SignUpForm() {
                         <FormItem>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                                <Input placeholder={'Bambang Ganteng'} {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input placeholder={'bambang@gmail.com'} {...field} />
+                                <Input placeholder={'bambang'} type="text" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -62,15 +58,28 @@ export default function SignUpForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>Your New Password</FormLabel>
                             <FormControl>
-                                <Input placeholder={'******'} {...field} />
+                                <Input type="password" placeholder={'********'} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Sign Up</Button>
+                <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Confirm New Password</FormLabel>
+                            <FormControl>
+                                <Input type="password" placeholder={'********'} {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit" className='w-full'>Set up your account</Button>
             </form>
         </Form>
     )

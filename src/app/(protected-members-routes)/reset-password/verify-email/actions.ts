@@ -8,6 +8,7 @@ import { emailVerificationFormSchema } from './validation'
 import prisma from '@/lib/prisma'
 import { logger } from '@/lib/logger'
 import { redirect } from 'next/navigation'
+import { getClientIP } from '../../lib/server/utils'
 
 type FormState = {
     message: string
@@ -22,7 +23,9 @@ export default async function verifyPasswordResetEmailAction(
     _prevState: FormState,
     data: FormData,
 ): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',

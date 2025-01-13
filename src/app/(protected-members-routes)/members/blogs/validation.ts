@@ -7,7 +7,7 @@ export const filterSchema = z.object({
 
 export type FilterValues = z.infer<typeof filterSchema>
 
-export type SearchParams = FilterValues & { size?: string; page?: string }
+export type SearchParams = { size?: string; page?: string; q?: string }
 
 const MAX_IMAGE_SIZE = 400_880 // 4 MB
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
@@ -54,5 +54,5 @@ export const editBlogFormSchemaClient = addBlogFormSchemaClient.extend({
 export const editBlogFormSchemaServer = editBlogFormSchemaClient.extend({
     blogId: z.string(),
     thumbnail: z.custom<File>((val) => val instanceof File, 'Picture must be a file type').optional(),
-    currentBlogImageKey: z.string()
+    currentBlogImageKey: z.string(),
 })

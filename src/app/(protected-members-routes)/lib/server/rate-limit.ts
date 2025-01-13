@@ -1,62 +1,83 @@
+import { logAction } from '@/lib/logger'
+
+type TokenStorage = {
+    count: number
+    refilledAt: number
+}
+
+/**
+ * - Maintains a bucket of tokens for each unique key
+ * - Automatically refills tokens over time
+ * - Allows or denies actions based on token availability
+ *
+ * @param {number} max Maximum number of tokens a bucket can hold
+ * @param {number} refillIntervalSeconds How often tokens are refilled
+ * @returns {boolean} Allows or denies actions based on token availability
+ */
 export class RefillingTokenBucket<_Key> {
-    public max: number
-    public refillIntervalSeconds: number
+    private bucket = new Map<_Key, TokenStorage>()
 
-    constructor(max: number, refillIntervalSeconds: number) {
-        this.max = max
-        this.refillIntervalSeconds = refillIntervalSeconds
+    constructor(
+        public name: string,
+        public max: number,
+        public refillIntervalSeconds: number,
+    ) {
+        logAction(`${this.name}`, `Initialization: max=${max} tokens, refill interval=${refillIntervalSeconds}s.`)
     }
 
-    private storage = new Map<_Key, RefillBucket>()
+    private refillTokens(tokenStorage: TokenStorage): void {
+        const now = Date.now()
+        const elapsedIntervals = Math.floor((now - tokenStorage.refilledAt) / (this.refillIntervalSeconds * 1000))
+        if (elapsedIntervals > 0) {
+            tokenStorage.count = Math.min(tokenStorage.count + elapsedIntervals, this.max)
+            tokenStorage.refilledAt = now
+        }
+    }
 
+    /**
+     * - `true` if key is new or token count is >= cost
+     * - `false` if token count is insufficient
+     *
+     * @returns {boolean} isAllowed
+     */
     public check(key: _Key, cost: number): boolean {
-        const bucket = this.storage.get(key) ?? null
-        if (bucket === null) {
-            // console.log(`New Bucket for key "${key}". (max: ${this.max}).`)
-
+        const tokenStorage = this.bucket.get(key)
+        if (!tokenStorage) {
+            logAction(this.name, `New key "${key}" detected. Allowing initial request.`)
             return true
         }
-        const now = Date.now()
-        const refill = Math.floor((now - bucket.refilledAt) / (this.refillIntervalSeconds * 1000))
-        const availableTokens = Math.min(bucket.count + refill, this.max)
+        this.refillTokens(tokenStorage)
+        logAction(this.name, `Key "${key}" checked. Tokens: ${tokenStorage.count}, Cost: ${cost}.`)
 
-        // console.log(`Bucket for key "${key}" has ${availableTokens} tokens available.`)
-
-        if (refill > 0) {
-            return availableTokens >= cost
-        }
-        return bucket.count >= cost
+        return tokenStorage.count >= cost
     }
 
+    /**
+     * - `true` if token is insufficient
+     * - `false` if consume successful
+     *
+     * @returns {boolean} isError
+     */
     public consume(key: _Key, cost: number): boolean {
-        // logger.info(`Consume called for key "${key}". Current bucket:`, this.storage.get(key))
+        let tokenStorage = this.bucket.get(key)
 
-        let bucket = this.storage.get(key) ?? null
-        const now = Date.now()
-        if (bucket === null) {
-            // Create a new bucket if it doesn't exist
-            bucket = {
-                count: this.max - cost, // Initialize with tokens reduced by cost
-                refilledAt: now,
-            }
-            this.storage.set(key, bucket)
+        if (!tokenStorage) {
+            tokenStorage = { count: this.max, refilledAt: Date.now() }
+            this.bucket.set(key, tokenStorage)
+            logAction(this.name, `New key "${key}" registered.`)
+            return false
+        }
+
+        this.refillTokens(tokenStorage)
+
+        if (tokenStorage.count < cost) {
+            logAction(this.name, `Insufficient tokens for key "${key}".`)
             return true
         }
+        tokenStorage.count -= cost // Consume tokens
+        logAction(this.name, `Key "${key}" allowed. Remaining tokens: ${tokenStorage.count}.`)
 
-        // Calculate the number of tokens to refill
-        const refill = Math.floor((now - bucket.refilledAt) / (this.refillIntervalSeconds * 1000))
-        bucket.count = Math.min(bucket.count + refill, this.max)
-        bucket.refilledAt = now
-
-        if (bucket.count < cost) {
-            return false // Not enough tokens
-        }
-        bucket.count -= cost // Consume tokens
-        this.storage.set(key, bucket) // Update storage with the modified bucket
-        
-        // logger.info(`After consume: "${key}" bucket:`, this.storage.get(key))
-
-        return true
+        return false
     }
 }
 
@@ -152,11 +173,6 @@ export class ExpiringTokenBucket<_Key> {
     public reset(key: _Key): void {
         this.storage.delete(key)
     }
-}
-
-interface RefillBucket {
-    count: number
-    refilledAt: number
 }
 
 interface ExpiringBucket {

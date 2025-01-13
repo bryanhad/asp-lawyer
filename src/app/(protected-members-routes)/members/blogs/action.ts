@@ -5,26 +5,38 @@ import { utapi } from '@/app/api/uploadthing/core'
 import { BlogTranslationKey, EntityType, Language } from '@/lib/enum'
 import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'
+import { getBlurredImageUrls } from '@/lib/server-utils'
 import { Blog, Prisma, User } from '@prisma/client'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { UploadThingError } from 'uploadthing/server'
 import { FileEsque, UploadedFileData } from 'uploadthing/types'
 import { z } from 'zod'
 import { globalPOSTRateLimit } from '../../lib/server/request'
+import { REVALIDATE_CLIENT_CACHE } from '../constants'
 import {
     addBlogFormSchemaClient,
     addBlogFormSchemaServer,
     editBlogFormSchemaClient,
     editBlogFormSchemaServer,
-    SearchParams,
 } from './validation'
-import { getBlurredImageUrls } from '@/lib/server-utils'
-import { revalidatePath } from 'next/cache'
+import { getClientIP } from '../../lib/server/utils'
+
+export type SearchParams = { size?: number; page?: number; q?: string }
 
 type FetchedBlogEntry = Pick<Blog, 'id' | 'imageUrl' | 'createdAt'> & {
     title: { id: string; en: string }
     author: Pick<User, 'id' | 'username'>
+}
+
+export type FetchDetail = {
+    totalDataCount: number
+    totalAvailablePages: number
+    isUsingFilter: boolean
+    fetchSize: number
+    fetchedDataCount: number
+    currentPage: number
 }
 
 type BlogData = FetchedBlogEntry & {
@@ -34,45 +46,22 @@ type BlogData = FetchedBlogEntry & {
 export async function getData({
     filterValues,
     createdByUserId: _createdByUserId,
-    defaultFetchSize,
-}: {
+}: Partial<{
     filterValues: SearchParams
-    defaultFetchSize: number
-    createdByUserId?: string
-}): Promise<{
+    createdByUserId: string
+}> = {}): Promise<{
     blogs: BlogData[]
-    totalDataCount: number
-    totalAvailablePages: number
-    isUsingFilter: boolean
-    fetchSize: number
+    fetchDetail: FetchDetail
 }> {
-    const { q, page, size } = filterValues
+    const { q, page, size } = filterValues ?? {}
     const isUsingFilter = !!q
-    const currentPage = Number(page) || 1
-    const fetchSize = Number(size) || defaultFetchSize
+    const currentPage = page || 1
+    const fetchSize = size || 5
 
     const searchString = q
         ?.split(' ')
         .filter((word) => word.length > 0)
         .join(' ')
-
-    const baseQuery = Prisma.sql`
-        FROM blogs b
-        LEFT JOIN translations AS t 
-            ON t."entityId" = b."id" 
-            AND t."entityType" = ${EntityType.BLOG}
-            AND t."key" IN (${BlogTranslationKey.TITLE})
-        LEFT JOIN users u
-            ON u."id" = b."authorId"
-            ${
-                searchString
-                    ? Prisma.sql`WHERE 
-                        t."value" ILIKE ${`%${searchString}%`} 
-                        OR u."username" ILIKE ${`%${searchString}%`}
-                    `
-                    : Prisma.empty
-            }
-    `
 
     const offset = (currentPage - 1) * fetchSize
 
@@ -96,11 +85,32 @@ export async function getData({
                     THEN t."value" 
                 END)
             ) AS title
-            ${baseQuery}
+            FROM blogs b
+            LEFT JOIN translations AS t 
+                ON t."entityId" = b."id" 
+                AND t."entityType" = ${EntityType.BLOG}
+                AND t."key" IN (${BlogTranslationKey.TITLE})
+            LEFT JOIN users u
+                ON u."id" = b."authorId"
+            ${
+                searchString
+                    ? Prisma.sql`WHERE 
+                        EXISTS (
+                            SELECT 1 FROM translations sub_t
+                            WHERE sub_t."entityId" = b."id"
+                                AND sub_t."entityType" = ${EntityType.BLOG}
+                                AND sub_t."key" = ${BlogTranslationKey.TITLE}
+                                AND sub_t."value" ILIKE ${`%${searchString}%`}
+                        ) OR
+                        u."username" ILIKE ${`%${searchString}%`}
+                    `
+                    : Prisma.empty
+            }
             GROUP BY b."id", b."imageUrl", b."createdAt", u."id"
+            ORDER BY b."createdAt" DESC
             LIMIT ${fetchSize} OFFSET ${offset}
         `,
-        prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count ${baseQuery}`,
+        prisma.$queryRaw<{ count: number }[]>`SELECT COUNT(*) as count FROM blogs b`,
     ])
 
     // Step 1: Collect image URLs
@@ -119,20 +129,25 @@ export async function getData({
 
     const totalDataCount = Number(countRes[0].count)
     const totalAvailablePages = Math.ceil(Number(totalDataCount) / fetchSize)
-
     return {
         blogs: transformedBlog,
-        totalDataCount,
-        totalAvailablePages,
-        isUsingFilter,
-        fetchSize,
+        fetchDetail: {
+            totalDataCount,
+            totalAvailablePages,
+            isUsingFilter,
+            fetchSize,
+            fetchedDataCount: transformedBlog.length,
+            currentPage,
+        },
     }
 }
 
 export async function addBlogAction(
     data: Partial<z.infer<typeof addBlogFormSchemaClient>>,
 ): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
@@ -236,7 +251,7 @@ export async function addBlogAction(
     }
     revalidatePath(`/en/blogs`)
     revalidatePath(`/id/blogs`)
-    return redirect(`/members/blogs?toast=${encodeURIComponent(`New blog has been added`)}`)
+    return redirect(`/members/blogs?toast=${encodeURIComponent(`New blog has been added`)}&${REVALIDATE_CLIENT_CACHE}`)
 }
 
 /**
@@ -294,7 +309,9 @@ export async function editBlogAction(
     currentBlogImageKey: unknown,
     data: Partial<z.infer<typeof editBlogFormSchemaClient>>,
 ): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
@@ -410,7 +427,9 @@ export async function editBlogAction(
 }
 
 export async function deleteBlogAction(blogId: unknown): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',

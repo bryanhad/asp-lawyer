@@ -11,6 +11,18 @@ export enum EntityType {
     // USER = 'USER',
 }
 
+export enum UserStatus {
+    NOT_VERIFIED = 'NOT_VERIFIED',
+    ON_BOARDING = 'ON_BOARDING',
+    ACTIVE = 'ACTIVE',
+    // HOLD = 'HOLD',
+}
+
+export enum UserRole {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
+
 export enum MemberTranslationKey {
     DEGREE = 'DEGREE',
     POSITION = 'POSITION',
@@ -43,7 +55,6 @@ export enum BlogTranslationKey {
     TITLE = 'TITLE',
     CONTENT = 'CONTENT',
 }
-
 
 /**
  * Perhaps in the future..

@@ -7,6 +7,7 @@ import {
 } from '@/app/(protected-members-routes)/lib/server/auth'
 import { globalPOSTRateLimit } from '../../lib/server/request'
 import { redirect } from 'next/navigation'
+import { getClientIP } from '../../lib/server/utils'
 
 export type FormState = {
     success?: boolean
@@ -14,7 +15,9 @@ export type FormState = {
 }
 
 export async function logoutAction(_prevState: FormState): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+    
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',

@@ -23,7 +23,8 @@ import { ExpiringTokenBucket } from '../../lib/server/rate-limit'
 import { verifyPasswordHash, verifyPasswordStrength } from '../../lib/server/password'
 import { getUserPasswordHash, updateUserPassword } from '../../lib/server/user'
 import prisma from '@/lib/prisma'
-import { logger } from '@/lib/logger'
+import { logActionError, logger } from '@/lib/logger'
+import { getClientIP } from '../../lib/server/utils'
 
 type UpdateEmailFormState = FormState<typeof updateEmailFormSchema>
 type UpdatePasswordFormSchema = FormState<typeof updatePasswordFormSchema>
@@ -34,12 +35,15 @@ export async function updateEmailAction(
     _prevState: UpdateEmailFormState,
     data: FormData,
 ): Promise<UpdateEmailFormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
+
     const { session, user } = await getCurrentSession()
     if (session === null) {
         return {
@@ -80,22 +84,32 @@ export async function updateEmailAction(
 
     const { email } = parsedData.data
 
-    const emailAvailable = await checkEmailAvailability(email)
-    if (!emailAvailable) {
+    try {
+        const emailAvailable = await checkEmailAvailability(email)
+        if (!emailAvailable) {
+            return {
+                success: false,
+                message: 'This email is already used',
+            }
+        }
+        if (!sendVerificationEmailBucket.consume(user.id, 1)) {
+            return {
+                success: false,
+                message: 'Too many requests',
+            }
+        }
+
+        await prisma.$transaction(async (tx) => {
+            const verificationRequest = await createEmailVerificationRequest(tx, user.id, email)
+            await sendVerificationEmail(verificationRequest.email, verificationRequest.code)
+            await setEmailVerificationRequestCookie(verificationRequest)
+        })
+    } catch (err) {
         return {
             success: false,
-            message: 'This email is already used',
+            message: 'Failed to send verification email',
         }
     }
-    if (!sendVerificationEmailBucket.consume(user.id, 1)) {
-        return {
-            success: false,
-            message: 'Too many requests',
-        }
-    }
-    const verificationRequest = await createEmailVerificationRequest(user.id, email)
-    await sendVerificationEmail(verificationRequest.email, verificationRequest.code)
-    await setEmailVerificationRequestCookie(verificationRequest)
     return redirect(`/verify-email?toast=${encodeURIComponent(`Please check email inbox for ${user.email}`)}`)
 }
 
@@ -103,12 +117,15 @@ export async function updatePasswordAction(
     _prev: UpdatePasswordFormSchema,
     data: FormData,
 ): Promise<UpdatePasswordFormSchema> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
+
     const { session, user } = await getCurrentSession()
     if (session === null) {
         return {

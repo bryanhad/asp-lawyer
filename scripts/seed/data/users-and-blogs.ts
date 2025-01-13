@@ -1,4 +1,4 @@
-import { BlogTranslationKey, Language } from '../../../src/lib/enum'
+import { BlogTranslationKey, Language, UserRole, UserStatus } from '../../../src/lib/enum'
 import { BlogsSeed, UsersSeed } from '../types'
 
 export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
@@ -8,6 +8,8 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
         email: 'admin@gmail.com',
         password: 'sipalingadmin12',
         emailIsVerified: true,
+        status: UserStatus.ACTIVE,
+        role: UserRole.ADMIN,
         blogs: [
             {
                 id: 'cm4dpntdw0003tmao7zt3c0nx',
@@ -118,5 +120,35 @@ export const usersAndBlogsSeed: (UsersSeed & { blogs: BlogsSeed[] })[] = [
                 ],
             },
         ],
+    },
+    {
+        id: 2,
+        username: 'Lawyer Kece',
+        email: 'lawyerkece@gmail.com',
+        password: 'lawyerkece12',
+        emailIsVerified: false,
+        status: UserStatus.ON_BOARDING,
+        role: UserRole.USER,
+        blogs: [],
+    },
+    {
+        id: 3,
+        username: 'sipaling lawyer',
+        email: 'sipalinglawyer@gmail.com',
+        password: 'sipalinglawyer12',
+        emailIsVerified: false,
+        status: UserStatus.NOT_VERIFIED,
+        role: UserRole.USER,
+        blogs: [],
+    },
+    {
+        id: 4,
+        username: 'sipaling kurator',
+        email: 'sipalingkurator@gmail.com',
+        password: 'sipalingkurator12',
+        emailIsVerified: true,
+        status: UserStatus.ACTIVE,
+        role: UserRole.USER,
+        blogs: [],
     },
 ]

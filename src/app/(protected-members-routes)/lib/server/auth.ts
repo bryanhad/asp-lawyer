@@ -30,11 +30,7 @@ export function generateSessionToken(): string {
     return token
 }
 
-export async function createSession(
-    token: string,
-    userId: number,
-    tx?: Prisma.TransactionClient
-): Promise<Session> {
+export async function createSession(token: string, userId: number, tx?: Prisma.TransactionClient): Promise<Session> {
     const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
     const session: Session = {
         id: sessionId,
@@ -65,7 +61,8 @@ export async function validateSessionToken(token: string): Promise<SessionValida
                     id: true,
                     email: true,
                     username: true,
-                    emailIsVerified: true,
+                    status: true,
+                    role: true,
                 },
             },
         },
@@ -122,6 +119,12 @@ export async function setSessionTokenCookie(token: string, expiresAt: Date) {
         expires: expiresAt,
         path: '/', // Cookies can be accessed from all routes
     })
+}
+
+export async function createAndSetSessionCookie(userId:number) {
+    const sessionToken = generateSessionToken()
+    const session = await createSession(sessionToken, userId)
+    await setSessionTokenCookie(sessionToken, session.expiresAt)
 }
 
 export async function deleteSessionTokenCookie() {

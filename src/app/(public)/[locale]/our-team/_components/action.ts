@@ -1,13 +1,11 @@
 'use server'
 
 import { EntityType, Language, MemberTranslationKey } from '@/lib/enum'
+import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'
 import { Member } from '@prisma/client'
 
-type QueryResult = Pick<
-    Member,
-    'slug' | 'name' | 'email' | 'linkedInUrl' | 'role' | 'imageUrl'
-> & {
+type QueryResult = Pick<Member, 'slug' | 'name' | 'email' | 'linkedInUrl' | 'role' | 'imageUrl'> & {
     position: { id: string; en: string }
     degree: { id: string; en: string }
 }
@@ -15,6 +13,7 @@ type QueryResult = Pick<
 export type MembersData = QueryResult[]
 
 export async function getData(): Promise<MembersData> {
+    logger.info('our-team getData called')
     const query: QueryResult[] = await prisma.$queryRaw`
         SELECT 
             m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl",
@@ -63,6 +62,7 @@ export async function getData(): Promise<MembersData> {
         GROUP BY m."order", m."slug", m."name", m."email", m."linkedInUrl", m."role", m."imageUrl"
         ORDER BY m."order"
     `
+    logger.info('our-team getData returns')
 
     return query
 }

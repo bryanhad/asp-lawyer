@@ -1,22 +1,23 @@
-import { deleteBlogAction, getData } from '../action'
-import { DeleteButton, EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
-import InputorInfo from './inputor-info'
-import { cn } from '@/lib/utils'
+import { EditButton, ViewButton } from '@/app/(protected-members-routes)/_components/buttons'
 import Flag from '@/components/ui/flag'
 import ImageWithFallbackPlaceholder from '@/components/ui/image-with-fallback-placeholder'
+import { cn } from '@/lib/utils'
+import { getData } from '../action'
+import InputorInfo from './inputor-info'
 
 // get the type of single blog of the getData function
 type Props = Awaited<ReturnType<typeof getData>>['blogs'][number] & {
     className?: string
+    deleteButton: React.ReactNode
 }
 
-function BlogCard({ className, ...blog }: Props) {
+function BlogCard({ className, deleteButton, ...blog }: Props) {
     return (
         <div className={cn('flex flex-col overflow-hidden rounded-md border', className)}>
             <div className="grid grid-cols-3 p-2">
                 <div className="relative max-h-[150px] min-h-[120px] w-full overflow-hidden rounded-md bg-secondary">
                     <ImageWithFallbackPlaceholder
-                        variant='absolute-center'
+                        variant="absolute-center"
                         className="object-cover object-center dark:brightness-90"
                         alt={`Thumbnail of blog '${blog.title}'`}
                         src={blog.imageUrl}
@@ -48,12 +49,7 @@ function BlogCard({ className, ...blog }: Props) {
                 </div>
             </div>
             <div className="flex gap-4 p-2">
-                <DeleteButton
-                    className="flex-[1]"
-                    small
-                    toBeDeletedName={blog.title.en}
-                    onApprove={deleteBlogAction.bind(null, blog.id)}
-                />
+                {deleteButton}
                 <EditButton className="flex-[1]" small href={`/members/blogs/${blog.id}/edit`} />
                 <ViewButton className="flex-[1]" small href={`/members/blogs/${blog.id}`} />
             </div>
