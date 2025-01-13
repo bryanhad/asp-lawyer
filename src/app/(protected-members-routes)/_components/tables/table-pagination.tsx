@@ -9,12 +9,13 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
 type Props = {
+    isLoading:boolean
     fetchDetail?: TableFetchDetail
     paginateFn: UseMutateFunction<unknown, Error, Partial<{ filterValues: FilterSearchParams }> | undefined>
 }
 
-function TablePagination({ fetchDetail, paginateFn }: Props) {
-    const DATA_READY = !!fetchDetail
+function TablePagination({ fetchDetail, paginateFn, isLoading }: Props) {
+    const DATA_READY = !!fetchDetail && !isLoading
 
     return (
         <div className="mb-4 flex items-center justify-between px-2">

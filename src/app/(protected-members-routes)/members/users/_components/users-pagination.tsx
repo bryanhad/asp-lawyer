@@ -9,7 +9,7 @@ import { useUsersData } from './display-component'
 import { useUsersTableContext } from './table-context'
 
 function UsersPagination() {
-    const { setIsLoading } = useUsersTableContext()
+    const { setIsLoading, isLoading } = useUsersTableContext()
     const { data } = useUsersData()
     const queryClient = getQueryClient()
     const { mutate: paginate } = useMutation({
@@ -25,7 +25,7 @@ function UsersPagination() {
         },
     })
 
-    return <TablePagination fetchDetail={data?.fetchDetail} paginateFn={paginate} />
+    return <TablePagination fetchDetail={data?.fetchDetail} paginateFn={paginate} isLoading={isLoading} />
 }
 
 export default UsersPagination

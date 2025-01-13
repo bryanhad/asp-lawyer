@@ -9,7 +9,7 @@ import { useBlogsData } from './display-component'
 import { useBlogsTableContext } from './table-context'
 
 function BlogsPagination() {
-    const { setIsLoading } = useBlogsTableContext()
+    const { setIsLoading, isLoading } = useBlogsTableContext()
     const { data } = useBlogsData()
     const queryClient = getQueryClient()
     const { mutate: paginate } = useMutation({
@@ -25,7 +25,7 @@ function BlogsPagination() {
         },
     })
 
-    return <TablePagination fetchDetail={data?.fetchDetail} paginateFn={paginate} />
+    return <TablePagination fetchDetail={data?.fetchDetail} paginateFn={paginate} isLoading={isLoading} />
 }
 
 export default BlogsPagination
