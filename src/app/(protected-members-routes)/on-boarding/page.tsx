@@ -27,7 +27,7 @@ export default async function OnBoardingPage() {
             <Suspense>
                 <SearchParamHandler />
             </Suspense>
-            <div><OnBoardingForm/></div>
+           <OnBoardingForm className='w-full max-w-[400px]'/>
         </AuthPageContainer>
     )
 }

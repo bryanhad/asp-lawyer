@@ -4,6 +4,9 @@ import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 import { useQuery } from '@tanstack/react-query'
 import { USERS_QUERY_KEY } from '../../constants'
 import { getData } from '../action'
+import { useEffect } from 'react'
+import { useUsersTableContext } from './table-context'
+import UsersTable from './users-table'
 
 export function useUsersData() {
     return useQuery({
@@ -13,8 +16,14 @@ export function useUsersData() {
     })
 }
 
+
 export default function DisplayUsers() {
-    const { data, isPending } = useUsersData()
+    const { isPending } = useUsersData()
+    const { setIsLoading } = useUsersTableContext()
+
+    useEffect(() => {
+        setIsLoading(isPending)
+    }, [isPending, setIsLoading])
 
     if (isPending) {
         return <PageLoadingIndicator />
@@ -22,14 +31,7 @@ export default function DisplayUsers() {
 
     return (
         <div className="flex flex-col gap-4 overflow-hidden md:min-h-[360px] md:gap-2">
-            <ul>
-                {data &&
-                    data.users.map((u) => (
-                        <li className="ml-6 list-disc" key={u.id}>
-                            {JSON.stringify(u)}
-                        </li>
-                    ))}
-            </ul>
+            <UsersTable />
         </div>
     )
 }

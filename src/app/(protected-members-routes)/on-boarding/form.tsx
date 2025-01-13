@@ -10,8 +10,13 @@ import { FormData, formSchema } from './validation'
 import { onBoardingAction } from './actions'
 import { createRedirectUrl } from '../lib/client/utils'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
-export default function OnBoardingForm() {
+type Props = {
+    className?: string
+}
+
+export default function OnBoardingForm({ className }: Props) {
     const router = useRouter()
     const { toast } = useToast()
 
@@ -34,7 +39,7 @@ export default function OnBoardingForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-4', className)}>
                 <FormField
                     control={form.control}
                     name="username"
@@ -74,7 +79,7 @@ export default function OnBoardingForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Set up your account</Button>
+                <Button type="submit" className='w-full'>Set up your account</Button>
             </form>
         </Form>
     )

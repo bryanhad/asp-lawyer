@@ -1,6 +1,5 @@
+import { checkAuthorization } from '@/app/(protected-members-routes)/lib/server/utils'
 import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
-import { getCurrentSession } from '@/app/(protected-members-routes)/lib/server/auth'
-import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import FetchComponent from './fetch-component'
 
@@ -9,17 +8,14 @@ type Props = {
 }
 
 export default async function ViewBlogPage({ params }: Props) {
-    const { session, user } = await getCurrentSession()
-    if (session === null) {
-        return redirect('/sign-in')
-    }
-    if (!user.emailIsVerified) {
-        return redirect('/verify-email')
+    const res = await checkAuthorization()
+    if (res.tooManyRequest) {
+        return res.message
     }
 
     return (
         <Suspense fallback={<PageLoadingIndicator />}>
-            <FetchComponent params={params} currentUserId={user.id} />
+            <FetchComponent params={params} currentUserId={res.user.id} />
         </Suspense>
     )
 }

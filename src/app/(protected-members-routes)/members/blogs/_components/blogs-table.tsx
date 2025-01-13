@@ -10,12 +10,12 @@ import { useBlogsData } from './display-component'
 import InputorInfo from './inputor-info'
 import { SkeletonFallbackDesktop, SkeletonFallbackMobile } from './skeleton'
 import { useBlogsTableContext } from './table-context'
-import TableDataNotFound from './table-data-not-found'
 import { useToast } from '@/hooks/use-toast'
 import { useMutation } from '@tanstack/react-query'
 import { deleteBlogAction } from '../action'
 import { BLOGS_QUERY_KEY } from '../../constants'
 import { getQueryClient } from '@/lib/tanstack-query-client'
+import TableDataNotFound from '@/app/(protected-members-routes)/_components/tables/table-data-not-found'
 
 export default function BlogsTable() {
     const { isLoading } = useBlogsTableContext()

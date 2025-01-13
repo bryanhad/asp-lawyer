@@ -5,7 +5,7 @@ import { Prisma, User } from '@prisma/client'
 
 export type SearchParams = { size?: number; page?: number; q?: string }
 
-type FetchedUserEntry = Pick<User, 'id' | 'email' | 'username' | 'emailIsVerified' | 'status'> & {
+type FetchedUserEntry = Pick<User, 'id' | 'email' | 'username' | 'status'> & {
     blog_count: number
 }
 

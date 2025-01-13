@@ -2,6 +2,11 @@ import { logAction } from '@/lib/logger'
 import { encodeBase32UpperCaseNoPadding } from '@oslojs/encoding'
 import { headers } from 'next/headers'
 import { RefillingTokenBucket } from './rate-limit'
+import { globalGETRateLimit } from './request'
+import { getCurrentSession } from './auth'
+import { redirect } from 'next/navigation'
+import { UserStatus } from '@/lib/enum'
+import { UserInfo } from './user'
 
 export function generateRandomOTP(): string {
     const bytes = new Uint8Array(5)
@@ -47,7 +52,7 @@ export function createRedirectUrl(path: string, params: Record<string, string>):
 /**
  * - `true` if the key is null or the token is sufficient.
  * - `false` if the token is insufficient.
- * 
+ *
  * @returns isAllowed
  */
 export function isRequestAllowed<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key | null, cost: number) {
@@ -68,4 +73,25 @@ export function consumeToken<_Key>(bucket: RefillingTokenBucket<_Key>, key: _Key
         return bucket.consume(key, cost)
     }
     return false
+}
+
+type AuthorizationResult =
+    | { tooManyRequest: true; message: string; user: null }
+    | { tooManyRequest: false; message: null; user: UserInfo }
+
+export async function checkAuthorization(): Promise<AuthorizationResult> {
+    const isAllowed = await globalGETRateLimit()
+    if (!isAllowed) {
+        // Too many requests: Return the rate-limited result
+        return { tooManyRequest: true, message: 'Too many requests', user: null }
+    }
+
+    const { session, user } = await getCurrentSession()
+    if (session === null || user.status !== UserStatus.ACTIVE) {
+        // Redirect if the user is not authenticated or inactive
+        redirect('/sign-in')
+    }
+
+    // Authorized: Return the valid user and no message
+    return { tooManyRequest: false, message: null, user }
 }
