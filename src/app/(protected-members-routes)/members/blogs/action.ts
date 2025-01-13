@@ -21,6 +21,7 @@ import {
     editBlogFormSchemaClient,
     editBlogFormSchemaServer,
 } from './validation'
+import { getClientIP } from '../../lib/server/utils'
 
 export type SearchParams = { size?: number; page?: number; q?: string }
 
@@ -144,7 +145,9 @@ export async function getData({
 export async function addBlogAction(
     data: Partial<z.infer<typeof addBlogFormSchemaClient>>,
 ): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
@@ -306,7 +309,9 @@ export async function editBlogAction(
     currentBlogImageKey: unknown,
     data: Partial<z.infer<typeof editBlogFormSchemaClient>>,
 ): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
@@ -422,7 +427,9 @@ export async function editBlogAction(
 }
 
 export async function deleteBlogAction(blogId: unknown): Promise<{ success: boolean; message: string }> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',

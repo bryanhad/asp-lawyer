@@ -52,7 +52,7 @@ export type UsersSeed = {
     email: string
     username: string
     password: string
-    emailIsVerified: true
+    emailIsVerified: boolean
     status: UserStatus
     role: UserRole
 }

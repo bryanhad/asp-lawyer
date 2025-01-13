@@ -14,6 +14,7 @@ import { createSession, generateSessionToken, invalidateUserSessions, setSession
 import { updateUserPassword } from '../lib/server/user'
 import { redirect } from 'next/navigation'
 import { logger } from '@/lib/logger'
+import { getClientIP } from '../lib/server/utils'
 
 type FormState = {
     message: string
@@ -23,12 +24,15 @@ type FormState = {
 }
 
 export async function resetPasswordAction(_prevState: FormState, data: FormData): Promise<FormState> {
-    if (!globalPOSTRateLimit()) {
+    const clientIP = await getClientIP()
+
+    if (!globalPOSTRateLimit(clientIP)) {
         return {
             success: false,
             message: 'Too many requests',
         }
     }
+    
     const { session: passwordResetSession, user } = await validatePasswordResetSessionRequest()
     if (passwordResetSession === null) {
         return {

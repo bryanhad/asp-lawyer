@@ -50,6 +50,8 @@ export async function validatePasswordResetSessionToken(token: string): Promise<
                     email: true,
                     username: true,
                     emailIsVerified: true,
+                    status: true,
+                    role:true
                 },
             },
         },
@@ -68,7 +70,7 @@ export async function validatePasswordResetSessionToken(token: string): Promise<
         })
         return { session: null, user: null }
     }
-    return { session, user }
+    return { session, user}
 }
 
 export async function invalidateUserPasswordResetSessions(tx: Prisma.TransactionClient, userId: number) {
