@@ -5,6 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { UseMutateFunction } from '@tanstack/react-query'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { FilterSearchParams, TableFetchDetail } from '../../lib/types'
+import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 
 type Props = {
     fetchDetail?: TableFetchDetail
@@ -12,19 +14,19 @@ type Props = {
 }
 
 function TablePagination({ fetchDetail, paginateFn }: Props) {
-    if (!fetchDetail) return null
-
-    const { fetchSize, fetchedDataCount, totalAvailablePages, totalDataCount, currentPage } = fetchDetail
+    const DATA_READY = !!fetchDetail
 
     return (
         <div className="mb-4 flex items-center justify-between px-2">
-            <div className="hidden flex-[1] text-sm text-muted-foreground md:block">
-                {fetchedDataCount} of {totalDataCount} row(s) shown.
+            <div className="hidden flex-[1] gap-2 text-sm text-muted-foreground md:flex md:items-center">
+                {DATA_READY ? fetchDetail.fetchedDataCount : <SkeletonNumber className='max-h-[12px] m-0'/>} of{' '}
+                {DATA_READY ? fetchDetail.totalDataCount : <SkeletonNumber className='max-h-[12px] m-0'/>} row(s) shown.
             </div>
             <div className="flex flex-[1] items-center justify-between gap-3 md:flex-row">
                 <div className="flex items-center gap-2 md:flex-row">
                     <p className="sm:hidden">Rows</p>
                     <p className="hidden text-nowrap text-sm font-medium sm:block">Rows per page</p>
+
                     <Select
                         onValueChange={(value) => {
                             const newFetchSize = Number(value)
@@ -32,7 +34,7 @@ function TablePagination({ fetchDetail, paginateFn }: Props) {
                         }}
                     >
                         <SelectTrigger className="h-8 min-w-[70px]">
-                            <SelectValue placeholder={fetchSize} />
+                            {DATA_READY ? <SelectValue placeholder={fetchDetail.fetchSize} /> : <SkeletonNumber />}
                         </SelectTrigger>
                         <SelectContent side="top">
                             {[5, 10, 15].map((pageSize) => (
@@ -44,7 +46,8 @@ function TablePagination({ fetchDetail, paginateFn }: Props) {
                     </Select>
                 </div>
                 <div className="hidden w-[100px] items-center justify-center text-sm font-medium md:ml-auto md:flex">
-                    Page {currentPage} of {totalAvailablePages}
+                    Page {DATA_READY ? fetchDetail.currentPage : <SkeletonNumber className='mx-[3px]' />} of{' '}
+                    {DATA_READY ? fetchDetail.totalAvailablePages : <SkeletonNumber className='mx-[3px]' />}
                 </div>
                 <div className="flex items-center gap-2">
                     {/* GO TO FIRST PAGE */}
@@ -62,10 +65,10 @@ function TablePagination({ fetchDetail, paginateFn }: Props) {
                     <Button
                         variant="outline"
                         className="h-8 w-8 p-0"
-                        disabled={currentPage <= 1}
+                        disabled={!DATA_READY || fetchDetail.currentPage <= 1}
                         onClick={() =>
                             paginateFn({
-                                filterValues: { page: currentPage - 1 },
+                                filterValues: { page: fetchDetail ? fetchDetail.currentPage - 1 : 1 },
                             })
                         }
                     >
@@ -74,15 +77,16 @@ function TablePagination({ fetchDetail, paginateFn }: Props) {
                     </Button>
 
                     <div className="flex w-[100px] items-center justify-center text-sm font-medium md:hidden">
-                        Page {currentPage} of {totalAvailablePages}
+                        Page {DATA_READY ? fetchDetail.currentPage : <SkeletonNumber className='mx-[3px]'/>} of{' '}
+                        {DATA_READY ? fetchDetail.totalAvailablePages : <SkeletonNumber className='mx-[3px]' />}
                     </div>
                     <Button
                         variant="outline"
                         className="h-8 w-8 p-0"
-                        disabled={currentPage >= totalAvailablePages}
+                        disabled={!DATA_READY || fetchDetail.currentPage >= fetchDetail.totalAvailablePages}
                         onClick={() =>
                             paginateFn({
-                                filterValues: { page: currentPage + 1 },
+                                filterValues: { page: DATA_READY ? fetchDetail.currentPage + 1 : 2 },
                             })
                         }
                     >
@@ -105,6 +109,11 @@ function TablePagination({ fetchDetail, paginateFn }: Props) {
             </div>
         </div>
     )
+}
+
+
+function SkeletonNumber({className}: {className?:string}) {
+    return <Skeleton className={cn("min-h-[14px] w-[8px] rounded-sm mx-[1.5px]", className)} />
 }
 
 export default TablePagination

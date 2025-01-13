@@ -34,9 +34,9 @@ function SkeletonFallbackDesktop() {
                     </TableCell>
                     <TableCell className="max-md:hidden">
                         <div className="grid grid-cols-2 gap-3 xl:grid-cols-3">
-                            <Skeleton className="aspect-square h-[40px] w-[80px]" />
-                            <Skeleton className="aspect-square h-[40px] w-[80px]" />
-                            <Skeleton className="aspect-square h-[40px] w-[80px]" />
+                            <Skeleton className="col-span-2 h-[40px] min-w-min xl:order-3 xl:col-span-1" />
+                            <Skeleton className="aspect-square h-[40px] w-full" />
+                            <Skeleton className="aspect-square h-[40px] w-full" />
                         </div>
                     </TableCell>
                 </TableRow>
@@ -88,4 +88,4 @@ function SkeletonFallbackMobile() {
     )
 }
 
-export {SkeletonFallbackDesktop, SkeletonFallbackMobile}
+export { SkeletonFallbackDesktop, SkeletonFallbackMobile }

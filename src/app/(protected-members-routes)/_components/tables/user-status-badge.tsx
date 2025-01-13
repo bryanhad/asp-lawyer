@@ -4,9 +4,10 @@ import { cn } from '@/lib/utils'
 
 type Props = {
     userStatus: string
+    className?: string
 }
 
-export default function UserStatusBadge({ userStatus }: Props) {
+export function UserStatusBadge({ userStatus, className }: Props) {
     const detail = { tip: '', text: '' }
 
     switch (userStatus) {
@@ -30,14 +31,35 @@ export default function UserStatusBadge({ userStatus }: Props) {
     return (
         <SimplePopover
             tip={detail.tip}
-            className={cn('border', {
-                'border-green-600 text-green-600': userStatus === UserStatus.ACTIVE,
-                'border-blue-500 text-blue-500 dark:border-blue-500 dark:text-blue-500':
-                    userStatus === UserStatus.ON_BOARDING,
-                'border-red-600 text-red-600': userStatus === UserStatus.NOT_VERIFIED,
-            })}
+            className={cn(
+                'border',
+                {
+                    'border-green-600 text-green-600': userStatus === UserStatus.ACTIVE,
+                    'border-blue-500 text-blue-500 dark:border-blue-500 dark:text-blue-500':
+                        userStatus === UserStatus.ON_BOARDING,
+                    'border-red-600 text-red-600': userStatus === UserStatus.NOT_VERIFIED,
+                },
+                className,
+            )}
         >
             {detail.text}
         </SimplePopover>
+    )
+}
+
+type UserStatusBulletProps = {
+    userStatus: string
+    className?: string
+}
+
+export function UserStatusBullet({ userStatus }: UserStatusBulletProps) {
+    return (
+        <div
+            className={cn('size-3 rounded-full border-2 border-red-500', {
+                'border-green-500': userStatus === UserStatus.ACTIVE,
+                'border-red-500': userStatus === UserStatus.NOT_VERIFIED,
+                'border-blue-500': userStatus === UserStatus.ON_BOARDING,
+            })}
+        />
     )
 }
