@@ -25,8 +25,6 @@ export type MemberSeed = {
     email?: string
     translations: TranslationSeed<MemberTranslationKey, string[] | string>[]
     role: MemberRole
-    inputorId: number
-    editorId?: number
 }
 
 export type PracticeAreaSeed = {
