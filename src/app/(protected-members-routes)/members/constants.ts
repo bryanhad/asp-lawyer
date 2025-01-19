@@ -1,6 +1,7 @@
 // to be used throughout the tanstack QueryClient
 const BLOGS_QUERY_KEY = ['members-route', 'blogs']
 const USERS_QUERY_KEY = ['members-route', 'users']
+const MEMBERS_QUERY_KEY = ['members-route', 'members']
 
 // to be used as search param to revalidate client cache
 const REVALIDATE_CLIENT_CACHE = 'revalidate=true'
@@ -11,4 +12,4 @@ const REVALIDATE_CLIENT_CACHE = 'revalidate=true'
  */
 export const PLACEHOLDER_USERNAME = 'PLACEHOLDER_USERNAME'
 
-export {BLOGS_QUERY_KEY, REVALIDATE_CLIENT_CACHE, USERS_QUERY_KEY}
+export {BLOGS_QUERY_KEY, REVALIDATE_CLIENT_CACHE, USERS_QUERY_KEY, MEMBERS_QUERY_KEY}

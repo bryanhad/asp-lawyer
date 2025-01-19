@@ -29,6 +29,8 @@ model User {
     emailVerificationRequests EmailVerificationRequest[]
     sessions                  Session[]
     Blog                      Blog[]
+    inputedMembers Member[] @relation("Inputor")
+    editedMembers  Member[] @relation("Editor")
 
     @@map("users")
 }
@@ -92,6 +94,13 @@ model Member {
     email       String?
     role        String
 
+    inputor   User   @relation("Inputor", fields: [inputorId], references: [id], onDelete: Cascade)
+    inputorId Int
+    editor    User?  @relation("Editor", fields: [editorId], references: [id], onDelete: Cascade)
+    editorId  Int?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
     @@map("members")
 }
 
@@ -136,6 +145,7 @@ model Blog {
 
     authorId  Int
     createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("blogs")
 }

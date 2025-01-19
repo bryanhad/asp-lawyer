@@ -1,13 +1,11 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { Prisma, User } from '@prisma/client'
+import { Member, Prisma, User } from '@prisma/client'
 
 export type SearchParams = { size?: number; page?: number; q?: string }
 
-type FetchedUserEntry = Pick<User, 'id' | 'email' | 'username' | 'status'> & {
-    blog_count: number
-}
+type FetchedUserEntry = Pick<Member, 'id' | 'name' | 'role' | 'order' | 'email' | 'imageUrl' | 'slug'>
 
 export type FetchDetail = {
     totalDataCount: number

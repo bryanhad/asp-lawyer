@@ -25,6 +25,8 @@ export type MemberSeed = {
     email?: string
     translations: TranslationSeed<MemberTranslationKey, string[] | string>[]
     role: MemberRole
+    inputorId: number
+    editorId?: number
 }
 
 export type PracticeAreaSeed = {
@@ -50,8 +52,8 @@ export type BlogsSeed = {
 export type UsersSeed = {
     id: number
     email: string
-    username: string
-    password: string
+    username: string | null
+    password: string | null
     emailIsVerified: boolean
     status: UserStatus
     role: UserRole

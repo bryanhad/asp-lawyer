@@ -4,6 +4,7 @@ import { MemberSeed } from '../types'
 export const membersSeed: MemberSeed[] = [
     {
         slug: 'arif',
+        inputorId: 1,
         order: 1,
         role: MemberRole.PARTNER,
         name: 'Muhamad Arifudin',
@@ -85,6 +86,8 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'herlin',
+        inputorId: 1,
+        editorId: 1,
         order: 2,
         role: MemberRole.PARTNER,
         name: 'Herlin Susanto',
@@ -166,6 +169,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'dani',
+        inputorId: 1,
         order: 3,
         role: MemberRole.ASSOCIATE,
         name: 'Rakhmadani Hutama',
@@ -247,6 +251,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'agung',
+        inputorId: 1,
         order: 4,
         role: MemberRole.ASSOCIATE,
         name: 'Muhammad Agung Laksana',
@@ -318,6 +323,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'andy',
+        inputorId: 1,
         order: 5,
         role: MemberRole.ASSOCIATE,
         name: 'Andy Arly Gustiawan',
@@ -389,6 +395,8 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'kharis',
+        inputorId: 1,
+        editorId: 2,
         order: 6,
         role: MemberRole.ASSOCIATE,
         name: 'Christian Kharis Wicaksono',
@@ -460,6 +468,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'fahmi',
+        inputorId: 1,
         order: 7,
         role: MemberRole.ASSOCIATE,
         name: 'Akhmad Fahmi Budiman',
@@ -531,6 +540,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'adnan',
+        inputorId: 1,
         order: 8,
         role: MemberRole.ASSOCIATE,
         name: 'Adnan Dika Prawira Wardhana',
@@ -603,6 +613,7 @@ export const membersSeed: MemberSeed[] = [
 
     {
         slug: 'betti',
+        inputorId: 1,
         order: 9,
         role: MemberRole.ASSOCIATE,
         name: 'Betti',
@@ -674,6 +685,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'rizki',
+        inputorId: 1,
         order: 10,
         role: MemberRole.ASSOCIATE,
         name: 'Muhammad Rizki Aditya',
@@ -745,6 +757,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'erwin',
+        inputorId: 1,
         order: 11,
         role: MemberRole.ASSOCIATE,
         name: 'Erwin Hardi Pramana',
@@ -816,6 +829,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'faras',
+        inputorId: 1,
         order: 12,
         role: MemberRole.ASSOCIATE,
         name: 'Faras Salwaa Janvira',
@@ -887,6 +901,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'indah',
+        inputorId: 1,
         order: 13,
         role: MemberRole.ASSOCIATE,
         name: 'Indah Try Harsanti',
@@ -958,6 +973,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'richard',
+        inputorId: 1,
         order: 14,
         role: MemberRole.SUPPORT,
         name: 'Richard Goenawan',
@@ -1029,6 +1045,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'ratna',
+        inputorId: 1,
         order: 15,
         role: MemberRole.ASSOCIATE,
         name: 'Ratna Sumirat',
@@ -1100,6 +1117,7 @@ export const membersSeed: MemberSeed[] = [
     },
     {
         slug: 'reza',
+        inputorId: 1,
         order: 16,
         role: MemberRole.SUPPORT,
         name: 'Reza Rahmawati',

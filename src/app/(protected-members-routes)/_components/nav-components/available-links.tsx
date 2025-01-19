@@ -1,4 +1,4 @@
-import { LayoutDashboard, ScrollText, Settings, UserRound } from 'lucide-react'
+import { LayoutDashboard, ScrollText, Settings, UserRound, Users } from 'lucide-react'
 
 export const AVAILABLE_LINKS = [
     {
@@ -14,11 +14,11 @@ export const AVAILABLE_LINKS = [
                 href: '/members/users',
                 icon: <UserRound className="shrink-0" />,
             },
-            // {
-            //     title: 'Team Members',
-            //     href: '/members/team-members',
-            //     icon: <Users className="shrink-0" />,
-            // },
+            {
+                title: 'Members',
+                href: '/members/members',
+                icon: <Users className="shrink-0" />,
+            },
             {
                 title: 'Blogs',
                 href: '/members/blogs',

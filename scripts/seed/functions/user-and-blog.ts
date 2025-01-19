@@ -26,12 +26,16 @@ export async function seedUsersAndBlogs(prisma: Prisma.TransactionClient) {
 
     console.log(`🚀 Adding dummy users to 'users' table...`)
     for (const { blogs, ...user } of usersAndBlogsSeed) {
-        const passwordHash = await hash(user.password, {
-            memoryCost: 19456,
-            timeCost: 2,
-            outputLen: 32,
-            parallelism: 1,
-        })
+        let passwordHash = null
+
+        if (user.password) {
+            passwordHash = await hash(user.password, {
+                memoryCost: 19456,
+                timeCost: 2,
+                outputLen: 32,
+                parallelism: 1,
+            })
+        }
         const recoveryCode = generateRandomRecoveryCode()
         const encryptedRecoveryCode = encrypt(new TextEncoder().encode(recoveryCode))
 
@@ -44,7 +48,7 @@ export async function seedUsersAndBlogs(prisma: Prisma.TransactionClient) {
                 status: user.status,
                 email: user.email,
                 passwordHash,
-                username: user.username,
+                username: user.username || undefined,
                 emailIsVerified: user.emailIsVerified,
                 recoveryCode: Buffer.from(encryptedRecoveryCode), //convert Uint8Array to Buffer
             },
