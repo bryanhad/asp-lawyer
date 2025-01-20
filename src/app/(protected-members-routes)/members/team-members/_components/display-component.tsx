@@ -1,6 +1,5 @@
 'use client'
 
-import { PageLoadingIndicator } from '@/components/ui/loading-indicator'
 import { useQuery } from '@tanstack/react-query'
 import { MEMBERS_QUERY_KEY} from '../../constants'
 import { getData } from '../action'
@@ -25,10 +24,6 @@ export default function DisplayMembers() {
     useEffect(() => {
         setIsLoading(isPending)
     }, [isPending, setIsLoading])
-
-    // if (isPending) {
-    //     return <PageLoadingIndicator />
-    // }
 
     return (
         <div className="flex flex-col gap-4 overflow-hidden md:min-h-[360px] md:gap-2">

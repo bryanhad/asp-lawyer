@@ -15,8 +15,8 @@ export const AVAILABLE_LINKS = [
                 icon: <UserRound className="shrink-0" />,
             },
             {
-                title: 'Members',
-                href: '/members/members',
+                title: 'Team Members',
+                href: '/members/team-members',
                 icon: <Users className="shrink-0" />,
             },
             {
